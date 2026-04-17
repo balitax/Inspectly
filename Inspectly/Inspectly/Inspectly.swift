@@ -91,18 +91,21 @@ public final class Inspectly {
     
     // MARK: - Public API
     
-    /// Enable Inspectly with default configuration (debug only).
+    /// Enable Inspectly with default configuration.
     public static func enable() {
-        enable(with: Configuration())
+        enable(isEnabled: true, with: Configuration())
     }
     
-    /// Enable Inspectly with custom configuration.
-    /// - Parameter configuration: Custom configuration for Inspectly
-    public static func enable(with configuration: Configuration) {
+    /// Enable or disable Inspectly explicitly.
+    /// - Parameters:
+    ///   - isEnabled: Enable or disable Inspectly. Use `true` for debug, `false` for production release builds.
+    ///   - configuration: Custom configuration for Inspectly
+    public static func enable(isEnabled: Bool, with configuration: Configuration = Configuration()) {
         guard !_isEnabled else { return }
         
         self.configuration = configuration
         
+        // Check environment compatibility
         #if DEBUG
         let currentEnvironment: Environment = .debug
         #else
@@ -117,15 +120,20 @@ public final class Inspectly {
             isEnabledInCurrentEnv = configuration.enabledEnvironments.contains(.production)
         }
         
-        guard isEnabledInCurrentEnv else {
-            print("[Inspectly] Not enabled for \(currentEnvironment) environment")
+        // Allow explicit override or check environment
+        guard isEnabled && isEnabledInCurrentEnv else {
+            if !isEnabled {
+                print("[Inspectly] Disabled via parameter")
+            } else {
+                print("[Inspectly] Not enabled for \(currentEnvironment) environment")
+            }
             _isEnabled = false
             return
         }
         
         configureURLProtocol(with: configuration)
         
-        // Enable shake gesture based on config (can work in both debug and production)
+        // Enable shake gesture based on config
         if configuration.isShakeGestureEnabled {
             ShakeManager.shared.onShake = {
                 Inspectly.presentInspector()
