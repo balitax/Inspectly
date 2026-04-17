@@ -29,15 +29,28 @@ public final class Inspectly {
     
     // MARK: - Environment
     
-    public enum Environment {
+    public enum Environment: String, Codable {
         case debug
         case production
+    }
+    
+    public struct EnabledEnvironments: OptionSet {
+        public let rawValue: Int
+        
+        public init(rawValue: Int) {
+            self.rawValue = rawValue
+        }
+        
+        public static let debug = EnabledEnvironments(rawValue: 1 << 0)
+        public static let production = EnabledEnvironments(rawValue: 1 << 1)
+        
+        public static var all: EnabledEnvironments { [.debug, .production] }
     }
     
     // MARK: - Configuration
     
     public struct Configuration {
-        public var environment: Environment = .debug
+        public var enabledEnvironments: EnabledEnvironments = [.debug]
         
         public var isLoggingEnabled: Bool = true
         
@@ -52,7 +65,7 @@ public final class Inspectly {
         public var stubRepository: (any StubRepositoryProtocol)?
         
         public init(
-            environment: Environment = .debug,
+            enabledEnvironments: EnabledEnvironments = [.debug],
             isLoggingEnabled: Bool = true,
             isStubEnabled: Bool = false,
             ignoredHosts: Set<String> = [],
@@ -60,7 +73,7 @@ public final class Inspectly {
             ignoreLocalhost: Bool = true,
             stubRepository: (any StubRepositoryProtocol)? = nil
         ) {
-            self.environment = environment
+            self.enabledEnvironments = enabledEnvironments
             self.isLoggingEnabled = isLoggingEnabled
             self.isStubEnabled = isStubEnabled
             self.ignoredHosts = ignoredHosts
@@ -72,13 +85,12 @@ public final class Inspectly {
     
     // MARK: - Properties
     
+    private static var _isEnabled: Bool = false
     private static var configuration: Configuration?
-    private static var isEnabled: Bool = false
     
     // MARK: - Public API
     
-    /// Enable Inspectly with default configuration.
-    /// This will register URLProtocol and configure Alamofire interception.
+    /// Enable Inspectly with default configuration (debug only).
     public static func enable() {
         enable(with: Configuration())
     }
@@ -86,47 +98,66 @@ public final class Inspectly {
     /// Enable Inspectly with custom configuration.
     /// - Parameter configuration: Custom configuration for Inspectly
     public static func enable(with configuration: Configuration) {
-        guard !isEnabled else { return }
+        guard !_isEnabled else { return }
         
         self.configuration = configuration
         
-        // Only enable in debug mode or when explicitly configured
-        if configuration.environment == .debug || configuration.isLoggingEnabled || configuration.isStubEnabled {
-            configureURLProtocol(with: configuration)
-            
-            // Only enable shake gesture in debug mode
-            if configuration.environment == .debug && configuration.isShakeGestureEnabled {
-                ShakeManager.shared.onShake = {
-                    Inspectly.presentInspector()
-                }
+        #if DEBUG
+        let currentEnvironment: Environment = .debug
+        #else
+        let currentEnvironment: Environment = .production
+        #endif
+        
+        let isEnabledInCurrentEnv: Bool
+        switch currentEnvironment {
+        case .debug:
+            isEnabledInCurrentEnv = configuration.enabledEnvironments.contains(.debug)
+        case .production:
+            isEnabledInCurrentEnv = configuration.enabledEnvironments.contains(.production)
+        }
+        
+        guard isEnabledInCurrentEnv else {
+            print("[Inspectly] Not enabled for \(currentEnvironment) environment")
+            _isEnabled = false
+            return
+        }
+        
+        configureURLProtocol(with: configuration)
+        
+        // Only enable shake gesture in debug builds
+        #if DEBUG
+        if configuration.isShakeGestureEnabled {
+            ShakeManager.shared.onShake = {
+                Inspectly.presentInspector()
             }
         }
+        #endif
         
-        isEnabled = true
+        _isEnabled = true
         
-        if configuration.environment == .debug {
-            print("[Inspectly] Enabled (Debug) - shake device or press ⌘+Ctrl+Z to open inspector")
-        } else {
-            print("[Inspectly] Enabled (Production)")
-        }
+        #if DEBUG
+        print("[Inspectly] Enabled (Debug) - shake device or press ⌘+Ctrl+Z to open inspector")
+        #else
+        print("[Inspectly] Enabled (Production)")
+        #endif
     }
     
     /// Disable Inspectly and unregister interceptors.
     public static func disable() {
         URLProtocol.unregisterClass(InspectlyURLProtocol.self)
         ShakeManager.shared.onShake = nil
-        isEnabled = false
+        _isEnabled = false
         print("[Inspectly] Disabled")
     }
     
-    /// Check if Inspectly is currently in debug mode.
-    public static var isDebugMode: Bool {
-        return configuration?.environment == .debug
+    /// Check if Inspectly is currently enabled.
+    public static var isEnabled: Bool {
+        return _isEnabled
     }
     
     /// Check if Inspectly is currently enabled.
     public static var isActive: Bool {
-        return isEnabled
+        return _isEnabled
     }
     
     /// Present the Inspectly UI manually.
@@ -138,7 +169,7 @@ public final class Inspectly {
         
         let container = DependencyContainer.shared
         
-        if !isEnabled {
+        if !_isEnabled {
             configureURLProtocol(with: config)
         }
         
