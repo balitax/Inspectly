@@ -14,11 +14,10 @@ enum RequestDetailTab: String, CaseIterable, Identifiable {
     case params = "Params"
     case requestBody = "Request"
     case responseBody = "Response"
-    case timeline = "Timeline"
     case export = "Export"
-
+    
     var id: String { rawValue }
-
+    
     var iconName: String {
         switch self {
         case .overview: return "info.circle"
@@ -26,7 +25,6 @@ enum RequestDetailTab: String, CaseIterable, Identifiable {
         case .params: return "questionmark.circle"
         case .requestBody: return "arrow.up.doc"
         case .responseBody: return "arrow.down.doc"
-        case .timeline: return "clock.arrow.circlepath"
         case .export: return "square.and.arrow.up"
         }
     }

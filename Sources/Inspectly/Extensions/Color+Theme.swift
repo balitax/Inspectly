@@ -89,5 +89,9 @@ extension Color {
 // MARK: - ShapeStyle Extension
 
 extension ShapeStyle where Self == Color {
-    static var accentColor: Color { Color.accentColor }
+    static var accentColor: Color { Color(red: 0.133, green: 0.698, blue: 0.322) }
+}
+
+extension Color {
+    static var accentColor: Color { Color(red: 0.133, green: 0.698, blue: 0.322) }
 }

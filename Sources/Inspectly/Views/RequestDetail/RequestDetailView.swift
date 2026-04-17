@@ -32,9 +32,6 @@ struct RequestDetailView: View {
                 ResponseBodyTabView(viewModel: viewModel)
                     .tag(RequestDetailTab.responseBody)
 
-                TimelineTabView(viewModel: viewModel)
-                    .tag(RequestDetailTab.timeline)
-
                 ExportTabView(viewModel: viewModel)
                     .tag(RequestDetailTab.export)
             }
