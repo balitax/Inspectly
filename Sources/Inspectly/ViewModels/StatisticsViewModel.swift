@@ -10,7 +10,7 @@ import SwiftUI
 
 @MainActor
 final class StatisticsViewModel: ObservableObject {
-    @Published var summary: DashboardSummary = DashboardSummary()
+    @Published var summary: StatisticsSummary = StatisticsSummary()
     @Published var recentRequests: [NetworkRequest] = []
     @Published var isLoading: Bool = false
 
@@ -23,7 +23,7 @@ final class StatisticsViewModel: ObservableObject {
     func loadData() async {
         isLoading = true
         let allRequests = await requestRepository.getAllRequests()
-        summary = DashboardSummary.compute(from: allRequests)
+        summary = StatisticsSummary.compute(from: allRequests)
         recentRequests = Array(
             allRequests.sorted { $0.timestamp > $1.timestamp }.prefix(5)
         )
@@ -51,7 +51,7 @@ final class StatisticsViewModel: ObservableObject {
 
     static func mock() -> StatisticsViewModel {
         let vm = StatisticsViewModel(requestRepository: MockRequestRepository())
-        vm.summary = DashboardSummary.compute(from: MockRequests.all)
+        vm.summary = StatisticsSummary.compute(from: MockRequests.all)
         vm.recentRequests = Array(MockRequests.all.prefix(5))
         return vm
     }

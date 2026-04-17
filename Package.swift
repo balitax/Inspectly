@@ -16,7 +16,10 @@ let package = Package(
     targets: [
         .target(
             name: "Inspectly",
-            path: "Inspectly"
+            path: "Sources/Inspectly",
+            resources: [
+                .process("Assets.xcassets")
+            ]
         ),
     ]
 )

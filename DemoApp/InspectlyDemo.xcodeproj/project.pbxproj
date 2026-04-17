@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4B67BC621BC8BB7BCE454CEA /* DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EC63E9A97FBE7E40678841 /* DemoApp.swift */; };
-		6A7B755BDE2C77074CF68FA0 /* project.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4C9C14CBC24888FFEFEFCF87 /* project.yml */; };
 		9A4F03312D23BBB514595ECA /* Inspectly in Frameworks */ = {isa = PBXBuildFile; productRef = 30BD673E104A3045A5A405FD /* Inspectly */; };
 		F0E41B93FB756326738029B4 /* DemoAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3114342469748BA2D6614E2 /* DemoAppView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4C9C14CBC24888FFEFEFCF87 /* project.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = project.yml; sourceTree = "<group>"; };
 		7CE73C62E82725D09D13A409 /* DemoApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5067B7179AE3A7C50C6B417 /* Inspectly */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Inspectly; path = ..; sourceTree = SOURCE_ROOT; };
 		B5EC63E9A97FBE7E40678841 /* DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoApp.swift; sourceTree = "<group>"; };
@@ -56,10 +54,8 @@
 				B5EC63E9A97FBE7E40678841 /* DemoApp.swift */,
 				E3114342469748BA2D6614E2 /* DemoAppView.swift */,
 				B8AFF5B49B6960AC69AB46B5 /* Info.plist */,
-				4C9C14CBC24888FFEFEFCF87 /* project.yml */,
 			);
-			name = DemoApp;
-			path = .;
+			path = DemoApp;
 			sourceTree = "<group>";
 		};
 		DEDBC1A9E009D28C26653685 = {
@@ -79,7 +75,6 @@
 			buildConfigurationList = 383E1ABC79512A86EC3FF8FD /* Build configuration list for PBXNativeTarget "DemoApp" */;
 			buildPhases = (
 				7B35AB296C98FA17AA48CDB2 /* Sources */,
-				DF8A48A1E63401274E36FBF2 /* Resources */,
 				ABA9303E1DD9F3F3A4AD26E7 /* Frameworks */,
 			);
 			buildRules = (
@@ -114,7 +109,7 @@
 			mainGroup = DEDBC1A9E009D28C26653685;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				CB1FB18079BB23F20EC7C80D /* XCLocalSwiftPackageReference "..//" */,
+				711165A40060C55B6FD3B573 /* XCLocalSwiftPackageReference "../../Inspectly" */,
 			);
 			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
@@ -124,17 +119,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		DF8A48A1E63401274E36FBF2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6A7B755BDE2C77074CF68FA0 /* project.yml in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7B35AB296C98FA17AA48CDB2 /* Sources */ = {
@@ -154,13 +138,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = DemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.inspectly.DemoApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inspectly.demoapp;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -171,13 +155,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = DemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.inspectly.DemoApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inspectly.demoapp;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -234,6 +218,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -290,6 +275,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -324,9 +310,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		CB1FB18079BB23F20EC7C80D /* XCLocalSwiftPackageReference "..//" */ = {
+		711165A40060C55B6FD3B573 /* XCLocalSwiftPackageReference "../../Inspectly" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "..//";
+			relativePath = ../../Inspectly;
 		};
 /* End XCLocalSwiftPackageReference section */
 

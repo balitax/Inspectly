@@ -5,9 +5,9 @@
 
 import Foundation
 
-// MARK: - Dashboard Summary
+// MARK: - Statistics Summary
 
-public struct DashboardSummary {
+public struct StatisticsSummary {
     let totalRequests: Int
     let failedRequests: Int
     let averageResponseTime: TimeInterval
@@ -60,7 +60,7 @@ public struct DashboardSummary {
         String(format: "%.1f%%", successRate * 100)
     }
 
-    static func compute(from requests: [NetworkRequest]) -> DashboardSummary {
+    static func compute(from requests: [NetworkRequest]) -> StatisticsSummary {
         let total = requests.count
         let failed = requests.filter { $0.isError }.count
         let pinned = requests.filter { $0.isPinned }.count
@@ -91,7 +91,7 @@ public struct DashboardSummary {
             hourlyActivity[hour, default: 0] += 1
         }
 
-        return DashboardSummary(
+        return StatisticsSummary(
             totalRequests: total,
             failedRequests: failed,
             averageResponseTime: avgTime,
