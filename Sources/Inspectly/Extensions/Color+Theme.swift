@@ -91,8 +91,5 @@ extension Color {
 
 extension ShapeStyle where Self == Color {
     static var accentColor: Color { Color(red: 0.133, green: 0.698, blue: 0.322) }
-}
-
-extension Color {
-    static var accentColor: Color { Color(red: 0.133, green: 0.698, blue: 0.322) }
+    static var primaryGreen: Color { Color(red: 0.133, green: 0.698, blue: 0.322) }
 }
