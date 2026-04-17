@@ -1,0 +1,9 @@
+{
+  "error": "unauthorized",
+  "message": "Authentication token has expired. Please refresh your token or login again.",
+  "code": "AUTH_TOKEN_EXPIRED",
+  "details": {
+    "expired_at": "2025-04-17T09:00:00Z",
+    "token_type": "access_token"
+  }
+}

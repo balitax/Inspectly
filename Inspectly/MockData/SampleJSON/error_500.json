@@ -1,0 +1,12 @@
+{
+  "error": "internal_server_error",
+  "message": "An unexpected error occurred while processing your request.",
+  "code": "SERVER_ERROR",
+  "trace_id": "trace_abc123xyz789",
+  "timestamp": "2025-04-17T10:30:00Z",
+  "details": {
+    "service": "order-service",
+    "version": "2.1.0",
+    "instance": "pod-order-7c8f9d"
+  }
+}

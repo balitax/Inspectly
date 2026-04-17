@@ -1,0 +1,77 @@
+//
+//  Created by Agus Cahyono on 2026-04-17.
+//  GitHub: https://github.com/balitax
+//
+
+import SwiftUI
+
+// MARK: - Content View
+
+struct ContentView: View {
+    @State private var selectedTab: AppTab = .dashboard
+
+    let container: DependencyContainer
+
+    var body: some View {
+        TabView(selection: $selectedTab) {
+            DashboardView(
+                viewModel: DashboardViewModel(
+                    requestRepository: container.requestRepository
+                )
+            )
+            .tabItem {
+                Label("Dashboard", systemImage: "chart.bar.fill")
+            }
+            .tag(AppTab.dashboard)
+
+            RequestListView(
+                viewModel: RequestListViewModel(
+                    requestRepository: container.requestRepository
+                )
+            )
+            .tabItem {
+                Label("Requests", systemImage: "arrow.up.arrow.down.circle.fill")
+            }
+            .tag(AppTab.requests)
+
+            StubManagerView(
+                viewModel: StubManagerViewModel(
+                    stubRepository: container.stubRepository
+                )
+            )
+            .tabItem {
+                Label("Stubs", systemImage: "hammer.fill")
+            }
+            .tag(AppTab.stubs)
+
+            SettingsView(
+                viewModel: SettingsViewModel(
+                    storageManager: container.storageManager,
+                    exportManager: container.exportManager,
+                    requestRepository: container.requestRepository,
+                    stubRepository: container.stubRepository
+                )
+            )
+            .tabItem {
+                Label("Settings", systemImage: "gearshape.fill")
+            }
+            .tag(AppTab.settings)
+        }
+        .tint(.indigo)
+    }
+}
+
+// MARK: - App Tab
+
+enum AppTab: String, Hashable {
+    case dashboard
+    case requests
+    case stubs
+    case settings
+}
+
+// MARK: - Preview
+
+#Preview {
+    ContentView(container: .mock())
+}

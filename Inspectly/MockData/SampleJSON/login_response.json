@@ -1,0 +1,13 @@
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE3MTM1MjAwMDB9.signature",
+  "refresh_token": "dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4gZm9yIHRlc3Rpbmc",
+  "expires_in": 3600,
+  "token_type": "Bearer",
+  "user": {
+    "id": 123,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "admin",
+    "permissions": ["read", "write", "admin"]
+  }
+}

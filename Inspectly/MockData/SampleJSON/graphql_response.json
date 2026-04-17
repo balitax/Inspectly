@@ -1,0 +1,41 @@
+{
+  "data": {
+    "user": {
+      "id": "123",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "posts": {
+        "edges": [
+          {
+            "node": {
+              "id": "post_1",
+              "title": "Getting Started with SwiftUI",
+              "content": "SwiftUI is Apple's modern framework for building user interfaces...",
+              "createdAt": "2025-01-15T10:00:00Z",
+              "likes": 42,
+              "comments": {
+                "totalCount": 12
+              }
+            }
+          },
+          {
+            "node": {
+              "id": "post_2",
+              "title": "Advanced Combine Patterns",
+              "content": "In this article, we explore advanced reactive programming patterns...",
+              "createdAt": "2025-02-20T14:30:00Z",
+              "likes": 89,
+              "comments": {
+                "totalCount": 23
+              }
+            }
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": true,
+          "endCursor": "cursor_abc123"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,123 @@
+//
+//  Created by Agus Cahyono on 2026-04-17.
+//  GitHub: https://github.com/balitax
+//
+
+import SwiftUI
+
+// MARK: - Export Tab View
+
+struct ExportTabView: View {
+    @ObservedObject var viewModel: RequestDetailViewModel
+
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 16) {
+                // MARK: - Quick Copy Section
+                VStack(alignment: .leading, spacing: 12) {
+                    SectionHeaderView(title: "Quick Copy")
+
+                    VStack(spacing: 8) {
+                        exportButton(
+                            title: "Copy as cURL",
+                            subtitle: "Ready to paste in Terminal",
+                            icon: "terminal",
+                            color: .green
+                        ) {
+                            viewModel.copyCURL()
+                        }
+
+                        exportButton(
+                            title: "Copy JSON Body",
+                            subtitle: "Response body as formatted JSON",
+                            icon: "curlybraces",
+                            color: .blue
+                        ) {
+                            viewModel.copyJSONBody()
+                        }
+
+                        exportButton(
+                            title: "Copy Full Request",
+                            subtitle: "Headers, body, and response",
+                            icon: "doc.on.doc",
+                            color: .indigo
+                        ) {
+                            viewModel.copyFullRequest()
+                        }
+                    }
+                }
+
+                Divider()
+
+                // MARK: - Share Section
+                VStack(alignment: .leading, spacing: 12) {
+                    SectionHeaderView(title: "Share")
+
+                    exportButton(
+                        title: "Share Request",
+                        subtitle: "Share via system share sheet",
+                        icon: "square.and.arrow.up",
+                        color: .orange
+                    ) {
+                        viewModel.shareRequest()
+                    }
+                }
+
+                Divider()
+
+                // MARK: - cURL Preview
+                VStack(alignment: .leading, spacing: 8) {
+                    SectionHeaderView(title: "cURL Preview")
+
+                    CodeBlockView(
+                        title: nil,
+                        content: viewModel.request.curlCommand,
+                        showCopyButton: true
+                    )
+                }
+            }
+            .padding(16)
+        }
+    }
+
+    // MARK: - Export Button
+
+    private func exportButton(title: String, subtitle: String, icon: String, color: Color, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: 12) {
+                Image(systemName: icon)
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(color)
+                    .frame(width: 36, height: 36)
+                    .background(color.opacity(0.12))
+                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundStyle(.primary)
+
+                    Text(subtitle)
+                        .font(.system(size: 11))
+                        .foregroundStyle(.tertiary)
+                }
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12))
+                    .foregroundStyle(.quaternary)
+            }
+            .padding(12)
+            .background(Color(.tertiarySystemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+// MARK: - Preview
+
+#Preview {
+    ExportTabView(viewModel: .mock())
+}
