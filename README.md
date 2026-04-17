@@ -40,15 +40,18 @@ Inspectly is a powerful HTTP interception and mocking library for iOS. It allows
 ```swift
 import Inspectly
 
-// Enable Inspectly (done once in App init)
+// Enable Inspectly in App init
 Inspectly.enable()
 
-// Or with custom configuration
+// With custom configuration
 Inspectly.enable(with: Inspectly.Configuration(
     isLoggingEnabled: true,
     isStubEnabled: true,
     isShakeGestureEnabled: true
 ))
+
+// Disable (for production release builds)
+Inspectly.enable(isEnabled: false)
 ```
 
 ## Shake to Inspect
@@ -71,53 +74,25 @@ let config = Inspectly.Configuration(
 Inspectly.enable(with: config)
 ```
 
+### Enable/Disable
+
+```swift
+// Enable (default)
+Inspectly.enable()
+
+// Enable with config
+Inspectly.enable(isShakeGestureEnabled: true)
+
+// Disable (use in production release builds)
+Inspectly.enable(isEnabled: false)
+```
+
 ### Access Services
 
 ```swift
 // Access repositories
 let requestRepo = Inspectly.container.requestRepository
 let stubRepo = Inspectly.container.stubRepository
-```
-
-## Mock/Stub Configuration
-
-### Using MockStubs (for testing)
-
-```swift
-import Inspectly
-
-// Load mock stubs
-for stub in MockStubs.all {
-    await Inspectly.container.stubRepository.addStub(stub)
-}
-```
-
-### Creating Custom Stubs
-
-```swift
-import Inspectly
-
-let stub = RequestStub(
-    name: "Login Success",
-    description: "Mock login response",
-    matchRule: StubMatchRule(
-        method: .post,
-        urlPath: "/auth/login"
-    ),
-    scenarios: [
-        StubScenario(
-            name: "Success",
-            description: "Success response",
-            response: StubResponse(
-                statusCode: 200,
-                jsonBody: "{\"token\": \"abc123\"}"
-            ),
-            isActive: true
-        )
-    ]
-)
-
-await Inspectly.container.stubRepository.addStub(stub)
 ```
 
 ## Screenshots
