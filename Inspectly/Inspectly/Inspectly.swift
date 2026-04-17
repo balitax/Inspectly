@@ -91,16 +91,11 @@ public final class Inspectly {
     
     // MARK: - Public API
     
-    /// Enable Inspectly with default configuration.
-    public static func enable() {
-        enable(isEnabled: true, with: Configuration())
-    }
-    
-    /// Enable or disable Inspectly explicitly.
+    /// Enable Inspectly with optional configuration.
     /// - Parameters:
     ///   - isEnabled: Enable or disable Inspectly. Use `true` for debug, `false` for production release builds.
     ///   - configuration: Custom configuration for Inspectly
-    public static func enable(isEnabled: Bool, with configuration: Configuration = Configuration()) {
+    public static func enable(isEnabled: Bool = true, with configuration: Configuration = Configuration()) {
         guard !_isEnabled else { return }
         
         self.configuration = configuration
