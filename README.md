@@ -35,134 +35,90 @@ Inspectly is a powerful HTTP interception and mocking library for iOS. It allows
 .package(url: "https://github.com/balitax/Inspectly.git", from: "1.0.0")
 ```
 
-### CocoaPods
-
-```ruby
-# Future: CocoaPods support coming soon
-# pod 'Inspectly', '~> 1.0.0'
-```
-
 ## Quick Start
 
 ```swift
 import Inspectly
 
-// 1. Register URLProtocol
-URLProtocol.registerClass(InspectlyURLProtocol.self)
+// Enable Inspectly (done once in App init)
+Inspectly.enable()
 
-// 2. Configure (optional)
-InspectlyURLProtocol.isLoggingEnabled = true
-InspectlyURLProtocol.isStubEnabled = true
-
-// 3. Set stub repository
-InspectlyURLProtocol.stubRepository = stubRepository
+// Or with custom configuration
+Inspectly.enable(with: Inspectly.Configuration(
+    isLoggingEnabled: true,
+    isStubEnabled: true,
+    isShakeGestureEnabled: true
+))
 ```
 
-## Integration Guide
+## Shake to Inspect
 
-### URLSession Integration
+Shake your device or press **⌘+Ctrl+Z** to open the Inspectly dashboard.
+
+## Configuration
+
+### Basic Configuration
 
 ```swift
-// Option 1: Global registration
-URLProtocol.registerClass(InspectlyURLProtocol.self)
+let config = Inspectly.Configuration(
+    isLoggingEnabled: true,      // Enable request logging
+    isStubEnabled: true,         // Enable stub/mocking
+    isShakeGestureEnabled: true, // Enable shake to open inspector
+    ignoredHosts: Set(["api.example.com"]), // Ignore specific hosts
+    ignoreLocalhost: true       // Ignore localhost requests
+)
 
-// Option 2: Per-session configuration
-let config = URLSessionConfiguration.default
-config.protocolClasses = [InspectlyURLProtocol.self] + (config.protocolClasses ?? [])
-let session = URLSession(configuration: config)
+Inspectly.enable(with: config)
+```
 
-// 3. Set callback for captured requests
-InspectlyURLProtocol.onRequestCaptured = { request in
-    print("Captured: \(request.method) \(request.url)")
+### Access Services
+
+```swift
+// Access repositories
+let requestRepo = Inspectly.container.requestRepository
+let stubRepo = Inspectly.container.stubRepository
+```
+
+## Mock/Stub Configuration
+
+### Using MockStubs (for testing)
+
+```swift
+import Inspectly
+
+// Load mock stubs
+for stub in MockStubs.all {
+    await Inspectly.container.stubRepository.addStub(stub)
 }
 ```
 
-### Alamofire Integration
+### Creating Custom Stubs
 
 ```swift
-import Alamofire
+import Inspectly
 
-let interceptor = InspectlyRequestInterceptor(stubRepository: stubRepository)
-let eventMonitor = InspectlyEventMonitor()
-
-let session = Session(
-    interceptor: interceptor,
-    eventMonitors: [eventMonitor]
-)
-```
-
-## Stub Configuration
-
-### Match Rules
-
-Configure how requests are matched to stubs:
-
-```swift
-let matchRule = StubMatchRule(
-    method: .get,           // HTTP method to match
-    urlPath: "/api/users",  // URL path contains
-    queryParameters: [      // Query params must match
-        QueryParameter(key: "page", value: "1")
-    ],
-    headers: [               // Headers must match
-        RequestHeader(key: "Authorization", value: "Bearer token")
-    ],
-    bodyContains: "search"   // Request body contains
-)
-```
-
-### Scenarios
-
-Create multiple response scenarios per stub:
-
-```swift
-let scenarios = [
-    StubScenario(
-        name: "Success",
-        description: "Normal success response",
-        response: StubResponse(
-            statusCode: 200,
-            jsonBody: "{\"success\": true}"
-        ),
-        isActive: true
+let stub = RequestStub(
+    name: "Login Success",
+    description: "Mock login response",
+    matchRule: StubMatchRule(
+        method: .post,
+        urlPath: "/auth/login"
     ),
-    StubScenario(
-        name: "Error",
-        description: "Error response",
-        response: StubResponse(
-            statusCode: 500,
-            jsonBody: "{\"error\": \"Internal Server Error\"}"
-        ),
-        isActive: false
-    ),
-    StubScenario(
-        name: "Timeout",
-        description: "Simulate timeout",
-        response: StubResponse(
-            statusCode: 200,
-            responseDelay: 30,
-            errorType: .timeout
-        ),
-        isActive: false
-    )
-]
+    scenarios: [
+        StubScenario(
+            name: "Success",
+            description: "Success response",
+            response: StubResponse(
+                statusCode: 200,
+                jsonBody: "{\"token\": \"abc123\"}"
+            ),
+            isActive: true
+        )
+    ]
+)
+
+await Inspectly.container.stubRepository.addStub(stub)
 ```
-
-### Error Types
-
-Available error types for simulation:
-
-| Error Type | Description |
-|------------|-------------|
-| `.none` | No error (success) |
-| `.timeout` | Request timeout |
-| `.noInternet` | No internet connection |
-| `.unauthorized` | 401 Unauthorized |
-| `.forbidden` | 403 Forbidden |
-| `.notFound` | 404 Not Found |
-| `.internalServerError` | 500 Internal Server Error |
-| `.badGateway` | 502 Bad Gateway |
-| `.serviceUnavailable` | 503 Service Unavailable |
 
 ## Screenshots
 
