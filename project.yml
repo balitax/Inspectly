@@ -2,10 +2,6 @@ name: Inspectly
 options:
   bundleIdPrefix: com.inspectly
 
-packages:
-  Inspectly:
-    path: Inspectly
-
 targets:
   DemoApp:
     type: application
@@ -13,8 +9,7 @@ targets:
     deploymentTarget: "16.0"
     sources:
       - path: DemoApp/
-    dependencies:
-      - package: Inspectly
+      - path: Inspectly/
     info:
       path: DemoApp/Info.plist
       properties:
