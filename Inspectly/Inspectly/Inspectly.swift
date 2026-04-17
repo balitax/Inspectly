@@ -27,9 +27,18 @@ import UIKit
 /// ```
 public final class Inspectly {
     
+    // MARK: - Environment
+    
+    public enum Environment {
+        case debug
+        case production
+    }
+    
     // MARK: - Configuration
     
     public struct Configuration {
+        public var environment: Environment = .debug
+        
         public var isLoggingEnabled: Bool = true
         
         public var isStubEnabled: Bool = false
@@ -43,6 +52,7 @@ public final class Inspectly {
         public var stubRepository: (any StubRepositoryProtocol)?
         
         public init(
+            environment: Environment = .debug,
             isLoggingEnabled: Bool = true,
             isStubEnabled: Bool = false,
             ignoredHosts: Set<String> = [],
@@ -50,6 +60,7 @@ public final class Inspectly {
             ignoreLocalhost: Bool = true,
             stubRepository: (any StubRepositoryProtocol)? = nil
         ) {
+            self.environment = environment
             self.isLoggingEnabled = isLoggingEnabled
             self.isStubEnabled = isStubEnabled
             self.ignoredHosts = ignoredHosts
@@ -79,17 +90,25 @@ public final class Inspectly {
         
         self.configuration = configuration
         
-        configureURLProtocol(with: configuration)
-        
-        if configuration.isShakeGestureEnabled {
-            ShakeManager.shared.onShake = {
-                Inspectly.presentInspector()
+        // Only enable in debug mode or when explicitly configured
+        if configuration.environment == .debug || configuration.isLoggingEnabled || configuration.isStubEnabled {
+            configureURLProtocol(with: configuration)
+            
+            // Only enable shake gesture in debug mode
+            if configuration.environment == .debug && configuration.isShakeGestureEnabled {
+                ShakeManager.shared.onShake = {
+                    Inspectly.presentInspector()
+                }
             }
         }
         
         isEnabled = true
         
-        print("[Inspectly] Enabled - shake device or press ⌘+Ctrl+Z to open inspector")
+        if configuration.environment == .debug {
+            print("[Inspectly] Enabled (Debug) - shake device or press ⌘+Ctrl+Z to open inspector")
+        } else {
+            print("[Inspectly] Enabled (Production)")
+        }
     }
     
     /// Disable Inspectly and unregister interceptors.
@@ -98,6 +117,11 @@ public final class Inspectly {
         ShakeManager.shared.onShake = nil
         isEnabled = false
         print("[Inspectly] Disabled")
+    }
+    
+    /// Check if Inspectly is currently in debug mode.
+    public static var isDebugMode: Bool {
+        return configuration?.environment == .debug
     }
     
     /// Check if Inspectly is currently enabled.

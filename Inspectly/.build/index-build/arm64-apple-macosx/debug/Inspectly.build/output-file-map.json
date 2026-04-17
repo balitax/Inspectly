@@ -1,488 +1,488 @@
 {
   "": {
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/master.swiftdeps"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ContentView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ContentView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ContentView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ContentView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ContentView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ContentView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/Color+Theme.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Color+Theme.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Color+Theme.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Color+Theme~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Color+Theme.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Color+Theme.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/Date+Formatting.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Date+Formatting.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Date+Formatting.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Date+Formatting~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Date+Formatting.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Date+Formatting.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/String+JSON.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/String+JSON.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/String+JSON.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/String+JSON~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/String+JSON.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/String+JSON.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/View+Modifiers.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/View+Modifiers.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/View+Modifiers.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/View+Modifiers~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/View+Modifiers.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/View+Modifiers.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Inspectly.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Inspectly.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Inspectly.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Inspectly~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Inspectly.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Inspectly.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockRequests.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockRequests.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockRequests.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockRequests~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockRequests.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockRequests.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockSettings.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockSettings.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockSettings.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockSettings~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockSettings.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockSettings.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockStubs.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockStubs.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockStubs.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockStubs~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockStubs.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockStubs.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/AppSettings.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/AppSettings.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/AppSettings.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/AppSettings~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/AppSettings.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/AppSettings.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/DashboardSummary.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DashboardSummary.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DashboardSummary.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DashboardSummary~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DashboardSummary.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DashboardSummary.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/NetworkRequest.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkRequest.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkRequest.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkRequest~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkRequest.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkRequest.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/QueryParameter.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/QueryParameter.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/QueryParameter.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/QueryParameter~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/QueryParameter.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/QueryParameter.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestBody.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBody.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBody.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBody~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBody.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBody.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestGroup.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestGroup.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestGroup.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestGroup~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestGroup.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestGroup.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestHeader.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestHeader.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestHeader.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestHeader~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestHeader.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestHeader.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestStub.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestStub.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestStub.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestStub~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestStub.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestStub.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestTag.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestTag.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestTag.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestTag~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestTag.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestTag.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlyEventMonitor.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyEventMonitor.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyEventMonitor.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyEventMonitor~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyEventMonitor.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyEventMonitor.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlyRequestInterceptor.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyRequestInterceptor.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyRequestInterceptor.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyRequestInterceptor~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyRequestInterceptor.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyRequestInterceptor.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlySessionConfiguration.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlySessionConfiguration.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlySessionConfiguration.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlySessionConfiguration~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlySessionConfiguration.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlySessionConfiguration.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/InspectlyURLProtocol.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyURLProtocol.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyURLProtocol.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyURLProtocol~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyURLProtocol.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyURLProtocol.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/StubEngine.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubEngine.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubEngine.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubEngine~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubEngine.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubEngine.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/DependencyContainer.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DependencyContainer.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DependencyContainer.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DependencyContainer~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DependencyContainer.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DependencyContainer.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/ExportManager.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManager.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManager.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManager~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManager.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManager.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/NetworkObserverService.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverService.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverService.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverService~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverService.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverService.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/ExportManagerProtocol.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManagerProtocol.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManagerProtocol.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManagerProtocol~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManagerProtocol.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManagerProtocol.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/NetworkObserverProtocol.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverProtocol.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverProtocol.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverProtocol~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverProtocol.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverProtocol.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/RequestRepositoryProtocol.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepositoryProtocol.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepositoryProtocol.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepositoryProtocol~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepositoryProtocol.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepositoryProtocol.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/StorageManagerProtocol.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManagerProtocol.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManagerProtocol.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManagerProtocol~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManagerProtocol.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManagerProtocol.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/StubRepositoryProtocol.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepositoryProtocol.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepositoryProtocol.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepositoryProtocol~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepositoryProtocol.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepositoryProtocol.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/RequestRepository.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepository.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepository.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepository~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepository.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepository.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/StorageManager.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManager.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManager.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManager~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManager.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManager.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/StubRepository.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepository.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepository.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepository~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepository.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepository.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/RequestDetailViewModel.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailViewModel.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailViewModel.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailViewModel~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailViewModel.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailViewModel.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/RequestListViewModel.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListViewModel.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListViewModel.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListViewModel~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListViewModel.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListViewModel.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/SettingsViewModel.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsViewModel.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsViewModel.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsViewModel~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsViewModel.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsViewModel.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StatisticsViewModel.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsViewModel.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsViewModel.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsViewModel~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsViewModel.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsViewModel.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StubDetailViewModel.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailViewModel.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailViewModel.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailViewModel~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailViewModel.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailViewModel.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StubManagerViewModel.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerViewModel.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerViewModel.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerViewModel~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerViewModel.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerViewModel.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/CodeBlockView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/CodeBlockView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/CodeBlockView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/CodeBlockView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/CodeBlockView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/CodeBlockView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/EmptyStateView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/EmptyStateView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/EmptyStateView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/EmptyStateView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/EmptyStateView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/EmptyStateView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/FilterChipView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterChipView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterChipView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterChipView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterChipView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterChipView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/HTTPMethodBadge.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HTTPMethodBadge.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HTTPMethodBadge.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HTTPMethodBadge~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HTTPMethodBadge.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HTTPMethodBadge.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/SectionHeaderView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SectionHeaderView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SectionHeaderView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SectionHeaderView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SectionHeaderView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SectionHeaderView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/ShakeDetector.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ShakeDetector.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ShakeDetector.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ShakeDetector~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ShakeDetector.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ShakeDetector.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/StatusBadgeView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatusBadgeView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatusBadgeView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatusBadgeView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatusBadgeView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatusBadgeView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ExportTabView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportTabView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportTabView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportTabView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportTabView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportTabView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/HeadersTabView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HeadersTabView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HeadersTabView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HeadersTabView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HeadersTabView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HeadersTabView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/OverviewTabView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/OverviewTabView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/OverviewTabView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/OverviewTabView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/OverviewTabView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/OverviewTabView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ParamsTabView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ParamsTabView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ParamsTabView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ParamsTabView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ParamsTabView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ParamsTabView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/RequestBodyTabView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBodyTabView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBodyTabView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBodyTabView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBodyTabView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBodyTabView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/RequestDetailView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ResponseBodyTabView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseBodyTabView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseBodyTabView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseBodyTabView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseBodyTabView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseBodyTabView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/TimelineTabView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/TimelineTabView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/TimelineTabView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/TimelineTabView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/TimelineTabView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/TimelineTabView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/FilterSheetView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterSheetView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterSheetView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterSheetView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterSheetView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterSheetView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/RequestListView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/RequestRowView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRowView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRowView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRowView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRowView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRowView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Settings/SettingsView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/MiniChartView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MiniChartView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MiniChartView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MiniChartView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MiniChartView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MiniChartView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/StatisticsView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/SummaryCardView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SummaryCardView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SummaryCardView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SummaryCardView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SummaryCardView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SummaryCardView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/JSONPreviewView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/JSONPreviewView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/JSONPreviewView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/JSONPreviewView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/JSONPreviewView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/JSONPreviewView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/MatchRuleEditorView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MatchRuleEditorView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MatchRuleEditorView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MatchRuleEditorView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MatchRuleEditorView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MatchRuleEditorView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/ResponseEditorView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseEditorView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseEditorView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseEditorView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseEditorView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseEditorView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/ScenarioListView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ScenarioListView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ScenarioListView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ScenarioListView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ScenarioListView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ScenarioListView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/StubDetailView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubManager/StubManagerView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerView.dia"
-  },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubManager/StubRowView.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRowView.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRowView.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRowView~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRowView.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRowView.dia"
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/master.swiftdeps"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ContentView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ContentView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ContentView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ContentView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ContentView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ContentView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/Color+Theme.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Color+Theme.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Color+Theme.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Color+Theme~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Color+Theme.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Color+Theme.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/Date+Formatting.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Date+Formatting.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Date+Formatting.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Date+Formatting~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Date+Formatting.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Date+Formatting.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/String+JSON.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/String+JSON.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/String+JSON.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/String+JSON~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/String+JSON.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/String+JSON.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/View+Modifiers.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/View+Modifiers.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/View+Modifiers.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/View+Modifiers~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/View+Modifiers.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/View+Modifiers.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Inspectly.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Inspectly.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Inspectly.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Inspectly~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Inspectly.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Inspectly.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockRequests.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockRequests.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockRequests.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockRequests~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockRequests.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockRequests.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockSettings.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockSettings.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockSettings.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockSettings~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockSettings.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockSettings.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockStubs.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockStubs.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockStubs.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockStubs~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockStubs.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockStubs.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/AppSettings.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/AppSettings.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/AppSettings.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/AppSettings~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/AppSettings.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/AppSettings.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/DashboardSummary.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DashboardSummary.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DashboardSummary.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DashboardSummary~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DashboardSummary.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DashboardSummary.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/NetworkRequest.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkRequest.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkRequest.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkRequest~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkRequest.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkRequest.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/QueryParameter.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/QueryParameter.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/QueryParameter.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/QueryParameter~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/QueryParameter.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/QueryParameter.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestBody.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBody.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBody.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBody~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBody.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBody.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestGroup.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestGroup.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestGroup.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestGroup~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestGroup.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestGroup.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestHeader.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestHeader.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestHeader.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestHeader~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestHeader.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestHeader.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestStub.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestStub.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestStub.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestStub~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestStub.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestStub.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestTag.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestTag.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestTag.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestTag~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestTag.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestTag.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlyEventMonitor.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyEventMonitor.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyEventMonitor.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyEventMonitor~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyEventMonitor.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyEventMonitor.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlyRequestInterceptor.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyRequestInterceptor.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyRequestInterceptor.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyRequestInterceptor~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyRequestInterceptor.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyRequestInterceptor.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlySessionConfiguration.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlySessionConfiguration.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlySessionConfiguration.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlySessionConfiguration~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlySessionConfiguration.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlySessionConfiguration.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/InspectlyURLProtocol.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyURLProtocol.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyURLProtocol.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyURLProtocol~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyURLProtocol.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyURLProtocol.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/StubEngine.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubEngine.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubEngine.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubEngine~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubEngine.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubEngine.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/DependencyContainer.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DependencyContainer.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DependencyContainer.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DependencyContainer~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DependencyContainer.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DependencyContainer.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/ExportManager.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManager.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManager.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManager.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManager.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/NetworkObserverService.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverService.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverService.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverService~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverService.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverService.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/ExportManagerProtocol.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManagerProtocol.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManagerProtocol.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManagerProtocol~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManagerProtocol.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManagerProtocol.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/NetworkObserverProtocol.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverProtocol.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverProtocol.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverProtocol~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverProtocol.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverProtocol.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/RequestRepositoryProtocol.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepositoryProtocol.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepositoryProtocol.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepositoryProtocol~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepositoryProtocol.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepositoryProtocol.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/StorageManagerProtocol.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManagerProtocol.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManagerProtocol.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManagerProtocol~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManagerProtocol.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManagerProtocol.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/StubRepositoryProtocol.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepositoryProtocol.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepositoryProtocol.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepositoryProtocol~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepositoryProtocol.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepositoryProtocol.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/RequestRepository.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepository.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepository.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepository~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepository.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepository.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/StorageManager.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManager.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManager.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManager.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManager.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/StubRepository.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepository.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepository.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepository~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepository.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepository.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/RequestDetailViewModel.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailViewModel.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailViewModel.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailViewModel.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailViewModel.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/RequestListViewModel.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListViewModel.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListViewModel.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListViewModel.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListViewModel.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/SettingsViewModel.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsViewModel.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsViewModel.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsViewModel.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsViewModel.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StatisticsViewModel.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsViewModel.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsViewModel.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsViewModel.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsViewModel.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StubDetailViewModel.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailViewModel.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailViewModel.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailViewModel.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailViewModel.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StubManagerViewModel.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerViewModel.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerViewModel.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerViewModel.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerViewModel.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/CodeBlockView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/CodeBlockView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/CodeBlockView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/CodeBlockView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/CodeBlockView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/CodeBlockView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/EmptyStateView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/EmptyStateView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/EmptyStateView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/EmptyStateView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/EmptyStateView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/EmptyStateView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/FilterChipView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterChipView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterChipView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterChipView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterChipView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterChipView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/HTTPMethodBadge.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HTTPMethodBadge.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HTTPMethodBadge.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HTTPMethodBadge~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HTTPMethodBadge.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HTTPMethodBadge.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/SectionHeaderView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SectionHeaderView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SectionHeaderView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SectionHeaderView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SectionHeaderView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SectionHeaderView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/ShakeDetector.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ShakeDetector.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ShakeDetector.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ShakeDetector~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ShakeDetector.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ShakeDetector.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/StatusBadgeView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatusBadgeView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatusBadgeView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatusBadgeView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatusBadgeView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatusBadgeView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ExportTabView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportTabView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportTabView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportTabView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportTabView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportTabView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/HeadersTabView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HeadersTabView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HeadersTabView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HeadersTabView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HeadersTabView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HeadersTabView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/OverviewTabView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/OverviewTabView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/OverviewTabView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/OverviewTabView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/OverviewTabView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/OverviewTabView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ParamsTabView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ParamsTabView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ParamsTabView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ParamsTabView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ParamsTabView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ParamsTabView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/RequestBodyTabView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBodyTabView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBodyTabView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBodyTabView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBodyTabView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBodyTabView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/RequestDetailView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ResponseBodyTabView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseBodyTabView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseBodyTabView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseBodyTabView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseBodyTabView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseBodyTabView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/TimelineTabView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/TimelineTabView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/TimelineTabView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/TimelineTabView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/TimelineTabView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/TimelineTabView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/FilterSheetView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterSheetView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterSheetView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterSheetView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterSheetView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterSheetView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/RequestListView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/RequestRowView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRowView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRowView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRowView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRowView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRowView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Settings/SettingsView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/MiniChartView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MiniChartView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MiniChartView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MiniChartView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MiniChartView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MiniChartView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/StatisticsView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/SummaryCardView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SummaryCardView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SummaryCardView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SummaryCardView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SummaryCardView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SummaryCardView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/JSONPreviewView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/JSONPreviewView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/JSONPreviewView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/JSONPreviewView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/JSONPreviewView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/JSONPreviewView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/MatchRuleEditorView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MatchRuleEditorView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MatchRuleEditorView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MatchRuleEditorView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MatchRuleEditorView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MatchRuleEditorView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/ResponseEditorView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseEditorView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseEditorView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseEditorView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseEditorView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseEditorView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/ScenarioListView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ScenarioListView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ScenarioListView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ScenarioListView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ScenarioListView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ScenarioListView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/StubDetailView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubManager/StubManagerView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerView.dia"
+  },
+  "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubManager/StubRowView.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRowView.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRowView.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRowView~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRowView.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRowView.dia"
   }
 }

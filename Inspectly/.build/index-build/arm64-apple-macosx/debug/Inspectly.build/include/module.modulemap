@@ -1,3 +1,3 @@
 module Inspectly {
-    header "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/include/Inspectly-Swift.h"
+    header "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/include/Inspectly-Swift.h"
 }

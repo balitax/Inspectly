@@ -1,12 +1,12 @@
 {
   "": {
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/master.swiftdeps"
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/master.swiftdeps"
   },
-  "/Users/bareksa/Office/Inspectly/InspectlyPackage/Tests/InspectlyTests/InspectlyTests.swift": {
-    "dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/InspectlyTests.d",
-    "object": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/InspectlyTests.swift.o",
-    "swiftmodule": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/InspectlyTests~partial.swiftmodule",
-    "swift-dependencies": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/InspectlyTests.swiftdeps",
-    "diagnostics": "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/InspectlyTests.dia"
+  "/Users/bareksa/Office/Inspectly/Inspectly/Tests/InspectlyTests/InspectlyTests.swift": {
+    "dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/InspectlyTests.d",
+    "object": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/InspectlyTests.swift.o",
+    "swiftmodule": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/InspectlyTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/InspectlyTests.swiftdeps",
+    "diagnostics": "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/InspectlyTests.dia"
   }
 }

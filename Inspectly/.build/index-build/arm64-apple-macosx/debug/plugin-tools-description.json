@@ -1,8 +1,8 @@
 {
   "builtTestProducts" : [
     {
-      "binaryPath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.xctest/Contents/MacOS/InspectlyPackageTests",
-      "packagePath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage",
+      "binaryPath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.xctest/Contents/MacOS/InspectlyPackageTests",
+      "packagePath" : "/Users/bareksa/Office/Inspectly/Inspectly",
       "productName" : "InspectlyPackageTests"
     }
   ],
@@ -23,367 +23,367 @@
   "swiftCommands" : {
     "C.Inspectly-arm64-apple-macosx26.0-debug.module" : {
       "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
-      "fileList" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/sources",
-      "importPath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "fileList" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/sources",
+      "importPath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Modules",
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ContentView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ContentView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/Color+Theme.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/Color+Theme.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/Date+Formatting.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/Date+Formatting.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/String+JSON.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/String+JSON.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/View+Modifiers.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/View+Modifiers.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Inspectly.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Inspectly.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockRequests.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockRequests.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockSettings.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockSettings.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockStubs.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockStubs.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/AppSettings.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/AppSettings.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/DashboardSummary.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/DashboardSummary.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/NetworkRequest.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/NetworkRequest.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/QueryParameter.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/QueryParameter.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestBody.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestBody.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestGroup.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestGroup.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestHeader.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestHeader.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestStub.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestStub.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestTag.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestTag.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlyEventMonitor.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlyEventMonitor.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlyRequestInterceptor.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlyRequestInterceptor.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlySessionConfiguration.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlySessionConfiguration.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/InspectlyURLProtocol.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/InspectlyURLProtocol.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/StubEngine.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/StubEngine.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/DependencyContainer.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/DependencyContainer.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/ExportManager.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/ExportManager.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/NetworkObserverService.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/NetworkObserverService.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/ExportManagerProtocol.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/ExportManagerProtocol.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/NetworkObserverProtocol.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/NetworkObserverProtocol.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/RequestRepositoryProtocol.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/RequestRepositoryProtocol.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/StorageManagerProtocol.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/StorageManagerProtocol.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/StubRepositoryProtocol.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/StubRepositoryProtocol.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/RequestRepository.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/RequestRepository.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/StorageManager.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/StorageManager.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/StubRepository.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/StubRepository.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/RequestDetailViewModel.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/RequestDetailViewModel.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/RequestListViewModel.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/RequestListViewModel.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/SettingsViewModel.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/SettingsViewModel.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StatisticsViewModel.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StatisticsViewModel.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StubDetailViewModel.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StubDetailViewModel.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StubManagerViewModel.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StubManagerViewModel.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/CodeBlockView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/CodeBlockView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/EmptyStateView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/EmptyStateView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/FilterChipView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/FilterChipView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/HTTPMethodBadge.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/HTTPMethodBadge.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/SectionHeaderView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/SectionHeaderView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/ShakeDetector.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/ShakeDetector.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/StatusBadgeView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/StatusBadgeView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ExportTabView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ExportTabView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/HeadersTabView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/HeadersTabView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/OverviewTabView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/OverviewTabView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ParamsTabView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ParamsTabView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/RequestBodyTabView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/RequestBodyTabView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/RequestDetailView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/RequestDetailView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ResponseBodyTabView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ResponseBodyTabView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/TimelineTabView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/TimelineTabView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/FilterSheetView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/FilterSheetView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/RequestListView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/RequestListView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/RequestRowView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/RequestRowView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Settings/SettingsView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Settings/SettingsView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/MiniChartView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/MiniChartView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/StatisticsView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/StatisticsView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/SummaryCardView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/SummaryCardView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/JSONPreviewView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/JSONPreviewView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/MatchRuleEditorView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/MatchRuleEditorView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/ResponseEditorView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/ResponseEditorView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/ScenarioListView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/ScenarioListView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/StubDetailView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/StubDetailView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubManager/StubManagerView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubManager/StubManagerView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubManager/StubRowView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubManager/StubRowView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/sources"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/sources"
         }
       ],
       "isLibrary" : true,
       "moduleName" : "Inspectly",
-      "moduleOutputPath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Modules/Inspectly.swiftmodule",
+      "moduleOutputPath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Modules/Inspectly.swiftmodule",
       "objects" : [
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ContentView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Color+Theme.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Date+Formatting.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/String+JSON.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/View+Modifiers.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Inspectly.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockRequests.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockSettings.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockStubs.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/AppSettings.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DashboardSummary.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkRequest.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/QueryParameter.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBody.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestGroup.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestHeader.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestStub.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestTag.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyEventMonitor.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyRequestInterceptor.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlySessionConfiguration.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyURLProtocol.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubEngine.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DependencyContainer.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManager.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverService.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManagerProtocol.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverProtocol.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepositoryProtocol.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManagerProtocol.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepositoryProtocol.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepository.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManager.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepository.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailViewModel.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListViewModel.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsViewModel.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsViewModel.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailViewModel.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerViewModel.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/CodeBlockView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/EmptyStateView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterChipView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HTTPMethodBadge.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SectionHeaderView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ShakeDetector.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatusBadgeView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportTabView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HeadersTabView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/OverviewTabView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ParamsTabView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBodyTabView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseBodyTabView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/TimelineTabView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterSheetView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRowView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MiniChartView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SummaryCardView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/JSONPreviewView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MatchRuleEditorView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseEditorView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ScenarioListView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerView.swift.o",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRowView.swift.o"
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ContentView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Color+Theme.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Date+Formatting.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/String+JSON.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/View+Modifiers.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/Inspectly.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockRequests.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockSettings.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MockStubs.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/AppSettings.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DashboardSummary.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkRequest.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/QueryParameter.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBody.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestGroup.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestHeader.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestStub.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestTag.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyEventMonitor.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyRequestInterceptor.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlySessionConfiguration.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/InspectlyURLProtocol.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubEngine.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/DependencyContainer.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManager.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverService.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportManagerProtocol.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/NetworkObserverProtocol.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepositoryProtocol.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManagerProtocol.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepositoryProtocol.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRepository.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StorageManager.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRepository.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailViewModel.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListViewModel.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsViewModel.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsViewModel.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailViewModel.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerViewModel.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/CodeBlockView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/EmptyStateView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterChipView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HTTPMethodBadge.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SectionHeaderView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ShakeDetector.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatusBadgeView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ExportTabView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/HeadersTabView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/OverviewTabView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ParamsTabView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestBodyTabView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestDetailView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseBodyTabView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/TimelineTabView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/FilterSheetView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestListView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/RequestRowView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SettingsView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MiniChartView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StatisticsView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/SummaryCardView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/JSONPreviewView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/MatchRuleEditorView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ResponseEditorView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/ScenarioListView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubDetailView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubManagerView.swift.o",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/StubRowView.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -391,8 +391,6 @@
         "-incremental",
         "-enable-batch-mode",
         "-serialize-diagnostics",
-        "-index-store-path",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/index/store",
         "-Onone",
         "-enable-testing",
         "-j8",
@@ -400,12 +398,12 @@
         "-DDEBUG",
         "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
         "-module-cache-path",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
         "-parseable-output",
         "-parse-as-library",
         "-emit-objc-header",
         "-emit-objc-header-path",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/include/Inspectly-Swift.h",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/include/Inspectly-Swift.h",
         "-swift-version",
         "5",
         "-Xfrontend",
@@ -446,117 +444,117 @@
         "-Xcc",
         "-g",
         "-package-name",
-        "inspectlypackage"
+        "inspectly"
       ],
-      "outputFileMapPath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/output-file-map.json",
+      "outputFileMapPath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/output-file-map.json",
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Modules/Inspectly.swiftmodule"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Modules/Inspectly.swiftmodule"
         }
       ],
       "prepareForIndexing" : true,
       "sources" : [
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ContentView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/Color+Theme.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/Date+Formatting.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/String+JSON.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/View+Modifiers.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Inspectly.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockRequests.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockSettings.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockStubs.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/AppSettings.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/DashboardSummary.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/NetworkRequest.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/QueryParameter.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestBody.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestGroup.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestHeader.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestStub.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestTag.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlyEventMonitor.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlyRequestInterceptor.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlySessionConfiguration.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/InspectlyURLProtocol.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/StubEngine.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/DependencyContainer.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/ExportManager.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/NetworkObserverService.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/ExportManagerProtocol.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/NetworkObserverProtocol.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/RequestRepositoryProtocol.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/StorageManagerProtocol.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/StubRepositoryProtocol.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/RequestRepository.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/StorageManager.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/StubRepository.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/RequestDetailViewModel.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/RequestListViewModel.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/SettingsViewModel.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StatisticsViewModel.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StubDetailViewModel.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StubManagerViewModel.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/CodeBlockView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/EmptyStateView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/FilterChipView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/HTTPMethodBadge.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/SectionHeaderView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/ShakeDetector.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/StatusBadgeView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ExportTabView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/HeadersTabView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/OverviewTabView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ParamsTabView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/RequestBodyTabView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/RequestDetailView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ResponseBodyTabView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/TimelineTabView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/FilterSheetView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/RequestListView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/RequestRowView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Settings/SettingsView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/MiniChartView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/StatisticsView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/SummaryCardView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/JSONPreviewView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/MatchRuleEditorView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/ResponseEditorView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/ScenarioListView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/StubDetailView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubManager/StubManagerView.swift",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubManager/StubRowView.swift"
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ContentView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/Color+Theme.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/Date+Formatting.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/String+JSON.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/View+Modifiers.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Inspectly.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockRequests.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockSettings.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockStubs.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/AppSettings.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/DashboardSummary.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/NetworkRequest.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/QueryParameter.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestBody.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestGroup.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestHeader.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestStub.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestTag.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlyEventMonitor.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlyRequestInterceptor.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlySessionConfiguration.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/InspectlyURLProtocol.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/StubEngine.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/DependencyContainer.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/ExportManager.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/NetworkObserverService.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/ExportManagerProtocol.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/NetworkObserverProtocol.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/RequestRepositoryProtocol.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/StorageManagerProtocol.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/StubRepositoryProtocol.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/RequestRepository.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/StorageManager.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/StubRepository.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/RequestDetailViewModel.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/RequestListViewModel.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/SettingsViewModel.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StatisticsViewModel.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StubDetailViewModel.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StubManagerViewModel.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/CodeBlockView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/EmptyStateView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/FilterChipView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/HTTPMethodBadge.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/SectionHeaderView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/ShakeDetector.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/StatusBadgeView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ExportTabView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/HeadersTabView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/OverviewTabView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ParamsTabView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/RequestBodyTabView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/RequestDetailView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ResponseBodyTabView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/TimelineTabView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/FilterSheetView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/RequestListView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/RequestRowView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Settings/SettingsView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/MiniChartView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/StatisticsView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/SummaryCardView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/JSONPreviewView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/MatchRuleEditorView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/ResponseEditorView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/ScenarioListView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/StubDetailView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubManager/StubManagerView.swift",
+        "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubManager/StubRowView.swift"
       ],
-      "tempsPath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build",
+      "tempsPath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build",
       "wholeModuleOptimization" : false
     },
     "C.InspectlyPackageTests-arm64-apple-macosx26.0-debug.module" : {
       "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
-      "fileList" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/sources",
-      "importPath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "fileList" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/sources",
+      "importPath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Modules",
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.derived/runner.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.derived/runner.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Modules/InspectlyTests.swiftmodule"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Modules/InspectlyTests.swiftmodule"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/sources"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/sources"
         }
       ],
       "isLibrary" : true,
       "moduleName" : "InspectlyPackageTests",
-      "moduleOutputPath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Modules/InspectlyPackageTests.swiftmodule",
+      "moduleOutputPath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Modules/InspectlyPackageTests.swiftmodule",
       "objects" : [
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/runner.swift.o"
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/runner.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -564,8 +562,6 @@
         "-incremental",
         "-enable-batch-mode",
         "-serialize-diagnostics",
-        "-index-store-path",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/index/store",
         "-Onone",
         "-enable-testing",
         "-Xfrontend",
@@ -575,12 +571,12 @@
         "-DDEBUG",
         "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
         "-module-cache-path",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
         "-parseable-output",
         "-parse-as-library",
         "-emit-objc-header",
         "-emit-objc-header-path",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/include/InspectlyPackageTests-Swift.h",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/include/InspectlyPackageTests-Swift.h",
         "-Xfrontend",
         "-experimental-lazy-typecheck",
         "-Xfrontend",
@@ -619,49 +615,49 @@
         "-Xcc",
         "-g",
         "-package-name",
-        "inspectlypackage"
+        "inspectly"
       ],
-      "outputFileMapPath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/output-file-map.json",
+      "outputFileMapPath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/output-file-map.json",
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Modules/InspectlyPackageTests.swiftmodule"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Modules/InspectlyPackageTests.swiftmodule"
         }
       ],
       "prepareForIndexing" : true,
       "sources" : [
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.derived/runner.swift"
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.derived/runner.swift"
       ],
-      "tempsPath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build",
+      "tempsPath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build",
       "wholeModuleOptimization" : false
     },
     "C.InspectlyTests-arm64-apple-macosx26.0-debug.module" : {
       "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
-      "fileList" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/sources",
-      "importPath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "fileList" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/sources",
+      "importPath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Modules",
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Tests/InspectlyTests/InspectlyTests.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Tests/InspectlyTests/InspectlyTests.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Modules/Inspectly.swiftmodule"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Modules/Inspectly.swiftmodule"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/sources"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/sources"
         }
       ],
       "isLibrary" : true,
       "moduleName" : "InspectlyTests",
-      "moduleOutputPath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Modules/InspectlyTests.swiftmodule",
+      "moduleOutputPath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Modules/InspectlyTests.swiftmodule",
       "objects" : [
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/InspectlyTests.swift.o"
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/InspectlyTests.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -669,8 +665,6 @@
         "-incremental",
         "-enable-batch-mode",
         "-serialize-diagnostics",
-        "-index-store-path",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/index/store",
         "-Onone",
         "-enable-testing",
         "-Xfrontend",
@@ -680,7 +674,7 @@
         "-DDEBUG",
         "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
         "-module-cache-path",
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+        "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
         "-parseable-output",
         "-parse-as-library",
         "-swift-version",
@@ -723,20 +717,20 @@
         "-Xcc",
         "-g",
         "-package-name",
-        "inspectlypackage"
+        "inspectly"
       ],
-      "outputFileMapPath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/output-file-map.json",
+      "outputFileMapPath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/output-file-map.json",
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Modules/InspectlyTests.swiftmodule"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Modules/InspectlyTests.swiftmodule"
         }
       ],
       "prepareForIndexing" : true,
       "sources" : [
-        "/Users/bareksa/Office/Inspectly/InspectlyPackage/Tests/InspectlyTests/InspectlyTests.swift"
+        "/Users/bareksa/Office/Inspectly/Inspectly/Tests/InspectlyTests/InspectlyTests.swift"
       ],
-      "tempsPath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build",
+      "tempsPath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build",
       "wholeModuleOptimization" : false
     }
   },
@@ -749,86 +743,84 @@
       "-module-name",
       "Inspectly",
       "-package-name",
-      "inspectlypackage",
+      "inspectly",
       "-c",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ContentView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/Color+Theme.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/Date+Formatting.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/String+JSON.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/View+Modifiers.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Inspectly.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockRequests.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockSettings.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockStubs.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/AppSettings.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/DashboardSummary.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/NetworkRequest.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/QueryParameter.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestBody.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestGroup.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestHeader.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestStub.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestTag.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlyEventMonitor.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlyRequestInterceptor.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlySessionConfiguration.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/InspectlyURLProtocol.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/StubEngine.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/DependencyContainer.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/ExportManager.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/NetworkObserverService.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/ExportManagerProtocol.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/NetworkObserverProtocol.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/RequestRepositoryProtocol.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/StorageManagerProtocol.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/StubRepositoryProtocol.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/RequestRepository.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/StorageManager.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/StubRepository.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/RequestDetailViewModel.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/RequestListViewModel.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/SettingsViewModel.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StatisticsViewModel.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StubDetailViewModel.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StubManagerViewModel.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/CodeBlockView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/EmptyStateView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/FilterChipView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/HTTPMethodBadge.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/SectionHeaderView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/ShakeDetector.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/StatusBadgeView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ExportTabView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/HeadersTabView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/OverviewTabView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ParamsTabView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/RequestBodyTabView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/RequestDetailView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ResponseBodyTabView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/TimelineTabView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/FilterSheetView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/RequestListView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/RequestRowView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Settings/SettingsView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/MiniChartView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/StatisticsView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/SummaryCardView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/JSONPreviewView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/MatchRuleEditorView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/ResponseEditorView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/ScenarioListView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/StubDetailView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubManager/StubManagerView.swift",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubManager/StubRowView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ContentView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/Color+Theme.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/Date+Formatting.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/String+JSON.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/View+Modifiers.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Inspectly.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockRequests.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockSettings.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockStubs.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/AppSettings.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/DashboardSummary.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/NetworkRequest.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/QueryParameter.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestBody.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestGroup.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestHeader.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestStub.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestTag.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlyEventMonitor.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlyRequestInterceptor.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlySessionConfiguration.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/InspectlyURLProtocol.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/StubEngine.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/DependencyContainer.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/ExportManager.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/NetworkObserverService.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/ExportManagerProtocol.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/NetworkObserverProtocol.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/RequestRepositoryProtocol.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/StorageManagerProtocol.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/StubRepositoryProtocol.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/RequestRepository.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/StorageManager.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/StubRepository.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/RequestDetailViewModel.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/RequestListViewModel.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/SettingsViewModel.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StatisticsViewModel.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StubDetailViewModel.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StubManagerViewModel.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/CodeBlockView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/EmptyStateView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/FilterChipView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/HTTPMethodBadge.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/SectionHeaderView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/ShakeDetector.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/StatusBadgeView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ExportTabView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/HeadersTabView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/OverviewTabView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ParamsTabView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/RequestBodyTabView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/RequestDetailView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ResponseBodyTabView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/TimelineTabView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/FilterSheetView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/RequestListView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/RequestRowView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Settings/SettingsView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/MiniChartView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/StatisticsView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/SummaryCardView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/JSONPreviewView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/MatchRuleEditorView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/ResponseEditorView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/ScenarioListView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/StubDetailView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubManager/StubManagerView.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubManager/StubRowView.swift",
       "-I",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Modules",
       "-target",
       "arm64-apple-macosx10.13",
       "-incremental",
       "-enable-batch-mode",
       "-serialize-diagnostics",
-      "-index-store-path",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/index/store",
       "-Onone",
       "-enable-testing",
       "-j8",
@@ -836,12 +828,12 @@
       "-DDEBUG",
       "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
       "-module-cache-path",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+      "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
       "-parseable-output",
       "-parse-as-library",
       "-emit-objc-header",
       "-emit-objc-header-path",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/include/Inspectly-Swift.h",
+      "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/include/Inspectly-Swift.h",
       "-swift-version",
       "5",
       "-Xfrontend",
@@ -882,7 +874,7 @@
       "-Xcc",
       "-g",
       "-package-name",
-      "inspectlypackage",
+      "inspectly",
       "-driver-use-frontend-path",
       "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
     ],
@@ -891,18 +883,16 @@
       "-module-name",
       "InspectlyPackageTests",
       "-package-name",
-      "inspectlypackage",
+      "inspectly",
       "-c",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.derived/runner.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.derived/runner.swift",
       "-I",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Modules",
       "-target",
       "arm64-apple-macosx10.13",
       "-incremental",
       "-enable-batch-mode",
       "-serialize-diagnostics",
-      "-index-store-path",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/index/store",
       "-Onone",
       "-enable-testing",
       "-Xfrontend",
@@ -912,12 +902,12 @@
       "-DDEBUG",
       "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
       "-module-cache-path",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+      "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
       "-parseable-output",
       "-parse-as-library",
       "-emit-objc-header",
       "-emit-objc-header-path",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/include/InspectlyPackageTests-Swift.h",
+      "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/include/InspectlyPackageTests-Swift.h",
       "-Xfrontend",
       "-experimental-lazy-typecheck",
       "-Xfrontend",
@@ -956,7 +946,7 @@
       "-Xcc",
       "-g",
       "-package-name",
-      "inspectlypackage",
+      "inspectly",
       "-driver-use-frontend-path",
       "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
     ],
@@ -965,18 +955,16 @@
       "-module-name",
       "InspectlyTests",
       "-package-name",
-      "inspectlypackage",
+      "inspectly",
       "-c",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/Tests/InspectlyTests/InspectlyTests.swift",
+      "/Users/bareksa/Office/Inspectly/Inspectly/Tests/InspectlyTests/InspectlyTests.swift",
       "-I",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Modules",
       "-target",
       "arm64-apple-macosx14.0",
       "-incremental",
       "-enable-batch-mode",
       "-serialize-diagnostics",
-      "-index-store-path",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/index/store",
       "-Onone",
       "-enable-testing",
       "-Xfrontend",
@@ -986,7 +974,7 @@
       "-DDEBUG",
       "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
       "-module-cache-path",
-      "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+      "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
       "-parseable-output",
       "-parse-as-library",
       "-swift-version",
@@ -1029,7 +1017,7 @@
       "-Xcc",
       "-g",
       "-package-name",
-      "inspectlypackage",
+      "inspectly",
       "-driver-use-frontend-path",
       "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
     ]
@@ -1058,7 +1046,7 @@
     }
   },
   "writeCommands" : {
-    "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/sources" : {
+    "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/sources" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -1067,284 +1055,284 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ContentView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ContentView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/Color+Theme.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/Color+Theme.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/Date+Formatting.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/Date+Formatting.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/String+JSON.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/String+JSON.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Extensions/View+Modifiers.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Extensions/View+Modifiers.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Inspectly.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Inspectly.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockRequests.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockRequests.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockSettings.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockSettings.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/MockData/MockStubs.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/MockData/MockStubs.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/AppSettings.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/AppSettings.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/DashboardSummary.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/DashboardSummary.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/NetworkRequest.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/NetworkRequest.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/QueryParameter.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/QueryParameter.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestBody.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestBody.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestGroup.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestGroup.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestHeader.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestHeader.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestStub.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestStub.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Models/RequestTag.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Models/RequestTag.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlyEventMonitor.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlyEventMonitor.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlyRequestInterceptor.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlyRequestInterceptor.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/AlamofireIntegration/InspectlySessionConfiguration.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/AlamofireIntegration/InspectlySessionConfiguration.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/InspectlyURLProtocol.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/InspectlyURLProtocol.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Networking/StubEngine.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Networking/StubEngine.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/DependencyContainer.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/DependencyContainer.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/ExportManager.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/ExportManager.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/NetworkObserverService.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/NetworkObserverService.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/ExportManagerProtocol.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/ExportManagerProtocol.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/NetworkObserverProtocol.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/NetworkObserverProtocol.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/RequestRepositoryProtocol.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/RequestRepositoryProtocol.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/StorageManagerProtocol.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/StorageManagerProtocol.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/Protocols/StubRepositoryProtocol.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/Protocols/StubRepositoryProtocol.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/RequestRepository.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/RequestRepository.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/StorageManager.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/StorageManager.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Services/StubRepository.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Services/StubRepository.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/RequestDetailViewModel.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/RequestDetailViewModel.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/RequestListViewModel.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/RequestListViewModel.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/SettingsViewModel.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/SettingsViewModel.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StatisticsViewModel.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StatisticsViewModel.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StubDetailViewModel.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StubDetailViewModel.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/ViewModels/StubManagerViewModel.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/ViewModels/StubManagerViewModel.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/CodeBlockView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/CodeBlockView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/EmptyStateView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/EmptyStateView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/FilterChipView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/FilterChipView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/HTTPMethodBadge.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/HTTPMethodBadge.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/SectionHeaderView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/SectionHeaderView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/ShakeDetector.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/ShakeDetector.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Components/StatusBadgeView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Components/StatusBadgeView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ExportTabView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ExportTabView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/HeadersTabView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/HeadersTabView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/OverviewTabView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/OverviewTabView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ParamsTabView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ParamsTabView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/RequestBodyTabView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/RequestBodyTabView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/RequestDetailView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/RequestDetailView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/ResponseBodyTabView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/ResponseBodyTabView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestDetail/TimelineTabView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestDetail/TimelineTabView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/FilterSheetView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/FilterSheetView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/RequestListView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/RequestListView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/RequestList/RequestRowView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/RequestList/RequestRowView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Settings/SettingsView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Settings/SettingsView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/MiniChartView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/MiniChartView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/StatisticsView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/StatisticsView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/Statistics/SummaryCardView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/Statistics/SummaryCardView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/JSONPreviewView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/JSONPreviewView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/MatchRuleEditorView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/MatchRuleEditorView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/ResponseEditorView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/ResponseEditorView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/ScenarioListView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/ScenarioListView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubDetail/StubDetailView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubDetail/StubDetailView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubManager/StubManagerView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubManager/StubManagerView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Inspectly/Views/StubManager/StubRowView.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Inspectly/Views/StubManager/StubRowView.swift"
         }
       ],
-      "outputFilePath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/sources"
+      "outputFilePath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/Inspectly.build/sources"
     },
-    "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/sources" : {
+    "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/sources" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -1353,12 +1341,12 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.derived/runner.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.derived/runner.swift"
         }
       ],
-      "outputFilePath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/sources"
+      "outputFilePath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyPackageTests.build/sources"
     },
-    "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/sources" : {
+    "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/sources" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -1367,12 +1355,12 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/Tests/InspectlyTests/InspectlyTests.swift"
+          "name" : "/Users/bareksa/Office/Inspectly/Inspectly/Tests/InspectlyTests/InspectlyTests.swift"
         }
       ],
-      "outputFilePath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/sources"
+      "outputFilePath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/InspectlyTests.build/sources"
     },
-    "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+    "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
       "alwaysOutOfDate" : true,
       "inputs" : [
         {
@@ -1384,7 +1372,7 @@
           "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
         }
       ],
-      "outputFilePath" : "/Users/bareksa/Office/Inspectly/InspectlyPackage/.build/index-build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+      "outputFilePath" : "/Users/bareksa/Office/Inspectly/Inspectly/.build/index-build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
     }
   }
 }
