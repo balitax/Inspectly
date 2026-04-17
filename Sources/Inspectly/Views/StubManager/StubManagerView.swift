@@ -90,7 +90,7 @@ struct StubManagerView: View {
                             } label: {
                                 Label("Duplicate", systemImage: "doc.on.doc")
                             }
-                            .tint(.indigo)
+                            .tint(.primaryGreen)
                         }
                         .swipeActions(edge: .leading) {
                             Button {

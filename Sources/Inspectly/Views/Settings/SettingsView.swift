@@ -94,7 +94,7 @@ struct SettingsView: View {
                 Label("Enable Stubs Globally", systemImage: "hammer")
                     .font(.system(size: 14))
             }
-            .tint(.indigo)
+            .tint(.primaryGreen)
         } header: {
             Text("Stubs")
         } footer: {

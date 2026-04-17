@@ -63,7 +63,7 @@ struct ContentView: View {
             }
             .tag(AppTab.settings)
         }
-        .tint(.indigo)
+        .tint(.primaryGreen)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 if onDismiss != nil {

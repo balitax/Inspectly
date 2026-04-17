@@ -40,7 +40,7 @@ struct ExportTabView: View {
                             title: "Copy Full Request",
                             subtitle: "Headers, body, and response",
                             icon: "doc.on.doc",
-                            color: .indigo
+                            color: .primaryGreen
                         ) {
                             viewModel.copyFullRequest()
                         }

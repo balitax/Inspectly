@@ -26,9 +26,9 @@ struct RequestRowView: View {
                     if request.isStubbed {
                         Image(systemName: "hammer.fill")
                             .font(.system(size: 8))
-                            .foregroundStyle(.indigo)
+                            .foregroundStyle(.primaryGreen)
                             .padding(3)
-                            .background(Color.indigo.opacity(0.12))
+                            .background(Color.primaryGreen.opacity(0.12))
                             .clipShape(Circle())
                     }
                 }

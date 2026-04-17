@@ -71,7 +71,7 @@ struct OverviewTabView: View {
 
                     if viewModel.request.isStubbed {
                         Text("STUBBED")
-                            .badgeStyle(color: .indigo, isSmall: true)
+                            .badgeStyle(color: .primaryGreen, isSmall: true)
                     }
                 }
 

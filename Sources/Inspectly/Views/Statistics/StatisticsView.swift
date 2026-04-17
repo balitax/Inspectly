@@ -156,7 +156,7 @@ struct StatisticsView: View {
                 HStack(spacing: 8) {
                     QuickAccessChip(icon: "xmark.octagon.fill", label: "Errors", count: viewModel.summary.failedRequests, color: .red)
                     QuickAccessChip(icon: "tortoise.fill", label: "Slow", count: 0, color: .orange)
-                    QuickAccessChip(icon: "hammer.fill", label: "Stubbed", count: viewModel.summary.stubbedRequests, color: .indigo)
+                    QuickAccessChip(icon: "hammer.fill", label: "Stubbed", count: viewModel.summary.stubbedRequests, color: .primaryGreen)
                     QuickAccessChip(icon: "pin.fill", label: "Pinned", count: viewModel.summary.pinnedRequests, color: .yellow)
                     QuickAccessChip(icon: "heart.fill", label: "Favorites", count: viewModel.summary.favoriteRequests, color: .pink)
                 }

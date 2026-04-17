@@ -58,8 +58,9 @@ extension Color {
     static let textPrimary = Color(.label)
     static let textSecondary = Color(.secondaryLabel)
     static let textTertiary = Color(.tertiaryLabel)
-
-    static let accentIndigo = Color.indigo
+    
+    static let primaryGreen = Color(red: 0.133, green: 0.698, blue: 0.322)
+    static let accentIndigo = primaryGreen
     static let accentTeal = Color.teal
     static let accentMint = Color.mint
     static let accentCyan = Color.cyan
@@ -75,7 +76,7 @@ extension Color {
     static let tagDebug = Color.gray
 
     // MARK: - Chart Colors
-    static let chartPrimary = Color.indigo
+    static let chartPrimary = primaryGreen
     static let chartSecondary = Color.teal
     static let chartTertiary = Color.mint
     static let chartQuaternary = Color.cyan
@@ -83,7 +84,7 @@ extension Color {
     // MARK: - Stub Colors
     static let stubActive = Color.green
     static let stubInactive = Color.gray
-    static let stubBadge = Color.indigo
+    static let stubBadge = primaryGreen
 }
 
 // MARK: - ShapeStyle Extension
