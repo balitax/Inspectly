@@ -2,19 +2,11 @@ name: InspectlyDemo
 options:
   bundleIdPrefix: com.inspectly
 
-targets:
+packages:
   Inspectly:
-    type: framework
-    platform: iOS
-    deploymentTarget: "16.0"
-    sources:
-      - path: ../Inspectly/
-    settings:
-      base:
-        GENERATE_INFOPLIST_FILE: YES
-        INFOPLIST_KEY_CFBundleDisplayName: Inspectly
-        INFOPLIST_KEY_NSHumanReadableCopyright: ""
+    path: ../
 
+targets:
   DemoApp:
     type: application
     platform: iOS
@@ -22,7 +14,7 @@ targets:
     sources:
       - path: .
     dependencies:
-      - target: Inspectly
+      - package: Inspectly
     info:
       path: Info.plist
       properties:

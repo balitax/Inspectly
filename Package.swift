@@ -1,11 +1,11 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.9
 
 import PackageDescription
 
 let package = Package(
     name: "Inspectly",
     platforms: [
-        .iOS(16.0)
+        .iOS(.v16)
     ],
     products: [
         .library(
