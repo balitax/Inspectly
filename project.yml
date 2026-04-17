@@ -4,8 +4,7 @@ options:
 
 packages:
   Inspectly:
-    path: .
-    packageKind: root
+    path: InspectlyPackage
 
 targets:
   DemoApp:
