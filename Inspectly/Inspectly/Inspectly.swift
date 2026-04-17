@@ -27,31 +27,9 @@ import UIKit
 /// ```
 public final class Inspectly {
     
-    // MARK: - Environment
-    
-    public enum Environment: String, Codable {
-        case debug
-        case production
-    }
-    
-    public struct EnabledEnvironments: OptionSet {
-        public let rawValue: Int
-        
-        public init(rawValue: Int) {
-            self.rawValue = rawValue
-        }
-        
-        public static let debug = EnabledEnvironments(rawValue: 1 << 0)
-        public static let production = EnabledEnvironments(rawValue: 1 << 1)
-        
-        public static var all: EnabledEnvironments { [.debug, .production] }
-    }
-    
     // MARK: - Configuration
     
     public struct Configuration {
-        public var enabledEnvironments: EnabledEnvironments = [.debug]
-        
         public var isLoggingEnabled: Bool = true
         
         public var isStubEnabled: Bool = false
@@ -66,7 +44,6 @@ public final class Inspectly {
         public var stubRepository: (any StubRepositoryProtocol)?
         
         public init(
-            enabledEnvironments: EnabledEnvironments = [.debug],
             isLoggingEnabled: Bool = true,
             isStubEnabled: Bool = false,
             ignoredHosts: Set<String> = [],
@@ -74,7 +51,6 @@ public final class Inspectly {
             ignoreLocalhost: Bool = true,
             stubRepository: (any StubRepositoryProtocol)? = nil
         ) {
-            self.enabledEnvironments = enabledEnvironments
             self.isLoggingEnabled = isLoggingEnabled
             self.isStubEnabled = isStubEnabled
             self.ignoredHosts = ignoredHosts
@@ -100,28 +76,8 @@ public final class Inspectly {
         
         self.configuration = configuration
         
-        // Check environment compatibility
-        #if DEBUG
-        let currentEnvironment: Environment = .debug
-        #else
-        let currentEnvironment: Environment = .production
-        #endif
-        
-        let isEnabledInCurrentEnv: Bool
-        switch currentEnvironment {
-        case .debug:
-            isEnabledInCurrentEnv = configuration.enabledEnvironments.contains(.debug)
-        case .production:
-            isEnabledInCurrentEnv = configuration.enabledEnvironments.contains(.production)
-        }
-        
-        // Allow explicit override or check environment
-        guard isEnabled && isEnabledInCurrentEnv else {
-            if !isEnabled {
-                print("[Inspectly] Disabled via parameter")
-            } else {
-                print("[Inspectly] Not enabled for \(currentEnvironment) environment")
-            }
+        guard isEnabled else {
+            print("[Inspectly] Disabled via parameter")
             _isEnabled = false
             return
         }
@@ -137,11 +93,7 @@ public final class Inspectly {
         
         _isEnabled = true
         
-        #if DEBUG
-        print("[Inspectly] Enabled (Debug) - shake device or press ⌘+Ctrl+Z to open inspector")
-        #else
-        print("[Inspectly] Enabled (Production)")
-        #endif
+        print("[Inspectly] Enabled - shake device or press ⌘+Ctrl+Z to open inspector")
     }
     
     /// Disable Inspectly and unregister interceptors.
@@ -176,7 +128,9 @@ public final class Inspectly {
         }
         
         DispatchQueue.main.async {
-            let presentingVC = UIApplication.shared.windows.first?.rootViewController
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            let presentingVC = window.rootViewController
             
             let contentView = ContentView(container: container) {
                 presentingVC?.dismiss(animated: true)
