@@ -23,4 +23,5 @@ Pods/
 *.swo
 
 # OS
-*.log
+*.log.build/
+Inspectly.xcodeproj/

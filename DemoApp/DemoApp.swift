@@ -4,32 +4,18 @@
 //
 
 import SwiftUI
-import Alamofire
 
 @main
 struct DemoApp: App {
-    private let container = DependencyContainer.shared
     
-    // Shared alamofire session infused with Inspectly's power
-    private let demoSession: Session
-
     init() {
-        // Configure Inspectly's URLProtocol
-        InspectlySessionConfiguration.configureURLProtocol(with: container)
-        
-        // Build an Alamofire session configuration loaded with Inspectly
-        var configuration = URLSessionConfiguration.af.default
-        InspectlySessionConfiguration.addProtocol(to: &configuration)
-        
-        // Create the session
-        self.demoSession = Session(configuration: configuration)
+        Inspectly.enable()
     }
 
     var body: some Scene {
         WindowGroup {
-            DemoAppView(session: demoSession, container: container)
+            DemoAppView()
                 .task {
-                    // Pre-fill Inspectly with mock stubs so we have something to demonstrate with
                     await loadMockData()
                 }
         }
@@ -37,7 +23,7 @@ struct DemoApp: App {
     
     private func loadMockData() async {
         for stub in MockStubs.all {
-            await container.stubRepository.addStub(stub)
+            await Inspectly.container.stubRepository.addStub(stub)
         }
     }
 }

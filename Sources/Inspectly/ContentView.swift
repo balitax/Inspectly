@@ -8,9 +8,15 @@ import SwiftUI
 // MARK: - Content View
 
 struct ContentView: View {
-    @State private var selectedTab: AppTab = .statistics
+    @State private var selectedTab: AppTab = .requests
+    let onDismiss: (() -> Void)?
 
     let container: DependencyContainer
+
+    init(container: DependencyContainer, isPresented: Binding<Bool>? = nil, onDismiss: (() -> Void)? = nil) {
+        self.container = container
+        self.onDismiss = onDismiss
+    }
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -58,6 +64,15 @@ struct ContentView: View {
             .tag(AppTab.settings)
         }
         .tint(.indigo)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                if onDismiss != nil {
+                    Button("Done") {
+                        onDismiss?()
+                    }
+                }
+            }
+        }
     }
 }
 

@@ -7,7 +7,7 @@ import Foundation
 
 extension String {
     /// Pretty print JSON string
-    var prettyPrintedJSON: String? {
+    public var prettyPrintedJSON: String? {
         guard let data = self.data(using: .utf8),
               let json = try? JSONSerialization.jsonObject(with: data),
               let prettyData = try? JSONSerialization.data(withJSONObject: json, options: [.prettyPrinted, .sortedKeys]),
@@ -18,7 +18,7 @@ extension String {
     }
 
     /// Validate if string is valid JSON
-    var isValidJSON: Bool {
+    public var isValidJSON: Bool {
         guard let data = self.data(using: .utf8) else { return false }
         return (try? JSONSerialization.jsonObject(with: data)) != nil
     }

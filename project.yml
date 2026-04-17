@@ -2,21 +2,14 @@ name: Inspectly
 options:
   bundleIdPrefix: com.inspectly
 
-packages:
-  Alamofire:
-    url: https://github.com/Alamofire/Alamofire.git
-    from: 5.8.0
-
 targets:
   InspectlyDemo:
     type: application
     platform: iOS
     deploymentTarget: "16.0"
     sources:
-      - path: Inspectly/
+      - path: Sources/Inspectly/
       - path: DemoApp/
-    dependencies:
-      - package: Alamofire
     info:
       path: DemoApp/Info.plist
       properties:

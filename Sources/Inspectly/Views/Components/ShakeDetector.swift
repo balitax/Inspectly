@@ -24,12 +24,28 @@ extension UIDevice {
     static let deviceDidShake = Notification.Name("deviceDidShake")
 }
 
+// MARK: - Shake Manager
+
+final class ShakeManager {
+    static let shared = ShakeManager()
+    var onShake: (() -> Void)?
+    
+    private init() {}
+    
+    func trigger() {
+        DispatchQueue.main.async {
+            self.onShake?()
+        }
+    }
+}
+
 // MARK: - UIWindow Extension for Shake
 
 extension UIWindow {
     open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        super.motionEnded(motion, with: event)
         if motion == .motionShake {
-            NotificationCenter.default.post(name: UIDevice.deviceDidShake, object: nil)
+            ShakeManager.shared.trigger()
         }
     }
 }
@@ -38,7 +54,7 @@ extension UIWindow {
 
 struct ShakeDetector: ViewModifier {
     let action: () -> Void
-
+    
     func body(content: Content) -> some View {
         content
             .onReceive(NotificationCenter.default.publisher(for: UIDevice.deviceDidShake)) { _ in
