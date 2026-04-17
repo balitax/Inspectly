@@ -58,11 +58,8 @@ public final class Inspectly {
         
         public var ignoredHosts: Set<String> = []
         
-        /// Enable shake gesture to open inspector (only works in DEBUG builds)
+        /// Enable shake gesture to open inspector
         public var isShakeGestureEnabled: Bool = true
-        
-        /// Enable inspector UI access in production builds
-        public var isInspectorUIAccessibleInProduction: Bool = false
         
         public var ignoreLocalhost: Bool = true
         
@@ -74,7 +71,6 @@ public final class Inspectly {
             isStubEnabled: Bool = false,
             ignoredHosts: Set<String> = [],
             isShakeGestureEnabled: Bool = true,
-            isInspectorUIAccessibleInProduction: Bool = false,
             ignoreLocalhost: Bool = true,
             stubRepository: (any StubRepositoryProtocol)? = nil
         ) {
@@ -83,7 +79,6 @@ public final class Inspectly {
             self.isStubEnabled = isStubEnabled
             self.ignoredHosts = ignoredHosts
             self.isShakeGestureEnabled = isShakeGestureEnabled
-            self.isInspectorUIAccessibleInProduction = isInspectorUIAccessibleInProduction
             self.ignoreLocalhost = ignoreLocalhost
             self.stubRepository = stubRepository
         }
@@ -130,14 +125,12 @@ public final class Inspectly {
         
         configureURLProtocol(with: configuration)
         
-        // Only enable shake gesture in debug builds
-        #if DEBUG
+        // Enable shake gesture based on config (can work in both debug and production)
         if configuration.isShakeGestureEnabled {
             ShakeManager.shared.onShake = {
                 Inspectly.presentInspector()
             }
         }
-        #endif
         
         _isEnabled = true
         
@@ -172,14 +165,6 @@ public final class Inspectly {
             print("[Inspectly] Not enabled. Call Inspectly.enable() first.")
             return
         }
-        
-        // Check if inspector UI is accessible in production
-        #if !DEBUG
-        if !config.isInspectorUIAccessibleInProduction {
-            print("[Inspectly] Inspector UI is not accessible in production. Set isInspectorUIAccessibleInProduction to true to enable.")
-            return
-        }
-        #endif
         
         let container = DependencyContainer.shared
         
