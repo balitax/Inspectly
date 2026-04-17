@@ -15,6 +15,7 @@ targets:
       - path: .
     dependencies:
       - package: Inspectly
+        product: Inspectly
     info:
       path: Info.plist
       properties:
