@@ -8,22 +8,12 @@ import SwiftUI
 // MARK: - Content View
 
 struct ContentView: View {
-    @State private var selectedTab: AppTab = .dashboard
+    @State private var selectedTab: AppTab = .statistics
 
     let container: DependencyContainer
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            DashboardView(
-                viewModel: DashboardViewModel(
-                    requestRepository: container.requestRepository
-                )
-            )
-            .tabItem {
-                Label("Dashboard", systemImage: "chart.bar.fill")
-            }
-            .tag(AppTab.dashboard)
-
             RequestListView(
                 viewModel: RequestListViewModel(
                     requestRepository: container.requestRepository
@@ -33,6 +23,16 @@ struct ContentView: View {
                 Label("Requests", systemImage: "arrow.up.arrow.down.circle.fill")
             }
             .tag(AppTab.requests)
+
+            StatisticsView(
+                viewModel: StatisticsViewModel(
+                    requestRepository: container.requestRepository
+                )
+            )
+            .tabItem {
+                Label("Statistics", systemImage: "chart.bar.fill")
+            }
+            .tag(AppTab.statistics)
 
             StubManagerView(
                 viewModel: StubManagerViewModel(
@@ -64,8 +64,8 @@ struct ContentView: View {
 // MARK: - App Tab
 
 enum AppTab: String, Hashable {
-    case dashboard
     case requests
+    case statistics
     case stubs
     case settings
 }
