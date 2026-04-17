@@ -7,9 +7,9 @@ import Foundation
 
 // MARK: - Request Tag
 
-struct RequestTag: Identifiable, Codable, Hashable {
-    let id: UUID
-    var name: String
+public struct RequestTag: Identifiable, Codable, Hashable {
+    public let id: UUID
+    public var name: String
     var color: String // Semantic color name
 
     init(id: UUID = UUID(), name: String, color: String = "tagDefault") {

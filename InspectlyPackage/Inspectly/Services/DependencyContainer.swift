@@ -9,7 +9,7 @@ import Foundation
 
 /// Central dependency injection container for the Inspectly app.
 /// Provides protocol-based injection for all services.
-final class DependencyContainer: @unchecked Sendable {
+public final class DependencyContainer: @unchecked Sendable {
 
     // MARK: - Singleton
 
@@ -17,15 +17,15 @@ final class DependencyContainer: @unchecked Sendable {
 
     // MARK: - Services
 
-    let storageManager: StorageManagerProtocol
-    let requestRepository: RequestRepositoryProtocol
-    let stubRepository: StubRepositoryProtocol
-    let exportManager: ExportManagerProtocol
-    let networkObserver: NetworkObserverProtocol
+    public let storageManager: StorageManagerProtocol
+    public let requestRepository: RequestRepositoryProtocol
+    public let stubRepository: StubRepositoryProtocol
+    public let exportManager: ExportManagerProtocol
+    public let networkObserver: NetworkObserverProtocol
 
     // MARK: - Initialization
 
-    init(
+    public init(
         storageManager: StorageManagerProtocol? = nil,
         requestRepository: RequestRepositoryProtocol? = nil,
         stubRepository: StubRepositoryProtocol? = nil,

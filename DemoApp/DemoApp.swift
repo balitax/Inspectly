@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import Inspectly
 
 @main
 struct DemoApp: App {

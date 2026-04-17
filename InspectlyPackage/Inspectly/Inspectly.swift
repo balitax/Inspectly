@@ -25,24 +25,24 @@ import UIKit
 ///     }
 /// }
 /// ```
-final class Inspectly {
+public final class Inspectly {
     
     // MARK: - Configuration
     
-    struct Configuration {
-        var isLoggingEnabled: Bool = true
+    public struct Configuration {
+        public var isLoggingEnabled: Bool = true
         
-        var isStubEnabled: Bool = false
+        public var isStubEnabled: Bool = false
         
-        var ignoredHosts: Set<String> = []
+        public var ignoredHosts: Set<String> = []
         
-        var isShakeGestureEnabled: Bool = true
+        public var isShakeGestureEnabled: Bool = true
         
-        var ignoreLocalhost: Bool = true
+        public var ignoreLocalhost: Bool = true
         
-        var stubRepository: (any StubRepositoryProtocol)?
+        public var stubRepository: (any StubRepositoryProtocol)?
         
-        init(
+        public init(
             isLoggingEnabled: Bool = true,
             isStubEnabled: Bool = false,
             ignoredHosts: Set<String> = [],
@@ -68,13 +68,13 @@ final class Inspectly {
     
     /// Enable Inspectly with default configuration.
     /// This will register URLProtocol and configure Alamofire interception.
-    static func enable() {
+    public static func enable() {
         enable(with: Configuration())
     }
     
     /// Enable Inspectly with custom configuration.
     /// - Parameter configuration: Custom configuration for Inspectly
-    static func enable(with configuration: Configuration) {
+    public static func enable(with configuration: Configuration) {
         guard !isEnabled else { return }
         
         self.configuration = configuration
@@ -93,7 +93,7 @@ final class Inspectly {
     }
     
     /// Disable Inspectly and unregister interceptors.
-    static func disable() {
+    public static func disable() {
         URLProtocol.unregisterClass(InspectlyURLProtocol.self)
         ShakeManager.shared.onShake = nil
         isEnabled = false
@@ -101,12 +101,12 @@ final class Inspectly {
     }
     
     /// Check if Inspectly is currently enabled.
-    static var isActive: Bool {
+    public static var isActive: Bool {
         return isEnabled
     }
     
     /// Present the Inspectly UI manually.
-    static func presentInspector(rootView: UIViewController? = nil) {
+    public static func presentInspector(rootView: UIViewController? = nil) {
         guard let config = configuration else {
             print("[Inspectly] Not enabled. Call Inspectly.enable() first.")
             return
@@ -141,7 +141,7 @@ final class Inspectly {
     }
     
     /// Get the shared container for custom access.
-    static var container: DependencyContainer {
+    public static var container: DependencyContainer {
         return DependencyContainer.shared
     }
     

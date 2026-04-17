@@ -7,7 +7,7 @@ import Foundation
 
 // MARK: - Request Body
 
-struct RequestBody: Codable {
+public struct RequestBody: Codable {
     var rawString: String?
     var rawData: Data?
     var contentType: ContentType
@@ -44,7 +44,7 @@ struct RequestBody: Codable {
 
 // MARK: - Response Body
 
-struct ResponseBody: Codable {
+public struct ResponseBody: Codable {
     var rawString: String?
     var rawData: Data?
     var contentType: ContentType

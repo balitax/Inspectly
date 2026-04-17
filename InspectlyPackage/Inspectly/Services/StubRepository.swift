@@ -59,6 +59,10 @@ actor StubRepository: StubRepositoryProtocol {
             await persist()
         }
     }
+    
+    func toggleStubEnabled(_ id: UUID, enabled: Bool) async {
+        await toggleStub(id, enabled: enabled)
+    }
 
     func duplicateStub(_ id: UUID) async -> RequestStub? {
         guard let original = stubs.first(where: { $0.id == id }) else { return nil }
@@ -133,6 +137,9 @@ actor MockStubRepository: StubRepositoryProtocol {
     }
     func toggleStub(_ id: UUID, enabled: Bool) async {
         if let idx = stubs.firstIndex(where: { $0.id == id }) { stubs[idx].isEnabled = enabled }
+    }
+    func toggleStubEnabled(_ id: UUID, enabled: Bool) async {
+        await toggleStub(id, enabled: enabled)
     }
     func duplicateStub(_ id: UUID) async -> RequestStub? { nil }
     func incrementUsageCount(_ id: UUID) async {

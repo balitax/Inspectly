@@ -7,7 +7,7 @@ import Foundation
 
 // MARK: - Dashboard Summary
 
-struct DashboardSummary {
+public struct DashboardSummary {
     let totalRequests: Int
     let failedRequests: Int
     let averageResponseTime: TimeInterval

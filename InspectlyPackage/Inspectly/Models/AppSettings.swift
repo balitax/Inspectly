@@ -7,7 +7,7 @@ import Foundation
 
 // MARK: - App Settings
 
-struct AppSettings: Codable {
+public struct AppSettings: Codable {
     var isLoggingEnabled: Bool
     var areStubsEnabled: Bool
     var ignoredHosts: [IgnoredHost]
@@ -45,10 +45,10 @@ struct AppSettings: Codable {
 
 // MARK: - Ignored Host
 
-struct IgnoredHost: Identifiable, Codable, Hashable {
-    let id: UUID
+public struct IgnoredHost: Identifiable, Codable, Hashable {
+    public let id: UUID
     var host: String
-    var isEnabled: Bool
+    public var isEnabled: Bool
 
     init(id: UUID = UUID(), host: String, isEnabled: Bool = true) {
         self.id = id

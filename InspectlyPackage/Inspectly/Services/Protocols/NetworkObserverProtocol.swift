@@ -7,7 +7,7 @@ import Foundation
 
 // MARK: - Network Observer Protocol
 
-protocol NetworkObserverProtocol {
+public protocol NetworkObserverProtocol {
     var isObserving: Bool { get }
     func startObserving()
     func stopObserving()
@@ -16,7 +16,7 @@ protocol NetworkObserverProtocol {
 
 // MARK: - Network Observer Delegate
 
-protocol NetworkObserverDelegate: AnyObject {
+public protocol NetworkObserverDelegate: AnyObject {
     func networkObserver(_ observer: NetworkObserverProtocol, didCapture request: NetworkRequest)
     func networkObserver(_ observer: NetworkObserverProtocol, didUpdate request: NetworkRequest)
     func networkObserver(_ observer: NetworkObserverProtocol, didEncounterError error: Error)

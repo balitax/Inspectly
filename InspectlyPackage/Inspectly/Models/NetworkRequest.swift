@@ -111,8 +111,8 @@ enum ContentType: String, Codable {
 
 // MARK: - Timeline Event
 
-struct TimelineEvent: Identifiable, Codable {
-    let id: UUID
+public struct TimelineEvent: Identifiable, Codable {
+    public let id: UUID
     let name: String
     let timestamp: Date
     let duration: TimeInterval?
@@ -135,8 +135,8 @@ struct TimelineEvent: Identifiable, Codable {
 
 // MARK: - Network Request
 
-struct NetworkRequest: Identifiable, Codable, Equatable, Hashable {
-    let id: UUID
+public struct NetworkRequest: Identifiable, Codable, Equatable, Hashable {
+    public let id: UUID
     var method: HTTPMethodType
     var url: String
     var host: String
@@ -286,11 +286,11 @@ struct NetworkRequest: Identifiable, Codable, Equatable, Hashable {
 
     // MARK: - Equatable & Hashable
 
-    static func == (lhs: NetworkRequest, rhs: NetworkRequest) -> Bool {
+    public static func == (lhs: NetworkRequest, rhs: NetworkRequest) -> Bool {
         lhs.id == rhs.id
     }
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 }

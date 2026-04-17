@@ -7,8 +7,8 @@ import Foundation
 
 // MARK: - Query Parameter
 
-struct QueryParameter: Identifiable, Codable, Hashable {
-    let id: UUID
+public struct QueryParameter: Identifiable, Codable, Hashable {
+    public let id: UUID
     var key: String
     var value: String
 

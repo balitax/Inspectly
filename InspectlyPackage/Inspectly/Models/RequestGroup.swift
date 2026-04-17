@@ -7,8 +7,8 @@ import Foundation
 
 // MARK: - Request Group
 
-struct RequestGroup: Identifiable {
-    let id: String
+public struct RequestGroup: Identifiable {
+    public let id: String
     let title: String
     let date: Date
     var requests: [NetworkRequest]

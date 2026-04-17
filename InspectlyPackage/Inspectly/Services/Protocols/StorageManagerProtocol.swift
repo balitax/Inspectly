@@ -7,7 +7,7 @@ import Foundation
 
 // MARK: - Storage Manager Protocol
 
-protocol StorageManagerProtocol {
+public protocol StorageManagerProtocol {
     func save<T: Encodable>(_ data: T, forKey key: String) async throws
     func load<T: Decodable>(_ type: T.Type, forKey key: String) async throws -> T?
     func delete(forKey key: String) async throws

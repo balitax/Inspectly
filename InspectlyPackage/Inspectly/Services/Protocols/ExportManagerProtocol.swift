@@ -7,7 +7,7 @@ import Foundation
 
 // MARK: - Export Manager Protocol
 
-protocol ExportManagerProtocol {
+public protocol ExportManagerProtocol {
     func exportRequests(_ requests: [NetworkRequest]) async throws -> Data
     func importRequests(from data: Data) async throws -> [NetworkRequest]
     func exportStubs(_ stubs: [RequestStub]) async throws -> Data

@@ -7,8 +7,8 @@ import Foundation
 
 // MARK: - Request Header
 
-struct RequestHeader: Identifiable, Codable, Hashable {
-    let id: UUID
+public struct RequestHeader: Identifiable, Codable, Hashable {
+    public let id: UUID
     var key: String
     var value: String
 

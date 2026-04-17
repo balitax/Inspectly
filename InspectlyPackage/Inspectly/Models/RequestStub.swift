@@ -65,8 +65,8 @@ enum StubErrorType: String, Codable, CaseIterable, Identifiable {
 
 // MARK: - Stub Match Rule
 
-struct StubMatchRule: Codable, Identifiable {
-    let id: UUID
+public struct StubMatchRule: Codable, Identifiable {
+    public let id: UUID
     var method: HTTPMethodType?
     var urlPath: String?
     var fullURL: String?
@@ -137,8 +137,8 @@ struct StubMatchRule: Codable, Identifiable {
 
 // MARK: - Stub Response
 
-struct StubResponse: Codable, Identifiable {
-    let id: UUID
+public struct StubResponse: Codable, Identifiable {
+    public let id: UUID
     var statusCode: Int
     var headers: [RequestHeader]
     var jsonBody: String?
@@ -179,10 +179,10 @@ struct StubResponse: Codable, Identifiable {
 
 // MARK: - Stub Scenario
 
-struct StubScenario: Identifiable, Codable {
-    let id: UUID
-    var name: String
-    var description: String
+public struct StubScenario: Identifiable, Codable {
+    public let id: UUID
+    public var name: String
+    public var description: String
     var response: StubResponse
     var isActive: Bool
 
@@ -203,18 +203,18 @@ struct StubScenario: Identifiable, Codable {
 
 // MARK: - Request Stub
 
-struct RequestStub: Identifiable, Codable {
-    let id: UUID
-    var name: String
-    var description: String
-    var matchRule: StubMatchRule
-    var scenarios: [StubScenario]
-    var isEnabled: Bool
-    var usageCount: Int
-    var lastTriggered: Date?
-    var createdAt: Date
-    var updatedAt: Date
-    var groupName: String?
+public struct RequestStub: Identifiable, Codable {
+    public let id: UUID
+    public var name: String
+    public var description: String
+    public var matchRule: StubMatchRule
+    public var scenarios: [StubScenario]
+    public var isEnabled: Bool
+    public var usageCount: Int
+    public var lastTriggered: Date?
+    public var createdAt: Date
+    public var updatedAt: Date
+    public var groupName: String?
 
     init(
         id: UUID = UUID(),

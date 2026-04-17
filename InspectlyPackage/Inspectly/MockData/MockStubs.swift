@@ -7,7 +7,7 @@ import Foundation
 
 // MARK: - Mock Stubs
 
-struct MockStubs {
+public struct MockStubs {
 
     // MARK: - Login Stub
 
@@ -261,7 +261,7 @@ struct MockStubs {
 
     // MARK: - All Stubs
 
-    static let all: [RequestStub] = [
+    public static let all: [RequestStub] = [
         loginStub,
         usersListStub,
         profileUpdateStub,

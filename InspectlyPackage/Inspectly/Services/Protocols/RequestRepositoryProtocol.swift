@@ -7,7 +7,7 @@ import Foundation
 
 // MARK: - Request Repository Protocol
 
-protocol RequestRepositoryProtocol {
+public protocol RequestRepositoryProtocol {
     func getAllRequests() async -> [NetworkRequest]
     func getRequest(by id: UUID) async -> NetworkRequest?
     func addRequest(_ request: NetworkRequest) async
