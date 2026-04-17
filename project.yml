@@ -2,14 +2,12 @@ name: Inspectly
 options:
   bundleIdPrefix: com.inspectly
 
-targets:
+packages:
   Inspectly:
-    type: framework
-    platform: iOS
-    deploymentTarget: "16.0"
-    sources:
-      - path: Sources/Inspectly/
+    path: .
+    packageKind: root
 
+targets:
   DemoApp:
     type: application
     platform: iOS
@@ -17,7 +15,7 @@ targets:
     sources:
       - path: DemoApp/
     dependencies:
-      - target: Inspectly
+      - package: Inspectly
     info:
       path: DemoApp/Info.plist
       properties:
