@@ -1,15 +1,24 @@
 name: Inspectly
 options:
   bundleIdPrefix: com.inspectly
+
+packages:
+  Alamofire:
+    url: https://github.com/Alamofire/Alamofire.git
+    from: 5.8.0
+
 targets:
-  Inspectly:
+  InspectlyDemo:
     type: application
     platform: iOS
     deploymentTarget: "16.0"
     sources:
       - path: Inspectly/
+      - path: DemoApp/
+    dependencies:
+      - package: Alamofire
     info:
-      path: Inspectly/Info.plist
+      path: DemoApp/Info.plist
       properties:
         UILaunchScreen: {}
         UIApplicationSceneManifest:
