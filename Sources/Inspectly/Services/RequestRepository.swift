@@ -89,7 +89,7 @@ actor RequestRepository: RequestRepositoryProtocol {
 actor MockRequestRepository: RequestRepositoryProtocol {
     private var requests: [NetworkRequest]
 
-    init(requests: [NetworkRequest] = MockRequests.all) {
+    init(requests: [NetworkRequest] = []) {
         self.requests = requests
     }
 

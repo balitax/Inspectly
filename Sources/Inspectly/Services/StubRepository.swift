@@ -120,7 +120,7 @@ actor StubRepository: StubRepositoryProtocol {
 actor MockStubRepository: StubRepositoryProtocol {
     private var stubs: [RequestStub]
 
-    init(stubs: [RequestStub] = MockStubs.all) {
+    init(stubs: [RequestStub] = []) {
         self.stubs = stubs
     }
 

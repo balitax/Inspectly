@@ -213,7 +213,7 @@ final class RequestListViewModel: ObservableObject {
 
     static func mock() -> RequestListViewModel {
         let vm = RequestListViewModel(requestRepository: MockRequestRepository())
-        vm.requests = MockRequests.all
+        vm.requests = []
         vm.applyFiltersAndSort()
         return vm
     }

@@ -72,5 +72,5 @@ struct ResponseBodyTabView: View {
 // MARK: - Preview
 
 #Preview {
-    ResponseBodyTabView(viewModel: RequestDetailViewModel(request: MockRequests.getUsersList))
+    ResponseBodyTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .get, url: "https://api.example.com/users", host: "api.example.com", path: "/users")))
 }

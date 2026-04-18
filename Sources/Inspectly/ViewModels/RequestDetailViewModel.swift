@@ -39,12 +39,19 @@ final class RequestDetailViewModel: ObservableObject {
     @Published var showShareSheet: Bool = false
     @Published var copiedToClipboard: Bool = false
     @Published var shareContent: String = ""
+    @Published var createdStub: RequestStub?
 
     private let exportManager: ExportManagerProtocol
 
     init(request: NetworkRequest, exportManager: ExportManagerProtocol = ExportManager()) {
         self.request = request
         self.exportManager = exportManager
+    }
+
+    // MARK: - Stub Actions
+
+    func createStub() {
+        createdStub = request.toStub()
     }
 
     // MARK: - Overview Data
@@ -149,6 +156,6 @@ final class RequestDetailViewModel: ObservableObject {
     // MARK: - Mock
 
     static func mock() -> RequestDetailViewModel {
-        RequestDetailViewModel(request: MockRequests.postLogin)
+        RequestDetailViewModel(request: NetworkRequest(method: .get, url: "https://api.example.com", host: "api.example.com", path: "/"))
     }
 }

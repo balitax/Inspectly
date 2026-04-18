@@ -60,5 +60,5 @@ struct RequestBodyTabView: View {
 // MARK: - Preview
 
 #Preview {
-    RequestBodyTabView(viewModel: RequestDetailViewModel(request: MockRequests.postLogin))
+    RequestBodyTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .post, url: "https://api.example.com/login", host: "api.example.com", path: "/login")))
 }

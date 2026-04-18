@@ -92,5 +92,5 @@ struct ParamsTabView: View {
 // MARK: - Preview
 
 #Preview {
-    ParamsTabView(viewModel: RequestDetailViewModel(request: MockRequests.getUsersList))
+    ParamsTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .get, url: "https://api.example.com/users?id=1", host: "api.example.com", path: "/users")))
 }

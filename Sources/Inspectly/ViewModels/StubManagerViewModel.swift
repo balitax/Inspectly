@@ -127,7 +127,7 @@ final class StubManagerViewModel: ObservableObject {
 
     static func mock() -> StubManagerViewModel {
         let vm = StubManagerViewModel(stubRepository: MockStubRepository())
-        vm.stubs = MockStubs.all
+        vm.stubs = []
         return vm
     }
 }

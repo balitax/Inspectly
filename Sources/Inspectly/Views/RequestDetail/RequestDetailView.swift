@@ -50,6 +50,17 @@ struct RequestDetailView: View {
                 copiedBanner
             }
         }
+        .sheet(item: $viewModel.createdStub) { stub in
+            NavigationStack {
+                StubDetailView(
+                    viewModel: StubDetailViewModel(
+                        stub: stub,
+                        isEditing: true,
+                        stubRepository: DependencyContainer.shared.stubRepository
+                    )
+                )
+            }
+        }
     }
 
     // MARK: - Tab Selector
@@ -118,6 +129,14 @@ struct RequestDetailView: View {
                 viewModel.shareRequest()
             } label: {
                 Label("Share...", systemImage: "square.and.arrow.up")
+            }
+
+            Divider()
+
+            Button {
+                viewModel.createStub()
+            } label: {
+                Label("Create Stub", systemImage: "hammer")
             }
         } label: {
             Image(systemName: "square.and.arrow.up")

@@ -32,7 +32,7 @@ public final class Inspectly {
     public struct Configuration {
         public var isLoggingEnabled: Bool = true
         
-        public var isStubEnabled: Bool = false
+        public var isStubEnabled: Bool = true
         
         public var ignoredHosts: Set<String> = []
         
@@ -45,7 +45,7 @@ public final class Inspectly {
         
         public init(
             isLoggingEnabled: Bool = true,
-            isStubEnabled: Bool = false,
+            isStubEnabled: Bool = true,
             ignoredHosts: Set<String> = [],
             isShakeGestureEnabled: Bool = true,
             ignoreLocalhost: Bool = true,

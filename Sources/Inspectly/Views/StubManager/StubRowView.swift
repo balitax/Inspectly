@@ -83,10 +83,8 @@ struct StubRowView: View {
 
 #Preview {
     List {
-        StubRowView(stub: MockStubs.loginStub)
-        StubRowView(stub: MockStubs.usersListStub)
-        StubRowView(stub: MockStubs.profileUpdateStub)
-        StubRowView(stub: MockStubs.networkErrorStub)
+        StubRowView(stub: RequestStub(name: "Login Mock", matchRule: StubMatchRule(fullURL: "https://api.example.com/login")))
+        StubRowView(stub: RequestStub(name: "User List", matchRule: StubMatchRule(fullURL: "https://api.example.com/users")))
     }
     .listStyle(.insetGrouped)
 }

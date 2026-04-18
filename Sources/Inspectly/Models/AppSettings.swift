@@ -20,7 +20,7 @@ public struct AppSettings: Codable {
 
     init(
         isLoggingEnabled: Bool = true,
-        areStubsEnabled: Bool = false,
+        areStubsEnabled: Bool = true,
         ignoredHosts: [IgnoredHost] = [],
         maxStoredRequests: Int = 500,
         isShakeGestureEnabled: Bool = true,

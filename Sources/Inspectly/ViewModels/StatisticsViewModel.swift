@@ -51,8 +51,8 @@ final class StatisticsViewModel: ObservableObject {
 
     static func mock() -> StatisticsViewModel {
         let vm = StatisticsViewModel(requestRepository: MockRequestRepository())
-        vm.summary = StatisticsSummary.compute(from: MockRequests.all)
-        vm.recentRequests = Array(MockRequests.all.prefix(5))
+        vm.summary = StatisticsSummary.compute(from: [])
+        vm.recentRequests = []
         return vm
     }
 }

@@ -30,21 +30,6 @@ struct MatchRuleEditorView: View {
 
             Divider()
 
-            // MARK: - URL Path
-            VStack(alignment: .leading, spacing: 4) {
-                Text("URL Path (contains)")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(.secondary)
-                TextField("/api/v1/users", text: Binding(
-                    get: { viewModel.stub.matchRule.urlPath ?? "" },
-                    set: { viewModel.updateURLPath($0) }
-                ))
-                .textFieldStyle(.roundedBorder)
-                .font(.system(size: 13, design: .monospaced))
-                .autocapitalization(.none)
-                .autocorrectionDisabled()
-            }
-
             // MARK: - Full URL
             VStack(alignment: .leading, spacing: 4) {
                 Text("Full URL (exact match)")

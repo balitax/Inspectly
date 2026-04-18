@@ -133,5 +133,5 @@ struct TimelineTabView: View {
 // MARK: - Preview
 
 #Preview {
-    TimelineTabView(viewModel: RequestDetailViewModel(request: MockRequests.getUsersList))
+    TimelineTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .get, url: "https://api.example.com/users", host: "api.example.com", path: "/users")))
 }

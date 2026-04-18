@@ -21,11 +21,8 @@ struct StubDetailView: View {
                 // MARK: - Match Rules
                 matchRuleSection
 
-                // MARK: - Scenarios
-                scenarioSection
-
-                // MARK: - Test
-                testSection
+                // MARK: - Response Data
+                responseDataSection
             }
             .padding(16)
         }
@@ -43,11 +40,6 @@ struct StubDetailView: View {
                 }
                 .fontWeight(.semibold)
             }
-        }
-        .alert("Test Result", isPresented: $viewModel.showTestResult) {
-            Button("OK") {}
-        } message: {
-            Text(viewModel.testResultMessage)
         }
     }
 
@@ -106,39 +98,22 @@ struct StubDetailView: View {
         .sectionCardStyle()
     }
 
-    // MARK: - Scenarios
+    // MARK: - Response Data
 
-    private var scenarioSection: some View {
+    private var responseDataSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            SectionHeaderView(title: "Scenarios", actionTitle: "Add") {
-                viewModel.addScenario()
-            }
+            SectionHeaderView(title: "Response Data")
 
-            ScenarioListView(viewModel: viewModel)
-        }
-        .sectionCardStyle()
-    }
-
-    // MARK: - Test
-
-    private var testSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            SectionHeaderView(title: "Test")
-
-            Button {
-                viewModel.testStub()
-            } label: {
-                HStack {
-                    Image(systemName: "play.fill")
-                    Text("Test Match Rule")
-                }
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 12)
-                .background(Color.accentColor)
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            }
+            ResponseEditorView(
+                response: Binding(
+                    get: { viewModel.response },
+                    set: { viewModel.response = $0 }
+                ),
+                onValidateJSON: {
+                    viewModel.validateJSON()
+                },
+                jsonError: viewModel.jsonValidationError
+            )
         }
         .sectionCardStyle()
     }

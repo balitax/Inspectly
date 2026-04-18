@@ -94,23 +94,19 @@ public struct StubMatchRule: Codable, Identifiable {
 
     /// Check if a request matches this rule
     func matches(_ request: NetworkRequest) -> Bool {
-        // Check method
-        if let method = method, request.method != method {
-            return false
-        }
-
-        // Check URL path
-        if let urlPath = urlPath, !urlPath.isEmpty {
-            if !request.path.contains(urlPath) {
-                return false
-            }
-        }
-
-        // Check full URL
+        // Check full URL (Mandatory)
         if let fullURL = fullURL, !fullURL.isEmpty {
             if request.url != fullURL {
                 return false
             }
+        } else {
+            // If fullURL is missing, we can't match strictly as requested
+            return false
+        }
+
+        // Check method
+        if let method = method, request.method != method {
+            return false
         }
 
         // Check query parameters

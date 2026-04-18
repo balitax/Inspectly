@@ -293,6 +293,38 @@ public struct NetworkRequest: Identifiable, Codable, Equatable, Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
+
+    // MARK: - Stub Conversion
+
+    /// Converts this request into a RequestStub for mocking
+    func toStub() -> RequestStub {
+        let matchRule = StubMatchRule(
+            method: method,
+            urlPath: nil,
+            fullURL: url, // Set full URL for exact matching
+            queryParameters: queryParameters,
+            headers: requestHeaders
+        )
+
+        let scenario = StubScenario(
+            name: "Original Capture",
+            description: "Default scenario imported from real request capture",
+            response: StubResponse(
+                statusCode: statusCode ?? 200,
+                headers: responseHeaders,
+                jsonBody: responseBody?.rawString,
+                plainTextBody: responseBody?.contentType == .plainText ? responseBody?.rawString : nil
+            ),
+            isActive: true
+        )
+
+        return RequestStub(
+            name: "Stub for \(path)",
+            description: "Imported from \(method.rawValue) capture",
+            matchRule: matchRule,
+            scenarios: [scenario]
+        )
+    }
 }
 
 // MARK: - Request Source

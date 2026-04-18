@@ -88,12 +88,9 @@ struct RequestRowView: View {
 
 #Preview {
     List {
-        RequestRowView(request: MockRequests.getUsersList)
-        RequestRowView(request: MockRequests.postLogin)
-        RequestRowView(request: MockRequests.unauthorized)
-        RequestRowView(request: MockRequests.serverError)
-        RequestRowView(request: MockRequests.stubbedLogin)
-        RequestRowView(request: MockRequests.slowRequest)
+        RequestRowView(request: NetworkRequest(method: .get, url: "https://api.example.com/users", host: "api.example.com", path: "/users", statusCode: 200))
+        RequestRowView(request: NetworkRequest(method: .post, url: "https://api.example.com/login", host: "api.example.com", path: "/login", statusCode: 201))
+        RequestRowView(request: NetworkRequest(method: .get, url: "https://api.example.com/error", host: "api.example.com", path: "/error", statusCode: 500))
     }
     .listStyle(.insetGrouped)
 }
