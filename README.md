@@ -54,6 +54,49 @@ Inspectly.enable(with: Inspectly.Configuration(
 Inspectly.enable(isEnabled: false)
 ```
 
+## Automatic Network Interception
+
+Inspectly automatically intercepts all `URLSession` requests (including `URLSessionTask`, `URLSessionDataTask`, etc.) without any additional setup.
+
+### URLSession (Automatic)
+```swift
+// No additional setup needed - all URLSession requests are automatically captured
+let task = URLSession.shared.dataTask(with: url) { data, response, error in
+    // ...
+}
+task.resume()
+```
+
+### Alamofire (Manual Setup Required)
+
+Since Alamofire uses its own session management, you need to add Inspectly's event monitor:
+
+```swift
+import Alamofire
+
+// Create Inspectly monitor
+let inspectlyMonitor = InspectlyEventMonitor(
+    requestRepository: Inspectly.container.requestRepository
+)
+
+// Add to your Alamofire session
+let session = Session(eventMonitors: [inspectlyMonitor])
+
+// Use the session for requests
+session.request("https://api.example.com/users")
+    .responseDecodable(of: UsersResponse.self) { response in
+        // Handle response
+    }
+```
+
+### URLSession Configuration (Automatic)
+
+Inspectly automatically injects itself into the default and ephemeral URLSession configurations. This means:
+
+- All `URLSession.shared` requests are captured
+- All custom sessions using `URLSessionConfiguration.default` or `.ephemeral` are captured
+- No additional code required for URLSession
+
 ## Shake to Inspect
 
 Shake your device or press **⌘+Ctrl+Z** to open the Inspectly dashboard.
