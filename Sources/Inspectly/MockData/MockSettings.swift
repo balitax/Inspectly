@@ -10,7 +10,7 @@ import Foundation
 struct MockSettings {
     static let `default` = AppSettings(
         isLoggingEnabled: true,
-        areStubsEnabled: false,
+        areStubsEnabled: true,
         ignoredHosts: [
             IgnoredHost(host: "analytics.example.com", isEnabled: true),
             IgnoredHost(host: "crashlytics.google.com", isEnabled: true),
