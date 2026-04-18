@@ -23,7 +23,6 @@ struct OverviewTabView: View {
 
                         if index < viewModel.overviewItems.count - 1 {
                             Divider()
-                                .padding(.leading, 44)
                         }
                     }
                 }
@@ -51,7 +50,7 @@ struct OverviewTabView: View {
                     .sectionCardStyle()
                 }
             }
-            .padding(16)
+            // .padding(16)
         }
     }
 
@@ -76,17 +75,16 @@ struct OverviewTabView: View {
                 }
 
                 Text(viewModel.request.url)
-                    .font(.system(size: 11, design: .monospaced))
-                    .foregroundStyle(.secondary)
+                    .font(.system(size: 13, design: .default))
+                    .foregroundStyle(.primary)
             }
 
             Spacer()
         }
         .padding(14)
         .background(Color.forStatusCode(viewModel.request.statusCode).opacity(0.06))
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
         .overlay(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
+            RoundedRectangle(cornerRadius: 0, style: .continuous)
                 .strokeBorder(Color.forStatusCode(viewModel.request.statusCode).opacity(0.15), lineWidth: 1)
         )
     }
