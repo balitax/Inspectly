@@ -13,7 +13,7 @@ public final class DependencyContainer: @unchecked Sendable {
 
     // MARK: - Singleton
 
-    static let shared = DependencyContainer()
+    public static let shared = DependencyContainer()
 
     // MARK: - Services
 

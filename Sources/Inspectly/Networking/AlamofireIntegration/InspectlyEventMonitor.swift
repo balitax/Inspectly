@@ -37,7 +37,7 @@ public final class InspectlyEventMonitor {
     private let requestRepository: RequestRepositoryProtocol
     private var pendingRequests: [String: NetworkRequest] = [:]
 
-    init(requestRepository: RequestRepositoryProtocol) {
+    public init(requestRepository: RequestRepositoryProtocol) {
         self.requestRepository = requestRepository
     }
 
