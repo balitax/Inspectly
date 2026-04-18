@@ -47,7 +47,7 @@ struct HeadersTabView: View {
                         HStack(alignment: .top, spacing: 8) {
                             Text(header.key)
                                 .font(.system(size: 12, weight: .semibold, design: .monospaced))
-                                .foregroundStyle(.accentColor)
+                                .foregroundStyle(.primary)
                                 .frame(minWidth: 100, alignment: .leading)
 
                             Text(header.value)

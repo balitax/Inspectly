@@ -60,7 +60,7 @@ struct ParamsTabView: View {
                                 HStack(alignment: .top) {
                                     Text(param.key)
                                         .font(.system(size: 12, weight: .medium, design: .monospaced))
-                                        .foregroundStyle(.accentColor)
+                                        .foregroundStyle(.primary)
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .textSelection(.enabled)
 

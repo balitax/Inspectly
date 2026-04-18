@@ -30,7 +30,7 @@ Add Inspectly to your project via SPM:
 ```swift
 // In your Package.swift
 dependencies: [
-    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.0.2")
+    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.0.3")
 ]
 ```
 
