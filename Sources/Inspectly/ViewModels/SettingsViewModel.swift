@@ -12,10 +12,10 @@ import SwiftUI
 final class SettingsViewModel: ObservableObject {
     @Published var settings: AppSettings
     @Published var showClearConfirmation: Bool = false
-    @Published var showImportPicker: Bool = false
-    @Published var showExportSuccess: Bool = false
     @Published var exportMessage: String = ""
     @Published var newIgnoredHost: String = ""
+    @Published var shareURL: IdentifiableURL? = nil
+    @Published var showExportError: Bool = false
 
     private let storageManager: StorageManagerProtocol
     private let exportManager: ExportManagerProtocol
@@ -96,12 +96,15 @@ final class SettingsViewModel: ObservableObject {
         do {
             let requests = await requestRepository.getAllRequests()
             let data = try await exportManager.exportRequests(requests)
-            let size = ByteCountFormatter.string(fromByteCount: Int64(data.count), countStyle: .file)
-            exportMessage = "Exported \(requests.count) requests (\(size))"
-            showExportSuccess = true
+            
+            let tempDir = FileManager.default.temporaryDirectory
+            let fileURL = tempDir.appendingPathComponent("inspectly_logs_\(Int(Date().timeIntervalSince1970)).json")
+            try data.write(to: fileURL)
+            
+            shareURL = IdentifiableURL(url: fileURL)
         } catch {
             exportMessage = "Export failed: \(error.localizedDescription)"
-            showExportSuccess = true
+            showExportError = true
         }
     }
 
@@ -109,12 +112,15 @@ final class SettingsViewModel: ObservableObject {
         do {
             let stubs = await stubRepository.getAllStubs()
             let data = try await exportManager.exportStubs(stubs)
-            let size = ByteCountFormatter.string(fromByteCount: Int64(data.count), countStyle: .file)
-            exportMessage = "Exported \(stubs.count) stubs (\(size))"
-            showExportSuccess = true
+            
+            let tempDir = FileManager.default.temporaryDirectory
+            let fileURL = tempDir.appendingPathComponent("inspectly_stubs_\(Int(Date().timeIntervalSince1970)).json")
+            try data.write(to: fileURL)
+            
+            shareURL = IdentifiableURL(url: fileURL)
         } catch {
             exportMessage = "Export failed: \(error.localizedDescription)"
-            showExportSuccess = true
+            showExportError = true
         }
     }
 

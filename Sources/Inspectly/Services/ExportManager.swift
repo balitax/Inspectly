@@ -31,11 +31,6 @@ final class ExportManager: ExportManagerProtocol {
         return try encoder.encode(exportData)
     }
 
-    func importRequests(from data: Data) async throws -> [NetworkRequest] {
-        let wrapper = try decoder.decode(ExportWrapper<[NetworkRequest]>.self, from: data)
-        return wrapper.data
-    }
-
     func exportStubs(_ stubs: [RequestStub]) async throws -> Data {
         let exportData = ExportWrapper(
             version: "1.0",
@@ -45,11 +40,6 @@ final class ExportManager: ExportManagerProtocol {
             data: stubs
         )
         return try encoder.encode(exportData)
-    }
-
-    func importStubs(from data: Data) async throws -> [RequestStub] {
-        let wrapper = try decoder.decode(ExportWrapper<[RequestStub]>.self, from: data)
-        return wrapper.data
     }
 
     func exportAsJSON(_ requests: [NetworkRequest]) async throws -> String {
@@ -77,9 +67,7 @@ private struct ExportWrapper<T: Codable>: Codable {
 
 final class MockExportManager: ExportManagerProtocol {
     func exportRequests(_ requests: [NetworkRequest]) async throws -> Data { Data() }
-    func importRequests(from data: Data) async throws -> [NetworkRequest] { [] }
     func exportStubs(_ stubs: [RequestStub]) async throws -> Data { Data() }
-    func importStubs(from data: Data) async throws -> [RequestStub] { [] }
     func exportAsJSON(_ requests: [NetworkRequest]) async throws -> String { "[]" }
     func generateShareableURL(for request: NetworkRequest) -> URL? { nil }
 }

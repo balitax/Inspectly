@@ -44,10 +44,13 @@ struct SettingsView: View {
             } message: {
                 Text("This will permanently delete all captured requests. This action cannot be undone.")
             }
-            .alert("Export", isPresented: $viewModel.showExportSuccess) {
+            .alert("Export Error", isPresented: $viewModel.showExportError) {
                 Button("OK") {}
             } message: {
                 Text(viewModel.exportMessage)
+            }
+            .sheet(item: $viewModel.shareURL) { identifiable in
+                ActivityView(activityItems: [identifiable.url])
             }
             .task {
                 await viewModel.loadSettings()
@@ -218,13 +221,6 @@ struct SettingsView: View {
                 Task { await viewModel.exportStubs() }
             } label: {
                 Label("Export Stubs", systemImage: "square.and.arrow.up")
-                    .font(.system(size: 14))
-            }
-
-            Button {
-                viewModel.showImportPicker = true
-            } label: {
-                Label("Import Stubs", systemImage: "square.and.arrow.down")
                     .font(.system(size: 14))
             }
         } header: {

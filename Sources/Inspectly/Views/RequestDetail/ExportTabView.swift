@@ -55,11 +55,36 @@ struct ExportTabView: View {
 
                     exportButton(
                         title: "Share Request",
-                        subtitle: "Share via system share sheet",
+                        subtitle: "Share via system share sheet (cURL)",
                         icon: "square.and.arrow.up",
                         color: .orange
                     ) {
                         viewModel.shareRequest()
+                    }
+
+                    exportButton(
+                        title: "Share as JSON file",
+                        subtitle: "Export full request data as a file",
+                        icon: "doc.text.fill",
+                        color: .purple
+                    ) {
+                        viewModel.shareAsJSON()
+                    }
+                }
+
+                Divider()
+
+                // MARK: - Mocking Section
+                VStack(alignment: .leading, spacing: 12) {
+                    SectionHeaderView(title: "Mocking & Stubs")
+
+                    exportButton(
+                        title: "Create API Stub",
+                        subtitle: "Convert this request into a mock",
+                        icon: "hammer.fill",
+                        color: .primaryGreen
+                    ) {
+                        viewModel.createStub()
                     }
                 }
 

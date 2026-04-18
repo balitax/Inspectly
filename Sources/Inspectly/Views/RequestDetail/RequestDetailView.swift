@@ -61,6 +61,12 @@ struct RequestDetailView: View {
                 )
             }
         }
+        .sheet(isPresented: $viewModel.showShareSheet) {
+            ActivityView(activityItems: [viewModel.shareContent])
+        }
+        .sheet(item: $viewModel.shareURL) { identifiable in
+            ActivityView(activityItems: [identifiable.url])
+        }
     }
 
     // MARK: - Tab Selector

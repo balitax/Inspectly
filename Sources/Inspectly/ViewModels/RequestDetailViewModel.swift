@@ -40,6 +40,7 @@ final class RequestDetailViewModel: ObservableObject {
     @Published var copiedToClipboard: Bool = false
     @Published var shareContent: String = ""
     @Published var createdStub: RequestStub?
+    @Published var shareURL: IdentifiableURL? = nil
 
     private let exportManager: ExportManagerProtocol
 
@@ -134,6 +135,24 @@ final class RequestDetailViewModel: ObservableObject {
     func shareRequest() {
         shareContent = request.curlCommand
         showShareSheet = true
+    }
+
+    func shareAsJSON() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+            encoder.dateEncodingStrategy = .iso8601
+            let data = try encoder.encode(request)
+            
+            let tempDir = FileManager.default.temporaryDirectory
+            let fileName = "inspectly_request_\(request.method.rawValue)_\(Int(Date().timeIntervalSince1970)).json"
+            let fileURL = tempDir.appendingPathComponent(fileName)
+            try data.write(to: fileURL)
+            
+            shareURL = IdentifiableURL(url: fileURL)
+        } catch {
+            print("[Inspectly] Failed to share as JSON: \(error)")
+        }
     }
 
     private func showCopiedFeedback() {
