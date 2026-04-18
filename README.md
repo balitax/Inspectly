@@ -69,24 +69,98 @@ task.resume()
 
 ### Alamofire (Manual Setup Required)
 
-Since Alamofire uses its own session management, you need to add Inspectly's event monitor:
+Since Alamofire uses its own session management, you need to create a custom event monitor:
 
 ```swift
 import Alamofire
+import Inspectly
 
-// Create Inspectly monitor
-let inspectlyMonitor = InspectlyEventMonitor(
+/// Custom EventMonitor that captures Alamofire requests
+final class InspectlyAlamofireMonitor: EventMonitor {
+    private let requestRepository: RequestRepositoryProtocol
+
+    init(requestRepository: RequestRepositoryProtocol) {
+        self.requestRepository = requestRepository
+    }
+
+    func request(_ request: Request, didCreateURLRequest urlRequest: URLRequest) {
+        guard InspectlyURLProtocol.isLoggingEnabled else { return }
+        
+        // Create NetworkRequest from Alamofire request
+        let networkRequest = createNetworkRequest(from: urlRequest, requestId: request.id)
+        
+        Task {
+            await requestRepository.addRequest(networkRequest)
+        }
+    }
+
+    func request(_ request: Request, didParseResponse response: AFDataResponse<Any?>) {
+        guard InspectlyURLProtocol.isLoggingEnabled else { return }
+        
+        // Update response data
+        // Note: Full implementation requires storing pending requests and updating them
+    }
+    
+    private func createNetworkRequest(from urlRequest: URLRequest, requestId: String) -> NetworkRequest {
+        // Implementation to convert URLRequest to NetworkRequest
+        // This is a simplified version
+        let url = urlRequest.url?.absoluteString ?? ""
+        let components = URLComponents(string: url)
+        
+        return NetworkRequest(
+            method: HTTPMethodType(rawValue: urlRequest.httpMethod ?? "GET") ?? .get,
+            url: url,
+            host: components?.host ?? "",
+            path: components?.path ?? "",
+            scheme: components?.scheme ?? "https",
+            requestHeaders: urlRequest.allHTTPHeaderFields?.map {
+                RequestHeader(key: $0.key, value: $0.value)
+            } ?? [],
+            queryParameters: components?.queryItems?.map {
+                QueryParameter(key: $0.name, value: $0.value ?? "")
+            } ?? [],
+            requestBody: nil,
+            statusCode: nil,
+            responseHeaders: [],
+            responseBody: nil,
+            startTime: Date(),
+            endTime: nil,
+            duration: nil,
+            error: nil,
+            isStubbed: false
+        )
+    }
+}
+```
+
+Then use it with your Alamofire session:
+
+```swift
+// Create session with Inspectly monitor
+let session = Session(eventMonitors: [InspectlyAlamofireMonitor(
     requestRepository: Inspectly.container.requestRepository
-)
+)])
 
-// Add to your Alamofire session
-let session = Session(eventMonitors: [inspectlyMonitor])
-
-// Use the session for requests
+// Use the session for all Alamofire requests
 session.request("https://api.example.com/users")
     .responseDecodable(of: UsersResponse.self) { response in
         // Handle response
     }
+```
+
+**Tip**: Create a shared session instance to capture all Alamofire requests:
+
+```swift
+// AppDelegate or Singleton
+class NetworkManager {
+    static let shared = Session(eventMonitors: [InspectlyAlamofireMonitor(
+        requestRepository: Inspectly.container.requestRepository
+    )])
+    
+    static func request(...) -> DataRequest {
+        shared.request(...)
+    }
+}
 ```
 
 ### URLSession Configuration (Automatic)
