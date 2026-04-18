@@ -1,0 +1,49 @@
+name: InspectlyDemo
+
+options:
+  bundleIdPrefix: com.inspectly
+  deploymentTarget:
+    iOS: "16.0"
+
+packages:
+  Inspectly:
+    path: ../Inspectly
+    
+  Alamofire:
+    url: https://github.com/Alamofire/Alamofire.git
+    from: 5.9.1
+
+targets:
+  DemoApp:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - DemoApp
+    dependencies:
+      - package: Inspectly
+        product: Inspectly
+      - package: Alamofire
+        product: Alamofire
+    info:
+      path: DemoApp/Info.plist
+      properties:
+        UILaunchScreen: {}
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.inspectly.demoapp
+        INFOPLIST_FILE: DemoApp/Info.plist
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SWIFT_VERSION: 5.0
+
+schemes:
+  DemoApp:
+    build:
+      targets:
+        DemoApp: all
+    run:
+      config: Debug
+    archive:
+      config: Release

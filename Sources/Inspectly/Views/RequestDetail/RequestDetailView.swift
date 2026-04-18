@@ -67,6 +67,7 @@ struct RequestDetailView: View {
         .sheet(item: $viewModel.shareURL) { identifiable in
             ActivityView(activityItems: [identifiable.url])
         }
+        .toolbar(.hidden, for: .tabBar)
     }
 
     // MARK: - Tab Selector

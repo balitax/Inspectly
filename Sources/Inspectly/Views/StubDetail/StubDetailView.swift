@@ -41,6 +41,7 @@ struct StubDetailView: View {
                 .fontWeight(.semibold)
             }
         }
+        .toolbar(.hidden, for: .tabBar)
     }
 
     // MARK: - General Info
