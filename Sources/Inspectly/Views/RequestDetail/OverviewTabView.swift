@@ -78,7 +78,6 @@ struct OverviewTabView: View {
                 Text(viewModel.request.url)
                     .font(.system(size: 11, design: .monospaced))
                     .foregroundStyle(.secondary)
-                    .lineLimit(2)
             }
 
             Spacer()
