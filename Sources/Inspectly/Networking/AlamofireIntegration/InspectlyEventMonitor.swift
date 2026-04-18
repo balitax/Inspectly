@@ -46,6 +46,8 @@ final class InspectlyEventMonitor {
     /// Called when a URLRequest is created from the initial URLRequestConvertible value.
     /// Equivalent to: `func request(_ request: Request, didCreateURLRequest urlRequest: URLRequest)`
     func requestDidCreateURLRequest(_ urlRequest: URLRequest, requestID: String) {
+        guard InspectlyURLProtocol.isLoggingEnabled else { return }
+        
         let url = urlRequest.url?.absoluteString ?? ""
         let components = URLComponents(string: url)
 
