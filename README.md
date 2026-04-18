@@ -14,11 +14,12 @@ Inspectly is a premium, developer-first HTTP interception and mocking library fo
 - **Seamless Integration** - Automatic interception via method swizzling. No need to pass configurations or add interceptors manually.
 - **Zero Dependencies** - Light-weight and standalone. Supports Alamofire & AFNetworking without linking against them.
 - **HTTP Interception** - Deep capture of requests and responses including headers, body, redirects, and timing.
-- **Mock/Stub Engine** - Create powerful stubs with flexible match rules and dynamic response scenarios.
-- **Error Simulation** - Inject timeouts, connection failures, and HTTP errors to test edge cases.
-- **Premium SwiftUI UI** - Interactive Statistics, filterable Request List, detailed Timeline view, and intuitive Stub Manager.
-- **Quick Export** - Share requests as cURL commands, raw JSON, or shareable files.
-- **Developer Experience** - Shake to open, hourly activity charts, and modern design aesthetics.
+- **Precision Mocking** - Create stubs with strict "Full URL" matching for exact environment-specific testing.
+- **Direct JSON Editing** - Edit mock responses directly within the app's UI with built-in JSON validation.
+- **Premium SwiftUI UI** - Interactive Statistics, filterable Request List, detailed Timeline view, and a high-performance Stub Manager.
+- **Quick Export & Share** - Share captures as cURL, JSON files, or full exported logs via the system Share Sheet.
+- **Zero-Waste Experience** - No dummy data or clutter. Starts clean, focused entirely on your app's network traffic.
+- **Developer Experience** - Shake to open, hourly activity charts, and modern design aesthetics with hidden navigation bars for maximum focus.
 
 ## 📦 Installation
 
@@ -64,7 +65,7 @@ For more control, you can pass a custom configuration:
 ```swift
 let config = Inspectly.Configuration(
     isLoggingEnabled: true,      // Default: true
-    isStubEnabled: true,         // Default: false
+    isStubEnabled: true,         // Default: true
     isShakeGestureEnabled: true, // Default: true
     ignoredHosts: ["analytics.google.com"],
     ignoreLocalhost: true
@@ -98,7 +99,17 @@ Search, filter by status code, and sort your captures. Inspectly groups requests
 Dive deep into every request. View headers, formatted JSON bodies, raw data, and a detailed timeline of the network lifecycle.
 
 ### 🎭 Stub Manager
-Mock any API endpoint. Define match rules for paths, methods, or headers, and switch between success/error scenarios on the fly.
+Mock any API endpoint with surgical precision. Inspectly's stub engine uses strict URL matching ensuring your mocks only trigger when exactly intended.
+
+- **Direct Editing**: Change HTTP status, delays, and JSON response bodies on the fly.
+- **JSON Validation**: Built-in validator ensures your mock responses are always valid.
+- **Seamless Creation**: Convert any intercepted live request into a stub with one tap from the detail view.
+
+### 📤 Export & Sharing
+Extract your data exactly how you need it.
+- **cURL**: Perfectly formatted for terminal testing.
+- **JSON File**: Share a full request capture as a `.json` file.
+- **Bulk Export**: Export your entire log or stub collection via the system share sheet for backup or team sharing.
 
 ## 🤝 Contributing
 
