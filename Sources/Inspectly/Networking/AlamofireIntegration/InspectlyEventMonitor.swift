@@ -32,7 +32,7 @@ import Foundation
 ///   conform to Alamofire's `EventMonitor` protocol.
 /// - The protocol methods below mirror Alamofire's EventMonitor API.
 
-final class InspectlyEventMonitor {
+public final class InspectlyEventMonitor {
 
     private let requestRepository: RequestRepositoryProtocol
     private var pendingRequests: [String: NetworkRequest] = [:]
