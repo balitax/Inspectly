@@ -13,14 +13,10 @@ let package = Package(
             targets: ["Inspectly"]
         ),
     ],
-    dependencies: [
-        .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.8.0")
-    ],
     targets: [
         .target(
             name: "Inspectly",
             path: "Sources/Inspectly",
-            dependencies: ["Alamofire"],
             resources: [
                 .process("Assets.xcassets")
             ]

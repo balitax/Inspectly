@@ -183,15 +183,7 @@ public final class Inspectly {
         
         URLProtocol.registerClass(InspectlyURLProtocol.self)
         
-        // Auto-inject into default URLSession configurations
-        let defaultConfig = URLSessionConfiguration.default
-        if !defaultConfig.protocolClasses.contains(where: { $0 == InspectlyURLProtocol.self }) {
-            defaultConfig.protocolClasses.insert(InspectlyURLProtocol.self, at: 0)
-        }
-        
-        let ephemeralConfig = URLSessionConfiguration.ephemeral
-        if !ephemeralConfig.protocolClasses.contains(where: { $0 == InspectlyURLProtocol.self }) {
-            ephemeralConfig.protocolClasses.insert(InspectlyURLProtocol.self, at: 0)
-        }
+        // Activate swizzling for seamless integration (Alamofire, AFNetworking, etc.)
+        InspectlySwizzler.shared.activate()
     }
 }
