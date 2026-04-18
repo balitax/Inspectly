@@ -4,35 +4,30 @@
 //
 
 import Foundation
+import Alamofire
 
 // MARK: - Inspectly Event Monitor for Alamofire
 ///
 /// An EventMonitor implementation that captures Alamofire request lifecycle events
 /// and logs them to Inspectly's request repository.
 ///
-/// ## Integration Guide
+/// ## Usage
 ///
 /// ```swift
 /// import Alamofire
+/// import Inspectly
 ///
-/// let inspectlyMonitor = InspectlyEventMonitor(
-///     requestRepository: DependencyContainer.shared.requestRepository
-/// )
+/// let session = Session(eventMonitors: [InspectlyEventMonitor(
+///     requestRepository: Inspectly.container.requestRepository
+/// )])
 ///
-/// let session = Session(eventMonitors: [inspectlyMonitor])
-///
-/// // Now all requests through this session will be captured by Inspectly
-/// session.request("https://api.example.com/users").responseDecodable(of: User.self) { response in
+/// session.request("https://api.example.com/users").response { response in
 ///     // Handle response
 /// }
 /// ```
 ///
-/// ## Notes
-/// - This is a sample implementation. In production, import Alamofire and
-///   conform to Alamofire's `EventMonitor` protocol.
-/// - The protocol methods below mirror Alamofire's EventMonitor API.
 
-public final class InspectlyEventMonitor {
+public final class InspectlyEventMonitor: EventMonitor {
 
     private let requestRepository: RequestRepositoryProtocol
     private var pendingRequests: [String: NetworkRequest] = [:]
@@ -41,11 +36,9 @@ public final class InspectlyEventMonitor {
         self.requestRepository = requestRepository
     }
 
-    // MARK: - Alamofire EventMonitor Methods (Sample)
+    // MARK: - EventMonitor Methods
 
-    /// Called when a URLRequest is created from the initial URLRequestConvertible value.
-    /// Equivalent to: `func request(_ request: Request, didCreateURLRequest urlRequest: URLRequest)`
-    func requestDidCreateURLRequest(_ urlRequest: URLRequest, requestID: String) {
+    public func request(_ request: Request, didCreateURLRequest urlRequest: URLRequest) {
         guard InspectlyURLProtocol.isLoggingEnabled else { return }
         
         let url = urlRequest.url?.absoluteString ?? ""
@@ -84,48 +77,94 @@ public final class InspectlyEventMonitor {
             ]
         )
 
-        pendingRequests[requestID] = networkRequest
+        pendingRequests[request.id] = networkRequest
+        
+        Task {
+            await requestRepository.addRequest(networkRequest)
+        }
     }
 
-    /// Called when a DataRequest receives a HTTPURLResponse.
-    /// Equivalent to: `func request(_ request: DataRequest, didParseResponse response: DataResponse<Data?, AFError>)`
-    func requestDidComplete(requestID: String, response: HTTPURLResponse?, data: Data?, error: Error?, duration: TimeInterval) {
-        guard var networkRequest = pendingRequests.removeValue(forKey: requestID) else { return }
-
-        networkRequest.statusCode = response?.statusCode
-        networkRequest.duration = duration
-        networkRequest.completedAt = Date()
-
-        if let response = response {
-            networkRequest.responseHeaders = response.allHeaderFields.map {
-                RequestHeader(key: "\($0.key)", value: "\($0.value)")
-            }
-        }
-
-        if let data = data {
-            networkRequest.responseBody = ResponseBody(
+    public func request(_ request: Request, didParseResponse response: AFDataResponse<Any?>) {
+        guard InspectlyURLProtocol.isLoggingEnabled else { return }
+        
+        guard var networkRequest = pendingRequests[request.id] else { return }
+        
+        let statusCode = response.response?.statusCode
+        
+        let responseHeaders = response.response?.headers.map {
+            RequestHeader(key: $0.name, value: $0.value)
+        } ?? []
+        
+        var responseBody: ResponseBody?
+        if let data = response.data {
+            responseBody = ResponseBody(
                 rawString: String(data: data, encoding: .utf8),
                 rawData: data,
                 contentType: .json,
                 size: Int64(data.count)
             )
-            networkRequest.responseSize = Int64(data.count)
         }
-
-        if let error = error {
-            networkRequest.errorMessage = error.localizedDescription
-            networkRequest.status = .unknown
-        } else if let statusCode = response?.statusCode {
-            networkRequest.status = (200...299).contains(statusCode) ? .success :
-                (400...499).contains(statusCode) ? .clientError : .serverError
-        }
-
-        networkRequest.timelineEvents.append(
-            TimelineEvent(name: "Response Received", timestamp: Date(), duration: duration)
+        
+        networkRequest = NetworkRequest(
+            id: networkRequest.id,
+            method: networkRequest.method,
+            url: networkRequest.url,
+            host: networkRequest.host,
+            path: networkRequest.path,
+            scheme: networkRequest.scheme,
+            requestHeaders: networkRequest.requestHeaders,
+            queryParameters: networkRequest.queryParameters,
+            requestBody: networkRequest.requestBody,
+            statusCode: statusCode,
+            responseHeaders: responseHeaders,
+            responseBody: responseBody,
+            timestamp: networkRequest.timestamp,
+            endTime: Date(),
+            duration: Date().timeIntervalSince(networkRequest.timestamp),
+            error: response.error,
+            isStubbed: networkRequest.isStubbed,
+            timelineEvents: networkRequest.timelineEvents + [
+                TimelineEvent(name: "Response Received", timestamp: Date())
+            ]
         )
-
+        
+        pendingRequests[request.id] = networkRequest
+        
         Task {
-            await requestRepository.addRequest(networkRequest)
+            await requestRepository.updateRequest(networkRequest)
+        }
+    }
+
+    public func request(_ request: Request, didFailWithError error: AFError) {
+        guard InspectlyURLProtocol.isLoggingEnabled else { return }
+        
+        guard var networkRequest = pendingRequests[request.id] else { return }
+        
+        networkRequest = NetworkRequest(
+            id: networkRequest.id,
+            method: networkRequest.method,
+            url: networkRequest.url,
+            host: networkRequest.host,
+            path: networkRequest.path,
+            scheme: networkRequest.scheme,
+            requestHeaders: networkRequest.requestHeaders,
+            queryParameters: networkRequest.queryParameters,
+            requestBody: networkRequest.requestBody,
+            statusCode: nil,
+            responseHeaders: [],
+            responseBody: nil,
+            timestamp: networkRequest.timestamp,
+            endTime: Date(),
+            duration: Date().timeIntervalSince(networkRequest.timestamp),
+            error: error.localizedDescription,
+            isStubbed: networkRequest.isStubbed,
+            timelineEvents: networkRequest.timelineEvents + [
+                TimelineEvent(name: "Request Failed", timestamp: Date())
+            ]
+        )
+        
+        Task {
+            await requestRepository.updateRequest(networkRequest)
         }
     }
 }
