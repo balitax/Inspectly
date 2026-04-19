@@ -215,13 +215,9 @@ This section is intentionally prepared so screenshots can be added later without
 
 ### Demo App
 
-| Requests Tab | Request Detail |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/request.png" width="300" /> | <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/response.png" width="300" /> |
-
-| Statistics Tab | Stubs Tab | Settings Tab |
-| --- | --- | --- |
-| <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/statistics.png" width="300" /> | <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/stubs.png" width="300" /> | <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/setting.png" width="300" /> |
+| Requests Tab | Request Detail | Statistics Tab | Stubs Tab | Settings Tab |
+| --- | --- | --- | --- | --- |
+| <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/request.png" width="220" /> | <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/response.png" width="220" /> | <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/statistics.png" width="220" /> | <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/stubs.png" width="220" /> | <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/setting.png" width="220" /> |
 
 
 ## Example Workflow
