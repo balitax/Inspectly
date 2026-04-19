@@ -47,6 +47,16 @@ struct StubManagerView: View {
             .navigationTitle("Stubs")
             .searchable(text: $viewModel.searchText, prompt: "Search stubs...")
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    filterMenu
+                }
+
+                ToolbarItem(placement: .topBarTrailing) {
+                    if !viewModel.stubs.isEmpty {
+                        clearButton
+                    }
+                }
+
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         viewModel.showingNewStub = true
@@ -55,10 +65,14 @@ struct StubManagerView: View {
                             .font(.system(size: 16))
                     }
                 }
-
-                ToolbarItem(placement: .topBarLeading) {
-                    filterMenu
+            }
+            .alert("Clear All Stubs?", isPresented: $viewModel.showClearConfirmation) {
+                Button("Cancel", role: .cancel) {}
+                Button("Clear", role: .destructive) {
+                    Task { await viewModel.clearStubs() }
                 }
+            } message: {
+                Text("This will permanently delete all saved stubs. Requests linked to those stubs will be unmarked. This action cannot be undone.")
             }
             .sheet(isPresented: $viewModel.showingNewStub) {
                 NavigationStack {
@@ -193,6 +207,17 @@ struct StubManagerView: View {
             }
         } label: {
             Image(systemName: "line.3.horizontal.decrease.circle")
+                .font(.system(size: 14))
+        }
+    }
+
+    // MARK: - Clear Button
+
+    private var clearButton: some View {
+        Button(role: .destructive) {
+            viewModel.showClearConfirmation = true
+        } label: {
+            Image(systemName: "trash")
                 .font(.system(size: 14))
         }
     }

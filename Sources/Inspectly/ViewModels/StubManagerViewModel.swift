@@ -40,6 +40,7 @@ final class StubManagerViewModel: ObservableObject {
     @Published var methodFilter: HTTPMethodType?
     @Published var isLoading: Bool = false
     @Published var showingNewStub: Bool = false
+    @Published var showClearConfirmation: Bool = false
 
     private let stubRepository: StubRepositoryProtocol
     private let requestRepository: RequestRepositoryProtocol
@@ -107,6 +108,16 @@ final class StubManagerViewModel: ObservableObject {
         await stubRepository.deleteStub(stub.id)
         await requestRepository.unmarkRequests(for: stub.id)
         stubs.removeAll { $0.id == stub.id }
+    }
+
+    func clearStubs() async {
+        let stubIDs = stubs.map(\.id)
+        await stubRepository.deleteAllStubs()
+        for stubID in stubIDs {
+            await requestRepository.unmarkRequests(for: stubID)
+        }
+        stubs.removeAll()
+        showClearConfirmation = false
     }
 
     func duplicateStub(_ stub: RequestStub) async {
