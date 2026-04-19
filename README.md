@@ -5,42 +5,52 @@
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![SPM](https://img.shields.io/badge/SPM-Ready-purple)](https://swift.org/package-manager)
 
-> **Zero-Dependency** HTTP Inspector & Mock Library for iOS.
-> Crafted with ❤️ by **Agus Cahyono**.
+Inspectly is a zero-dependency HTTP inspector and stubbing toolkit for iOS. It captures network traffic automatically, provides an in-app inspector UI, and lets you create and manage API stubs directly from the requests your app makes.
 
-Inspectly is a premium, developer-first HTTP interception and mocking library for iOS. It captures, inspects, and mocks network requests with **zero configuration** and **zero dependencies**. It works seamlessly with `URLSession`, **Alamofire**, **AFNetworking**, and any other networking library built on top of the Foundation networking stack.
+It is designed to work with the Foundation networking stack, so it fits naturally with `URLSession`, Alamofire, AFNetworking, and other libraries built on top of them.
 
-## 🌟 Key Features
+## Highlights
 
-- **Seamless Integration** - Automatic interception via method swizzling. No need to pass configurations or add interceptors manually.
-- **Zero Dependencies** - Light-weight and standalone. Supports Alamofire & AFNetworking without linking against them.
-- **Modern & Legacy Support** - Compatible with **iOS 13.0+**. Enjoy premium SwiftUI features on iOS 16+ with graceful degradation on legacy versions.
-- **HTTP Interception** - Deep capture of requests and responses including headers, body, redirects, and timing.
-- **Precision Mocking** - Create stubs with strict "Full URL" matching for exact environment-specific testing.
-- **Direct JSON Editing** - Edit mock responses directly within the app's UI with built-in JSON validation.
-- **Premium SwiftUI UI** - Interactive Statistics, filterable Request List, detailed Timeline view, and a high-performance Stub Manager (Requires iOS 16+).
-- **Quick Export & Share** - Share captures as cURL, JSON files, or full exported logs via the system Share Sheet.
-- **Zero-Waste Experience** - No dummy data or clutter. Starts clean, focused entirely on your app's network traffic.
-- **Developer Experience** - Shake to open, hourly activity charts, and modern design aesthetics with hidden navigation bars for maximum focus.
+- Zero configuration request interception via `URLProtocol` registration and swizzling.
+- Zero external dependencies.
+- Request capture for headers, bodies, response metadata, and timing.
+- In-app inspector with tabs for Requests, Statistics, Stubs, and Settings.
+- Create a stub directly from a captured request.
+- Enable, disable, duplicate, delete, search, filter, and clear stubs from the UI.
+- Search, sort, filter, pin, favorite, delete, and clear captured requests.
+- Stub badge support in the request list for requests linked to stubs.
+- Export logs and stubs from the Settings tab.
+- Shake gesture shortcut to open the inspector.
 
-## 📦 Installation
+## Requirements
+
+- iOS 13.0+
+- Swift 5.9+
+- Xcode 15+
+
+Notes:
+- Request interception and core storage work on iOS 13+.
+- The built-in inspector UI requires iOS 16+.
+
+## Installation
 
 ### Swift Package Manager
 
-Add Inspectly to your project via SPM:
+Add Inspectly to your project:
 
 ```swift
-// In your Package.swift
 dependencies: [
     .package(url: "https://github.com/balitax/Inspectly.git", from: "1.0.4")
 ]
 ```
 
-## 🚀 Quick Start
+Then add `Inspectly` to your target dependencies.
 
-### 1. Initialize Inspectly
+## Quick Start
 
-Simply enable Inspectly in your `App` or `AppDelegate`. It will automatically begin intercepting requests.
+### Basic setup
+
+Enable Inspectly once during app startup:
 
 ```swift
 import Inspectly
@@ -48,11 +58,9 @@ import Inspectly
 @main
 struct MyApp: App {
     init() {
-        // One-line setup for "magic" interception
-        // Works on iOS 13+, UI Dashboard requires iOS 16+
         Inspectly.enable()
     }
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -61,59 +69,188 @@ struct MyApp: App {
 }
 ```
 
-### 2. Presenting the Inspector
+### Present the inspector manually
 
-You can present the inspector manually. Inspectly will automatically check for version compatibility and warn you if the device version is below iOS 16.
+You can also open the inspector from any button, debug menu, or custom gesture:
 
 ```swift
-// Trigger from any button or gesture
 Inspectly.presentInspector()
 ```
 
-## 🛠 Seamless Compatibility
+### Recommended debug-only setup
 
-Inspectly uses low-level method swizzling to ensure it catches traffic from any library without you having to write a single line of extra code.
+For most apps, it makes sense to enable Inspectly only for debug builds:
 
-### URLSession
-Works automatically for `URLSession.shared` and any custom sessions created with `.default` or `.ephemeral` configurations.
+```swift
+import Inspectly
 
-### Alamofire
-No need to add `EventMonitor` or `RequestInterceptor`. Just use your `Session` as usual, and Inspectly will catch everything.
+@main
+struct MyApp: App {
+    init() {
+        #if DEBUG
+        Inspectly.enable()
+        #endif
+    }
 
-### AFNetworking
-Works out of the box with `AFHTTPSessionManager` and `AFURLSessionManager`.
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+```
 
-## 📱 Features Walkthrough
+## Configuration
 
-### 📊 Statistics
-Monitor your app's networking health with hourly activity charts, success rates, and method distribution analysis.
+Inspectly can be enabled with a custom configuration:
 
-### 📋 Request List
-Search, filter by status code, and sort your captures. Inspectly groups requests by date for easy navigation.
+```swift
+import Inspectly
 
-### 🔍 Request Detail
-Dive deep into every request. View headers, formatted JSON bodies, raw data, and a detailed timeline of the network lifecycle.
+let configuration = Inspectly.Configuration(
+    isLoggingEnabled: true,
+    isStubEnabled: true,
+    ignoredHosts: ["example.com"],
+    isShakeGestureEnabled: true,
+    ignoreLocalhost: true
+)
 
-### 🎭 Stub Manager
-Mock any API endpoint with surgical precision. Inspectly's stub engine uses strict URL matching ensuring your mocks only trigger when exactly intended.
+Inspectly.enable(with: configuration)
+```
 
-- **Direct Editing**: Change HTTP status, delays, and JSON response bodies on the fly.
-- **JSON Validation**: Built-in validator ensures your mock responses are always valid.
-- **Seamless Creation**: Convert any intercepted live request into a stub with one tap from the detail view.
+Available configuration options:
 
-### 📤 Export & Sharing
-Extract your data exactly how you need it.
-- **cURL**: Perfectly formatted for terminal testing.
-- **JSON File**: Share a full request capture as a `.json` file.
-- **Bulk Export**: Export your entire log or stub collection via the system share sheet for backup or team sharing.
+- `isLoggingEnabled`: Enable or disable request capture.
+- `isStubEnabled`: Enable or disable request stubbing globally.
+- `ignoredHosts`: Skip selected hosts from being captured.
+- `isShakeGestureEnabled`: Open the inspector by shaking the device.
+- `ignoreLocalhost`: Automatically ignore `localhost` and `127.0.0.1`.
+- `stubRepository`: Provide a custom stub repository implementation.
 
-## 🤝 Contributing
+Useful public APIs:
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+- `Inspectly.enable(isEnabled:with:)`
+- `Inspectly.disable()`
+- `Inspectly.presentInspector(rootView:)`
+- `Inspectly.isEnabled`
+- `Inspectly.container`
 
-## 📄 License
+## What You Get
 
-Inspectly is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
+### Requests
 
-**Created by [Agus Cahyono](https://github.com/balitax)**
-Copyright © 2026 Agus Cahyono. All rights reserved.
+The Requests tab is focused on day-to-day traffic inspection:
+
+- Automatic request and response capture.
+- Search by URL, method, or status.
+- Sort and filter captured traffic.
+- Grouping by date for easier browsing.
+- Swipe actions for pin, favorite, and delete.
+- Clear all captured requests from the toolbar.
+- Request rows can show a stub badge when linked to a stub.
+
+### Request Detail
+
+Each request can be inspected in more depth:
+
+- Overview for request metadata.
+- Headers and parameters inspection.
+- Request and response body viewing.
+- Timeline-style debugging information.
+- Create a new stub directly from a live request.
+
+### Statistics
+
+The Statistics tab gives a quick read on app networking activity:
+
+- Total requests summary.
+- Error and success visibility.
+- Stubbed request count.
+- Pinned and favorite request counts.
+- Recent activity overview.
+- Hourly activity chart.
+
+### Stubs
+
+The Stubs tab helps you manage mocked responses directly inside the app:
+
+- Create and edit stubs.
+- Enable or disable a stub without deleting it.
+- Duplicate existing stubs.
+- Delete individual stubs.
+- Clear all stubs from the toolbar.
+- Search by stub name or URL rule.
+- Filter by active state and HTTP method.
+- Automatically unmark linked requests when a stub is removed.
+
+### Settings
+
+The Settings tab centralizes runtime controls and data management:
+
+- Toggle logging on or off.
+- Toggle stubs globally.
+- Manage ignored hosts.
+- Configure max stored requests.
+- Enable or disable shake-to-open.
+- Toggle JSON prettifying.
+- Toggle large body truncation.
+- Clear all captured logs.
+- Export logs.
+- Export stubs.
+
+## Compatibility
+
+Inspectly is built around the Foundation networking stack, so it works with:
+
+- `URLSession`
+- Alamofire
+- AFNetworking
+- Other networking libraries built on top of Foundation
+
+No custom interceptor setup is required for the common use case.
+
+## Screenshots
+
+This section is intentionally prepared so screenshots can be added later without changing the README structure.
+
+### Demo App
+
+Replace the placeholders below with your final images:
+
+```md
+![Requests Tab](./Screenshots/requests.png)
+![Request Detail](./Screenshots/request-detail.png)
+![Statistics Tab](./Screenshots/statistics.png)
+![Stubs Tab](./Screenshots/stubs.png)
+![Settings Tab](./Screenshots/settings.png)
+```
+
+Suggested screenshots to provide:
+
+- Requests list
+- Request detail
+- Statistics dashboard
+- Stub manager
+- Settings / export actions
+
+## Example Workflow
+
+One practical workflow with Inspectly looks like this:
+
+1. Enable Inspectly in your app.
+2. Run the app and trigger real API calls.
+3. Open the inspector using shake gesture or `Inspectly.presentInspector()`.
+4. Open a request from the Requests tab.
+5. Create a stub from that request.
+6. Go to the Stubs tab and fine-tune the mocked response.
+7. Re-run the same app flow with stubs enabled.
+
+## Contributing
+
+Contributions are welcome. If you want to improve the UI, add features, or fix bugs, feel free to open a pull request.
+
+## License
+
+Inspectly is available under the MIT license. See [LICENSE](LICENSE) for details.
+
+Created by [Agus Cahyono](https://github.com/balitax)
