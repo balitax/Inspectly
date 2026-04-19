@@ -137,6 +137,7 @@ Inspectly.enable(with: configuration)
 | --- | --- |
 | `isLoggingEnabled` | Enable or disable request capture |
 | `isStubEnabled` | Enable or disable request stubbing globally |
+| `networkThrottlingPreset` | Simulate network conditions (Edge, 3G, Custom, etc.) |
 | `ignoredHosts` | Ignore selected hosts from being captured |
 | `isShakeGestureEnabled` | Open the inspector by shaking the device |
 | `ignoreLocalhost` | Ignore `localhost` and `127.0.0.1` |

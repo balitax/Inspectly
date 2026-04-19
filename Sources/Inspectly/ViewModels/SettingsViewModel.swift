@@ -58,8 +58,8 @@ final class SettingsViewModel: ObservableObject {
     func saveSettings() async {
         do {
             try await storageManager.save(settings, forKey: "inspectly_settings")
-            InspectlyURLProtocol.isLoggingEnabled = settings.isLoggingEnabled
-            InspectlyURLProtocol.isStubEnabled = settings.areStubsEnabled
+            Inspectly.applyRuntimeSettings(settings)
+            NotificationCenter.default.post(name: .inspectlySettingsDidChange, object: settings)
         } catch {
             print("[Inspectly] Failed to save settings: \(error)")
         }
@@ -69,8 +69,8 @@ final class SettingsViewModel: ObservableObject {
         do {
             if let loaded = try await storageManager.load(AppSettings.self, forKey: "inspectly_settings") {
                 settings = loaded
-                InspectlyURLProtocol.isLoggingEnabled = settings.isLoggingEnabled
-                InspectlyURLProtocol.isStubEnabled = settings.areStubsEnabled
+                Inspectly.applyRuntimeSettings(settings)
+                NotificationCenter.default.post(name: .inspectlySettingsDidChange, object: settings)
             }
         } catch {
             print("[Inspectly] Failed to load settings: \(error)")

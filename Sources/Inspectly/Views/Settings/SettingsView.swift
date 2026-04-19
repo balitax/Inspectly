@@ -33,6 +33,9 @@ struct SettingsView: View {
                 // MARK: - Stubs Section
                 stubsSection
 
+                // MARK: - Network Throttling
+                networkThrottlingSection
+
                 // MARK: - Ignored Hosts
                 ignoredHostsSection
 
@@ -75,6 +78,9 @@ struct SettingsView: View {
             .onChange(of: viewModel.settings.areStubsEnabled) { _ in
                 Task { await viewModel.saveSettings() }
             }
+            .onChange(of: viewModel.settings.networkThrottlingPreset) { _ in
+                Task { await viewModel.saveSettings() }
+            }
             .onChange(of: viewModel.settings.isShakeGestureEnabled) { _ in
                 Task { await viewModel.saveSettings() }
             }
@@ -95,7 +101,7 @@ struct SettingsView: View {
                 Label("Enable Logging", systemImage: "antenna.radiowaves.left.and.right")
                     .font(.system(size: 14))
             }
-            .tint(.green)
+            .tint(.accentColor)
         } header: {
             Text("Logging")
         } footer: {
@@ -116,6 +122,97 @@ struct SettingsView: View {
             Text("Stubs")
         } footer: {
             Text("When enabled, matching network requests will return stubbed responses.")
+        }
+    }
+
+    // MARK: - Network Throttling
+
+    private var networkThrottlingSection: some View {
+        Section {
+            HStack {
+                Label("Preset", systemImage: viewModel.settings.networkThrottlingPreset.iconName)
+                    .font(.system(size: 14))
+
+                Spacer()
+
+                Picker("", selection: $viewModel.settings.networkThrottlingPreset) {
+                    ForEach(NetworkThrottlingPreset.allCases) { preset in
+                        Text(preset.displayName).tag(preset)
+                    }
+                }
+                .pickerStyle(.menu)
+            }
+
+            if viewModel.settings.networkThrottlingPreset == .custom {
+                VStack(alignment: .leading, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack {
+                            Text("Request Delay")
+                                .font(.system(size: 13, weight: .medium))
+                            Spacer()
+                            Text(String(format: "%.1fs", viewModel.settings.customNetworkDelay))
+                                .font(.system(size: 12, weight: .bold))
+                                .monospaced()
+                        }
+                        
+                        Slider(value: $viewModel.settings.customNetworkDelay, in: 0...30, step: 0.5) { _ in
+                            Task { await viewModel.saveSettings() }
+                        }
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Toggle(isOn: Binding(
+                            get: { viewModel.settings.customNetworkBandwidth != nil },
+                            set: { isEnabled in
+                                viewModel.settings.customNetworkBandwidth = isEnabled ? 1_000_000 : nil
+                                Task { await viewModel.saveSettings() }
+                            }
+                        )) {
+                            Text("Limit Bandwidth")
+                                .font(.system(size: 13, weight: .medium))
+                        }
+                        .tint(.accentColor)
+                        
+                        if let bandwidth = viewModel.settings.customNetworkBandwidth {
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack {
+                                    Text("Speed Limit")
+                                        .font(.system(size: 12))
+                                        .foregroundStyle(.secondary)
+                                    Spacer()
+                                    Text("\(Int(bandwidth / 1024)) KB/s")
+                                        .font(.system(size: 12, weight: .bold))
+                                        .monospaced()
+                                }
+                                
+                                Slider(value: Binding(
+                                    get: { bandwidth },
+                                    set: { newValue in
+                                        viewModel.settings.customNetworkBandwidth = newValue
+                                    }
+                                ), in: 8_192...10_000_000, step: 8_192) { _ in
+                                    Task { await viewModel.saveSettings() }
+                                }
+                            }
+                        }
+                    }
+                }
+                .padding(.vertical, 8)
+            }
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text(viewModel.settings.networkThrottlingPreset.displayName)
+                    .font(.system(size: 13, weight: .semibold))
+
+                Text(viewModel.settings.networkThrottlingPreset.description)
+                    .font(.system(size: 12))
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.vertical, 4)
+        } header: {
+            Text("Network Throttling")
+        } footer: {
+            Text("Simulate slower connections or DNS failures for all real requests intercepted by Inspectly.")
         }
     }
 
@@ -190,12 +287,6 @@ struct SettingsView: View {
 
     private var displaySection: some View {
         Section {
-            Toggle(isOn: $viewModel.settings.isShakeGestureEnabled) {
-                Label("Shake to Open", systemImage: "iphone.radiowaves.left.and.right")
-                    .font(.system(size: 14))
-            }
-            .tint(.accentColor)
-
             Toggle(isOn: $viewModel.settings.isAutoResponsePrettifying) {
                 Label("Auto-Prettify JSON", systemImage: "text.alignleft")
                     .font(.system(size: 14))

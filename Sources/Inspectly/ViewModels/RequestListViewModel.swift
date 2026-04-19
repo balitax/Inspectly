@@ -96,15 +96,25 @@ final class RequestListViewModel: ObservableObject {
     @Published var showClearConfirmation: Bool = false
     @Published var listRenderID: UUID = UUID()
     @Published var errorMessage: String?
+    @Published var activeThrottling: NetworkThrottlingPreset = .off
 
     let requestRepository: RequestRepositoryProtocol
     private var hasLoadedOnce = false
 
     init(requestRepository: RequestRepositoryProtocol) {
         self.requestRepository = requestRepository
+        Task {
+            await loadThrottlingStatus()
+        }
     }
 
     // MARK: - Data Loading
+
+    func loadThrottlingStatus() async {
+        if let settings = try? await DependencyContainer.shared.storageManager.load(AppSettings.self, forKey: "inspectly_settings") {
+            self.activeThrottling = settings.networkThrottlingPreset
+        }
+    }
 
     func loadRequests() async {
         isLoading = true
