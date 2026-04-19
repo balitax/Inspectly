@@ -104,6 +104,14 @@ struct DemoAppView: View {
                             color: .red
                         )
                     }
+
+                    Button(action: createPost) {
+                        actionLabel(
+                            "Create Post (POST)",
+                            icon: "plus.circle.fill",
+                            color: .purple
+                        )
+                    }
                 }
                 .padding(.horizontal, 24)
                 
@@ -203,6 +211,14 @@ struct DemoAppView: View {
             loadingMessage: "Loading invalid endpoint..."
         )
     }
+
+    private func createPost() {
+        requestJSON(
+            from: "https://jsonplaceholder.typicode.com/posts",
+            method: .post,
+            loadingMessage: "Creating post..."
+        )
+    }
     
     // MARK: - Request Handler
     
@@ -238,10 +254,18 @@ struct DemoAppView: View {
         let headers: HTTPHeaders = [
             "Accept": "application/json"
         ]
+
+        let parameters: [String: Any]? = method == .post ? [
+            "title": "foo",
+            "body": "bar",
+            "userId": 1
+        ] : nil
         
         AF.request(
             urlString,
             method: method,
+            parameters: parameters,
+            encoding: JSONEncoding.default,
             headers: headers
         )
         .validate()
@@ -296,6 +320,16 @@ struct DemoAppView: View {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        if method == .post {
+            let body: [String: Any] = [
+                "title": "foo",
+                "body": "bar",
+                "userId": 1
+            ]
+            request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+        }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {

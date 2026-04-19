@@ -179,6 +179,11 @@ public struct StubResponse: Codable, Identifiable {
         jsonBody ?? plainTextBody ?? ""
     }
 
+    var contentType: ContentType {
+        let header = headers.first { $0.key.lowercased() == "content-type" }?.value.lowercased() ?? ""
+        return ContentType.parse(header)
+    }
+
     var isJSONValid: Bool {
         guard let json = jsonBody, !json.isEmpty else { return true }
         guard let data = json.data(using: .utf8) else { return false }
