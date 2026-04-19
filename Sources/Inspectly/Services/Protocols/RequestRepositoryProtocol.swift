@@ -27,6 +27,11 @@ public protocol RequestRepositoryProtocol {
     func updateRequest(_ request: NetworkRequest) async
     func deleteRequest(_ id: UUID) async
     func deleteAllRequests() async
+    func unmarkRequests(for stubId: UUID) async
     func searchRequests(query: String) async -> [NetworkRequest]
     func getRequestCount() async -> Int
+}
+
+extension Notification.Name {
+    static let inspectlyRequestsDidChange = Notification.Name("inspectly.requests.didChange")
 }

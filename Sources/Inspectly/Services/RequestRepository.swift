@@ -28,6 +28,9 @@ actor RequestRepository: RequestRepositoryProtocol {
     init(storageManager: StorageManagerProtocol, initialRequests: [NetworkRequest] = []) {
         self.storageManager = storageManager
         self.requests = initialRequests
+        Task {
+            await self.loadFromStorage()
+        }
     }
 
     func getAllRequests() async -> [NetworkRequest] {
@@ -60,6 +63,20 @@ actor RequestRepository: RequestRepositoryProtocol {
         await persist()
     }
 
+    func unmarkRequests(for stubId: UUID) async {
+        var didChange = false
+        for i in 0..<requests.count {
+            if requests[i].stubId == stubId {
+                requests[i].isStubbed = false
+                requests[i].stubId = nil
+                didChange = true
+            }
+        }
+        if didChange {
+            await persist()
+        }
+    }
+
     func searchRequests(query: String) async -> [NetworkRequest] {
         guard !query.isEmpty else { return requests }
         let lowercasedQuery = query.lowercased()
@@ -82,6 +99,7 @@ actor RequestRepository: RequestRepositoryProtocol {
         do {
             if let stored = try await storageManager.load([NetworkRequest].self, forKey: storageKey) {
                 self.requests = stored
+                await publishRequestsDidChange()
             }
         } catch {
             print("[Inspectly] Failed to load requests: \(error)")
@@ -91,8 +109,15 @@ actor RequestRepository: RequestRepositoryProtocol {
     private func persist() async {
         do {
             try await storageManager.save(requests, forKey: storageKey)
+            await publishRequestsDidChange()
         } catch {
             print("[Inspectly] Failed to persist requests: \(error)")
+        }
+    }
+
+    private func publishRequestsDidChange() async {
+        await MainActor.run {
+            NotificationCenter.default.post(name: .inspectlyRequestsDidChange, object: nil)
         }
     }
 }
@@ -108,15 +133,47 @@ actor MockRequestRepository: RequestRepositoryProtocol {
 
     func getAllRequests() async -> [NetworkRequest] { requests }
     func getRequest(by id: UUID) async -> NetworkRequest? { requests.first { $0.id == id } }
-    func addRequest(_ request: NetworkRequest) async { requests.insert(request, at: 0) }
-    func updateRequest(_ request: NetworkRequest) async {
-        if let idx = requests.firstIndex(where: { $0.id == request.id }) { requests[idx] = request }
+    func addRequest(_ request: NetworkRequest) async {
+        requests.insert(request, at: 0)
+        await publishRequestsDidChange()
     }
-    func deleteRequest(_ id: UUID) async { requests.removeAll { $0.id == id } }
-    func deleteAllRequests() async { requests.removeAll() }
+    func updateRequest(_ request: NetworkRequest) async {
+        if let idx = requests.firstIndex(where: { $0.id == request.id }) {
+            requests[idx] = request
+            await publishRequestsDidChange()
+        }
+    }
+    func deleteRequest(_ id: UUID) async {
+        requests.removeAll { $0.id == id }
+        await publishRequestsDidChange()
+    }
+    func deleteAllRequests() async {
+        requests.removeAll()
+        await publishRequestsDidChange()
+    }
+    func unmarkRequests(for stubId: UUID) async {
+        var didChange = false
+        for index in requests.indices {
+            if requests[index].stubId == stubId {
+                requests[index].isStubbed = false
+                requests[index].stubId = nil
+                requests[index].stubScenarioName = nil
+                didChange = true
+            }
+        }
+        if didChange {
+            await publishRequestsDidChange()
+        }
+    }
     func searchRequests(query: String) async -> [NetworkRequest] {
         guard !query.isEmpty else { return requests }
         return requests.filter { $0.url.lowercased().contains(query.lowercased()) }
     }
     func getRequestCount() async -> Int { requests.count }
+
+    private func publishRequestsDidChange() async {
+        await MainActor.run {
+            NotificationCenter.default.post(name: .inspectlyRequestsDidChange, object: nil)
+        }
+    }
 }

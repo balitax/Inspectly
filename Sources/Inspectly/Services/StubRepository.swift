@@ -28,6 +28,9 @@ actor StubRepository: StubRepositoryProtocol {
     init(storageManager: StorageManagerProtocol, initialStubs: [RequestStub] = []) {
         self.storageManager = storageManager
         self.stubs = initialStubs
+        Task {
+            await self.loadFromStorage()
+        }
     }
 
     func getAllStubs() async -> [RequestStub] {

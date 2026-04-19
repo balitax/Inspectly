@@ -23,6 +23,15 @@ import SwiftUI
 @available(iOS 16.0, *)
 struct RequestListView: View {
     @StateObject var viewModel: RequestListViewModel
+    let stubRepository: StubRepositoryProtocol
+
+    init(
+        viewModel: RequestListViewModel,
+        stubRepository: StubRepositoryProtocol = DependencyContainer.shared.stubRepository
+    ) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+        self.stubRepository = stubRepository
+    }
 
     var body: some View {
         NavigationStack {
@@ -59,6 +68,12 @@ struct RequestListView: View {
                 viewModel.applyFiltersAndSort()
             }
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    if !viewModel.requests.isEmpty {
+                        clearButton
+                    }
+                }
+
                 ToolbarItem(placement: .topBarTrailing) {
                     sortMenu
                 }
@@ -76,8 +91,26 @@ struct RequestListView: View {
                 }
                 .presentationDetents([.medium, .large])
             }
+            .alert("Clear All Requests?", isPresented: $viewModel.showClearConfirmation) {
+                Button("Cancel", role: .cancel) {}
+                Button("Clear", role: .destructive) {
+                    Task { await viewModel.clearRequests() }
+                }
+            } message: {
+                Text("This will permanently delete all captured requests from the Requests tab. This action cannot be undone.")
+            }
             .task {
-                await viewModel.loadRequests()
+                await viewModel.loadRequestsIfNeeded()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .inspectlyRequestsDidChange)) { _ in
+                Task {
+                    await viewModel.refresh()
+                }
+            }
+            .onAppear {
+                Task {
+                    await viewModel.refreshOnAppear()
+                }
             }
         }
     }
@@ -133,9 +166,25 @@ struct RequestListView: View {
                 }
             }
         }
+        .id(viewModel.listRenderID)
         .listStyle(.insetGrouped)
         .navigationDestination(for: NetworkRequest.self) { request in
-            RequestDetailView(viewModel: RequestDetailViewModel(request: request))
+            RequestDetailView(
+                viewModel: RequestDetailViewModel(
+                    request: request,
+                    requestRepository: viewModel.requestRepository
+                ),
+                stubRepository: stubRepository,
+                onStubSaved: { savedStub in
+                    viewModel.markRequestAsStubbed(request.id, stubId: savedStub.id)
+                    await viewModel.refresh()
+                },
+                onDismissed: {
+                    Task {
+                        await viewModel.refresh()
+                    }
+                }
+            )
         }
     }
 
@@ -159,6 +208,17 @@ struct RequestListView: View {
             }
         } label: {
             Image(systemName: "arrow.up.arrow.down")
+                .font(.system(size: 14))
+        }
+    }
+
+    // MARK: - Clear Button
+
+    private var clearButton: some View {
+        Button(role: .destructive) {
+            viewModel.showClearConfirmation = true
+        } label: {
+            Image(systemName: "trash")
                 .font(.system(size: 14))
         }
     }

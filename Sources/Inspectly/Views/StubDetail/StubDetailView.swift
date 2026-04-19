@@ -23,7 +23,7 @@ import SwiftUI
 @available(iOS 16.0, *)
 struct StubDetailView: View {
     @StateObject var viewModel: StubDetailViewModel
-    var onSave: ((RequestStub) -> Void)?
+    var onSave: ((RequestStub) async -> Void)?
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -48,7 +48,7 @@ struct StubDetailView: View {
                 Button("Save") {
                     Task {
                         await viewModel.save()
-                        onSave?(viewModel.stub)
+                        await onSave?(viewModel.stub)
                         dismiss()
                     }
                 }

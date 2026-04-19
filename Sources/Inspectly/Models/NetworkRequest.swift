@@ -176,6 +176,7 @@ public struct NetworkRequest: Identifiable, Codable, Equatable, Hashable {
     var timelineEvents: [TimelineEvent]
     var errorMessage: String?
     var stubScenarioName: String?
+    var stubId: UUID?
     var source: RequestSource
 
     init(
@@ -206,6 +207,7 @@ public struct NetworkRequest: Identifiable, Codable, Equatable, Hashable {
         timelineEvents: [TimelineEvent] = [],
         errorMessage: String? = nil,
         stubScenarioName: String? = nil,
+        stubId: UUID? = nil,
         source: RequestSource = .real
     ) {
         self.id = id
@@ -235,6 +237,7 @@ public struct NetworkRequest: Identifiable, Codable, Equatable, Hashable {
         self.timelineEvents = timelineEvents
         self.errorMessage = errorMessage
         self.stubScenarioName = stubScenarioName
+        self.stubId = stubId
         self.source = source
     }
 

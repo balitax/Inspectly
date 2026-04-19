@@ -23,6 +23,21 @@ import SwiftUI
 @available(iOS 16.0, *)
 struct RequestDetailView: View {
     @StateObject var viewModel: RequestDetailViewModel
+    let stubRepository: StubRepositoryProtocol
+    let onStubSaved: ((RequestStub) async -> Void)?
+    let onDismissed: (() -> Void)?
+
+    init(
+        viewModel: RequestDetailViewModel,
+        stubRepository: StubRepositoryProtocol = DependencyContainer.shared.stubRepository,
+        onStubSaved: ((RequestStub) async -> Void)? = nil,
+        onDismissed: (() -> Void)? = nil
+    ) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+        self.stubRepository = stubRepository
+        self.onStubSaved = onStubSaved
+        self.onDismissed = onDismissed
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -70,8 +85,12 @@ struct RequestDetailView: View {
                     viewModel: StubDetailViewModel(
                         stub: stub,
                         isEditing: true,
-                        stubRepository: DependencyContainer.shared.stubRepository
-                    )
+                        stubRepository: stubRepository
+                    ),
+                    onSave: { savedStub in
+                        await viewModel.markRequestAsStubbed(using: savedStub)
+                        await onStubSaved?(savedStub)
+                    }
                 )
             }
         }
@@ -80,6 +99,9 @@ struct RequestDetailView: View {
         }
         .sheet(item: $viewModel.shareURL) { identifiable in
             ActivityView(activityItems: [identifiable.url])
+        }
+        .onDisappear {
+            onDismissed?()
         }
         .toolbar(.hidden, for: .tabBar)
     }

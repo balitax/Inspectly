@@ -55,6 +55,11 @@ struct StatisticsView: View {
             .task {
                 await viewModel.loadData()
             }
+            .onReceive(NotificationCenter.default.publisher(for: .inspectlyRequestsDidChange)) { _ in
+                Task {
+                    await viewModel.loadData()
+                }
+            }
         }
     }
 

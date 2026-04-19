@@ -58,16 +58,29 @@ final class RequestDetailViewModel: ObservableObject {
     @Published var shareURL: IdentifiableURL? = nil
 
     private let exportManager: ExportManagerProtocol
+    private let requestRepository: RequestRepositoryProtocol
 
-    init(request: NetworkRequest, exportManager: ExportManagerProtocol = ExportManager()) {
+    init(
+        request: NetworkRequest,
+        exportManager: ExportManagerProtocol = ExportManager(),
+        requestRepository: RequestRepositoryProtocol = DependencyContainer.shared.requestRepository
+    ) {
         self.request = request
         self.exportManager = exportManager
+        self.requestRepository = requestRepository
     }
 
     // MARK: - Stub Actions
 
     func createStub() {
         createdStub = request.toStub()
+    }
+
+    func markRequestAsStubbed(using stub: RequestStub) async {
+        request.isStubbed = true
+        request.stubId = stub.id
+        request.stubScenarioName = nil
+        await requestRepository.updateRequest(request)
     }
 
     // MARK: - Overview Data

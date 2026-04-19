@@ -93,9 +93,12 @@ final class RequestListViewModel: ObservableObject {
     @Published var filter: RequestFilter = RequestFilter()
     @Published var isLoading: Bool = false
     @Published var showFilterSheet: Bool = false
+    @Published var showClearConfirmation: Bool = false
+    @Published var listRenderID: UUID = UUID()
     @Published var errorMessage: String?
 
-    private let requestRepository: RequestRepositoryProtocol
+    let requestRepository: RequestRepositoryProtocol
+    private var hasLoadedOnce = false
 
     init(requestRepository: RequestRepositoryProtocol) {
         self.requestRepository = requestRepository
@@ -109,10 +112,24 @@ final class RequestListViewModel: ObservableObject {
         requests = await requestRepository.getAllRequests()
         applyFiltersAndSort()
         isLoading = false
+        hasLoadedOnce = true
+    }
+
+    func loadRequestsIfNeeded() async {
+        guard !hasLoadedOnce else { return }
+        await loadRequests()
     }
 
     func refresh() async {
         await loadRequests()
+    }
+
+    func refreshOnAppear() async {
+        if hasLoadedOnce {
+            await refresh()
+        } else {
+            await loadRequests()
+        }
     }
 
     // MARK: - Filtering & Sorting
@@ -166,6 +183,7 @@ final class RequestListViewModel: ObservableObject {
         }
 
         groupedRequests = RequestGroup.groupByDate(filtered)
+        listRenderID = UUID()
     }
 
     // MARK: - Actions
@@ -173,6 +191,21 @@ final class RequestListViewModel: ObservableObject {
     func deleteRequest(_ request: NetworkRequest) async {
         await requestRepository.deleteRequest(request.id)
         requests.removeAll { $0.id == request.id }
+        applyFiltersAndSort()
+    }
+
+    func clearRequests() async {
+        await requestRepository.deleteAllRequests()
+        requests.removeAll()
+        groupedRequests.removeAll()
+        showClearConfirmation = false
+    }
+
+    func markRequestAsStubbed(_ requestId: UUID, stubId: UUID) {
+        guard let index = requests.firstIndex(where: { $0.id == requestId }) else { return }
+        requests[index].isStubbed = true
+        requests[index].stubId = stubId
+        requests[index].stubScenarioName = nil
         applyFiltersAndSort()
     }
 

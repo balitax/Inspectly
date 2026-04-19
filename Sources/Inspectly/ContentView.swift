@@ -37,7 +37,8 @@ struct ContentView: View {
             RequestListView(
                 viewModel: RequestListViewModel(
                     requestRepository: container.requestRepository
-                )
+                ),
+                stubRepository: container.stubRepository
             )
             .tabItem {
                 Label("Requests", systemImage: "arrow.up.arrow.down.circle.fill")
@@ -56,7 +57,8 @@ struct ContentView: View {
 
             StubManagerView(
                 viewModel: StubManagerViewModel(
-                    stubRepository: container.stubRepository
+                    stubRepository: container.stubRepository,
+                    requestRepository: container.requestRepository
                 )
             )
             .tabItem {

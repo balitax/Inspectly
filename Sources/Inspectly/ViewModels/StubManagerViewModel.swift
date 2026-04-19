@@ -42,9 +42,11 @@ final class StubManagerViewModel: ObservableObject {
     @Published var showingNewStub: Bool = false
 
     private let stubRepository: StubRepositoryProtocol
+    private let requestRepository: RequestRepositoryProtocol
 
-    init(stubRepository: StubRepositoryProtocol) {
+    init(stubRepository: StubRepositoryProtocol, requestRepository: RequestRepositoryProtocol) {
         self.stubRepository = stubRepository
+        self.requestRepository = requestRepository
     }
 
     // MARK: - Data
@@ -103,6 +105,7 @@ final class StubManagerViewModel: ObservableObject {
 
     func deleteStub(_ stub: RequestStub) async {
         await stubRepository.deleteStub(stub.id)
+        await requestRepository.unmarkRequests(for: stub.id)
         stubs.removeAll { $0.id == stub.id }
     }
 
@@ -140,7 +143,10 @@ final class StubManagerViewModel: ObservableObject {
     // MARK: - Mock
 
     static func mock() -> StubManagerViewModel {
-        let vm = StubManagerViewModel(stubRepository: MockStubRepository())
+        let vm = StubManagerViewModel(
+            stubRepository: MockStubRepository(),
+            requestRepository: MockRequestRepository()
+        )
         vm.stubs = []
         return vm
     }

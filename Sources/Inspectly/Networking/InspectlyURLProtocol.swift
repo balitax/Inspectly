@@ -113,7 +113,7 @@ final class InspectlyURLProtocol: URLProtocol {
                 if let stub = await Self.stubRepository?.findMatchingStub(for: networkRequest),
                    let scenario = stub.activeScenario {
                     await Self.stubRepository?.incrementUsageCount(stub.id)
-                    handleStubbedResponse(scenario.response, for: networkRequest)
+                    handleStubbedResponse(scenario.response, for: networkRequest, stubId: stub.id)
                     return
                 }
 
@@ -166,7 +166,7 @@ final class InspectlyURLProtocol: URLProtocol {
         )
     }
 
-    private func handleStubbedResponse(_ stubResponse: StubResponse, for networkRequest: NetworkRequest) {
+    private func handleStubbedResponse(_ stubResponse: StubResponse, for networkRequest: NetworkRequest, stubId: UUID) {
         // Simulate delay
         let delay = stubResponse.responseDelay
 
@@ -179,6 +179,7 @@ final class InspectlyURLProtocol: URLProtocol {
                 var updatedRequest = networkRequest
                 updatedRequest.status = stubResponse.errorType == .timeout ? .timeout : .serverError
                 updatedRequest.isStubbed = true
+                updatedRequest.stubId = stubId
                 updatedRequest.source = .stubbed
                 updatedRequest.duration = delay
                 updatedRequest.errorMessage = error.localizedDescription
@@ -200,6 +201,7 @@ final class InspectlyURLProtocol: URLProtocol {
                 var updatedRequest = networkRequest
                 updatedRequest.statusCode = statusCode
                 updatedRequest.isStubbed = true
+                updatedRequest.stubId = stubId
                 updatedRequest.source = .stubbed
                 updatedRequest.duration = delay
                 updatedRequest.responseBody = ResponseBody(
