@@ -215,23 +215,14 @@ This section is intentionally prepared so screenshots can be added later without
 
 ### Demo App
 
-Replace the placeholders below with your final images:
+| Requests Tab | Request Detail |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/request.png" width="300" /> | <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/response.png" width="300" /> |
 
-```md
-![Requests Tab](./Screenshots/requests.png)
-![Request Detail](./Screenshots/request-detail.png)
-![Statistics Tab](./Screenshots/statistics.png)
-![Stubs Tab](./Screenshots/stubs.png)
-![Settings Tab](./Screenshots/settings.png)
-```
+| Statistics Tab | Stubs Tab | Settings Tab |
+| --- | --- | --- |
+| <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/statistics.png" width="300" /> | <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/stubs.png" width="300" /> | <img src="https://raw.githubusercontent.com/balitax/Inspectly/main/Screenshots/setting.png" width="300" /> |
 
-Suggested screenshots to provide:
-
-- Requests list
-- Request detail
-- Statistics dashboard
-- Stub manager
-- Settings / export actions
 
 ## Example Workflow
 
