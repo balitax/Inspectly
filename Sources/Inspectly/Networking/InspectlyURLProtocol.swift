@@ -62,8 +62,8 @@ final class InspectlyURLProtocol: URLProtocol {
     /// Whether logging is enabled.
     static var isLoggingEnabled: Bool = true
 
-    /// Active network throttling preset for real requests.
-    static var networkThrottlingPreset: NetworkThrottlingPreset = .off
+    /// Active network throttling configuration for real requests.
+    static var networkThrottlingConfig: NetworkThrottlingConfiguration = NetworkThrottlingConfiguration()
 
     /// Hosts to ignore (will not be intercepted).
     static var ignoredHosts: Set<String> = []
@@ -230,7 +230,7 @@ final class InspectlyURLProtocol: URLProtocol {
     }
 
     private func proceedWithRealRequest(_ request: URLRequest, startTime: Date) {
-        let throttle = Self.networkThrottlingPreset.configuration
+        let throttle = Self.networkThrottlingConfig
 
         if let failureMode = throttle.failureMode {
             waitResponsive(for: throttle.requestDelay) { [weak self] in

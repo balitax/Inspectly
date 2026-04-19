@@ -16,6 +16,7 @@ public enum NetworkThrottlingPreset: String, Codable, CaseIterable, Identifiable
     case threeG
     case highLatency
     case dnsFailure
+    case custom
 
     public var id: String { rawValue }
 
@@ -26,6 +27,7 @@ public enum NetworkThrottlingPreset: String, Codable, CaseIterable, Identifiable
         case .threeG: return "3G"
         case .highLatency: return "High Latency"
         case .dnsFailure: return "DNS Failure"
+        case .custom: return "Custom"
         }
     }
 
@@ -36,6 +38,7 @@ public enum NetworkThrottlingPreset: String, Codable, CaseIterable, Identifiable
         case .threeG: return "antenna.radiowaves.left.and.right"
         case .highLatency: return "clock.badge.exclamationmark"
         case .dnsFailure: return "wifi.exclamationmark"
+        case .custom: return "slider.horizontal.3"
         }
     }
 
@@ -51,10 +54,12 @@ public enum NetworkThrottlingPreset: String, Codable, CaseIterable, Identifiable
             return "Adds a long startup delay while keeping the transfer speed unchanged."
         case .dnsFailure:
             return "Fails requests before they reach the server to simulate host resolution issues."
+        case .custom:
+            return "Manually define latency and bandwidth limits for specific testing scenarios."
         }
     }
 
-    var configuration: NetworkThrottlingConfiguration {
+    func configuration(customDelay: TimeInterval = 0, customBytesPerSecond: Double? = nil) -> NetworkThrottlingConfiguration {
         switch self {
         case .off:
             return NetworkThrottlingConfiguration()
@@ -78,7 +83,17 @@ public enum NetworkThrottlingPreset: String, Codable, CaseIterable, Identifiable
                 requestDelay: 0.15,
                 failureMode: .dnsFailure
             )
+        case .custom:
+            return NetworkThrottlingConfiguration(
+                requestDelay: customDelay,
+                bytesPerSecond: customBytesPerSecond
+            )
         }
+    }
+
+    @available(*, deprecated, message: "Use configuration(customDelay:customBytesPerSecond:) instead")
+    var configuration: NetworkThrottlingConfiguration {
+        configuration()
     }
 }
 

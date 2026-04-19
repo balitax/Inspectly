@@ -143,6 +143,63 @@ struct SettingsView: View {
                 .pickerStyle(.menu)
             }
 
+            if viewModel.settings.networkThrottlingPreset == .custom {
+                VStack(alignment: .leading, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack {
+                            Text("Request Delay")
+                                .font(.system(size: 13, weight: .medium))
+                            Spacer()
+                            Text(String(format: "%.1fs", viewModel.settings.customNetworkDelay))
+                                .font(.system(size: 12, weight: .bold))
+                                .monospaced()
+                        }
+                        
+                        Slider(value: $viewModel.settings.customNetworkDelay, in: 0...30, step: 0.5) { _ in
+                            Task { await viewModel.saveSettings() }
+                        }
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Toggle(isOn: Binding(
+                            get: { viewModel.settings.customNetworkBandwidth != nil },
+                            set: { isEnabled in
+                                viewModel.settings.customNetworkBandwidth = isEnabled ? 1_000_000 : nil
+                                Task { await viewModel.saveSettings() }
+                            }
+                        )) {
+                            Text("Limit Bandwidth")
+                                .font(.system(size: 13, weight: .medium))
+                        }
+                        .tint(.accentColor)
+                        
+                        if let bandwidth = viewModel.settings.customNetworkBandwidth {
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack {
+                                    Text("Speed Limit")
+                                        .font(.system(size: 12))
+                                        .foregroundStyle(.secondary)
+                                    Spacer()
+                                    Text("\(Int(bandwidth / 1024)) KB/s")
+                                        .font(.system(size: 12, weight: .bold))
+                                        .monospaced()
+                                }
+                                
+                                Slider(value: Binding(
+                                    get: { bandwidth },
+                                    set: { newValue in
+                                        viewModel.settings.customNetworkBandwidth = newValue
+                                    }
+                                ), in: 8_192...10_000_000, step: 8_192) { _ in
+                                    Task { await viewModel.saveSettings() }
+                                }
+                            }
+                        }
+                    }
+                }
+                .padding(.vertical, 8)
+            }
+
             VStack(alignment: .leading, spacing: 6) {
                 Text(viewModel.settings.networkThrottlingPreset.displayName)
                     .font(.system(size: 13, weight: .semibold))

@@ -182,7 +182,7 @@ public final class Inspectly {
     private static func configureURLProtocol(with configuration: Configuration) {
         InspectlyURLProtocol.isLoggingEnabled = configuration.isLoggingEnabled
         InspectlyURLProtocol.isStubEnabled = configuration.isStubEnabled
-        InspectlyURLProtocol.networkThrottlingPreset = configuration.networkThrottlingPreset
+        InspectlyURLProtocol.networkThrottlingConfig = configuration.networkThrottlingPreset.configuration()
         
         if let stubRepo = configuration.stubRepository {
             InspectlyURLProtocol.stubRepository = stubRepo
@@ -214,7 +214,11 @@ public final class Inspectly {
 
         InspectlyURLProtocol.isLoggingEnabled = settings.isLoggingEnabled
         InspectlyURLProtocol.isStubEnabled = settings.areStubsEnabled
-        InspectlyURLProtocol.networkThrottlingPreset = settings.networkThrottlingPreset
+        
+        InspectlyURLProtocol.networkThrottlingConfig = settings.networkThrottlingPreset.configuration(
+            customDelay: settings.customNetworkDelay,
+            customBytesPerSecond: settings.customNetworkBandwidth
+        )
 
         var ignoredHosts = configuration.ignoredHosts
         ignoredHosts.formUnion(settings.ignoredHosts.filter(\.isEnabled).map(\.host))
