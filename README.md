@@ -1,7 +1,7 @@
 # Inspectly
 
 <p align="center">
-  <img src="./inspectly.png" width="180" alt="Inspectly Preview" />
+  <img src="./inspectly.png" width="380" alt="Inspectly Preview" />
 </p>
 
 <p align="center">
@@ -167,9 +167,14 @@ No custom interceptor setup is required for common use cases.
 
 ## Screenshots
 
-| Requests | Request Detail | Statistics | Stubs | Settings |
-| --- | --- | --- | --- | --- |
-| <img src="./Screenshots/request.png" width="220" height="480" /> | <img src="./Screenshots/response.png" width="220" height="480" /> | <img src="./Screenshots/statistics.png" width="220" height="480" /> | <img src="./Screenshots/stubs.png" width="220" height="480" /> | <img src="./Screenshots/setting.png" width="220" height="480" /> |
+| Requests | Request Detail |
+| --- | --- |
+| <img src="./Screenshots/request.png" width="320" style="aspect-ratio: 9 / 19.5; object-fit: contain;" /> | <img src="./Screenshots/response.png" width="320" style="aspect-ratio: 9 / 19.5; object-fit: contain;" /> |
+
+| Statistics | Stubs | Settings |
+| --- | --- | --- |
+| <img src="./Screenshots/statistics.png" width="260" style="aspect-ratio: 9 / 19.5; object-fit: contain;" /> | <img src="./Screenshots/stubs.png" width="260" style="aspect-ratio: 9 / 19.5; object-fit: contain;" /> | <img src="./Screenshots/setting.png" width="260" style="aspect-ratio: 9 / 19.5; object-fit: contain;" /> |
+
 ---
 
 ## Typical Workflow
