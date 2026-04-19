@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  ParamsTabView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Params Tab View
 
+@available(iOS 16.0, *)
 struct ParamsTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
 
@@ -91,6 +105,9 @@ struct ParamsTabView: View {
 
 // MARK: - Preview
 
-#Preview {
-    ParamsTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .get, url: "https://api.example.com/users?id=1", host: "api.example.com", path: "/users")))
+@available(iOS 16.0, *)
+struct ParamsTabView_Previews: PreviewProvider {
+    static var previews: some View {
+        ParamsTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .get, url: "https://api.example.com/users?id=1", host: "api.example.com", path: "/users")))
+    }
 }

@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  StubRowView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Stub Row View
 
+@available(iOS 16.0, *)
 struct StubRowView: View {
     let stub: RequestStub
 
@@ -81,10 +95,13 @@ struct StubRowView: View {
 
 // MARK: - Preview
 
-#Preview {
-    List {
-        StubRowView(stub: RequestStub(name: "Login Mock", matchRule: StubMatchRule(fullURL: "https://api.example.com/login")))
-        StubRowView(stub: RequestStub(name: "User List", matchRule: StubMatchRule(fullURL: "https://api.example.com/users")))
+@available(iOS 16.0, *)
+struct StubRowView_Previews: PreviewProvider {
+    static var previews: some View {
+        List {
+            StubRowView(stub: RequestStub(name: "Login Mock", matchRule: StubMatchRule(fullURL: "https://api.example.com/login")))
+            StubRowView(stub: RequestStub(name: "User List", matchRule: StubMatchRule(fullURL: "https://api.example.com/users")))
+        }
+        .listStyle(.insetGrouped)
     }
-    .listStyle(.insetGrouped)
 }

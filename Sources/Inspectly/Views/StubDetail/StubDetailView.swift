@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  StubDetailView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Stub Detail View
 
+@available(iOS 16.0, *)
 struct StubDetailView: View {
     @StateObject var viewModel: StubDetailViewModel
     var onSave: ((RequestStub) -> Void)?
@@ -122,8 +136,11 @@ struct StubDetailView: View {
 
 // MARK: - Preview
 
-#Preview {
-    NavigationStack {
-        StubDetailView(viewModel: .mock())
+@available(iOS 16.0, *)
+struct StubDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            StubDetailView(viewModel: .mock())
+        }
     }
 }

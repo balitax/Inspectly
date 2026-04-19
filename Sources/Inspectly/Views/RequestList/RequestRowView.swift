@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  RequestRowView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Request Row View
 
+@available(iOS 16.0, *)
 struct RequestRowView: View {
     let request: NetworkRequest
 
@@ -26,9 +40,9 @@ struct RequestRowView: View {
                     if request.isStubbed {
                         Image(systemName: "hammer.fill")
                             .font(.system(size: 8))
-                            .foregroundStyle(.primaryGreen)
+                            .foregroundStyle(.accentColor)
                             .padding(3)
-                            .background(Color.primaryGreen.opacity(0.12))
+                            .background(Color.accentColor.opacity(0.12))
                             .clipShape(Circle())
                     }
                 }
@@ -86,11 +100,14 @@ struct RequestRowView: View {
 
 // MARK: - Preview
 
-#Preview {
-    List {
-        RequestRowView(request: NetworkRequest(method: .get, url: "https://api.example.com/users", host: "api.example.com", path: "/users", statusCode: 200))
-        RequestRowView(request: NetworkRequest(method: .post, url: "https://api.example.com/login", host: "api.example.com", path: "/login", statusCode: 201))
-        RequestRowView(request: NetworkRequest(method: .get, url: "https://api.example.com/error", host: "api.example.com", path: "/error", statusCode: 500))
+@available(iOS 16.0, *)
+struct RequestRowView_Previews: PreviewProvider {
+    static var previews: some View {
+        List {
+            RequestRowView(request: NetworkRequest(method: .get, url: "https://api.example.com/users", host: "api.example.com", path: "/users", statusCode: 200))
+            RequestRowView(request: NetworkRequest(method: .post, url: "https://api.example.com/login", host: "api.example.com", path: "/login", statusCode: 201))
+            RequestRowView(request: NetworkRequest(method: .get, url: "https://api.example.com/error", host: "api.example.com", path: "/error", statusCode: 500))
+        }
+        .listStyle(.insetGrouped)
     }
-    .listStyle(.insetGrouped)
 }

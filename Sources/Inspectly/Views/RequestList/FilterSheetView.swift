@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  FilterSheetView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Filter Sheet View
 
+@available(iOS 16.0, *)
 struct FilterSheetView: View {
     @Binding var filter: RequestFilter
     let onApply: () -> Void
@@ -147,6 +161,9 @@ struct FilterSheetView: View {
 
 // MARK: - Preview
 
-#Preview {
-    FilterSheetView(filter: .constant(RequestFilter())) {}
+@available(iOS 16.0, *)
+struct FilterSheetView_Previews: PreviewProvider {
+    static var previews: some View {
+        FilterSheetView(filter: .constant(RequestFilter())) {}
+    }
 }

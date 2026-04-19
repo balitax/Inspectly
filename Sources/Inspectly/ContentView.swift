@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  ContentView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Content View
 
+@available(iOS 16.0, *)
 struct ContentView: View {
     @State private var selectedTab: AppTab = .requests
     let onDismiss: (() -> Void)?
@@ -63,7 +77,7 @@ struct ContentView: View {
             }
             .tag(AppTab.settings)
         }
-        .tint(.primaryGreen)
+        .tint(.accentColor)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 if onDismiss != nil {
@@ -87,6 +101,9 @@ enum AppTab: String, Hashable {
 
 // MARK: - Preview
 
-#Preview {
-    ContentView(container: .mock())
+@available(iOS 16.0, *)
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView(container: .mock())
+    }
 }

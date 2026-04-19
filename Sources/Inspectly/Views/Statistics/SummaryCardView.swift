@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  SummaryCardView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Summary Card View
 
+@available(iOS 16.0, *)
 struct SummaryCardView: View {
     let title: String
     let value: String
@@ -52,12 +66,15 @@ struct SummaryCardView: View {
 
 // MARK: - Preview
 
-#Preview {
-    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
-        SummaryCardView(title: "Total Requests", value: "1,234", icon: "arrow.up.arrow.down", color: .primaryGreen, trend: "+12%")
-        SummaryCardView(title: "Failed", value: "23", icon: "xmark.circle.fill", color: .red, trend: "-5%")
-        SummaryCardView(title: "Avg Response", value: "234ms", icon: "clock.fill", color: .teal)
-        SummaryCardView(title: "Success Rate", value: "98.1%", icon: "checkmark.seal.fill", color: .green)
+@available(iOS 16.0, *)
+struct SummaryCardView_Previews: PreviewProvider {
+    static var previews: some View {
+        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+            SummaryCardView(title: "Total Requests", value: "1,234", icon: "arrow.up.arrow.down", color: .accentColor, trend: "+12%")
+            SummaryCardView(title: "Failed", value: "23", icon: "xmark.circle.fill", color: .red, trend: "-5%")
+            SummaryCardView(title: "Avg Response", value: "234ms", icon: "clock.fill", color: .teal)
+            SummaryCardView(title: "Success Rate", value: "98.1%", icon: "checkmark.seal.fill", color: .green)
+        }
+        .padding()
     }
-    .padding()
 }

@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  RequestDetailView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Request Detail View
 
+@available(iOS 16.0, *)
 struct RequestDetailView: View {
     @StateObject var viewModel: RequestDetailViewModel
 
@@ -88,7 +102,7 @@ struct RequestDetailView: View {
                                 Text(tab.rawValue)
                                     .font(.system(size: 12, weight: .medium))
                             }
-                            .foregroundStyle(viewModel.selectedTab == tab ? .accentColor : .secondary)
+                            .foregroundColor(viewModel.selectedTab == tab ? .accentColor : .secondary)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
 
@@ -168,8 +182,11 @@ struct RequestDetailView: View {
 
 // MARK: - Preview
 
-#Preview {
-    NavigationStack {
-        RequestDetailView(viewModel: .mock())
+@available(iOS 16.0, *)
+struct RequestDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            RequestDetailView(viewModel: .mock())
+        }
     }
 }

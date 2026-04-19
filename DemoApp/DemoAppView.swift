@@ -1,6 +1,25 @@
+//
+//  DemoAppView.swift
+//  InspectlyDemo
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
+//
+
 import SwiftUI
 import Alamofire
 
+@available(iOS 16.0, *)
 struct DemoAppView: View {
     
     // MARK: - Network Engine
@@ -28,7 +47,7 @@ struct DemoAppView: View {
                 VStack(spacing: 8) {
                     Image(systemName: "iphone.radiowaves.left.and.right")
                         .font(.system(size: 48))
-                        .foregroundStyle(.indigo)
+                        .foregroundColor(Color(red: 0.345, green: 0.337, blue: 0.839)) // Indigo fallback
                         .padding(.bottom, 8)
                     
                     Text("Inspectly Demo")
@@ -36,7 +55,7 @@ struct DemoAppView: View {
                     
                     Text("Shake your device (⌘+Ctrl+Z) to open Inspectly inspector.")
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 32)
                 }
@@ -323,8 +342,11 @@ struct DemoAppView: View {
     }
 }
 
-#Preview {
-    DemoAppView()
+@available(iOS 16.0, *)
+struct DemoAppView_Previews: PreviewProvider {
+    static var previews: some View {
+        DemoAppView()
+    }
 }
 
 // MARK: - JSON Formatter Extension

@@ -1,6 +1,19 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  RequestDetailViewModel.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import Foundation
@@ -8,6 +21,7 @@ import SwiftUI
 
 // MARK: - Request Detail Tab
 
+@available(iOS 16.0, *)
 enum RequestDetailTab: String, CaseIterable, Identifiable {
     case overview = "Overview"
     case headers = "Headers"
@@ -32,6 +46,7 @@ enum RequestDetailTab: String, CaseIterable, Identifiable {
 
 // MARK: - Request Detail View Model
 
+@available(iOS 16.0, *)
 @MainActor
 final class RequestDetailViewModel: ObservableObject {
     @Published var request: NetworkRequest

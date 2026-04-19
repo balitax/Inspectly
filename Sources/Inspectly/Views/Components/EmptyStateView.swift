@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  EmptyStateView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Empty State View
 
+@available(iOS 16.0, *)
 struct EmptyStateView: View {
     let icon: String
     let title: String
@@ -56,13 +70,16 @@ struct EmptyStateView: View {
 
 // MARK: - Preview
 
-#Preview {
-    VStack {
-        EmptyStateView(
-            icon: "network.slash",
-            title: "No Requests Yet",
-            subtitle: "Start making API calls to see them appear here. Inspectly will automatically capture all network traffic.",
-            actionTitle: "Learn More"
-        ) {}
+@available(iOS 16.0, *)
+struct EmptyStateView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            EmptyStateView(
+                icon: "network.slash",
+                title: "No Requests Yet",
+                subtitle: "Start making API calls to see them appear here. Inspectly will automatically capture all network traffic.",
+                actionTitle: "Learn More"
+            ) {}
+        }
     }
 }

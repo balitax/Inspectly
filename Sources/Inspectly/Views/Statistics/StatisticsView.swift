@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  StatisticsView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Statistics View
 
+@available(iOS 16.0, *)
 struct StatisticsView: View {
     @StateObject var viewModel: StatisticsViewModel
 
@@ -156,7 +170,7 @@ struct StatisticsView: View {
                 HStack(spacing: 8) {
                     QuickAccessChip(icon: "xmark.octagon.fill", label: "Errors", count: viewModel.summary.failedRequests, color: .red)
                     QuickAccessChip(icon: "tortoise.fill", label: "Slow", count: 0, color: .orange)
-                    QuickAccessChip(icon: "hammer.fill", label: "Stubbed", count: viewModel.summary.stubbedRequests, color: .primaryGreen)
+                    QuickAccessChip(icon: "hammer.fill", label: "Stubbed", count: viewModel.summary.stubbedRequests, color: .accentColor)
                     QuickAccessChip(icon: "pin.fill", label: "Pinned", count: viewModel.summary.pinnedRequests, color: .yellow)
                     QuickAccessChip(icon: "heart.fill", label: "Favorites", count: viewModel.summary.favoriteRequests, color: .pink)
                 }
@@ -196,6 +210,7 @@ struct StatisticsView: View {
 
 // MARK: - Quick Access Chip
 
+@available(iOS 16.0, *)
 private struct QuickAccessChip: View {
     let icon: String
     let label: String
@@ -225,6 +240,7 @@ private struct QuickAccessChip: View {
 
 // MARK: - Recent Activity Row
 
+@available(iOS 16.0, *)
 private struct RecentActivityRow: View {
     let request: NetworkRequest
 
@@ -259,6 +275,9 @@ private struct RecentActivityRow: View {
 
 // MARK: - Preview
 
-#Preview {
-    StatisticsView(viewModel: .mock())
+@available(iOS 16.0, *)
+struct StatisticsView_Previews: PreviewProvider {
+    static var previews: some View {
+        StatisticsView(viewModel: .mock())
+    }
 }

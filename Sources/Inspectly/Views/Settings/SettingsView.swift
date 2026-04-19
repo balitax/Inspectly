@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  SettingsView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Settings View
 
+@available(iOS 16.0, *)
 struct SettingsView: View {
     @StateObject var viewModel: SettingsViewModel
 
@@ -97,7 +111,7 @@ struct SettingsView: View {
                 Label("Enable Stubs Globally", systemImage: "hammer")
                     .font(.system(size: 14))
             }
-            .tint(.primaryGreen)
+            .tint(.accentColor)
         } header: {
             Text("Stubs")
         } footer: {
@@ -139,7 +153,7 @@ struct SettingsView: View {
                     viewModel.addIgnoredHost()
                 } label: {
                     Image(systemName: "plus.circle.fill")
-                        .foregroundStyle(.accentColor)
+                        .foregroundColor(.accentColor)
                 }
                 .disabled(viewModel.newIgnoredHost.isEmpty)
             }
@@ -267,6 +281,9 @@ struct SettingsView: View {
 
 // MARK: - Preview
 
-#Preview {
-    SettingsView(viewModel: .mock())
+@available(iOS 16.0, *)
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingsView(viewModel: .mock())
+    }
 }

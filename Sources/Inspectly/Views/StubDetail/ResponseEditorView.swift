@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  ResponseEditorView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Response Editor View
 
+@available(iOS 16.0, *)
 struct ResponseEditorView: View {
     @Binding var response: StubResponse
     var onValidateJSON: () -> Void
@@ -41,7 +55,7 @@ struct ResponseEditorView: View {
                                 .padding(.horizontal, 6)
                                 .padding(.vertical, 3)
                                 .background(response.statusCode == code ? Color.accentColor.opacity(0.15) : Color(.tertiarySystemFill))
-                                .foregroundStyle(response.statusCode == code ? .accentColor : .secondary)
+                                .foregroundColor(response.statusCode == code ? .accentColor : .secondary)
                                 .clipShape(RoundedRectangle(cornerRadius: 4))
                         }
                         .buttonStyle(.plain)
@@ -60,7 +74,7 @@ struct ResponseEditorView: View {
                     Spacer()
                     Text(String(format: "%.1fs", response.responseDelay))
                         .font(.system(size: 12, weight: .medium, design: .monospaced))
-                        .foregroundStyle(.accentColor)
+                        .foregroundColor(.accentColor)
                 }
                 
                 Slider(value: $response.responseDelay, in: 0...30, step: 0.5)
@@ -97,7 +111,7 @@ struct ResponseEditorView: View {
                             .padding(.vertical, 7)
                             .padding(.horizontal, 6)
                             .background(response.errorType == errorType ? Color.accentColor.opacity(0.15) : Color(.tertiarySystemFill))
-                            .foregroundStyle(response.errorType == errorType ? .accentColor : .secondary)
+                            .foregroundColor(response.errorType == errorType ? .accentColor : .secondary)
                             .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
                         }
                         .buttonStyle(.plain)
@@ -147,16 +161,19 @@ struct ResponseEditorView: View {
 
 // MARK: - Preview
 
-#Preview {
-    ScrollView {
-        ResponseEditorView(
-            response: .constant(StubResponse(
-                statusCode: 200,
-                jsonBody: "{\n  \"message\": \"Hello\"\n}"
-            )),
-            onValidateJSON: {},
-            jsonError: nil
-        )
-        .padding()
+@available(iOS 16.0, *)
+struct ResponseEditorView_Previews: PreviewProvider {
+    static var previews: some View {
+        ScrollView {
+            ResponseEditorView(
+                response: .constant(StubResponse(
+                    statusCode: 200,
+                    jsonBody: "{\n  \"message\": \"Hello\"\n}"
+                )),
+                onValidateJSON: {},
+                jsonError: nil
+            )
+            .padding()
+        }
     }
 }

@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  TimelineTabView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Timeline Tab View
 
+@available(iOS 16.0, *)
 struct TimelineTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
 
@@ -35,7 +49,7 @@ struct TimelineTabView: View {
 
                         Image(systemName: "clock.fill")
                             .font(.system(size: 32))
-                            .foregroundStyle(.accentColor.opacity(0.3))
+                            .foregroundColor(Color.accentColor.opacity(0.3))
                     }
                     .sectionCardStyle()
 
@@ -87,21 +101,21 @@ struct TimelineTabView: View {
                 HStack {
                     Text(event.name)
                         .font(.system(size: 13, weight: .medium))
-                        .foregroundStyle(.primary)
+                        .foregroundColor(.primary)
 
                     Spacer()
 
                     if let duration = event.duration {
                         Text(formatDuration(duration))
                             .font(.system(size: 11, weight: .medium, design: .monospaced))
-                            .foregroundStyle(.secondary)
+                            .foregroundColor(.secondary)
                     }
                 }
 
                 if let detail = event.detail {
                     Text(detail)
                         .font(.system(size: 11, design: .monospaced))
-                        .foregroundStyle(.tertiary)
+                        .foregroundColor(.secondary)
                 }
 
                 // Duration bar
@@ -132,6 +146,9 @@ struct TimelineTabView: View {
 
 // MARK: - Preview
 
-#Preview {
-    TimelineTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .get, url: "https://api.example.com/users", host: "api.example.com", path: "/users")))
+@available(iOS 16.0, *)
+struct TimelineTabView_Previews: PreviewProvider {
+    static var previews: some View {
+        TimelineTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .get, url: "https://api.example.com/users", host: "api.example.com", path: "/users")))
+    }
 }

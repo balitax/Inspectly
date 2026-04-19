@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  SectionHeaderView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Section Header View
 
+@available(iOS 16.0, *)
 struct SectionHeaderView: View {
     let title: String
     var subtitle: String? = nil
@@ -33,7 +47,7 @@ struct SectionHeaderView: View {
                 Button(action: action) {
                     Text(actionTitle)
                         .font(.system(size: 13, weight: .medium))
-                        .foregroundStyle(.accentColor)
+                        .foregroundColor(.accentColor)
                 }
                 .buttonStyle(.plain)
             }
@@ -43,11 +57,14 @@ struct SectionHeaderView: View {
 
 // MARK: - Preview
 
-#Preview {
-    VStack(spacing: 20) {
-        SectionHeaderView(title: "Recent Activity")
-        SectionHeaderView(title: "Requests", subtitle: "42 total", actionTitle: "See All") {}
-        SectionHeaderView(title: "Quick Filters", actionTitle: "Reset") {}
+@available(iOS 16.0, *)
+struct SectionHeaderView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack(spacing: 20) {
+            SectionHeaderView(title: "Recent Activity")
+            SectionHeaderView(title: "Requests", subtitle: "42 total", actionTitle: "See All") {}
+            SectionHeaderView(title: "Quick Filters", actionTitle: "Reset") {}
+        }
+        .padding()
     }
-    .padding()
 }

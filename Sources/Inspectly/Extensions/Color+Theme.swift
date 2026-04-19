@@ -1,6 +1,19 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  Color+Theme.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
@@ -59,37 +72,36 @@ extension Color {
     static let textSecondary = Color(.secondaryLabel)
     static let textTertiary = Color(.tertiaryLabel)
     
-    static let primaryGreen = Color(red: 0.133, green: 0.698, blue: 0.322)
-    static let accentIndigo = primaryGreen
-    static let accentTeal = Color.teal
-    static let accentMint = Color.mint
-    static let accentCyan = Color.cyan
+    static let accentColor = Color(red: 0.890, green: 0.118, blue: 0.322)
+    static let accentIndigo = Color(red: 0.345, green: 0.337, blue: 0.839)
+    static let accentTeal = Color(red: 0.188, green: 0.690, blue: 0.780)
+    static let accentMint = Color(red: 0.0, green: 0.780, blue: 0.745)
+    static let accentCyan = Color(red: 0.196, green: 0.678, blue: 0.902)
 
     // MARK: - Tag Colors
     static let tagAuth = Color.orange
     static let tagAPI = Color.blue
     static let tagUpload = Color.green
-    static let tagDownload = Color.cyan
+    static let tagDownload = Color(red: 0.196, green: 0.678, blue: 0.902)
     static let tagGraphQL = Color.purple
-    static let tagWebSocket = Color.mint
+    static let tagWebSocket = Color(red: 0.0, green: 0.780, blue: 0.745)
     static let tagCritical = Color.red
     static let tagDebug = Color.gray
 
     // MARK: - Chart Colors
-    static let chartPrimary = primaryGreen
-    static let chartSecondary = Color.teal
-    static let chartTertiary = Color.mint
-    static let chartQuaternary = Color.cyan
+    static let chartPrimary = accentColor
+    static let chartSecondary = Color(red: 0.188, green: 0.690, blue: 0.780)
+    static let chartTertiary = Color(red: 0.0, green: 0.780, blue: 0.745)
+    static let chartQuaternary = Color(red: 0.196, green: 0.678, blue: 0.902)
 
     // MARK: - Stub Colors
     static let stubActive = Color.green
     static let stubInactive = Color.gray
-    static let stubBadge = primaryGreen
+    static let stubBadge = accentColor
 }
 
 // MARK: - ShapeStyle Extension
 
 extension ShapeStyle where Self == Color {
-    static var accentColor: Color { Color(red: 0.133, green: 0.698, blue: 0.322) }
-    static var primaryGreen: Color { Color(red: 0.133, green: 0.698, blue: 0.322) }
+    static var accentColor: Color { Color(red: 0.890, green: 0.118, blue: 0.322) }
 }

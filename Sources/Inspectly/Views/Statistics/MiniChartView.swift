@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  MiniChartView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Mini Chart View
 
+@available(iOS 16.0, *)
 struct MiniChartView: View {
     let data: [Double]
     var barColor: Color = .chartPrimary
@@ -56,23 +70,26 @@ struct MiniChartView: View {
 
 // MARK: - Preview
 
-#Preview {
-    VStack(spacing: 24) {
-        MiniChartView(
-            data: [2, 5, 3, 8, 12, 7, 4, 6, 9, 15, 11, 8, 3, 5, 7, 10, 14, 9, 6, 4, 3, 2, 1, 0]
-        )
-        .frame(height: 80)
-        .padding()
-        .background(Color(.secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-
-        MiniChartView(
-            data: [4, 8, 6, 12, 9, 15, 7],
-            barColor: .teal,
-            showLabels: false
-        )
-        .frame(height: 50)
+@available(iOS 16.0, *)
+struct MiniChartView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack(spacing: 24) {
+            MiniChartView(
+                data: [2, 5, 3, 8, 12, 7, 4, 6, 9, 15, 11, 8, 3, 5, 7, 10, 14, 9, 6, 4, 3, 2, 1, 0]
+            )
+            .frame(height: 80)
+            .padding()
+            .background(Color(.secondarySystemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+    
+            MiniChartView(
+                data: [4, 8, 6, 12, 9, 15, 7],
+                barColor: .teal,
+                showLabels: false
+            )
+            .frame(height: 50)
+            .padding()
+        }
         .padding()
     }
-    .padding()
 }

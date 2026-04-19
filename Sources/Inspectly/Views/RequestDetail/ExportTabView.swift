@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  ExportTabView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Export Tab View
 
+@available(iOS 16.0, *)
 struct ExportTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
 
@@ -40,7 +54,7 @@ struct ExportTabView: View {
                             title: "Copy Full Request",
                             subtitle: "Headers, body, and response",
                             icon: "doc.on.doc",
-                            color: .primaryGreen
+                            color: .accentColor
                         ) {
                             viewModel.copyFullRequest()
                         }
@@ -82,7 +96,7 @@ struct ExportTabView: View {
                         title: "Create API Stub",
                         subtitle: "Convert this request into a mock",
                         icon: "hammer.fill",
-                        color: .primaryGreen
+                        color: .accentColor
                     ) {
                         viewModel.createStub()
                     }
@@ -143,6 +157,9 @@ struct ExportTabView: View {
 
 // MARK: - Preview
 
-#Preview {
-    ExportTabView(viewModel: .mock())
+@available(iOS 16.0, *)
+struct ExportTabView_Previews: PreviewProvider {
+    static var previews: some View {
+        ExportTabView(viewModel: .mock())
+    }
 }

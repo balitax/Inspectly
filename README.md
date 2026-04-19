@@ -1,22 +1,24 @@
 # Inspectly
 
-[![iOS](https://img.shields.io/badge/iOS-16.0%2B-blue)](https://developer.apple.com)
+[![iOS](https://img.shields.io/badge/iOS-13.0%2B-blue)](https://developer.apple.com)
 [![Swift](https://img.shields.io/badge/Swift-5.9%2B-orange)](https://swift.org)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![SPM](https://img.shields.io/badge/SPM-Ready-purple)](https://swift.org/package-manager)
 
-> **Zero-Dependency** HTTP Inspector & Mock Library for iOS
+> **Zero-Dependency** HTTP Inspector & Mock Library for iOS.
+> Crafted with ❤️ by **Agus Cahyono**.
 
-Inspectly is a premium, developer-first HTTP interception and mocking library for iOS. It capture, inspects, and mocks network requests with **zero configuration** and **zero dependencies**. It works seamlessly with `URLSession`, **Alamofire**, **AFNetworking**, and any other networking library that uses Foundation's networking stack.
+Inspectly is a premium, developer-first HTTP interception and mocking library for iOS. It captures, inspects, and mocks network requests with **zero configuration** and **zero dependencies**. It works seamlessly with `URLSession`, **Alamofire**, **AFNetworking**, and any other networking library built on top of the Foundation networking stack.
 
 ## 🌟 Key Features
 
 - **Seamless Integration** - Automatic interception via method swizzling. No need to pass configurations or add interceptors manually.
 - **Zero Dependencies** - Light-weight and standalone. Supports Alamofire & AFNetworking without linking against them.
+- **Modern & Legacy Support** - Compatible with **iOS 13.0+**. Enjoy premium SwiftUI features on iOS 16+ with graceful degradation on legacy versions.
 - **HTTP Interception** - Deep capture of requests and responses including headers, body, redirects, and timing.
 - **Precision Mocking** - Create stubs with strict "Full URL" matching for exact environment-specific testing.
 - **Direct JSON Editing** - Edit mock responses directly within the app's UI with built-in JSON validation.
-- **Premium SwiftUI UI** - Interactive Statistics, filterable Request List, detailed Timeline view, and a high-performance Stub Manager.
+- **Premium SwiftUI UI** - Interactive Statistics, filterable Request List, detailed Timeline view, and a high-performance Stub Manager (Requires iOS 16+).
 - **Quick Export & Share** - Share captures as cURL, JSON files, or full exported logs via the system Share Sheet.
 - **Zero-Waste Experience** - No dummy data or clutter. Starts clean, focused entirely on your app's network traffic.
 - **Developer Experience** - Shake to open, hourly activity charts, and modern design aesthetics with hidden navigation bars for maximum focus.
@@ -30,7 +32,7 @@ Add Inspectly to your project via SPM:
 ```swift
 // In your Package.swift
 dependencies: [
-    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.0.3")
+    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.0.4")
 ]
 ```
 
@@ -47,6 +49,7 @@ import Inspectly
 struct MyApp: App {
     init() {
         // One-line setup for "magic" interception
+        // Works on iOS 13+, UI Dashboard requires iOS 16+
         Inspectly.enable()
     }
     
@@ -58,20 +61,13 @@ struct MyApp: App {
 }
 ```
 
-### 2. Custom Configuration
+### 2. Presenting the Inspector
 
-For more control, you can pass a custom configuration:
+You can present the inspector manually. Inspectly will automatically check for version compatibility and warn you if the device version is below iOS 16.
 
 ```swift
-let config = Inspectly.Configuration(
-    isLoggingEnabled: true,      // Default: true
-    isStubEnabled: true,         // Default: true
-    isShakeGestureEnabled: true, // Default: true
-    ignoredHosts: ["analytics.google.com"],
-    ignoreLocalhost: true
-)
-
-Inspectly.enable(with: config)
+// Trigger from any button or gesture
+Inspectly.presentInspector()
 ```
 
 ## 🛠 Seamless Compatibility
@@ -119,4 +115,5 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 Inspectly is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
 
-Copyright © 2026 [Agus Cahyono](https://github.com/balitax)
+**Created by [Agus Cahyono](https://github.com/balitax)**
+Copyright © 2026 Agus Cahyono. All rights reserved.

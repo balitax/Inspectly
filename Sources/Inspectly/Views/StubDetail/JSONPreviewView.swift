@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  JSONPreviewView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - JSON Preview View
 
+@available(iOS 16.0, *)
 struct JSONPreviewView: View {
     let json: String
     @State private var isValid: Bool = true
@@ -72,15 +86,18 @@ struct JSONPreviewView: View {
 
 // MARK: - Preview
 
-#Preview {
-    VStack(spacing: 20) {
-        JSONPreviewView(json: """
-        {"id": 1, "name": "John Doe", "email": "john@example.com"}
-        """)
-
-        JSONPreviewView(json: """
-        {"invalid": json missing quote}
-        """)
+@available(iOS 16.0, *)
+struct JSONPreviewView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack(spacing: 20) {
+            JSONPreviewView(json: """
+            {"id": 1, "name": "John Doe", "email": "john@example.com"}
+            """)
+    
+            JSONPreviewView(json: """
+            {"invalid": json missing quote}
+            """)
+        }
+        .padding()
     }
-    .padding()
 }

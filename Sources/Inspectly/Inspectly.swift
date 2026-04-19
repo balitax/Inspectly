@@ -1,6 +1,19 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  Inspectly.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import Foundation
@@ -116,6 +129,15 @@ public final class Inspectly {
     
     /// Present the Inspectly UI manually.
     public static func presentInspector(rootView: UIViewController? = nil) {
+        if #available(iOS 16.0, *) {
+            presentInspectorInternal(rootView: rootView)
+        } else {
+            print("[Inspectly] Warning: Inspectly UI requires iOS 16.0 or newer.")
+        }
+    }
+    
+    @available(iOS 16.0, *)
+    private static func presentInspectorInternal(rootView: UIViewController? = nil) {
         guard let config = configuration else {
             print("[Inspectly] Not enabled. Call Inspectly.enable() first.")
             return

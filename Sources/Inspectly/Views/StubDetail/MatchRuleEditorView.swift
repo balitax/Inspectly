@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  MatchRuleEditorView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Match Rule Editor View
 
+@available(iOS 16.0, *)
 struct MatchRuleEditorView: View {
     @ObservedObject var viewModel: StubDetailViewModel
 
@@ -152,7 +166,7 @@ struct MatchRuleEditorView: View {
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
                 .background(isSelected ? Color.accentColor.opacity(0.15) : Color(.tertiarySystemFill))
-                .foregroundStyle(isSelected ? .accentColor : .secondary)
+                .foregroundColor(isSelected ? .accentColor : .secondary)
                 .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
         }
         .buttonStyle(.plain)
@@ -161,9 +175,12 @@ struct MatchRuleEditorView: View {
 
 // MARK: - Preview
 
-#Preview {
-    ScrollView {
-        MatchRuleEditorView(viewModel: .mock())
-            .padding()
+@available(iOS 16.0, *)
+struct MatchRuleEditorView_Previews: PreviewProvider {
+    static var previews: some View {
+        ScrollView {
+            MatchRuleEditorView(viewModel: .mock())
+                .padding()
+        }
     }
 }

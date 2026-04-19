@@ -1,12 +1,26 @@
 //
-//  Created by Agus Cahyono on 2026-04-17.
-//  GitHub: https://github.com/balitax
+//  FilterChipView.swift
+//  Inspectly
+//
+//  Created by Agus Cahyono on 18/04/2026.
+//  Copyright © 2026 Agus Cahyono. All rights reserved.
+//
+//  Inspectly is a premium, developer-first HTTP interception and mocking
+//  library for iOS. It captures, inspects, and mocks network requests with
+//  zero configuration and zero dependencies.
+//
+//  Compatible with URLSession, Alamofire, AFNetworking, and any networking
+//  library built on top of Foundation networking.
+//
+//  Repository:
+//  https://github.com/balitax/Inspectly
 //
 
 import SwiftUI
 
 // MARK: - Filter Chip View
 
+@available(iOS 16.0, *)
 struct FilterChipView: View {
     let label: String
     let isSelected: Bool
@@ -26,7 +40,7 @@ struct FilterChipView: View {
             .padding(.horizontal, 12)
             .padding(.vertical, 7)
             .background(isSelected ? Color.accentColor.opacity(0.15) : Color(.tertiarySystemFill))
-            .foregroundStyle(isSelected ? Color.accentColor : .secondary)
+            .foregroundColor(isSelected ? Color.accentColor : .secondary)
             .clipShape(Capsule())
             .overlay(
                 Capsule()
@@ -39,6 +53,7 @@ struct FilterChipView: View {
 
 // MARK: - Filter Chip Group
 
+@available(iOS 16.0, *)
 struct FilterChipGroup<T: Identifiable & Hashable>: View {
     let items: [T]
     let selected: Set<T>
@@ -63,17 +78,20 @@ struct FilterChipGroup<T: Identifiable & Hashable>: View {
 
 // MARK: - Preview
 
-#Preview {
-    VStack(spacing: 16) {
-        FilterChipView(label: "GET", isSelected: true, icon: "network") {}
-        FilterChipView(label: "POST", isSelected: false) {}
-        FilterChipView(label: "Errors", isSelected: true, icon: "exclamationmark.triangle") {}
+@available(iOS 16.0, *)
+struct FilterChipView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack(spacing: 16) {
+            FilterChipView(label: "GET", isSelected: true, icon: "network") {}
+            FilterChipView(label: "POST", isSelected: false) {}
+            FilterChipView(label: "Errors", isSelected: true, icon: "exclamationmark.triangle") {}
 
-        HStack(spacing: 8) {
-            FilterChipView(label: "Success", isSelected: false) {}
-            FilterChipView(label: "Failed", isSelected: true) {}
-            FilterChipView(label: "Stubbed", isSelected: false, icon: "hammer") {}
+            HStack(spacing: 8) {
+                FilterChipView(label: "Success", isSelected: false) {}
+                FilterChipView(label: "Failed", isSelected: true) {}
+                FilterChipView(label: "Stubbed", isSelected: false, icon: "hammer") {}
+            }
         }
+        .padding()
     }
-    .padding()
 }
