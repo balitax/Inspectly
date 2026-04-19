@@ -169,7 +169,7 @@ No custom interceptor setup is required for common use cases.
 
 | Requests | Request Detail | Statistics | Stubs | Settings |
 | --- | --- | --- | --- | --- |
-| <img src="./Screenshots/request.png" width="220" height="240" /> | <img src="./Screenshots/response.png" width="220" height="240" /> | <img src="./Screenshots/statistics.png" width="220" height="240" /> | <img src="./Screenshots/stubs.png" width="220" height="240" /> | <img src="./Screenshots/setting.png" width="220" height="240" /> |
+| <img src="./Screenshots/request.png" width="220" height="480" /> | <img src="./Screenshots/response.png" width="220" height="480" /> | <img src="./Screenshots/statistics.png" width="220" height="480" /> | <img src="./Screenshots/stubs.png" width="220" height="480" /> | <img src="./Screenshots/setting.png" width="220" height="480" /> |
 ---
 
 ## Typical Workflow
