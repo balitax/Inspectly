@@ -107,9 +107,15 @@ struct RequestListView: View {
                     await viewModel.refresh()
                 }
             }
+            .onReceive(NotificationCenter.default.publisher(for: .inspectlySettingsDidChange)) { notification in
+                if let settings = notification.object as? AppSettings {
+                    viewModel.activeThrottling = settings.networkThrottlingPreset
+                }
+            }
             .onAppear {
                 Task {
                     await viewModel.refreshOnAppear()
+                    await viewModel.loadThrottlingStatus()
                 }
             }
         }
@@ -119,6 +125,11 @@ struct RequestListView: View {
 
     private var requestList: some View {
         List {
+            // Throttling Banner
+            if viewModel.activeThrottling != .off {
+                throttlingBanner
+            }
+
             // Active Filter Summary
             if viewModel.hasActiveFilter {
                 activeFilterBar
@@ -264,6 +275,45 @@ struct RequestListView: View {
             .font(.system(size: 12, weight: .medium))
         }
         .listRowBackground(Color.clear)
+    }
+
+    // MARK: - Throttling Banner
+
+    private var throttlingBanner: some View {
+        HStack(spacing: 12) {
+            ZStack {
+                Circle()
+                    .fill(Color.orange.opacity(0.15))
+                    .frame(width: 32, height: 32)
+
+                Image(systemName: viewModel.activeThrottling.iconName)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(.orange)
+            }
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Network Throttling Active: \(viewModel.activeThrottling.displayName)")
+                    .font(.system(size: 13, weight: .bold))
+
+                Text(viewModel.activeThrottling.description)
+                    .font(.system(size: 11))
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer()
+
+            Image(systemName: "chevron.right")
+                .font(.system(size: 10, weight: .bold))
+                .foregroundStyle(.secondary.opacity(0.5))
+        }
+        .padding(.vertical, 4)
+        .listRowBackground(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color.orange.opacity(0.05))
+                .padding(.horizontal, 4)
+                .padding(.vertical, 4)
+        )
+        .listRowSeparator(.hidden)
     }
 }
 

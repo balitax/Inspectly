@@ -31,7 +31,3 @@ public protocol RequestRepositoryProtocol {
     func searchRequests(query: String) async -> [NetworkRequest]
     func getRequestCount() async -> Int
 }
-
-extension Notification.Name {
-    static let inspectlyRequestsDidChange = Notification.Name("inspectly.requests.didChange")
-}

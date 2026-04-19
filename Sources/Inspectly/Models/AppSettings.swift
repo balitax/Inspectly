@@ -23,6 +23,7 @@ import Foundation
 public struct AppSettings: Codable {
     var isLoggingEnabled: Bool
     var areStubsEnabled: Bool
+    var networkThrottlingPreset: NetworkThrottlingPreset
     var ignoredHosts: [IgnoredHost]
     var maxStoredRequests: Int
     var isShakeGestureEnabled: Bool
@@ -34,6 +35,7 @@ public struct AppSettings: Codable {
     init(
         isLoggingEnabled: Bool = true,
         areStubsEnabled: Bool = true,
+        networkThrottlingPreset: NetworkThrottlingPreset = .off,
         ignoredHosts: [IgnoredHost] = [],
         maxStoredRequests: Int = 500,
         isShakeGestureEnabled: Bool = true,
@@ -44,6 +46,7 @@ public struct AppSettings: Codable {
     ) {
         self.isLoggingEnabled = isLoggingEnabled
         self.areStubsEnabled = areStubsEnabled
+        self.networkThrottlingPreset = networkThrottlingPreset
         self.ignoredHosts = ignoredHosts
         self.maxStoredRequests = maxStoredRequests
         self.isShakeGestureEnabled = isShakeGestureEnabled
@@ -54,6 +57,34 @@ public struct AppSettings: Codable {
     }
 
     static let `default` = AppSettings()
+
+    enum CodingKeys: String, CodingKey {
+        case isLoggingEnabled
+        case areStubsEnabled
+        case networkThrottlingPreset
+        case ignoredHosts
+        case maxStoredRequests
+        case isShakeGestureEnabled
+        case isDarkModeOverride
+        case isAutoResponsePrettifying
+        case isRequestBodyTruncation
+        case truncationLimit
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        isLoggingEnabled = try container.decodeIfPresent(Bool.self, forKey: .isLoggingEnabled) ?? true
+        areStubsEnabled = try container.decodeIfPresent(Bool.self, forKey: .areStubsEnabled) ?? true
+        networkThrottlingPreset = try container.decodeIfPresent(NetworkThrottlingPreset.self, forKey: .networkThrottlingPreset) ?? .off
+        ignoredHosts = try container.decodeIfPresent([IgnoredHost].self, forKey: .ignoredHosts) ?? []
+        maxStoredRequests = try container.decodeIfPresent(Int.self, forKey: .maxStoredRequests) ?? 500
+        isShakeGestureEnabled = try container.decodeIfPresent(Bool.self, forKey: .isShakeGestureEnabled) ?? true
+        isDarkModeOverride = try container.decodeIfPresent(Bool.self, forKey: .isDarkModeOverride)
+        isAutoResponsePrettifying = try container.decodeIfPresent(Bool.self, forKey: .isAutoResponsePrettifying) ?? true
+        isRequestBodyTruncation = try container.decodeIfPresent(Bool.self, forKey: .isRequestBodyTruncation) ?? false
+        truncationLimit = try container.decodeIfPresent(Int.self, forKey: .truncationLimit) ?? 10000
+    }
 }
 
 // MARK: - Ignored Host

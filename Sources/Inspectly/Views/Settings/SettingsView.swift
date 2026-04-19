@@ -33,6 +33,9 @@ struct SettingsView: View {
                 // MARK: - Stubs Section
                 stubsSection
 
+                // MARK: - Network Throttling
+                networkThrottlingSection
+
                 // MARK: - Ignored Hosts
                 ignoredHostsSection
 
@@ -75,6 +78,9 @@ struct SettingsView: View {
             .onChange(of: viewModel.settings.areStubsEnabled) { _ in
                 Task { await viewModel.saveSettings() }
             }
+            .onChange(of: viewModel.settings.networkThrottlingPreset) { _ in
+                Task { await viewModel.saveSettings() }
+            }
             .onChange(of: viewModel.settings.isShakeGestureEnabled) { _ in
                 Task { await viewModel.saveSettings() }
             }
@@ -95,7 +101,7 @@ struct SettingsView: View {
                 Label("Enable Logging", systemImage: "antenna.radiowaves.left.and.right")
                     .font(.system(size: 14))
             }
-            .tint(.green)
+            .tint(.accentColor)
         } header: {
             Text("Logging")
         } footer: {
@@ -116,6 +122,40 @@ struct SettingsView: View {
             Text("Stubs")
         } footer: {
             Text("When enabled, matching network requests will return stubbed responses.")
+        }
+    }
+
+    // MARK: - Network Throttling
+
+    private var networkThrottlingSection: some View {
+        Section {
+            HStack {
+                Label("Preset", systemImage: viewModel.settings.networkThrottlingPreset.iconName)
+                    .font(.system(size: 14))
+
+                Spacer()
+
+                Picker("", selection: $viewModel.settings.networkThrottlingPreset) {
+                    ForEach(NetworkThrottlingPreset.allCases) { preset in
+                        Text(preset.displayName).tag(preset)
+                    }
+                }
+                .pickerStyle(.menu)
+            }
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text(viewModel.settings.networkThrottlingPreset.displayName)
+                    .font(.system(size: 13, weight: .semibold))
+
+                Text(viewModel.settings.networkThrottlingPreset.description)
+                    .font(.system(size: 12))
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.vertical, 4)
+        } header: {
+            Text("Network Throttling")
+        } footer: {
+            Text("Simulate slower connections or DNS failures for all real requests intercepted by Inspectly.")
         }
     }
 
@@ -190,12 +230,6 @@ struct SettingsView: View {
 
     private var displaySection: some View {
         Section {
-            Toggle(isOn: $viewModel.settings.isShakeGestureEnabled) {
-                Label("Shake to Open", systemImage: "iphone.radiowaves.left.and.right")
-                    .font(.system(size: 14))
-            }
-            .tint(.accentColor)
-
             Toggle(isOn: $viewModel.settings.isAutoResponsePrettifying) {
                 Label("Auto-Prettify JSON", systemImage: "text.alignleft")
                     .font(.system(size: 14))

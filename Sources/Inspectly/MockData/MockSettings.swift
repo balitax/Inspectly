@@ -24,6 +24,7 @@ struct MockSettings {
     static let `default` = AppSettings(
         isLoggingEnabled: true,
         areStubsEnabled: true,
+        networkThrottlingPreset: .off,
         ignoredHosts: [
             IgnoredHost(host: "analytics.example.com", isEnabled: true),
             IgnoredHost(host: "crashlytics.google.com", isEnabled: true),
@@ -40,6 +41,7 @@ struct MockSettings {
     static let allStubsEnabled = AppSettings(
         isLoggingEnabled: true,
         areStubsEnabled: true,
+        networkThrottlingPreset: .threeG,
         ignoredHosts: [],
         maxStoredRequests: 1000,
         isShakeGestureEnabled: true,

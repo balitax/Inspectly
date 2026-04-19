@@ -46,6 +46,8 @@ public final class Inspectly {
         public var isLoggingEnabled: Bool = true
         
         public var isStubEnabled: Bool = true
+
+        public var networkThrottlingPreset: NetworkThrottlingPreset = .off
         
         public var ignoredHosts: Set<String> = []
         
@@ -59,6 +61,7 @@ public final class Inspectly {
         public init(
             isLoggingEnabled: Bool = true,
             isStubEnabled: Bool = true,
+            networkThrottlingPreset: NetworkThrottlingPreset = .off,
             ignoredHosts: Set<String> = [],
             isShakeGestureEnabled: Bool = true,
             ignoreLocalhost: Bool = true,
@@ -66,6 +69,7 @@ public final class Inspectly {
         ) {
             self.isLoggingEnabled = isLoggingEnabled
             self.isStubEnabled = isStubEnabled
+            self.networkThrottlingPreset = networkThrottlingPreset
             self.ignoredHosts = ignoredHosts
             self.isShakeGestureEnabled = isShakeGestureEnabled
             self.ignoreLocalhost = ignoreLocalhost
@@ -96,13 +100,8 @@ public final class Inspectly {
         }
         
         configureURLProtocol(with: configuration)
-        
-        // Enable shake gesture based on config
-        if configuration.isShakeGestureEnabled {
-            ShakeManager.shared.onShake = {
-                Inspectly.presentInspector()
-            }
-        }
+        applyShakeGesture(isEnabled: configuration.isShakeGestureEnabled)
+        loadPersistedSettingsIfNeeded()
         
         _isEnabled = true
         
@@ -183,6 +182,7 @@ public final class Inspectly {
     private static func configureURLProtocol(with configuration: Configuration) {
         InspectlyURLProtocol.isLoggingEnabled = configuration.isLoggingEnabled
         InspectlyURLProtocol.isStubEnabled = configuration.isStubEnabled
+        InspectlyURLProtocol.networkThrottlingPreset = configuration.networkThrottlingPreset
         
         if let stubRepo = configuration.stubRepository {
             InspectlyURLProtocol.stubRepository = stubRepo
@@ -207,5 +207,46 @@ public final class Inspectly {
         
         // Activate swizzling for seamless integration (Alamofire, AFNetworking, etc.)
         InspectlySwizzler.shared.activate()
+    }
+
+    static func applyRuntimeSettings(_ settings: AppSettings) {
+        guard let configuration else { return }
+
+        InspectlyURLProtocol.isLoggingEnabled = settings.isLoggingEnabled
+        InspectlyURLProtocol.isStubEnabled = settings.areStubsEnabled
+        InspectlyURLProtocol.networkThrottlingPreset = settings.networkThrottlingPreset
+
+        var ignoredHosts = configuration.ignoredHosts
+        ignoredHosts.formUnion(settings.ignoredHosts.filter(\.isEnabled).map(\.host))
+
+        if configuration.ignoreLocalhost {
+            ignoredHosts.insert("localhost")
+            ignoredHosts.insert("127.0.0.1")
+        }
+
+        InspectlyURLProtocol.ignoredHosts = ignoredHosts
+        applyShakeGesture(isEnabled: settings.isShakeGestureEnabled)
+    }
+
+    private static func loadPersistedSettingsIfNeeded() {
+        Task {
+            do {
+                if let settings = try await DependencyContainer.shared.storageManager.load(AppSettings.self, forKey: "inspectly_settings") {
+                    applyRuntimeSettings(settings)
+                }
+            } catch {
+                print("[Inspectly] Failed to load persisted settings: \(error)")
+            }
+        }
+    }
+
+    private static func applyShakeGesture(isEnabled: Bool) {
+        if isEnabled {
+            ShakeManager.shared.onShake = {
+                Inspectly.presentInspector()
+            }
+        } else {
+            ShakeManager.shared.onShake = nil
+        }
     }
 }
