@@ -100,17 +100,22 @@ final class InspectlyURLProtocol: URLProtocol {
     override func startLoading() {
         isStopped = false
 
+        // Extract body data (this handles streams too)
+        var urlRequest = self.request
+        let bodyData = urlRequest.extractBodyData()
+
         // Mark request as handled to prevent re-entry
-        guard let mutableRequest = (request as NSURLRequest).mutableCopy() as? NSMutableURLRequest else {
+        guard let mutableRequest = (urlRequest as NSURLRequest).mutableCopy() as? NSMutableURLRequest else {
             client?.urlProtocol(self, didFailWithError: NSError(domain: "InspectlyURLProtocol", code: -1))
             return
         }
         URLProtocol.setProperty(true, forKey: InspectlyURLProtocol.handledKey, in: mutableRequest)
 
         let startTime = Date()
+        let finalRequest = mutableRequest as URLRequest
 
         // Build NetworkRequest for logging
-        let networkRequest = buildNetworkRequest(from: request, timestamp: startTime)
+        let networkRequest = buildNetworkRequest(from: finalRequest, bodyData: bodyData, timestamp: startTime)
         capturedRequest = networkRequest
 
         // Check for stub
@@ -124,10 +129,10 @@ final class InspectlyURLProtocol: URLProtocol {
                 }
 
                 // No stub found, proceed with real request
-                proceedWithRealRequest(mutableRequest as URLRequest, startTime: startTime)
+                proceedWithRealRequest(finalRequest, startTime: startTime)
             }
         } else {
-            proceedWithRealRequest(mutableRequest as URLRequest, startTime: startTime)
+            proceedWithRealRequest(finalRequest, startTime: startTime)
         }
     }
 
@@ -138,7 +143,7 @@ final class InspectlyURLProtocol: URLProtocol {
 
     // MARK: - Private Methods
 
-    private func buildNetworkRequest(from urlRequest: URLRequest, timestamp: Date) -> NetworkRequest {
+    private func buildNetworkRequest(from urlRequest: URLRequest, bodyData: Data?, timestamp: Date) -> NetworkRequest {
         let url = urlRequest.url?.absoluteString ?? ""
         let components = URLComponents(string: url)
 
@@ -150,12 +155,13 @@ final class InspectlyURLProtocol: URLProtocol {
             QueryParameter(key: $0.name, value: $0.value ?? "")
         } ?? []
 
+        let contentType = urlRequest.contentType
         var requestBody: RequestBody?
-        if let bodyData = urlRequest.httpBody {
+        if let bodyData = bodyData {
             requestBody = RequestBody(
                 rawString: String(data: bodyData, encoding: .utf8),
                 rawData: bodyData,
-                contentType: .json,
+                contentType: contentType,
                 size: Int64(bodyData.count)
             )
         }
@@ -169,6 +175,8 @@ final class InspectlyURLProtocol: URLProtocol {
             requestHeaders: requestHeaders,
             queryParameters: queryParams,
             requestBody: requestBody,
+            requestContentType: contentType,
+            requestSize: bodyData != nil ? Int64(bodyData!.count) : nil,
             timestamp: timestamp
         )
     }
@@ -211,10 +219,14 @@ final class InspectlyURLProtocol: URLProtocol {
                 updatedRequest.stubId = stubId
                 updatedRequest.source = .stubbed
                 updatedRequest.duration = delay
+
+                let responseContentType = stubResponse.contentType
+                updatedRequest.responseContentType = responseContentType
+
                 updatedRequest.responseBody = ResponseBody(
                     rawString: bodyString,
                     rawData: bodyData,
-                    contentType: .json,
+                    contentType: responseContentType,
                     size: Int64(bodyData.count)
                 )
                 updatedRequest.status = (200...299).contains(statusCode) ? .success :
@@ -262,6 +274,9 @@ final class InspectlyURLProtocol: URLProtocol {
                 if let httpResponse = response as? HTTPURLResponse {
                     var updatedRequest = self.capturedRequest!
                     updatedRequest.statusCode = httpResponse.statusCode
+                    
+                    let responseContentType = httpResponse.contentType
+                    updatedRequest.responseContentType = responseContentType
 
                     let responseHeadersList = httpResponse.allHeaderFields.map {
                         RequestHeader(key: "\($0.key)", value: "\($0.value)")
@@ -272,7 +287,7 @@ final class InspectlyURLProtocol: URLProtocol {
                         updatedRequest.responseBody = ResponseBody(
                             rawString: String(data: data, encoding: .utf8),
                             rawData: data,
-                            contentType: .json,
+                            contentType: responseContentType,
                             size: Int64(data.count)
                         )
                         updatedRequest.responseSize = Int64(data.count)

@@ -39,11 +39,18 @@ public struct RequestBody: Codable {
     }
 
     var prettyPrinted: String {
-        guard let raw = rawString else { return "" }
-        if contentType == .json {
-            return raw.prettyPrintedJSON ?? raw
+        if let raw = rawString {
+            if contentType == .json {
+                return raw.prettyPrintedJSON ?? raw
+            }
+            return raw
         }
-        return raw
+        
+        if let data = rawData, !data.isEmpty {
+            return "[Binary Data: \(formattedSize)]"
+        }
+        
+        return "No request body content"
     }
 
     var formattedSize: String {
@@ -76,11 +83,18 @@ public struct ResponseBody: Codable {
     }
 
     var prettyPrinted: String {
-        guard let raw = rawString else { return "" }
-        if contentType == .json {
-            return raw.prettyPrintedJSON ?? raw
+        if let raw = rawString {
+            if contentType == .json {
+                return raw.prettyPrintedJSON ?? raw
+            }
+            return raw
         }
-        return raw
+        
+        if let data = rawData, !data.isEmpty {
+            return "[Binary Data: \(formattedSize)]"
+        }
+        
+        return "No request body content"
     }
 
     var formattedSize: String {

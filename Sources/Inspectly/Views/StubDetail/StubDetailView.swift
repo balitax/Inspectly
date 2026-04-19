@@ -119,16 +119,7 @@ struct StubDetailView: View {
         VStack(alignment: .leading, spacing: 12) {
             SectionHeaderView(title: "Response Data")
 
-            ResponseEditorView(
-                response: Binding(
-                    get: { viewModel.response },
-                    set: { viewModel.response = $0 }
-                ),
-                onValidateJSON: {
-                    viewModel.validateJSON()
-                },
-                jsonError: viewModel.jsonValidationError
-            )
+            ResponseEditorView(viewModel: viewModel)
         }
         .sectionCardStyle()
     }
