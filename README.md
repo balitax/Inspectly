@@ -33,6 +33,8 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 - Zero external dependencies
 - In-app inspector UI for Requests, Statistics, Stubs, and Settings
 - Request and response inspection including headers, bodies, timing, and metadata
+- **Rich HTML Rendering**: Interactive preview for HTML responses (ideal for debugging server errors)
+- **Smart Content Detection**: Automatic content-type sniffing when server headers are misleading
 - Create API stubs directly from captured requests
 - Enable, disable, duplicate, search, and manage stubs
 - Search, filter, sort, favorite, pin, and clear captured requests
