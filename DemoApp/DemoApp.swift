@@ -19,6 +19,7 @@
 import SwiftUI
 import Inspectly
 
+@available(iOS 14.0, *)
 @main
 struct DemoApp: App {
     

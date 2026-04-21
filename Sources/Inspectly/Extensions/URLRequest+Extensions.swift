@@ -56,6 +56,36 @@ extension ContentType {
         if header.contains("application/octet-stream") { return .octetStream }
         return .unknown
     }
+    
+    /// Detects content type from body data when headers are misleading or missing.
+    static func sniff(data: Data) -> ContentType? {
+        guard !data.isEmpty else { return nil }
+        
+        // Convert a small portion of data to string for sniffing
+        let sniffSize = min(data.count, 512)
+        let sniffData = data.prefix(sniffSize)
+        guard let content = String(data: sniffData, encoding: .utf8)?.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) else {
+            return nil
+        }
+        
+        if content.hasPrefix("<!doctype html") || content.hasPrefix("<html") {
+            return .html
+        }
+        
+        if content.hasPrefix("{") || content.hasPrefix("[") {
+            return .json
+        }
+        
+        if content.hasPrefix("<?xml") || content.hasPrefix("<") {
+            // Check if it's actually HTML but missing the doctype
+            if content.contains("<body") || content.contains("<head") || content.contains("<title") {
+                return .html
+            }
+            return .xml
+        }
+        
+        return nil
+    }
 }
 
 extension Data {
