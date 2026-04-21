@@ -170,9 +170,9 @@ No custom interceptor setup is required for common use cases.
 
 ## Screenshots
 
-| Requests | Request Detail |
-| --- | --- |
-| <img src="./Screenshots/request.png" width="320" style="aspect-ratio: 9 / 19.5; object-fit: contain;" /> | <img src="./Screenshots/response.png" width="320" style="aspect-ratio: 9 / 19.5; object-fit: contain;" /> |
+| Demo App | Requests | Request Detail |
+| --- | --- | --- |
+| <img src="./Screenshots/demo.png" width="260" style="aspect-ratio: 9 / 19.5; object-fit: contain;" /> | <img src="./Screenshots/request.png" width="260" style="aspect-ratio: 9 / 19.5; object-fit: contain;" /> | <img src="./Screenshots/response.png" width="260" style="aspect-ratio: 9 / 19.5; object-fit: contain;" /> |
 
 | Statistics | Stubs | Settings |
 | --- | --- | --- |
