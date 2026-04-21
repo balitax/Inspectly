@@ -40,124 +40,133 @@ struct DemoAppView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 24) {
-                
-                // MARK: - Header Info
-                
-                VStack(spacing: 8) {
-                    Image(systemName: "iphone.radiowaves.left.and.right")
-                        .font(.system(size: 48))
-                        .foregroundColor(Color(red: 0.345, green: 0.337, blue: 0.839)) // Indigo fallback
-                        .padding(.bottom, 8)
+            ScrollView {
+                VStack(spacing: 24) {
                     
-                    Text("Inspectly Demo")
-                        .font(.title2.bold())
+                    // MARK: - Header Info
                     
-                    Text("Shake your device (⌘+Ctrl+Z) to open Inspectly inspector.")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 32)
-                }
-                .padding(.top, 40)
-                
-                // MARK: - Network Engine Picker
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Network Engine")
-                        .font(.caption.bold())
-                        .foregroundStyle(.secondary)
+                    VStack(spacing: 8) {
+                        Image(systemName: "iphone.radiowaves.left.and.right")
+                            .font(.system(size: 48))
+                            .foregroundColor(Color(red: 0.345, green: 0.337, blue: 0.839)) // Indigo fallback
+                            .padding(.bottom, 8)
+                        
+                        Text("Inspectly Demo")
+                            .font(.title2.bold())
+                        
+                        Text("Shake your device (⌘+Ctrl+Z) to open Inspectly inspector.")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 32)
+                    }
+                    .padding(.top, 40)
                     
-                    Picker("Network Engine", selection: $selectedNetworkEngine) {
-                        ForEach(NetworkEngine.allCases) { engine in
-                            Text(engine.rawValue)
-                                .tag(engine)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
-                .padding(.horizontal, 24)
-                
-                // MARK: - Action Buttons
-                
-                VStack(spacing: 12) {
-                    Button(action: loadCommentList) {
-                        actionLabel(
-                            "Fetch Comments",
-                            icon: "message.circle.fill",
-                            color: .blue
-                        )
-                    }
+                    // MARK: - Network Engine Picker
                     
-                    Button(action: loadPostDetail) {
-                        actionLabel(
-                            "Fetch Post Detail",
-                            icon: "doc.text.fill",
-                            color: .green
-                        )
-                    }
-                    
-                    Button(action: loadInvalidEndpoint) {
-                        actionLabel(
-                            "Simulate 404 Error",
-                            icon: "exclamationmark.triangle.fill",
-                            color: .red
-                        )
-                    }
-
-                    Button(action: createPost) {
-                        actionLabel(
-                            "Create Post (POST)",
-                            icon: "plus.circle.fill",
-                            color: .purple
-                        )
-                    }
-                }
-                .padding(.horizontal, 24)
-                
-                // MARK: - Response Box
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack {
-                        Text("Latest Response")
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Network Engine")
                             .font(.caption.bold())
                             .foregroundStyle(.secondary)
                         
-                        Spacer()
-                        
-                        Text(selectedNetworkEngine.rawValue)
-                            .font(.caption2.bold())
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(Color(.tertiarySystemFill))
-                            .clipShape(Capsule())
-                    }
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 12, style: .continuous)
-                            .fill(Color(.secondarySystemBackground))
-                        
-                        if isLoading {
-                            VStack(spacing: 12) {
-                                ProgressView()
-                                
-                                Text("Loading...")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
+                        Picker("Network Engine", selection: $selectedNetworkEngine) {
+                            ForEach(NetworkEngine.allCases) { engine in
+                                Text(engine.rawValue)
+                                    .tag(engine)
                             }
-                        } else {
-                            ScrollView {
+                        }
+                        .pickerStyle(.segmented)
+                    }
+                    .padding(.horizontal, 24)
+                    
+                    // MARK: - Action Buttons
+                    
+                    VStack(spacing: 12) {
+                        Button(action: loadCommentList) {
+                            actionLabel(
+                                "Fetch Comments",
+                                icon: "message.circle.fill",
+                                color: .blue
+                            )
+                        }
+                        
+                        Button(action: loadPostDetail) {
+                            actionLabel(
+                                "Fetch Post Detail",
+                                icon: "doc.text.fill",
+                                color: .green
+                            )
+                        }
+                        
+                        Button(action: loadInvalidEndpoint) {
+                            actionLabel(
+                                "Simulate 404 Error",
+                                icon: "exclamationmark.triangle.fill",
+                                color: .red
+                            )
+                        }
+
+                        Button(action: load503Error) {
+                            actionLabel(
+                                "Simulate 503 Error (Sniff HTML)",
+                                icon: "server.rack",
+                                color: .red
+                            )
+                        }
+
+                        Button(action: createPost) {
+
+                            actionLabel(
+                                "Create Post (POST)",
+                                icon: "plus.circle.fill",
+                                color: .purple
+                            )
+                        }
+                    }
+                    .padding(.horizontal, 24)
+                    
+                    // MARK: - Response Box
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            Text("Latest Response")
+                                .font(.caption.bold())
+                                .foregroundStyle(.secondary)
+                            
+                            Spacer()
+                            
+                            Text(selectedNetworkEngine.rawValue)
+                                .font(.caption2.bold())
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(Color(.tertiarySystemFill))
+                                .clipShape(Capsule())
+                        }
+                        
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                .fill(Color(.secondarySystemBackground))
+                            
+                            if isLoading {
+                                VStack(spacing: 12) {
+                                    ProgressView()
+                                    
+                                    Text("Loading...")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+                            } else {
                                 Text(responseText)
                                     .font(.system(size: 12, design: .monospaced))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(12)
                             }
                         }
+                        .frame(minHeight: 120)
                     }
-                    .frame(maxHeight: .infinity)
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 24)
                 }
-                .padding(.horizontal, 24)
-                .padding(.bottom, 24)
             }
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.inline)
@@ -209,6 +218,13 @@ struct DemoAppView: View {
         requestJSON(
             from: "https://jsonplaceholder.typicode.com/invalid-endpoint-404",
             loadingMessage: "Loading invalid endpoint..."
+        )
+    }
+
+    private func load503Error() {
+        requestJSON(
+            from: "https://mock-api.net/api/inspectly/error-503",
+            loadingMessage: "Loading 503 error (with HTML sniffing)..."
         )
     }
 

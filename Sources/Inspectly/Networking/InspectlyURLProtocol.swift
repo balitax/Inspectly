@@ -275,15 +275,19 @@ final class InspectlyURLProtocol: URLProtocol {
                     var updatedRequest = self.capturedRequest!
                     updatedRequest.statusCode = httpResponse.statusCode
                     
-                    let responseContentType = httpResponse.contentType
-                    updatedRequest.responseContentType = responseContentType
-
+                    var responseContentType = httpResponse.contentType
+                    
                     let responseHeadersList = httpResponse.allHeaderFields.map {
                         RequestHeader(key: "\($0.key)", value: "\($0.value)")
                     }
                     updatedRequest.responseHeaders = responseHeadersList
 
                     if let data = data {
+                        // Sniff content type from data if header is misleading (e.g. application/json but body is HTML)
+                        if let sniffedType = ContentType.sniff(data: data) {
+                            responseContentType = sniffedType
+                        }
+                        
                         updatedRequest.responseBody = ResponseBody(
                             rawString: String(data: data, encoding: .utf8),
                             rawData: data,
@@ -292,6 +296,8 @@ final class InspectlyURLProtocol: URLProtocol {
                         )
                         updatedRequest.responseSize = Int64(data.count)
                     }
+                    
+                    updatedRequest.responseContentType = responseContentType
 
                     updatedRequest.status = (200...299).contains(httpResponse.statusCode) ? .success :
                         (400...499).contains(httpResponse.statusCode) ? .clientError : .serverError

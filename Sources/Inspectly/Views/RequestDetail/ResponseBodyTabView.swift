@@ -24,6 +24,7 @@ import SwiftUI
 struct ResponseBodyTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
     @State private var showRaw = false
+    @State private var showPreview = true
 
     var body: some View {
         ScrollView {
@@ -52,6 +53,14 @@ struct ResponseBodyTabView: View {
                                 .font(.system(size: 11, weight: .medium, design: .monospaced))
                                 .foregroundStyle(.tertiary)
                         }
+                        
+                        if viewModel.request.responseContentType == .html {
+                            Toggle("Preview", isOn: $showPreview)
+                                .toggleStyle(.button)
+                                .buttonStyle(.bordered)
+                                .controlSize(.mini)
+                                .font(.system(size: 10, weight: .medium))
+                        }
 
                         Toggle("Raw", isOn: $showRaw)
                             .toggleStyle(.button)
@@ -70,12 +79,16 @@ struct ResponseBodyTabView: View {
                     }
 
                     // MARK: - Body Content
-                    CodeBlockView(
-                        title: "Response Body",
-                        content: showRaw
-                            ? (viewModel.request.responseBody?.rawString ?? "")
-                            : viewModel.prettyResponseBody
-                    )
+                    if viewModel.request.responseContentType == .html && showPreview && !showRaw {
+                        HTMLPreviewView(htmlContent: viewModel.request.responseBody?.rawString ?? "")
+                    } else {
+                        CodeBlockView(
+                            title: "Response Body",
+                            content: showRaw
+                                ? (viewModel.request.responseBody?.rawString ?? "")
+                                : viewModel.prettyResponseBody
+                        )
+                    }
                 }
             }
             .padding(16)
