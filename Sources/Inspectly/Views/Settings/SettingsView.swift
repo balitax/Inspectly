@@ -287,6 +287,39 @@ struct SettingsView: View {
 
     private var displaySection: some View {
         Section {
+            HStack {
+                Label("Theme", systemImage: "circle.lefthalf.filled")
+                    .font(.system(size: 14))
+
+                Spacer()
+
+                Picker("", selection: Binding(
+                    get: {
+                        switch viewModel.settings.isDarkModeOverride {
+                        case .some(true): return 2
+                        case .some(false): return 1
+                        case nil: return 0
+                        }
+                    },
+                    set: { value in
+                        switch value {
+                        case 0: viewModel.settings.isDarkModeOverride = nil
+                        case 1: viewModel.settings.isDarkModeOverride = false
+                        case 2: viewModel.settings.isDarkModeOverride = true
+                        default: viewModel.settings.isDarkModeOverride = nil
+                        }
+                    }
+                )) {
+                    Text("System").tag(0)
+                    Text("Light").tag(1)
+                    Text("Dark").tag(2)
+                }
+                .pickerStyle(.menu)
+                .onChange(of: viewModel.settings.isDarkModeOverride) { _ in
+                    Task { await viewModel.saveSettings() }
+                }
+            }
+
             Toggle(isOn: $viewModel.settings.isAutoResponsePrettifying) {
                 Label("Auto-Prettify JSON", systemImage: "text.alignleft")
                     .font(.system(size: 14))

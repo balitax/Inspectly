@@ -37,6 +37,7 @@ struct DemoAppView: View {
     @State private var responseText = "Network request results will appear here."
     @State private var isLoading = false
     @State private var selectedNetworkEngine: NetworkEngine = .alamofire
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -170,6 +171,15 @@ struct DemoAppView: View {
             }
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: toggleDarkMode) {
+                        Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
+                    }
+                }
+            }
+            .preferredColorScheme(isDarkMode ? .dark : .light)
+            
         }
     }
     
@@ -237,6 +247,10 @@ struct DemoAppView: View {
     }
     
     // MARK: - Request Handler
+    
+    private func toggleDarkMode() {
+        isDarkMode.toggle()
+    }
     
     private func requestJSON(
         from urlString: String,

@@ -23,6 +23,7 @@ import SwiftUI
 @available(iOS 16.0, *)
 struct ContentView: View {
     @State private var selectedTab: AppTab = .requests
+    @State private var appSettings: AppSettings = .default
     let onDismiss: (() -> Void)?
 
     let container: DependencyContainer
@@ -30,6 +31,11 @@ struct ContentView: View {
     init(container: DependencyContainer, isPresented: Binding<Bool>? = nil, onDismiss: (() -> Void)? = nil) {
         self.container = container
         self.onDismiss = onDismiss
+    }
+
+    private var colorScheme: ColorScheme? {
+        guard let isDark = appSettings.isDarkModeOverride else { return nil }
+        return isDark ? .dark : .light
     }
 
     var body: some View {
@@ -80,6 +86,7 @@ struct ContentView: View {
             .tag(AppTab.settings)
         }
         .tint(.accentColor)
+        .preferredColorScheme(colorScheme)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 if onDismiss != nil {
@@ -88,6 +95,20 @@ struct ContentView: View {
                     }
                 }
             }
+        }
+        .task {
+            await loadSettings()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .inspectlySettingsDidChange)) { notification in
+            if let settings = notification.object as? AppSettings {
+                appSettings = settings
+            }
+        }
+    }
+
+    private func loadSettings() async {
+        if let loaded = try? await container.storageManager.load(AppSettings.self, forKey: "inspectly_settings") {
+            appSettings = loaded
         }
     }
 }

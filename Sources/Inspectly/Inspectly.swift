@@ -159,6 +159,9 @@ public final class Inspectly {
             let hostingController = UIHostingController(rootView: contentView)
             hostingController.modalPresentationStyle = .pageSheet
             
+            applyTheme(to: hostingController)
+            setupThemeObserver()
+            
             if let sheet = hostingController.sheetPresentationController {
                 sheet.detents = [.large()]
                 sheet.prefersGrabberVisible = true
@@ -207,6 +210,38 @@ public final class Inspectly {
         
         // Activate swizzling for seamless integration (Alamofire, AFNetworking, etc.)
         InspectlySwizzler.shared.activate()
+    }
+    
+    @available(iOS 16.0, *)
+    private static func applyTheme(to hostingController: UIHostingController<ContentView>) {
+        Task {
+            if let settings = try? await DependencyContainer.shared.storageManager.load(AppSettings.self, forKey: "inspectly_settings"),
+               let isDarkModeOverride = settings.isDarkModeOverride {
+                await MainActor.run {
+                    hostingController.overrideUserInterfaceStyle = isDarkModeOverride ? .dark : .light
+                }
+            }
+        }
+    }
+    
+    @available(iOS 16.0, *)
+    private static func setupThemeObserver() {
+        NotificationCenter.default.addObserver(
+            forName: .inspectlySettingsDidChange,
+            object: nil,
+            queue: .main
+        ) { notification in
+            guard let settings = notification.object as? AppSettings,
+                  let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first,
+                  let hostingController = window.rootViewController?.presentedViewController as? UIHostingController<ContentView> else { return }
+            
+            if let isDarkModeOverride = settings.isDarkModeOverride {
+                hostingController.overrideUserInterfaceStyle = isDarkModeOverride ? .dark : .light
+            } else {
+                hostingController.overrideUserInterfaceStyle = .unspecified
+            }
+        }
     }
 
     static func applyRuntimeSettings(_ settings: AppSettings) {
