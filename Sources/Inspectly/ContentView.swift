@@ -26,7 +26,7 @@ struct ContentView: View {
     let onDismiss: (() -> Void)?
     let container: DependencyContainer
 
-    init(container: DependencyContainer, isPresented: Binding<Bool>? = nil, onDismiss: (() -> Void)? = nil) {
+    init(container: DependencyContainer, onDismiss: (() -> Void)? = nil) {
         self.container = container
         self.onDismiss = onDismiss
     }
@@ -37,86 +37,42 @@ struct ContentView: View {
     }
 
     var body: some View {
-        Group {
-            if #available(iOS 26, *) {
-                nativeLiquidTabContent
-            } else {
-                floatingTabContent
-            }
-        }
-        .preferredColorScheme(colorScheme)
-        .task { await loadSettings() }
-        .onReceive(NotificationCenter.default.publisher(for: .inspectlySettingsDidChange)) { notification in
-            if let settings = notification.object as? AppSettings {
-                appSettings = settings
-            }
-        }
-    }
-
-    // MARK: - iOS 26+ (Liquid Glass native floating tab bar)
-
-    @available(iOS 26, *)
-    private var nativeLiquidTabContent: some View {
-        ZStack(alignment: .topLeading) {
-            TabView(selection: $selectedTab) {
-                requestsTab
-                    .tabItem { Label("Requests", systemImage: "arrow.up.arrow.down.circle.fill") }
-                    .tag(AppTab.requests)
-
-                statisticsTab
-                    .tabItem { Label("Statistics", systemImage: "chart.bar.fill") }
-                    .tag(AppTab.statistics)
-
-                stubsTab
-                    .tabItem { Label("Stubs", systemImage: "hammer.fill") }
-                    .tag(AppTab.stubs)
-
-                settingsTab
-                    .tabItem { Label("Settings", systemImage: "gearshape.fill") }
-                    .tag(AppTab.settings)
-            }
-            .tint(.accentColor)
-
-            // Close button for fullscreen — floats above the liquid tab bar
-            if let onDismiss {
-                Button(action: onDismiss) {
-                    Image(systemName: "xmark.circle.fill")
-                        .symbolRenderingMode(.hierarchical)
-                        .font(.system(size: 30))
-                        .foregroundStyle(.secondary)
+        floatingTabContent
+            .preferredColorScheme(colorScheme)
+            .task { await loadSettings() }
+            .onReceive(NotificationCenter.default.publisher(for: .inspectlySettingsDidChange)) { notification in
+                if let settings = notification.object as? AppSettings {
+                    appSettings = settings
                 }
-                .padding(.top, 14)
-                .padding(.leading, 20)
             }
-        }
     }
 
     // MARK: - iOS 16–25 (Custom floating tab bar)
 
     private var floatingTabContent: some View {
-        ZStack(alignment: .bottom) {
-            TabView(selection: $selectedTab) {
-                requestsTab
-                    .tag(AppTab.requests)
-                    .toolbar(.hidden, for: .tabBar)
+        TabView(selection: $selectedTab) {
+            requestsTab
+                .tag(AppTab.requests)
+                .toolbar(.hidden, for: .tabBar)
 
-                statisticsTab
-                    .tag(AppTab.statistics)
-                    .toolbar(.hidden, for: .tabBar)
+            statisticsTab
+                .tag(AppTab.statistics)
+                .toolbar(.hidden, for: .tabBar)
 
-                stubsTab
-                    .tag(AppTab.stubs)
-                    .toolbar(.hidden, for: .tabBar)
+            stubsTab
+                .tag(AppTab.stubs)
+                .toolbar(.hidden, for: .tabBar)
 
-                settingsTab
-                    .tag(AppTab.settings)
-                    .toolbar(.hidden, for: .tabBar)
-            }
-            .tint(.accentColor)
-
+            settingsTab
+                .tag(AppTab.settings)
+                .toolbar(.hidden, for: .tabBar)
+        }
+        .tint(.accentColor)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
             FloatingTabBar(selectedTab: $selectedTab, onDismiss: onDismiss)
-                .padding(.horizontal, 20)
-                .padding(.bottom, 24)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 8)
+                .padding(.top, 4)
         }
         .ignoresSafeArea(.keyboard)
     }
@@ -170,11 +126,13 @@ struct ContentView: View {
 
 // MARK: - App Tab
 
-enum AppTab: String, Hashable, CaseIterable {
+enum AppTab: String, Hashable, CaseIterable, Identifiable {
     case requests
     case statistics
     case stubs
     case settings
+
+    var id: String { rawValue }
 
     var title: String {
         switch self {
@@ -204,61 +162,88 @@ enum AppTab: String, Hashable, CaseIterable {
     }
 }
 
-// MARK: - Floating Tab Bar (iOS 16–25)
+// MARK: - Floating Tab Bar (iOS 16–25, Liquid Glass-inspired)
 
 private struct FloatingTabBar: View {
     @Binding var selectedTab: AppTab
     let onDismiss: (() -> Void)?
+    @Namespace private var tabNamespace
 
     var body: some View {
-        HStack(spacing: 0) {
-            // Tab buttons
-            HStack(spacing: 4) {
+        HStack(spacing: 10) {
+            // Main frosted glass pill
+            HStack(spacing: 0) {
                 ForEach(AppTab.allCases) { tab in
                     tabButton(tab)
                 }
             }
-            .padding(6)
-            .background(.ultraThinMaterial, in: Capsule())
-            .shadow(color: .black.opacity(0.12), radius: 20, x: 0, y: 6)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 8)
+            .background {
+                Capsule()
+                    .fill(.ultraThinMaterial)
+                    .overlay {
+                        Capsule()
+                            .strokeBorder(Color.primary.opacity(0.12), lineWidth: 1)
+                    }
+                    .shadow(color: .black.opacity(0.18), radius: 32, x: 0, y: 10)
+            }
 
-            // Close button
+            // Close button — frosted glass circle
             if let onDismiss {
                 Button(action: onDismiss) {
                     Image(systemName: "xmark")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.secondary)
-                        .frame(width: 36, height: 36)
-                        .background(.ultraThinMaterial, in: Circle())
-                        .shadow(color: .black.opacity(0.1), radius: 12, x: 0, y: 4)
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundStyle(.accentColor)
+                        .frame(width: 60, height: 60)
+                        .background {
+                            Circle()
+                                .fill(.red)
+                                .overlay {
+                                    Circle()
+                                        .strokeBorder(.white.opacity(0.2), lineWidth: 0.5)
+                                }
+                                .shadow(color: .black.opacity(0.15), radius: 20, x: 0, y: 8)
+                        }
                 }
-                .padding(.leading, 10)
+                .buttonStyle(.plain)
             }
         }
     }
 
     private func tabButton(_ tab: AppTab) -> some View {
         Button {
-            withAnimation(.spring(response: 0.3, dampingFraction: 0.75)) {
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
                 selectedTab = tab
             }
         } label: {
             VStack(spacing: 3) {
                 Image(systemName: selectedTab == tab ? tab.selectedIcon : tab.icon)
-                    .font(.system(size: 17, weight: selectedTab == tab ? .semibold : .regular))
-                    .frame(height: 20)
+                    .font(.system(size: 20, weight: selectedTab == tab ? .semibold : .regular))
+                    .frame(width: 26, height: 26)
+                    .scaleEffect(selectedTab == tab ? 1.1 : 1.0)
+
                 Text(tab.title)
-                    .font(.system(size: 9.5, weight: .medium))
+                    .font(.system(size: 10, weight: .medium))
             }
             .foregroundStyle(selectedTab == tab ? Color.accentColor : Color.secondary)
-            .frame(width: 62)
-            .padding(.vertical, 9)
-            .background(
-                selectedTab == tab ? Color.accentColor.opacity(0.1) : Color.clear,
-                in: RoundedRectangle(cornerRadius: 12, style: .continuous)
-            )
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 8)
+            .padding(.horizontal, 10)
+            .background {
+                if selectedTab == tab {
+                    Capsule()
+                        .fill(Color(.systemBackground).opacity(0.7))
+                        .overlay {
+                            Capsule()
+                                .strokeBorder(Color.accentColor.opacity(0.15), lineWidth: 0.5)
+                        }
+                        .matchedGeometryEffect(id: "tabHighlight", in: tabNamespace)
+                }
+            }
         }
         .buttonStyle(.plain)
+        .animation(.spring(response: 0.35, dampingFraction: 0.7), value: selectedTab)
     }
 }
 

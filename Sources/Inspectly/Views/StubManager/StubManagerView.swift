@@ -153,6 +153,7 @@ struct StubManagerView: View {
             }
         }
         .listStyle(.insetGrouped)
+        .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 90) }
         .inspectlyNavigationDestination(for: UUID.self) { stubId in
             stubDetailDestination(for: stubId)
         }

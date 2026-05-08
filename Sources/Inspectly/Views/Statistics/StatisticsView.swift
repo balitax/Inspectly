@@ -39,6 +39,7 @@ struct StatisticsView: View {
                 .padding(.bottom, 24)
             }
             .background(Color.surfacePrimary)
+            .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 90) }
             .navigationTitle("Statistics")
             .refreshable {
                 await viewModel.loadData()

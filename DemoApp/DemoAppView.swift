@@ -20,401 +20,382 @@ import SwiftUI
 import Alamofire
 import Inspectly
 
-@available(iOS 15.0, *)
 struct DemoAppView: View {
-    
+
     // MARK: - Network Engine
-    
+
     private enum NetworkEngine: String, CaseIterable, Identifiable {
         case alamofire = "Alamofire"
         case urlSession = "URLSession"
-        
         var id: String { rawValue }
     }
-    
+
     // MARK: - State
-    
-    @State private var showingInspectly = false
-    @State private var responseText = "Network request results will appear here."
+
+    @State private var responseText: String? = nil
     @State private var isLoading = false
     @State private var selectedNetworkEngine: NetworkEngine = .alamofire
+    @State private var lastRequestName: String = ""
+    @State private var requestFailed = false
     @AppStorage("isDarkMode") private var isDarkMode: Bool = false
-    
+
+    // MARK: - Body
+
     var body: some View {
         InspectlyNavigationStack {
             ScrollView {
-                VStack(spacing: 24) {
-                    
-                    // MARK: - Header Info
-                    
-                    VStack(spacing: 8) {
-                        Image(systemName: "iphone.radiowaves.left.and.right")
-                            .font(.system(size: 48))
-                            .foregroundColor(Color(red: 0.345, green: 0.337, blue: 0.839)) // Indigo fallback
-                            .padding(.bottom, 8)
-                        
-                        Text("Inspectly Demo")
-                            .font(.title2.bold())
-                        
-                        Text("Shake your device (⌘+Ctrl+Z) to open Inspectly inspector.")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 32)
+                VStack(spacing: 20) {
+                    headerCard
+                    enginePicker
+                    actionsGrid
+                    if isLoading || responseText != nil {
+                        responseConsole
                     }
-                    .padding(.top, 40)
-                    
-                    // MARK: - Network Engine Picker
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Network Engine")
-                            .font(.caption.bold())
-                            .foregroundStyle(.secondary)
-                        
-                        Picker("Network Engine", selection: $selectedNetworkEngine) {
-                            ForEach(NetworkEngine.allCases) { engine in
-                                Text(engine.rawValue)
-                                    .tag(engine)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                    }
-                    .padding(.horizontal, 24)
-                    
-                    // MARK: - Action Buttons
-                    
-                    VStack(spacing: 12) {
-                        Button(action: loadCommentList) {
-                            actionLabel(
-                                "Fetch Comments",
-                                icon: "message.circle.fill",
-                                color: .blue
-                            )
-                        }
-                        
-                        Button(action: loadPostDetail) {
-                            actionLabel(
-                                "Fetch Post Detail",
-                                icon: "doc.text.fill",
-                                color: .green
-                            )
-                        }
-                        
-                        Button(action: loadInvalidEndpoint) {
-                            actionLabel(
-                                "Simulate 404 Error",
-                                icon: "exclamationmark.triangle.fill",
-                                color: .red
-                            )
-                        }
-
-                        Button(action: load503Error) {
-                            actionLabel(
-                                "Simulate 503 Error (Sniff HTML)",
-                                icon: "server.rack",
-                                color: .red
-                            )
-                        }
-
-                        Button(action: createPost) {
-
-                            actionLabel(
-                                "Create Post (POST)",
-                                icon: "plus.circle.fill",
-                                color: .purple
-                            )
-                        }
-                    }
-                    .padding(.horizontal, 24)
-                    
-                    // MARK: - Response Box
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack {
-                            Text("Latest Response")
-                                .font(.caption.bold())
-                                .foregroundStyle(.secondary)
-                            
-                            Spacer()
-                            
-                            Text(selectedNetworkEngine.rawValue)
-                                .font(.caption2.bold())
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 4)
-                                .background(Color(.tertiarySystemFill))
-                                .clipShape(Capsule())
-                        }
-                        
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .fill(Color(.secondarySystemBackground))
-                            
-                            if isLoading {
-                                VStack(spacing: 12) {
-                                    ProgressView()
-                                    
-                                    Text("Loading...")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
-                            } else {
-                                Text(responseText)
-                                    .font(.system(size: 12, design: .monospaced))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(12)
-                            }
-                        }
-                        .frame(minHeight: 120)
-                    }
-                    .padding(.horizontal, 24)
-                    .padding(.bottom, 24)
                 }
+                .padding(.horizontal, 16)
+                .padding(.top, 16)
+                .padding(.bottom, 40)
             }
-            .navigationTitle("Home")
+            .background(Color(.systemGroupedBackground))
+            .navigationTitle("Inspectly Demo")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: toggleDarkMode) {
+                    Button(action: { isDarkMode.toggle() }) {
                         Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
+                            .foregroundStyle(.primary)
                     }
                 }
             }
             .preferredColorScheme(isDarkMode ? .dark : .light)
-            
         }
     }
-    
-    // MARK: - Action Label UI
-    
-    private func actionLabel(
-        _ title: String,
-        icon: String,
-        color: Color
-    ) -> some View {
-        HStack {
-            Image(systemName: icon)
-                .frame(width: 24)
-            
-            Text(title)
-                .fontWeight(.medium)
-            
+
+    // MARK: - Header Card
+
+    private var headerCard: some View {
+        HStack(spacing: 16) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                Color(red: 0.345, green: 0.337, blue: 0.839),
+                                Color(red: 0.188, green: 0.690, blue: 0.780)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: 56, height: 56)
+
+                Image(systemName: "antenna.radiowaves.left.and.right")
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundStyle(.white)
+            }
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text("Inspectly")
+                    .font(.system(size: 18, weight: .bold))
+
+                Text("Shake ⌘+Ctrl+Z to open inspector")
+                    .font(.system(size: 12))
+                    .foregroundStyle(.secondary)
+            }
+
             Spacer()
-            
-            Image(systemName: "chevron.right")
-                .opacity(0.5)
         }
-        .padding()
-        .foregroundStyle(.white)
-        .background(color)
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-    }
-    
-    // MARK: - Network Actions
-    
-    private func loadCommentList() {
-        requestJSON(
-            from: "https://jsonplaceholder.typicode.com/comments?postId=1",
-            loadingMessage: "Loading comments..."
-        )
-    }
-    
-    private func loadPostDetail() {
-        requestJSON(
-            from: "https://jsonplaceholder.typicode.com/posts/1",
-            loadingMessage: "Loading post..."
-        )
-    }
-    
-    private func loadInvalidEndpoint() {
-        requestJSON(
-            from: "https://jsonplaceholder.typicode.com/invalid-endpoint-404",
-            loadingMessage: "Loading invalid endpoint..."
-        )
+        .padding(16)
+        .background(Color(.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 
-    private func load503Error() {
-        requestJSON(
-            from: "https://mock-api.net/api/inspectly/error-503",
-            loadingMessage: "Loading 503 error (with HTML sniffing)..."
-        )
-    }
+    // MARK: - Engine Picker
 
-    private func createPost() {
-        requestJSON(
-            from: "https://jsonplaceholder.typicode.com/posts",
-            method: .post,
-            loadingMessage: "Creating post..."
-        )
-    }
-    
-    // MARK: - Request Handler
-    
-    private func toggleDarkMode() {
-        isDarkMode.toggle()
-    }
-    
-    private func requestJSON(
-        from urlString: String,
-        method: HTTPMethod = .get,
-        loadingMessage: String = "Loading..."
-    ) {
-        isLoading = true
-        responseText = loadingMessage
-        
-        switch selectedNetworkEngine {
-        case .alamofire:
-            performAlamofireRequest(
-                from: urlString,
-                method: method
-            )
-            
-        case .urlSession:
-            performURLSessionRequest(
-                from: urlString,
-                method: method
-            )
-        }
-    }
-    
-    // MARK: - Alamofire Request
-    
-    private func performAlamofireRequest(
-        from urlString: String,
-        method: HTTPMethod
-    ) {
-        let headers: HTTPHeaders = [
-            "Accept": "application/json"
-        ]
+    private var enginePicker: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Label("Network Engine", systemImage: "network")
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundStyle(.secondary)
 
-        let parameters: [String: Any]? = method == .post ? [
-            "title": "foo",
-            "body": "bar",
-            "userId": 1
-        ] : nil
-        
-        AF.request(
-            urlString,
-            method: method,
-            parameters: parameters,
-            encoding: JSONEncoding.default,
-            headers: headers
-        )
-        .validate()
-        .responseData { response in
-            isLoading = false
-            
-            switch response.result {
-            case .success(let data):
-                if let prettyJSON = String(data: data, encoding: .utf8)?.prettyPrintedJSON {
-                    responseText = prettyJSON
-                } else {
-                    responseText = String(data: data, encoding: .utf8) ?? "Unable to parse response body"
+            Picker("Network Engine", selection: $selectedNetworkEngine) {
+                ForEach(NetworkEngine.allCases) { engine in
+                    Text(engine.rawValue).tag(engine)
                 }
-                
-            case .failure(let error):
-                let statusCode = response.response?.statusCode ?? 0
-                let serverResponse = response.data.flatMap {
-                    String(data: $0, encoding: .utf8)
-                } ?? "No response body"
-                
-                responseText = """
-                [Alamofire Request Failed]
-                
-                URL:
-                \(urlString)
-                
-                Status Code:
-                \(statusCode)
-                
-                Error:
-                \(error.localizedDescription)
-                
-                Response:
-                \(serverResponse)
-                """
+            }
+            .pickerStyle(.segmented)
+        }
+        .padding(16)
+        .background(Color(.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+    }
+
+    // MARK: - Actions Grid
+
+    private var actionsGrid: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Label("Quick Actions", systemImage: "bolt.fill")
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, 4)
+
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
+                actionCard(
+                    title: "Fetch Comments",
+                    subtitle: "GET /comments",
+                    icon: "message.circle.fill",
+                    color: Color(red: 0.345, green: 0.337, blue: 0.839),
+                    action: loadCommentList
+                )
+                actionCard(
+                    title: "Fetch Post",
+                    subtitle: "GET /posts/1",
+                    icon: "doc.text.fill",
+                    color: .teal,
+                    action: loadPostDetail
+                )
+                actionCard(
+                    title: "404 Error",
+                    subtitle: "Simulate not found",
+                    icon: "exclamationmark.triangle.fill",
+                    color: .orange,
+                    action: loadInvalidEndpoint
+                )
+                actionCard(
+                    title: "503 Error",
+                    subtitle: "HTML response body",
+                    icon: "server.rack",
+                    color: .red,
+                    action: load503Error
+                )
+                actionCard(
+                    title: "Create Post",
+                    subtitle: "POST /posts",
+                    icon: "plus.circle.fill",
+                    color: .purple,
+                    action: createPost
+                )
             }
         }
     }
-    
-    // MARK: - URLSession Request
-    
-    private func performURLSessionRequest(
-        from urlString: String,
-        method: HTTPMethod
-    ) {
+
+    private func actionCard(
+        title: String,
+        subtitle: String,
+        icon: String,
+        color: Color,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            HStack(spacing: 12) {
+                Image(systemName: icon)
+                    .font(.system(size: 20))
+                    .foregroundStyle(color)
+                    .frame(width: 36, height: 36)
+                    .background(color.opacity(0.12))
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.primary)
+                    Text(subtitle)
+                        .font(.system(size: 11))
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+            }
+            .padding(12)
+            .background(Color(.secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        }
+        .buttonStyle(.plain)
+        .disabled(isLoading)
+        .opacity(isLoading ? 0.5 : 1)
+    }
+
+    // MARK: - Response Console
+
+    private var responseConsole: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Label("Response", systemImage: "terminal.fill")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(.secondary)
+
+                Spacer()
+
+                if !isLoading, responseText != nil {
+                    HStack(spacing: 4) {
+                        Circle()
+                            .fill(requestFailed ? Color.red : Color.green)
+                            .frame(width: 6, height: 6)
+                        Text(requestFailed ? "Failed" : "Success")
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundStyle(requestFailed ? .red : .green)
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background((requestFailed ? Color.red : Color.green).opacity(0.1))
+                    .clipShape(Capsule())
+                }
+
+                if !isLoading, responseText != nil {
+                    Text(lastRequestName)
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color(.tertiarySystemFill))
+                        .clipShape(Capsule())
+                }
+            }
+            .padding(.horizontal, 4)
+
+            ZStack(alignment: .topLeading) {
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .fill(Color(.systemBackground))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
+                            .strokeBorder(Color.primary.opacity(0.06), lineWidth: 1)
+                    }
+
+                if isLoading {
+                    HStack(spacing: 10) {
+                        ProgressView()
+                            .controlSize(.small)
+                        Text("Sending request via \(selectedNetworkEngine.rawValue)...")
+                            .font(.system(size: 12, design: .monospaced))
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(16)
+                } else if let text = responseText {
+                    ScrollView(.vertical) {
+                        Text(text)
+                            .font(.system(size: 11, design: .monospaced))
+                            .foregroundStyle(.primary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(14)
+                    }
+                    .frame(maxHeight: 240)
+                }
+            }
+        }
+    }
+
+    // MARK: - Network Actions
+
+    private func loadCommentList() {
+        fire("Comments", url: "https://jsonplaceholder.typicode.com/comments?postId=1")
+    }
+
+    private func loadPostDetail() {
+        fire("Post Detail", url: "https://jsonplaceholder.typicode.com/posts/1")
+    }
+
+    private func loadInvalidEndpoint() {
+        fire("404 Error", url: "https://jsonplaceholder.typicode.com/invalid-endpoint-404")
+    }
+
+    private func load503Error() {
+        fire("503 Error", url: "https://mock-api.net/api/inspectly/error-503")
+    }
+
+    private func createPost() {
+        fire("Create Post", url: "https://jsonplaceholder.typicode.com/posts", method: .post)
+    }
+
+    private func fire(_ name: String, url: String, method: HTTPMethod = .get) {
+        isLoading = true
+        requestFailed = false
+        lastRequestName = name
+        responseText = nil
+
+        switch selectedNetworkEngine {
+        case .alamofire: performAlamofireRequest(from: url, method: method)
+        case .urlSession: performURLSessionRequest(from: url, method: method)
+        }
+    }
+
+    // MARK: - Alamofire
+
+    private func performAlamofireRequest(from urlString: String, method: HTTPMethod) {
+        let params: [String: Any]? = method == .post ? ["title": "foo", "body": "bar", "userId": 1] : nil
+
+        AF.request(urlString, method: method, parameters: params, encoding: JSONEncoding.default,
+                   headers: ["Accept": "application/json"])
+            .validate()
+            .responseData { response in
+                isLoading = false
+                switch response.result {
+                case .success(let data):
+                    responseText = String(data: data, encoding: .utf8)?.prettyPrintedJSON
+                        ?? String(data: data, encoding: .utf8)
+                        ?? "Unable to parse response"
+                case .failure(let error):
+                    requestFailed = true
+                    let code = response.response?.statusCode ?? 0
+                    let body = response.data.flatMap { String(data: $0, encoding: .utf8) } ?? "No body"
+                    responseText = "Status: \(code)\nError: \(error.localizedDescription)\n\nBody:\n\(body)"
+                }
+            }
+    }
+
+    // MARK: - URLSession
+
+    private func performURLSessionRequest(from urlString: String, method: HTTPMethod) {
         guard let url = URL(string: urlString) else {
             isLoading = false
             responseText = "Invalid URL"
             return
         }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         if method == .post {
-            let body: [String: Any] = [
-                "title": "foo",
-                "body": "bar",
-                "userId": 1
-            ]
-            request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+            request.httpBody = try? JSONSerialization.data(
+                withJSONObject: ["title": "foo", "body": "bar", "userId": 1]
+            )
         }
-        
+
         URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 isLoading = false
-                
                 if let error {
-                    responseText = """
-                    [URLSession Request Failed]
-                    
-                    URL:
-                    \(urlString)
-                    
-                    Error:
-                    \(error.localizedDescription)
-                    """
+                    requestFailed = true
+                    responseText = "Error: \(error.localizedDescription)"
                     return
                 }
-                
-                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-                
                 guard let data else {
-                    responseText = """
-                    [URLSession Request Failed]
-                    
-                    URL:
-                    \(urlString)
-                    
-                    Status Code:
-                    \(statusCode)
-                    
-                    No data received
-                    """
+                    requestFailed = true
+                    responseText = "No data received"
                     return
                 }
-                
-                if let prettyJSON = String(data: data, encoding: .utf8)?.prettyPrintedJSON {
-                    responseText = prettyJSON
-                } else {
-                    responseText = String(data: data, encoding: .utf8) ?? "Unable to parse response body"
-                }
+                let code = (response as? HTTPURLResponse)?.statusCode ?? 0
+                if code >= 400 { requestFailed = true }
+                responseText = String(data: data, encoding: .utf8)?.prettyPrintedJSON
+                    ?? String(data: data, encoding: .utf8)
+                    ?? "Unable to parse response"
             }
-        }
-        .resume()
+        }.resume()
     }
 }
 
-@available(iOS 15.0, *)
+// MARK: - Preview
+
 struct DemoAppView_Previews: PreviewProvider {
     static var previews: some View {
         DemoAppView()
+        DemoAppView()
+            .preferredColorScheme(.dark)
     }
 }
 
-// MARK: - JSON Formatter Extension
+// MARK: - JSON Formatter
 
 extension String {
     var prettyPrintedJSON: String? {
@@ -425,10 +406,7 @@ extension String {
                 withJSONObject: jsonObject,
                 options: [.prettyPrinted, .sortedKeys]
             )
-        else {
-            return nil
-        }
-        
+        else { return nil }
         return String(decoding: prettyData, as: UTF8.self)
     }
 }

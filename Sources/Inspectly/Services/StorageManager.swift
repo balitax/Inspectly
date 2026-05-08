@@ -20,23 +20,17 @@ import Foundation
 
 // MARK: - Storage Manager
 
-final class StorageManager: StorageManagerProtocol {
+actor StorageManager: StorageManagerProtocol {
     private let fileManager = FileManager.default
     private let baseDirectory: URL
 
-    /// Concurrent queue: reads run in parallel, writes use a barrier to serialize.
-    private let ioQueue = DispatchQueue(
-        label: "com.inspectly.storage.io",
-        attributes: .concurrent
-    )
-
     init() {
         let fallback = URL(fileURLWithPath: NSTemporaryDirectory())
-        let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first ?? fallback
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first ?? fallback
         baseDirectory = documentsPath.appendingPathComponent("Inspectly", isDirectory: true)
 
-        if !fileManager.fileExists(atPath: baseDirectory.path) {
-            try? fileManager.createDirectory(at: baseDirectory, withIntermediateDirectories: true)
+        if !FileManager.default.fileExists(atPath: baseDirectory.path) {
+            try? FileManager.default.createDirectory(at: baseDirectory, withIntermediateDirectories: true)
         }
     }
 
@@ -46,84 +40,33 @@ final class StorageManager: StorageManagerProtocol {
         encoder.outputFormatting = .prettyPrinted
         let encoded = try encoder.encode(data)
         let fileURL = baseDirectory.appendingPathComponent("\(key).json")
-
-        // Barrier write: blocks until all concurrent reads finish, then writes exclusively.
-        try await withCheckedThrowingContinuation { (cont: CheckedContinuation<Void, Error>) in
-            ioQueue.async(flags: .barrier) {
-                do {
-                    try encoded.write(to: fileURL, options: .atomic)
-                    cont.resume()
-                } catch {
-                    cont.resume(throwing: error)
-                }
-            }
-        }
+        try encoded.write(to: fileURL, options: .atomic)
     }
 
-    func load<T: Decodable>(_ type: T.Type, forKey key: String) async throws -> T? {
+    func load<T: Decodable & Sendable>(_ type: T.Type, forKey key: String) async throws -> T? {
         let fileURL = baseDirectory.appendingPathComponent("\(key).json")
-
-        // Concurrent read: multiple loads can proceed simultaneously.
-        return try await withCheckedThrowingContinuation { (cont: CheckedContinuation<T?, Error>) in
-            ioQueue.async {
-                guard self.fileManager.fileExists(atPath: fileURL.path) else {
-                    cont.resume(returning: nil)
-                    return
-                }
-                do {
-                    let data = try Data(contentsOf: fileURL)
-                    let decoder = JSONDecoder()
-                    decoder.dateDecodingStrategy = .iso8601
-                    cont.resume(returning: try decoder.decode(T.self, from: data))
-                } catch {
-                    cont.resume(throwing: error)
-                }
-            }
-        }
+        guard fileManager.fileExists(atPath: fileURL.path) else { return nil }
+        let data = try Data(contentsOf: fileURL)
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return try decoder.decode(T.self, from: data)
     }
 
     func delete(forKey key: String) async throws {
         let fileURL = baseDirectory.appendingPathComponent("\(key).json")
-        try await withCheckedThrowingContinuation { (cont: CheckedContinuation<Void, Error>) in
-            ioQueue.async(flags: .barrier) {
-                do {
-                    if self.fileManager.fileExists(atPath: fileURL.path) {
-                        try self.fileManager.removeItem(at: fileURL)
-                    }
-                    cont.resume()
-                } catch {
-                    cont.resume(throwing: error)
-                }
-            }
-        }
+        guard fileManager.fileExists(atPath: fileURL.path) else { return }
+        try fileManager.removeItem(at: fileURL)
     }
 
     func exists(forKey key: String) async -> Bool {
         let fileURL = baseDirectory.appendingPathComponent("\(key).json")
-        return await withCheckedContinuation { cont in
-            ioQueue.async {
-                cont.resume(returning: self.fileManager.fileExists(atPath: fileURL.path))
-            }
-        }
+        return fileManager.fileExists(atPath: fileURL.path)
     }
 
     func clearAll() async throws {
-        try await withCheckedThrowingContinuation { (cont: CheckedContinuation<Void, Error>) in
-            ioQueue.async(flags: .barrier) {
-                do {
-                    if self.fileManager.fileExists(atPath: self.baseDirectory.path) {
-                        try self.fileManager.removeItem(at: self.baseDirectory)
-                        try self.fileManager.createDirectory(
-                            at: self.baseDirectory,
-                            withIntermediateDirectories: true
-                        )
-                    }
-                    cont.resume()
-                } catch {
-                    cont.resume(throwing: error)
-                }
-            }
-        }
+        guard fileManager.fileExists(atPath: baseDirectory.path) else { return }
+        try fileManager.removeItem(at: baseDirectory)
+        try fileManager.createDirectory(at: baseDirectory, withIntermediateDirectories: true)
     }
 }
 
@@ -136,7 +79,7 @@ final class MockStorageManager: StorageManagerProtocol {
         store[key] = try JSONEncoder().encode(data)
     }
 
-    func load<T: Decodable>(_ type: T.Type, forKey key: String) async throws -> T? {
+    func load<T: Decodable & Sendable>(_ type: T.Type, forKey key: String) async throws -> T? {
         guard let data = store[key] else { return nil }
         return try JSONDecoder().decode(T.self, from: data)
     }

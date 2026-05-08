@@ -204,6 +204,7 @@ struct RequestListView: View {
         }
         .id(viewModel.listRenderID)
         .listStyle(.insetGrouped)
+        .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 90) }
         .inspectlyNavigationDestination(for: NetworkRequest.self) { request in
             requestDetailDestination(for: request)
         }

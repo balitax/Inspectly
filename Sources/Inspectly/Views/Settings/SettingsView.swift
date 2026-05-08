@@ -38,6 +38,7 @@ struct SettingsView: View {
                 aboutSection
             }
             .listStyle(.insetGrouped)
+            .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 90) }
             .navigationTitle("Settings")
             .alert("Clear All Logs?", isPresented: $viewModel.showClearConfirmation) {
                 Button("Cancel", role: .cancel) {}

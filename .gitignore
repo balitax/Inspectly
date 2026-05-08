@@ -12,6 +12,7 @@ project.xcworkspace/xcshareddata/swiftpm/
 
 # Swift Package Manager
 .swiftpm/
+.build/
 
 # CocoaPods
 Pods/
