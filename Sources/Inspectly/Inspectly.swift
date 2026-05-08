@@ -132,47 +132,31 @@ public final class Inspectly {
     
     /// Present the Inspectly UI manually.
     public static func presentInspector(rootView: UIViewController? = nil) {
-        if #available(iOS 16.0, *) {
-            presentInspectorInternal(rootView: rootView)
-        } else {
-            print("[Inspectly] Warning: Inspectly UI requires iOS 16.0 or newer.")
-        }
-    }
-    
-    @available(iOS 16.0, *)
-    private static func presentInspectorInternal(rootView: UIViewController? = nil) {
         guard let config = configuration else {
             print("[Inspectly] Not enabled. Call Inspectly.enable() first.")
             return
         }
-        
+
         let container = DependencyContainer.shared
-        
+
         if !_isEnabled {
             configureURLProtocol(with: config)
         }
-        
+
         DispatchQueue.main.async {
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                   let window = windowScene.windows.first else { return }
             let presentingVC = window.rootViewController
-            
+
             let contentView = ContentView(container: container) {
                 presentingVC?.dismiss(animated: true)
             }
             let hostingController = UIHostingController(rootView: contentView)
-            hostingController.modalPresentationStyle = .pageSheet
-            
+            hostingController.modalPresentationStyle = .fullScreen
+
             applyTheme(to: hostingController)
             setupThemeObserver()
-            
-            if let sheet = hostingController.sheetPresentationController {
-                sheet.detents = [.large()]
-                sheet.prefersGrabberVisible = true
-                sheet.prefersScrollingExpandsWhenScrolledToEdge = false
-                sheet.largestUndimmedDetentIdentifier = .medium
-            }
-            
+
             if let root = rootView {
                 root.present(hostingController, animated: true)
             } else {

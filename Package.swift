@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "Inspectly",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v16)
     ],
     products: [
         .library(
