@@ -23,8 +23,22 @@
       --border: #E2E8F0;
       --surface: #F8FAFC;
       --white: #FFFFFF;
+      --card: #FFFFFF;
+      --nav-bg: rgba(255,255,255,0.85);
       --radius: 14px;
       --mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="dark"] {
+      --accent: #3B9EFF;
+      --accent-light: #0F2A4A;
+      --text: #F1F5F9;
+      --text-secondary: #94A3B8;
+      --border: #1E293B;
+      --surface: #0F172A;
+      --white: #0F172A;
+      --card: #1E293B;
+      --nav-bg: rgba(10,15,28,0.88);
     }
 
     html { scroll-behavior: smooth; }
@@ -35,6 +49,7 @@
       background: var(--white);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      transition: background 0.2s, color 0.2s;
     }
 
     /* ─── NAV ─── */
@@ -42,12 +57,30 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255,255,255,0.85);
+      background: var(--nav-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 0 24px;
+      transition: background 0.2s;
     }
+
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: background 0.15s, border-color 0.15s;
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover { background: var(--border); }
     .nav-inner {
       max-width: 1100px;
       margin: 0 auto;
@@ -417,9 +450,9 @@
       margin-bottom: 40px;
     }
     .btn-white {
-      background: white;
+      background: var(--white);
       color: var(--accent);
-      border: 1.5px solid white;
+      border: 1.5px solid var(--white);
     }
     .btn-white:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
     .btn-outline-white {
@@ -500,6 +533,7 @@
       <li><a href="https://github.com/balitax/Inspectly" target="_blank">GitHub</a></li>
       <li><a href="https://github.com/balitax/Inspectly" target="_blank" class="nav-cta">Get Started →</a></li>
     </ul>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark mode">🌙</button>
   </div>
 </nav>
 
@@ -787,5 +821,34 @@
   </div>
 </footer>
 
+<script>
+  (function () {
+    var saved = localStorage.getItem('inspectly-theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+
+  function toggleTheme() {
+    var html = document.documentElement;
+    var isDark = html.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      html.removeAttribute('data-theme');
+      localStorage.setItem('inspectly-theme', 'light');
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      localStorage.setItem('inspectly-theme', 'dark');
+    }
+    updateToggleIcon();
+  }
+
+  function updateToggleIcon() {
+    var btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    btn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+  }
+
+  document.addEventListener('DOMContentLoaded', updateToggleIcon);
+</script>
 </body>
 </html>
