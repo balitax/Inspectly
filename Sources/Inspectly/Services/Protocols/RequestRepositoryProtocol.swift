@@ -22,6 +22,7 @@ import Foundation
 
 public protocol RequestRepositoryProtocol {
     func getAllRequests() async -> [NetworkRequest]
+    func getRequests(offset: Int, limit: Int) async -> [NetworkRequest]
     func getRequest(by id: UUID) async -> NetworkRequest?
     func addRequest(_ request: NetworkRequest) async
     func updateRequest(_ request: NetworkRequest) async
@@ -30,4 +31,5 @@ public protocol RequestRepositoryProtocol {
     func unmarkRequests(for stubId: UUID) async
     func searchRequests(query: String) async -> [NetworkRequest]
     func getRequestCount() async -> Int
+    func setMaxRequests(_ max: Int) async
 }

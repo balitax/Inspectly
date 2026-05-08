@@ -24,12 +24,17 @@ final class StorageManager: StorageManagerProtocol {
     private let fileManager = FileManager.default
     private let baseDirectory: URL
 
+    /// Concurrent queue: reads run in parallel, writes use a barrier to serialize.
+    private let ioQueue = DispatchQueue(
+        label: "com.inspectly.storage.io",
+        attributes: .concurrent
+    )
+
     init() {
         let fallback = URL(fileURLWithPath: NSTemporaryDirectory())
         let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first ?? fallback
         baseDirectory = documentsPath.appendingPathComponent("Inspectly", isDirectory: true)
 
-        // Create directory if needed
         if !fileManager.fileExists(atPath: baseDirectory.path) {
             try? fileManager.createDirectory(at: baseDirectory, withIntermediateDirectories: true)
         }
@@ -41,34 +46,83 @@ final class StorageManager: StorageManagerProtocol {
         encoder.outputFormatting = .prettyPrinted
         let encoded = try encoder.encode(data)
         let fileURL = baseDirectory.appendingPathComponent("\(key).json")
-        try encoded.write(to: fileURL)
+
+        // Barrier write: blocks until all concurrent reads finish, then writes exclusively.
+        try await withCheckedThrowingContinuation { (cont: CheckedContinuation<Void, Error>) in
+            ioQueue.async(flags: .barrier) {
+                do {
+                    try encoded.write(to: fileURL, options: .atomic)
+                    cont.resume()
+                } catch {
+                    cont.resume(throwing: error)
+                }
+            }
+        }
     }
 
     func load<T: Decodable>(_ type: T.Type, forKey key: String) async throws -> T? {
         let fileURL = baseDirectory.appendingPathComponent("\(key).json")
-        guard fileManager.fileExists(atPath: fileURL.path) else { return nil }
-        let data = try Data(contentsOf: fileURL)
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        return try decoder.decode(T.self, from: data)
+
+        // Concurrent read: multiple loads can proceed simultaneously.
+        return try await withCheckedThrowingContinuation { (cont: CheckedContinuation<T?, Error>) in
+            ioQueue.async {
+                guard self.fileManager.fileExists(atPath: fileURL.path) else {
+                    cont.resume(returning: nil)
+                    return
+                }
+                do {
+                    let data = try Data(contentsOf: fileURL)
+                    let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = .iso8601
+                    cont.resume(returning: try decoder.decode(T.self, from: data))
+                } catch {
+                    cont.resume(throwing: error)
+                }
+            }
+        }
     }
 
     func delete(forKey key: String) async throws {
         let fileURL = baseDirectory.appendingPathComponent("\(key).json")
-        if fileManager.fileExists(atPath: fileURL.path) {
-            try fileManager.removeItem(at: fileURL)
+        try await withCheckedThrowingContinuation { (cont: CheckedContinuation<Void, Error>) in
+            ioQueue.async(flags: .barrier) {
+                do {
+                    if self.fileManager.fileExists(atPath: fileURL.path) {
+                        try self.fileManager.removeItem(at: fileURL)
+                    }
+                    cont.resume()
+                } catch {
+                    cont.resume(throwing: error)
+                }
+            }
         }
     }
 
     func exists(forKey key: String) async -> Bool {
         let fileURL = baseDirectory.appendingPathComponent("\(key).json")
-        return fileManager.fileExists(atPath: fileURL.path)
+        return await withCheckedContinuation { cont in
+            ioQueue.async {
+                cont.resume(returning: self.fileManager.fileExists(atPath: fileURL.path))
+            }
+        }
     }
 
     func clearAll() async throws {
-        if fileManager.fileExists(atPath: baseDirectory.path) {
-            try fileManager.removeItem(at: baseDirectory)
-            try fileManager.createDirectory(at: baseDirectory, withIntermediateDirectories: true)
+        try await withCheckedThrowingContinuation { (cont: CheckedContinuation<Void, Error>) in
+            ioQueue.async(flags: .barrier) {
+                do {
+                    if self.fileManager.fileExists(atPath: self.baseDirectory.path) {
+                        try self.fileManager.removeItem(at: self.baseDirectory)
+                        try self.fileManager.createDirectory(
+                            at: self.baseDirectory,
+                            withIntermediateDirectories: true
+                        )
+                    }
+                    cont.resume()
+                } catch {
+                    cont.resume(throwing: error)
+                }
+            }
         }
     }
 }

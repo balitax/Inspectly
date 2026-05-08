@@ -240,8 +240,16 @@ public final class Inspectly {
             object: nil,
             queue: .main
         ) { notification in
-            guard let settings = notification.object as? AppSettings,
-                  let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            guard let settings = notification.object as? AppSettings else { return }
+
+            // Propagate max storage limit to the repository
+            let maxRequests = settings.maxStoredRequests
+            Task {
+                await DependencyContainer.shared.requestRepository.setMaxRequests(maxRequests)
+            }
+
+            // Apply theme override
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                   let window = windowScene.windows.first,
                   let hostingController = window.rootViewController?.presentedViewController as? UIHostingController<ContentView> else { return }
 

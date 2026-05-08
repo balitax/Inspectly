@@ -25,6 +25,7 @@ struct HeadersTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
     @State private var showingRequest = true
     @State private var copiedHeaderId: UUID?
+    @State private var revealedHeaderIds: Set<UUID> = []
 
     var body: some View {
         ScrollView {
@@ -88,18 +89,31 @@ struct HeadersTabView: View {
 
             // Key + Value stack
             VStack(alignment: .leading, spacing: 4) {
-                Text(header.key.uppercased())
-                    .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                    .foregroundStyle(.secondary)
-                    .tracking(0.4)
+                HStack(spacing: 6) {
+                    Text(header.key.uppercased())
+                        .font(.system(size: 10, weight: .semibold, design: .monospaced))
+                        .foregroundStyle(.secondary)
+                        .tracking(0.4)
 
-                Text(header.formattedValue)
+                    if header.isSensitive {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 8))
+                            .foregroundStyle(.orange)
+                    }
+                }
+
+                let isRevealed = revealedHeaderIds.contains(header.id)
+                let displayValue = header.isSensitive && !isRevealed
+                    ? header.maskedValue
+                    : header.formattedValue
+
+                Text(displayValue)
                     .font(.system(size: 13, design: .monospaced))
-                    .foregroundStyle(.primary)
-                    .textSelection(.enabled)
+                    .foregroundStyle(header.isSensitive && !isRevealed ? .secondary : .primary)
+                    .textSelection(isRevealed ? .enabled : .disabled)
                     .fixedSize(horizontal: false, vertical: true)
 
-                if header.formattedValue != header.value {
+                if !header.isSensitive && header.formattedValue != header.value {
                     Text(header.value)
                         .font(.system(size: 10, design: .monospaced))
                         .foregroundStyle(.tertiary)
@@ -110,26 +124,51 @@ struct HeadersTabView: View {
 
             Spacer(minLength: 8)
 
-            // Copy button
-            Button {
-                UIPasteboard.general.string = header.value
-                withAnimation(.easeInOut(duration: 0.15)) {
-                    copiedHeaderId = header.id
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    withAnimation(.easeInOut(duration: 0.15)) {
-                        if copiedHeaderId == header.id { copiedHeaderId = nil }
+            // Action buttons
+            HStack(spacing: 6) {
+                // Reveal toggle (sensitive only)
+                if header.isSensitive {
+                    let isRevealed = revealedHeaderIds.contains(header.id)
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.15)) {
+                            if isRevealed {
+                                revealedHeaderIds.remove(header.id)
+                            } else {
+                                revealedHeaderIds.insert(header.id)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: isRevealed ? "eye.slash" : "eye")
+                            .font(.system(size: 12))
+                            .foregroundStyle(.orange)
+                            .frame(width: 28, height: 28)
+                            .background(Color.orange.opacity(0.1))
+                            .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
                     }
+                    .buttonStyle(.plain)
                 }
-            } label: {
-                Image(systemName: copiedHeaderId == header.id ? "checkmark" : "doc.on.doc")
-                    .font(.system(size: 12))
-                    .foregroundStyle(copiedHeaderId == header.id ? .green : .secondary)
-                    .frame(width: 28, height: 28)
-                    .background(Color(.quaternarySystemFill))
-                    .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+
+                // Copy button
+                Button {
+                    UIPasteboard.general.string = header.value
+                    withAnimation(.easeInOut(duration: 0.15)) {
+                        copiedHeaderId = header.id
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        withAnimation(.easeInOut(duration: 0.15)) {
+                            if copiedHeaderId == header.id { copiedHeaderId = nil }
+                        }
+                    }
+                } label: {
+                    Image(systemName: copiedHeaderId == header.id ? "checkmark" : "doc.on.doc")
+                        .font(.system(size: 12))
+                        .foregroundStyle(copiedHeaderId == header.id ? .green : .secondary)
+                        .frame(width: 28, height: 28)
+                        .background(Color(.quaternarySystemFill))
+                        .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                }
+                .buttonStyle(.plain)
             }
-            .buttonStyle(.plain)
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 14)

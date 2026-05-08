@@ -134,6 +134,7 @@ struct RequestListView: View {
             ForEach(viewModel.groupedRequests) { group in
                 Section {
                     ForEach(group.requests) { request in
+
                         InspectlyNavigationLink(value: request) { request in
                             requestDetailDestination(for: request)
                         } label: {
@@ -170,6 +171,28 @@ struct RequestListView: View {
                     }
                 } header: {
                     sectionHeader(group: group)
+                }
+            }
+
+            // Load More
+            if viewModel.hasMore {
+                Section {
+                    HStack {
+                        Spacer()
+                        if viewModel.isLoadingMore {
+                            ProgressView()
+                                .controlSize(.small)
+                        } else {
+                            ProgressView()
+                                .controlSize(.small)
+                                .onAppear {
+                                    Task { await viewModel.loadMore() }
+                                }
+                        }
+                        Spacer()
+                    }
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
                 }
             }
         }

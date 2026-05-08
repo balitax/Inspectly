@@ -102,6 +102,47 @@ extension RequestHeader {
     }
 }
 
+// MARK: - Sensitive Header Detection
+
+extension RequestHeader {
+    /// Exact lowercased header names that always contain sensitive data.
+    private static let sensitiveExactKeys: Set<String> = [
+        "authorization",
+        "proxy-authorization",
+        "cookie",
+        "set-cookie",
+        "x-api-key",
+        "api-key",
+        "apikey",
+        "x-auth-token",
+        "x-access-token",
+        "x-secret",
+        "x-csrf-token",
+        "x-session-token",
+        "x-auth",
+    ]
+
+    /// Substrings that, if present in the lowercased key, mark the header sensitive.
+    private static let sensitiveSubstrings: [String] = [
+        "token", "secret", "password", "credential", "apikey", "api_key", "api-key",
+    ]
+
+    /// Returns `true` when this header is considered sensitive and should be masked by default.
+    var isSensitive: Bool {
+        let lower = key.lowercased()
+        if Self.sensitiveExactKeys.contains(lower) { return true }
+        return Self.sensitiveSubstrings.contains { lower.contains($0) }
+    }
+
+    /// Masked representation — shows first 4 chars then bullet padding.
+    /// Non-sensitive headers return `value` unchanged.
+    var maskedValue: String {
+        guard isSensitive, !value.isEmpty else { return value }
+        let prefix = String(value.prefix(4))
+        return prefix + String(repeating: "•", count: 8)
+    }
+}
+
 // MARK: - Common Headers
 
 extension RequestHeader {

@@ -92,6 +92,8 @@ final class RequestListViewModel: ObservableObject {
     @Published var sortOption: RequestSortOption = .latest
     @Published var filter: RequestFilter = RequestFilter()
     @Published var isLoading: Bool = false
+    @Published var isLoadingMore: Bool = false
+    @Published var hasMore: Bool = false
     @Published var showFilterSheet: Bool = false
     @Published var showClearConfirmation: Bool = false
     @Published var listRenderID: UUID = UUID()
@@ -100,6 +102,8 @@ final class RequestListViewModel: ObservableObject {
 
     let requestRepository: RequestRepositoryProtocol
     private var hasLoadedOnce = false
+    private var totalCount: Int = 0
+    private let pageSize = 50
 
     init(requestRepository: RequestRepositoryProtocol) {
         self.requestRepository = requestRepository
@@ -119,10 +123,22 @@ final class RequestListViewModel: ObservableObject {
     func loadRequests() async {
         isLoading = true
         errorMessage = nil
-        requests = await requestRepository.getAllRequests()
+        totalCount = await requestRepository.getRequestCount()
+        requests = await requestRepository.getRequests(offset: 0, limit: pageSize)
+        hasMore = requests.count < totalCount
         applyFiltersAndSort()
         isLoading = false
         hasLoadedOnce = true
+    }
+
+    func loadMore() async {
+        guard hasMore, !isLoadingMore, !isLoading else { return }
+        isLoadingMore = true
+        let nextBatch = await requestRepository.getRequests(offset: requests.count, limit: pageSize)
+        requests.append(contentsOf: nextBatch)
+        hasMore = requests.count < totalCount
+        applyFiltersAndSort()
+        isLoadingMore = false
     }
 
     func loadRequestsIfNeeded() async {
@@ -208,6 +224,8 @@ final class RequestListViewModel: ObservableObject {
         await requestRepository.deleteAllRequests()
         requests.removeAll()
         groupedRequests.removeAll()
+        totalCount = 0
+        hasMore = false
         showClearConfirmation = false
     }
 

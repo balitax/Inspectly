@@ -24,10 +24,16 @@ actor RequestRepository: RequestRepositoryProtocol {
     private var requests: [NetworkRequest]
     private let storageManager: StorageManagerProtocol
     private let storageKey = "inspectly_requests"
+    private var maxRequests: Int
 
-    init(storageManager: StorageManagerProtocol, initialRequests: [NetworkRequest] = []) {
+    init(
+        storageManager: StorageManagerProtocol,
+        initialRequests: [NetworkRequest] = [],
+        maxRequests: Int = 500
+    ) {
         self.storageManager = storageManager
         self.requests = initialRequests
+        self.maxRequests = maxRequests
         Task {
             await self.loadFromStorage()
         }
@@ -37,13 +43,31 @@ actor RequestRepository: RequestRepositoryProtocol {
         return requests
     }
 
+    func getRequests(offset: Int, limit: Int) async -> [NetworkRequest] {
+        guard offset < requests.count else { return [] }
+        let end = min(offset + limit, requests.count)
+        return Array(requests[offset..<end])
+    }
+
     func getRequest(by id: UUID) async -> NetworkRequest? {
         return requests.first { $0.id == id }
     }
 
     func addRequest(_ request: NetworkRequest) async {
         requests.insert(request, at: 0)
+        // Enforce max storage — trim oldest requests beyond the limit
+        if requests.count > maxRequests {
+            requests = Array(requests.prefix(maxRequests))
+        }
         await persist()
+    }
+
+    func setMaxRequests(_ max: Int) async {
+        maxRequests = max
+        if requests.count > max {
+            requests = Array(requests.prefix(max))
+            await persist()
+        }
     }
 
     func updateRequest(_ request: NetworkRequest) async {
@@ -132,7 +156,12 @@ actor MockRequestRepository: RequestRepositoryProtocol {
     }
 
     func getAllRequests() async -> [NetworkRequest] { requests }
+    func getRequests(offset: Int, limit: Int) async -> [NetworkRequest] {
+        guard offset < requests.count else { return [] }
+        return Array(requests[offset..<min(offset + limit, requests.count)])
+    }
     func getRequest(by id: UUID) async -> NetworkRequest? { requests.first { $0.id == id } }
+    func setMaxRequests(_ max: Int) async {}
     func addRequest(_ request: NetworkRequest) async {
         requests.insert(request, at: 0)
         await publishRequestsDidChange()

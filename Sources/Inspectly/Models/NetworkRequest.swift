@@ -288,7 +288,7 @@ public struct NetworkRequest: Identifiable, Codable, Equatable, Hashable {
         components.append("-X \(method.rawValue)")
 
         for header in requestHeaders {
-            components.append("-H '\(header.key): \(header.value)'")
+            components.append("-H '\(header.key): \(header.maskedValue)'")
         }
 
         if let body = requestBody?.rawString, !body.isEmpty {
