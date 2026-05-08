@@ -26,49 +26,52 @@ struct RequestRowView: View {
 
     var body: some View {
         HStack(spacing: 10) {
+            // Left status accent line
+            RoundedRectangle(cornerRadius: 2, style: .continuous)
+                .fill(statusAccentColor)
+                .frame(width: 3)
+                .padding(.vertical, 2)
+
             // Method badge
             HTTPMethodBadge(method: request.method)
 
-            // Request info
-            VStack(alignment: .leading, spacing: 3) {
-                HStack(spacing: 5) {
+            // Main content
+            VStack(alignment: .leading, spacing: 4) {
+                // Line 1: URL path + stub indicator
+                HStack(spacing: 6) {
                     Text(request.shortURL)
-                        .font(.system(size: 13, weight: .medium))
+                        .font(.system(size: 13, weight: .semibold))
                         .foregroundStyle(.primary)
                         .lineLimit(1)
 
                     if request.isStubbed {
                         Image(systemName: "hammer.fill")
-                            .font(.system(size: 8))
+                            .font(.system(size: 9))
                             .foregroundStyle(.accentColor)
-                            .padding(3)
-                            .background(Color.accentColor.opacity(0.12))
-                            .clipShape(Circle())
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 2)
+                            .background(Color.accentColor.opacity(0.1))
+                            .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
                     }
                 }
 
-                HStack(spacing: 8) {
-                    Text(request.host)
-                        .font(.system(size: 11))
-                        .foregroundStyle(.tertiary)
-                        .lineLimit(1)
+                // Line 2: host · timestamp · indicators
+                HStack(spacing: 5) {
+                    if !request.host.isEmpty {
+                        Text(request.host)
+                            .font(.system(size: 11))
+                            .foregroundStyle(.tertiary)
+                            .lineLimit(1)
 
-                    Text("·")
-                        .foregroundStyle(.quaternary)
+                        Text("·")
+                            .font(.system(size: 11))
+                            .foregroundStyle(.quaternary)
+                    }
 
                     Text(request.timestamp.relativeTimeString)
                         .font(.system(size: 11))
                         .foregroundStyle(.tertiary)
-                }
-            }
 
-            Spacer()
-
-            // Right side indicators
-            VStack(alignment: .trailing, spacing: 4) {
-                StatusBadgeView(statusCode: request.statusCode)
-
-                HStack(spacing: 6) {
                     if request.isPinned {
                         Image(systemName: "pin.fill")
                             .font(.system(size: 8))
@@ -80,14 +83,31 @@ struct RequestRowView: View {
                             .font(.system(size: 8))
                             .foregroundStyle(.pink)
                     }
-
-                    Text(request.formattedDuration)
-                        .font(.system(size: 10, weight: .medium, design: .monospaced))
-                        .foregroundStyle(durationColor)
                 }
             }
+
+            Spacer(minLength: 6)
+
+            // Right: status badge + duration
+            VStack(alignment: .trailing, spacing: 5) {
+                StatusBadgeView(statusCode: request.statusCode)
+
+                Text(request.formattedDuration)
+                    .font(.system(size: 10, weight: .medium, design: .monospaced))
+                    .foregroundStyle(durationColor)
+            }
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 6)
+    }
+
+    // MARK: - Computed Colors
+
+    private var statusAccentColor: Color {
+        guard let code = request.statusCode else {
+            return request.status == .timeout || request.status == .noInternet
+                ? .red : Color(.quaternaryLabel)
+        }
+        return Color.forStatusCode(code)
     }
 
     private var durationColor: Color {
@@ -106,6 +126,7 @@ struct RequestRowView_Previews: PreviewProvider {
         List {
             RequestRowView(request: NetworkRequest(method: .get, url: "https://api.example.com/users", host: "api.example.com", path: "/users", statusCode: 200))
             RequestRowView(request: NetworkRequest(method: .post, url: "https://api.example.com/login", host: "api.example.com", path: "/login", statusCode: 201))
+            RequestRowView(request: NetworkRequest(method: .delete, url: "https://api.example.com/users/1", host: "api.example.com", path: "/users/1", statusCode: 404))
             RequestRowView(request: NetworkRequest(method: .get, url: "https://api.example.com/error", host: "api.example.com", path: "/error", statusCode: 500))
         }
         .listStyle(.insetGrouped)

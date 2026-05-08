@@ -63,6 +63,8 @@ struct RequestBodyTabView: View {
             )
             .font(.system(size: 11, weight: .medium))
             .foregroundStyle(.secondary)
+            .lineLimit(1)
+            .fixedSize(horizontal: true, vertical: false)
             .padding(.horizontal, 10)
             .padding(.vertical, 5)
             .background(Color(.quaternarySystemFill))

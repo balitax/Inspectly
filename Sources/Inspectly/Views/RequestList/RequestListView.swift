@@ -34,7 +34,7 @@ struct RequestListView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        InspectlyNavigationStack {
             Group {
                 if viewModel.isLoading && viewModel.requests.isEmpty {
                     ProgressView()
@@ -68,17 +68,15 @@ struct RequestListView: View {
                 viewModel.applyFiltersAndSort()
             }
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     if !viewModel.requests.isEmpty {
                         clearButton
                     }
                 }
-
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     sortMenu
                 }
-
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     filterButton
                 }
             }
@@ -89,7 +87,7 @@ struct RequestListView: View {
                 FilterSheetView(filter: $viewModel.filter) {
                     viewModel.applyFiltersAndSort()
                 }
-                .presentationDetents([.medium, .large])
+                .inspectlyPresentationDetents([.medium, .large])
             }
             .alert("Clear All Requests?", isPresented: $viewModel.showClearConfirmation) {
                 Button("Cancel", role: .cancel) {}
@@ -97,15 +95,13 @@ struct RequestListView: View {
                     Task { await viewModel.clearRequests() }
                 }
             } message: {
-                Text("This will permanently delete all captured requests from the Requests tab. This action cannot be undone.")
+                Text("This will permanently delete all captured requests. This action cannot be undone.")
             }
             .task {
                 await viewModel.loadRequestsIfNeeded()
             }
             .onReceive(NotificationCenter.default.publisher(for: .inspectlyRequestsDidChange)) { _ in
-                Task {
-                    await viewModel.refresh()
-                }
+                Task { await viewModel.refresh() }
             }
             .onReceive(NotificationCenter.default.publisher(for: .inspectlySettingsDidChange)) { notification in
                 if let settings = notification.object as? AppSettings {
@@ -138,7 +134,9 @@ struct RequestListView: View {
             ForEach(viewModel.groupedRequests) { group in
                 Section {
                     ForEach(group.requests) { request in
-                        NavigationLink(value: request) {
+                        InspectlyNavigationLink(value: request) { request in
+                            requestDetailDestination(for: request)
+                        } label: {
                             RequestRowView(request: request)
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
@@ -171,35 +169,57 @@ struct RequestListView: View {
                         }
                     }
                 } header: {
-                    Text(group.title)
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.secondary)
+                    sectionHeader(group: group)
                 }
             }
         }
         .id(viewModel.listRenderID)
         .listStyle(.insetGrouped)
-        .navigationDestination(for: NetworkRequest.self) { request in
-            RequestDetailView(
-                viewModel: RequestDetailViewModel(
-                    request: request,
-                    requestRepository: viewModel.requestRepository
-                ),
-                stubRepository: stubRepository,
-                onStubSaved: { savedStub in
-                    viewModel.markRequestAsStubbed(request.id, stubId: savedStub.id)
-                    await viewModel.refresh()
-                },
-                onDismissed: {
-                    Task {
-                        await viewModel.refresh()
-                    }
-                }
-            )
+        .inspectlyNavigationDestination(for: NetworkRequest.self) { request in
+            requestDetailDestination(for: request)
         }
     }
 
-    // MARK: - Sort Menu
+    // MARK: - Section Header
+
+    private func sectionHeader(group: RequestGroup) -> some View {
+        HStack(spacing: 6) {
+            Text(group.title.uppercased())
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundStyle(.secondary)
+                .tracking(0.3)
+
+            Text("\(group.requests.count)")
+                .font(.system(size: 10, weight: .semibold, design: .monospaced))
+                .foregroundStyle(.tertiary)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 2)
+                .background(Color(.quaternarySystemFill))
+                .clipShape(Capsule())
+        }
+    }
+
+    // MARK: - Navigation Destination
+
+    @ViewBuilder
+    private func requestDetailDestination(for request: NetworkRequest) -> some View {
+        RequestDetailView(
+            viewModel: RequestDetailViewModel(
+                request: request,
+                requestRepository: viewModel.requestRepository
+            ),
+            stubRepository: stubRepository,
+            onStubSaved: { savedStub in
+                viewModel.markRequestAsStubbed(request.id, stubId: savedStub.id)
+                await viewModel.refresh()
+            },
+            onDismissed: {
+                Task { await viewModel.refresh() }
+            }
+        )
+    }
+
+    // MARK: - Toolbar
 
     private var sortMenu: some View {
         Menu {
@@ -223,8 +243,6 @@ struct RequestListView: View {
         }
     }
 
-    // MARK: - Clear Button
-
     private var clearButton: some View {
         Button(role: .destructive) {
             viewModel.showClearConfirmation = true
@@ -233,8 +251,6 @@ struct RequestListView: View {
                 .font(.system(size: 14))
         }
     }
-
-    // MARK: - Filter Button
 
     private var filterButton: some View {
         Button {
@@ -257,61 +273,70 @@ struct RequestListView: View {
     // MARK: - Active Filter Bar
 
     private var activeFilterBar: some View {
-        HStack {
+        HStack(spacing: 8) {
             Image(systemName: "line.3.horizontal.decrease")
                 .font(.system(size: 11))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.accentColor)
 
             Text("\(viewModel.totalFilteredCount) results")
-                .font(.system(size: 12, weight: .medium))
-                .foregroundStyle(.secondary)
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(.primary)
+
+            Text("filtered")
+                .font(.system(size: 11))
+                .foregroundStyle(.tertiary)
 
             Spacer()
 
-            Button("Clear") {
+            Button {
                 viewModel.clearFilter()
                 viewModel.searchText = ""
+            } label: {
+                Text("Clear")
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundStyle(.accentColor)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    .background(Color.accentColor.opacity(0.1))
+                    .clipShape(Capsule())
             }
-            .font(.system(size: 12, weight: .medium))
+            .buttonStyle(.plain)
         }
+        .padding(.vertical, 4)
         .listRowBackground(Color.clear)
+        .listRowSeparator(.hidden)
     }
 
     // MARK: - Throttling Banner
 
     private var throttlingBanner: some View {
-        HStack(spacing: 12) {
-            ZStack {
-                Circle()
-                    .fill(Color.orange.opacity(0.15))
-                    .frame(width: 32, height: 32)
-
-                Image(systemName: viewModel.activeThrottling.iconName)
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundStyle(.orange)
-            }
+        HStack(spacing: 10) {
+            Image(systemName: viewModel.activeThrottling.iconName)
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(.orange)
+                .frame(width: 32, height: 32)
+                .background(Color.orange.opacity(0.12))
+                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
 
             VStack(alignment: .leading, spacing: 2) {
-                Text("Network Throttling Active: \(viewModel.activeThrottling.displayName)")
-                    .font(.system(size: 13, weight: .bold))
+                Text("Throttling: \(viewModel.activeThrottling.displayName)")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(.orange)
 
                 Text(viewModel.activeThrottling.description)
                     .font(.system(size: 11))
                     .foregroundStyle(.secondary)
+                    .lineLimit(1)
             }
 
             Spacer()
-
-            Image(systemName: "chevron.right")
-                .font(.system(size: 10, weight: .bold))
-                .foregroundStyle(.secondary.opacity(0.5))
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 6)
         .listRowBackground(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color.orange.opacity(0.05))
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .fill(Color.orange.opacity(0.07))
                 .padding(.horizontal, 4)
-                .padding(.vertical, 4)
+                .padding(.vertical, 3)
         )
         .listRowSeparator(.hidden)
     }
