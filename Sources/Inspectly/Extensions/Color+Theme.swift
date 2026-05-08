@@ -100,3 +100,8 @@ extension Color {
     static let stubBadge = accentIndigo
 }
 
+// MARK: - ShapeStyle Extension
+
+extension ShapeStyle where Self == Color {
+    static var accentColor: Color { Color(.label) }
+}
