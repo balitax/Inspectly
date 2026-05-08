@@ -27,28 +27,13 @@ struct SettingsView: View {
     var body: some View {
         InspectlyNavigationStack {
             List {
-                // MARK: - Logging Section
                 loggingSection
-
-                // MARK: - Stubs Section
                 stubsSection
-
-                // MARK: - Network Throttling
                 networkThrottlingSection
-
-                // MARK: - Ignored Hosts
                 ignoredHostsSection
-
-                // MARK: - Storage
                 storageSection
-
-                // MARK: - Display
                 displaySection
-
-                // MARK: - Data Management
                 dataManagementSection
-
-                // MARK: - About
                 aboutSection
             }
             .listStyle(.insetGrouped)
@@ -98,12 +83,15 @@ struct SettingsView: View {
     private var loggingSection: some View {
         Section {
             Toggle(isOn: $viewModel.settings.isLoggingEnabled) {
-                Label("Enable Logging", systemImage: "antenna.radiowaves.left.and.right")
-                    .font(.system(size: 14))
+                settingRow(
+                    icon: "antenna.radiowaves.left.and.right",
+                    color: .green,
+                    title: "Enable Logging"
+                )
             }
-            .tint(.accentColor)
+            .tint(.green)
         } header: {
-            Text("Logging")
+            sectionHeader("Logging")
         } footer: {
             Text("When enabled, Inspectly captures all network requests and responses.")
         }
@@ -114,12 +102,15 @@ struct SettingsView: View {
     private var stubsSection: some View {
         Section {
             Toggle(isOn: $viewModel.settings.areStubsEnabled) {
-                Label("Enable Stubs Globally", systemImage: "hammer")
-                    .font(.system(size: 14))
+                settingRow(
+                    icon: "hammer.fill",
+                    color: .accentIndigo,
+                    title: "Enable Stubs Globally"
+                )
             }
-            .tint(.accentColor)
+            .tint(.accentIndigo)
         } header: {
-            Text("Stubs")
+            sectionHeader("Stubs")
         } footer: {
             Text("When enabled, matching network requests will return stubbed responses.")
         }
@@ -129,12 +120,11 @@ struct SettingsView: View {
 
     private var networkThrottlingSection: some View {
         Section {
-            HStack {
-                Label("Preset", systemImage: viewModel.settings.networkThrottlingPreset.iconName)
-                    .font(.system(size: 14))
-
+            HStack(spacing: 12) {
+                settingIcon(viewModel.settings.networkThrottlingPreset.iconName, color: .orange)
+                Text("Preset")
+                    .font(.system(size: 15))
                 Spacer()
-
                 Picker("", selection: $viewModel.settings.networkThrottlingPreset) {
                     ForEach(NetworkThrottlingPreset.allCases) { preset in
                         Text(preset.displayName).tag(preset)
@@ -143,77 +133,88 @@ struct SettingsView: View {
                 .pickerStyle(.menu)
             }
 
-            if viewModel.settings.networkThrottlingPreset == .custom {
-                VStack(alignment: .leading, spacing: 12) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        HStack {
-                            Text("Request Delay")
-                                .font(.system(size: 13, weight: .medium))
-                            Spacer()
-                            Text(String(format: "%.1fs", viewModel.settings.customNetworkDelay))
-                                .font(.system(size: 12, weight: .bold))
-                                .monospaced()
-                        }
-                        
-                        Slider(value: $viewModel.settings.customNetworkDelay, in: 0...30, step: 0.5) { _ in
-                            Task { await viewModel.saveSettings() }
-                        }
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        Toggle(isOn: Binding(
-                            get: { viewModel.settings.customNetworkBandwidth != nil },
-                            set: { isEnabled in
-                                viewModel.settings.customNetworkBandwidth = isEnabled ? 1_000_000 : nil
-                                Task { await viewModel.saveSettings() }
-                            }
-                        )) {
-                            Text("Limit Bandwidth")
-                                .font(.system(size: 13, weight: .medium))
-                        }
-                        .tint(.accentColor)
-                        
-                        if let bandwidth = viewModel.settings.customNetworkBandwidth {
-                            VStack(alignment: .leading, spacing: 4) {
-                                HStack {
-                                    Text("Speed Limit")
-                                        .font(.system(size: 12))
-                                        .foregroundStyle(.secondary)
-                                    Spacer()
-                                    Text("\(Int(bandwidth / 1024)) KB/s")
-                                        .font(.system(size: 12, weight: .bold))
-                                        .monospaced()
-                                }
-                                
-                                Slider(value: Binding(
-                                    get: { bandwidth },
-                                    set: { newValue in
-                                        viewModel.settings.customNetworkBandwidth = newValue
-                                    }
-                                ), in: 8_192...10_000_000, step: 8_192) { _ in
-                                    Task { await viewModel.saveSettings() }
-                                }
-                            }
-                        }
+            if viewModel.settings.networkThrottlingPreset != .off {
+                HStack(alignment: .top, spacing: 12) {
+                    Color.clear.frame(width: 28, height: 1)
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text(viewModel.settings.networkThrottlingPreset.displayName)
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(.orange)
+                        Text(viewModel.settings.networkThrottlingPreset.description)
+                            .font(.system(size: 12))
+                            .foregroundStyle(.secondary)
                     }
                 }
-                .padding(.vertical, 8)
+                .padding(.vertical, 2)
             }
 
-            VStack(alignment: .leading, spacing: 6) {
-                Text(viewModel.settings.networkThrottlingPreset.displayName)
-                    .font(.system(size: 13, weight: .semibold))
-
-                Text(viewModel.settings.networkThrottlingPreset.description)
-                    .font(.system(size: 12))
-                    .foregroundStyle(.secondary)
+            if viewModel.settings.networkThrottlingPreset == .custom {
+                customThrottlingControls
             }
-            .padding(.vertical, 4)
         } header: {
-            Text("Network Throttling")
+            sectionHeader("Network Throttling")
         } footer: {
             Text("Simulate slower connections or DNS failures for all real requests intercepted by Inspectly.")
         }
+    }
+
+    private var customThrottlingControls: some View {
+        VStack(spacing: 14) {
+            VStack(alignment: .leading, spacing: 6) {
+                HStack {
+                    Text("Request Delay")
+                        .font(.system(size: 13, weight: .medium))
+                    Spacer()
+                    Text(String(format: "%.1fs", viewModel.settings.customNetworkDelay))
+                        .font(.system(size: 12, weight: .bold, design: .monospaced))
+                        .foregroundStyle(.orange)
+                }
+                Slider(value: $viewModel.settings.customNetworkDelay, in: 0...30, step: 0.5) { _ in
+                    Task { await viewModel.saveSettings() }
+                }
+                .tint(.orange)
+            }
+
+            VStack(alignment: .leading, spacing: 6) {
+                Toggle(isOn: Binding(
+                    get: { viewModel.settings.customNetworkBandwidth != nil },
+                    set: { isEnabled in
+                        viewModel.settings.customNetworkBandwidth = isEnabled ? 1_000_000 : nil
+                        Task { await viewModel.saveSettings() }
+                    }
+                )) {
+                    Text("Limit Bandwidth")
+                        .font(.system(size: 13, weight: .medium))
+                }
+                .tint(.orange)
+
+                if let bandwidth = viewModel.settings.customNetworkBandwidth {
+                    VStack(alignment: .leading, spacing: 6) {
+                        HStack {
+                            Text("Speed Limit")
+                                .font(.system(size: 12))
+                                .foregroundStyle(.secondary)
+                            Spacer()
+                            Text("\(Int(bandwidth / 1024)) KB/s")
+                                .font(.system(size: 12, weight: .bold, design: .monospaced))
+                                .foregroundStyle(.orange)
+                        }
+                        Slider(
+                            value: Binding(
+                                get: { bandwidth },
+                                set: { viewModel.settings.customNetworkBandwidth = $0 }
+                            ),
+                            in: 8_192...10_000_000,
+                            step: 8_192
+                        ) { _ in
+                            Task { await viewModel.saveSettings() }
+                        }
+                        .tint(.orange)
+                    }
+                }
+            }
+        }
+        .padding(.vertical, 6)
     }
 
     // MARK: - Ignored Hosts
@@ -221,16 +222,15 @@ struct SettingsView: View {
     private var ignoredHostsSection: some View {
         Section {
             ForEach(viewModel.settings.ignoredHosts) { host in
-                HStack {
-                    Toggle(isOn: Binding(
-                        get: { host.isEnabled },
-                        set: { _ in viewModel.toggleIgnoredHost(host) }
-                    )) {
-                        Text(host.host)
-                            .font(.system(size: 13, design: .monospaced))
-                    }
-                    .tint(.orange)
+                Toggle(isOn: Binding(
+                    get: { host.isEnabled },
+                    set: { _ in viewModel.toggleIgnoredHost(host) }
+                )) {
+                    Text(host.host)
+                        .font(.system(size: 13, design: .monospaced))
+                        .foregroundStyle(host.isEnabled ? .primary : .secondary)
                 }
+                .tint(.orange)
                 .swipeActions {
                     Button(role: .destructive) {
                         viewModel.removeIgnoredHost(host)
@@ -240,22 +240,29 @@ struct SettingsView: View {
                 }
             }
 
-            HStack {
+            HStack(spacing: 10) {
+                Image(systemName: "plus.circle.fill")
+                    .font(.system(size: 18))
+                    .foregroundStyle(viewModel.newIgnoredHost.isEmpty ? Color(.tertiaryLabel) : .green)
+
                 TextField("Add host to ignore...", text: $viewModel.newIgnoredHost)
                     .font(.system(size: 13, design: .monospaced))
                     .autocapitalization(.none)
                     .autocorrectionDisabled()
+                    .onSubmit { viewModel.addIgnoredHost() }
 
-                Button {
-                    viewModel.addIgnoredHost()
-                } label: {
-                    Image(systemName: "plus.circle.fill")
-                        .foregroundColor(.accentColor)
+                if !viewModel.newIgnoredHost.isEmpty {
+                    Button {
+                        viewModel.addIgnoredHost()
+                    } label: {
+                        Text("Add")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(.green)
+                    }
                 }
-                .disabled(viewModel.newIgnoredHost.isEmpty)
             }
         } header: {
-            Text("Ignored Hosts")
+            sectionHeader("Ignored Hosts")
         } footer: {
             Text("Requests to these hosts will not be captured.")
         }
@@ -265,9 +272,10 @@ struct SettingsView: View {
 
     private var storageSection: some View {
         Section {
-            HStack {
-                Label("Max Stored Requests", systemImage: "internaldrive")
-                    .font(.system(size: 14))
+            HStack(spacing: 12) {
+                settingIcon("internaldrive.fill", color: .blue)
+                Text("Max Stored Requests")
+                    .font(.system(size: 15))
                 Spacer()
                 Picker("", selection: $viewModel.settings.maxStoredRequests) {
                     Text("100").tag(100)
@@ -279,7 +287,9 @@ struct SettingsView: View {
                 .pickerStyle(.menu)
             }
         } header: {
-            Text("Storage")
+            sectionHeader("Storage")
+        } footer: {
+            Text("Older requests are automatically removed when this limit is reached.")
         }
     }
 
@@ -287,12 +297,11 @@ struct SettingsView: View {
 
     private var displaySection: some View {
         Section {
-            HStack {
-                Label("Theme", systemImage: "circle.lefthalf.filled")
-                    .font(.system(size: 14))
-
+            HStack(spacing: 12) {
+                settingIcon("circle.lefthalf.filled", color: .purple)
+                Text("Theme")
+                    .font(.system(size: 15))
                 Spacer()
-
                 Picker("", selection: Binding(
                     get: {
                         switch viewModel.settings.isDarkModeOverride {
@@ -320,19 +329,34 @@ struct SettingsView: View {
                 }
             }
 
-            Toggle(isOn: $viewModel.settings.isAutoResponsePrettifying) {
-                Label("Auto-Prettify JSON", systemImage: "text.alignleft")
-                    .font(.system(size: 14))
+            Toggle(isOn: $viewModel.settings.isShakeGestureEnabled) {
+                settingRow(
+                    icon: "iphone.radiowaves.left.and.right",
+                    color: .pink,
+                    title: "Shake to Open"
+                )
             }
-            .tint(.accentColor)
+            .tint(.pink)
+
+            Toggle(isOn: $viewModel.settings.isAutoResponsePrettifying) {
+                settingRow(
+                    icon: "text.alignleft",
+                    color: .accentTeal,
+                    title: "Auto-Prettify JSON"
+                )
+            }
+            .tint(.accentTeal)
 
             Toggle(isOn: $viewModel.settings.isRequestBodyTruncation) {
-                Label("Truncate Large Bodies", systemImage: "scissors")
-                    .font(.system(size: 14))
+                settingRow(
+                    icon: "scissors",
+                    color: Color(.systemGray),
+                    title: "Truncate Large Bodies"
+                )
             }
-            .tint(.accentColor)
+            .tint(Color(.systemGray))
         } header: {
-            Text("Display")
+            sectionHeader("Display")
         }
     }
 
@@ -341,28 +365,48 @@ struct SettingsView: View {
     private var dataManagementSection: some View {
         Section {
             Button {
-                viewModel.showClearConfirmation = true
-            } label: {
-                Label("Clear All Logs", systemImage: "trash")
-                    .font(.system(size: 14))
-                    .foregroundStyle(.red)
-            }
-
-            Button {
                 Task { await viewModel.exportLogs() }
             } label: {
-                Label("Export Logs", systemImage: "square.and.arrow.up")
-                    .font(.system(size: 14))
+                HStack(spacing: 12) {
+                    settingIcon("arrow.up.doc.fill", color: .blue)
+                    Text("Export Logs")
+                        .font(.system(size: 15))
+                        .foregroundStyle(.primary)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundStyle(Color(.tertiaryLabel))
+                }
             }
 
             Button {
                 Task { await viewModel.exportStubs() }
             } label: {
-                Label("Export Stubs", systemImage: "square.and.arrow.up")
-                    .font(.system(size: 14))
+                HStack(spacing: 12) {
+                    settingIcon("hammer.circle.fill", color: .accentIndigo)
+                    Text("Export Stubs")
+                        .font(.system(size: 15))
+                        .foregroundStyle(.primary)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundStyle(Color(.tertiaryLabel))
+                }
+            }
+
+            Button {
+                viewModel.showClearConfirmation = true
+            } label: {
+                HStack(spacing: 12) {
+                    settingIcon("trash.fill", color: .red)
+                    Text("Clear All Logs")
+                        .font(.system(size: 15))
+                        .foregroundStyle(.red)
+                    Spacer()
+                }
             }
         } header: {
-            Text("Data Management")
+            sectionHeader("Data Management")
         }
     }
 
@@ -370,36 +414,73 @@ struct SettingsView: View {
 
     private var aboutSection: some View {
         Section {
-            HStack {
+            HStack(spacing: 14) {
+                Image(systemName: "network")
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundStyle(Color.accentIndigo)
+                    .frame(width: 44, height: 44)
+                    .background(Color.accentIndigo.opacity(0.1))
+                    .clipShape(RoundedRectangle(cornerRadius: 11, style: .continuous))
+
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Inspectly")
+                        .font(.system(size: 15, weight: .bold))
+                    Text("Network debugger for iOS developers")
+                        .font(.system(size: 12))
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .padding(.vertical, 4)
+
+            HStack(spacing: 12) {
+                settingIcon("tag.fill", color: Color(.systemGray))
                 Text("Version")
-                    .font(.system(size: 14))
+                    .font(.system(size: 15))
                 Spacer()
                 Text("\(viewModel.appVersion) (\(viewModel.buildNumber))")
                     .font(.system(size: 13, design: .monospaced))
                     .foregroundStyle(.secondary)
             }
 
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Inspectly")
-                    .font(.system(size: 15, weight: .semibold))
-
-                Text("A premium network debugging tool for iOS developers. Inspect API requests, create stubs, and simulate errors — all directly inside your app.")
-                    .font(.system(size: 12))
-                    .foregroundStyle(.secondary)
-            }
-            .padding(.vertical, 4)
-
-            HStack {
+            HStack(spacing: 12) {
+                settingIcon("person.fill", color: .pink)
                 Text("Developer")
-                    .font(.system(size: 14))
+                    .font(.system(size: 15))
                 Spacer()
-                Text("Built with ❤️ by Inspectly Team")
-                    .font(.system(size: 12))
+                Text("Inspectly Team")
+                    .font(.system(size: 13))
                     .foregroundStyle(.secondary)
             }
         } header: {
-            Text("About")
+            sectionHeader("About")
         }
+    }
+
+    // MARK: - Helpers
+
+    @ViewBuilder
+    private func settingRow(icon: String, color: Color, title: String) -> some View {
+        HStack(spacing: 12) {
+            settingIcon(icon, color: color)
+            Text(title)
+                .font(.system(size: 15))
+        }
+    }
+
+    private func settingIcon(_ name: String, color: Color) -> some View {
+        Image(systemName: name)
+            .font(.system(size: 13, weight: .medium))
+            .foregroundStyle(.white)
+            .frame(width: 28, height: 28)
+            .background(color)
+            .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+    }
+
+    private func sectionHeader(_ title: String) -> some View {
+        Text(title.uppercased())
+            .font(.system(size: 10, weight: .semibold))
+            .foregroundStyle(.secondary)
+            .tracking(0.4)
     }
 }
 
