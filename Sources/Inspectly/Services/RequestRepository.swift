@@ -102,6 +102,20 @@ actor RequestRepository: RequestRepositoryProtocol {
         }
     }
 
+    func markRequestsAsStubbed(for stub: RequestStub) async {
+        var didChange = false
+        for i in 0..<requests.count {
+            if stub.matchRule.matches(requests[i]) {
+                requests[i].isStubbed = true
+                requests[i].stubId = stub.id
+                didChange = true
+            }
+        }
+        if didChange {
+            await persist()
+        }
+    }
+
     func searchRequests(query: String) async -> [NetworkRequest] {
         guard !query.isEmpty else { return requests }
         let lowercasedQuery = query.lowercased()
@@ -199,6 +213,15 @@ actor MockRequestRepository: RequestRepositoryProtocol {
         }
         if didChange {
             await publishRequestsDidChange()
+        }
+    }
+
+    func markRequestsAsStubbed(for stub: RequestStub) async {
+        for index in requests.indices {
+            if stub.matchRule.matches(requests[index]) {
+                requests[index].isStubbed = true
+                requests[index].stubId = stub.id
+            }
         }
     }
     func searchRequests(query: String) async -> [NetworkRequest] {

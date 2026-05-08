@@ -29,6 +29,7 @@ public protocol RequestRepositoryProtocol {
     func deleteRequest(_ id: UUID) async
     func deleteAllRequests() async
     func unmarkRequests(for stubId: UUID) async
+    func markRequestsAsStubbed(for stub: RequestStub) async
     func searchRequests(query: String) async -> [NetworkRequest]
     func getRequestCount() async -> Int
     func setMaxRequests(_ max: Int) async

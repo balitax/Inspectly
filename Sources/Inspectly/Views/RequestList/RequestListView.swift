@@ -238,8 +238,7 @@ struct RequestListView: View {
             ),
             stubRepository: stubRepository,
             onStubSaved: { savedStub in
-                viewModel.markRequestAsStubbed(request.id, stubId: savedStub.id)
-                await viewModel.refresh()
+                await viewModel.markRequestsAsStubbed(using: savedStub)
             },
             onDismissed: {
                 Task { await viewModel.refresh() }

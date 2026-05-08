@@ -236,11 +236,13 @@ final class RequestListViewModel: ObservableObject {
         showClearConfirmation = false
     }
 
-    func markRequestAsStubbed(_ requestId: UUID, stubId: UUID) {
-        guard let index = requests.firstIndex(where: { $0.id == requestId }) else { return }
-        requests[index].isStubbed = true
-        requests[index].stubId = stubId
-        requests[index].stubScenarioName = nil
+    func markRequestsAsStubbed(using stub: RequestStub) async {
+        await requestRepository.markRequestsAsStubbed(for: stub)
+        // Sync in-memory array
+        for i in requests.indices where stub.matchRule.matches(requests[i]) {
+            requests[i].isStubbed = true
+            requests[i].stubId = stub.id
+        }
         applyFiltersAndSort()
     }
 

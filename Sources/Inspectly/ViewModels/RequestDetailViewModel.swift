@@ -80,7 +80,7 @@ final class RequestDetailViewModel: ObservableObject {
         request.isStubbed = true
         request.stubId = stub.id
         request.stubScenarioName = nil
-        await requestRepository.updateRequest(request)
+        await requestRepository.markRequestsAsStubbed(for: stub)
     }
 
     // MARK: - Overview Data
