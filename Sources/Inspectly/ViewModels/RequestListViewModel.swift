@@ -101,12 +101,17 @@ final class RequestListViewModel: ObservableObject {
     @Published var activeThrottling: NetworkThrottlingPreset = .off
 
     let requestRepository: RequestRepositoryProtocol
+    let stubRepository: StubRepositoryProtocol
     private var hasLoadedOnce = false
     private var totalCount: Int = 0
     private let pageSize = 50
 
-    init(requestRepository: RequestRepositoryProtocol) {
+    init(
+        requestRepository: RequestRepositoryProtocol,
+        stubRepository: StubRepositoryProtocol = DependencyContainer.shared.stubRepository
+    ) {
         self.requestRepository = requestRepository
+        self.stubRepository = stubRepository
         Task {
             await loadThrottlingStatus()
         }
@@ -223,6 +228,7 @@ final class RequestListViewModel: ObservableObject {
 
     func clearRequests() async {
         await requestRepository.deleteAllRequests()
+        await stubRepository.deleteAllStubs()
         requests.removeAll()
         groupedRequests.removeAll()
         totalCount = 0
@@ -289,7 +295,7 @@ final class RequestListViewModel: ObservableObject {
     // MARK: - Mock
 
     static func mock() -> RequestListViewModel {
-        let vm = RequestListViewModel(requestRepository: MockRequestRepository())
+        let vm = RequestListViewModel(requestRepository: MockRequestRepository(), stubRepository: MockStubRepository())
         vm.requests = []
         vm.applyFiltersAndSort()
         return vm

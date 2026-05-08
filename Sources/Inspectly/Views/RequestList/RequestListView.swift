@@ -95,7 +95,7 @@ struct RequestListView: View {
                     Task { await viewModel.clearRequests() }
                 }
             } message: {
-                Text("This will permanently delete all captured requests. This action cannot be undone.")
+                Text("This will permanently delete all captured requests and stubs. This action cannot be undone.")
             }
             .task {
                 await viewModel.loadRequestsIfNeeded()
