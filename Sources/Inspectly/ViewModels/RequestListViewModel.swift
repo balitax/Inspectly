@@ -21,7 +21,6 @@ import SwiftUI
 
 // MARK: - Sort Option
 
-@available(iOS 15.0, *)
 enum RequestSortOption: String, CaseIterable, Identifiable {
     case latest = "Latest"
     case oldest = "Oldest"
@@ -83,7 +82,6 @@ struct RequestFilter {
 
 // MARK: - Request List View Model
 
-@available(iOS 15.0, *)
 @MainActor
 final class RequestListViewModel: ObservableObject {
     @Published var requests: [NetworkRequest] = []

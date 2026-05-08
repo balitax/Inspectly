@@ -8,7 +8,6 @@
 import SwiftUI
 import WebKit
 
-@available(iOS 15.0, *)
 struct HTMLPreviewView: View {
     let htmlContent: String
     @State private var webViewHeight: CGFloat = 300
@@ -31,7 +30,6 @@ struct HTMLPreviewView: View {
     }
 }
 
-@available(iOS 15.0, *)
 struct HTMLWebView: UIViewRepresentable {
     let html: String
     @Binding var dynamicHeight: CGFloat

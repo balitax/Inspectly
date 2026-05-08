@@ -202,7 +202,6 @@ public final class Inspectly {
         InspectlySwizzler.shared.activate()
     }
     
-    @available(iOS 16.0, *)
     private static func applyTheme(to hostingController: UIHostingController<ContentView>) {
         Task {
             if let settings = try? await DependencyContainer.shared.storageManager.load(AppSettings.self, forKey: "inspectly_settings"),
@@ -214,7 +213,6 @@ public final class Inspectly {
         }
     }
     
-    @available(iOS 16.0, *)
     private static func setupThemeObserver() {
         // Guard against accumulating duplicate observers on every presentInspector() call
         guard themeObserverToken == nil else { return }

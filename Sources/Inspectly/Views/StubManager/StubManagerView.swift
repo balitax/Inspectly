@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Stub Manager View
 
-@available(iOS 16.0, *)
 struct StubManagerView: View {
     @StateObject var viewModel: StubManagerViewModel
 
@@ -244,7 +243,6 @@ struct StubManagerView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct StubManagerView_Previews: PreviewProvider {
     static var previews: some View {
         StubManagerView(viewModel: .mock())

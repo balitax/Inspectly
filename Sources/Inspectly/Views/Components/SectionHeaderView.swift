@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Section Header View
 
-@available(iOS 15.0, *)
 struct SectionHeaderView: View {
     let title: String
     var subtitle: String? = nil
@@ -57,7 +56,6 @@ struct SectionHeaderView: View {
 
 // MARK: - Preview
 
-@available(iOS 15.0, *)
 struct SectionHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20) {

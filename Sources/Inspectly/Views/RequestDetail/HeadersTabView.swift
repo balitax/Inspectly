@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Headers Tab View
 
-@available(iOS 16.0, *)
 struct HeadersTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
     @State private var showingRequest = true
@@ -50,7 +49,6 @@ struct HeadersTabView: View {
 
     // MARK: - Headers Section
 
-    @available(iOS 16.0, *)
     @ViewBuilder
     private func headersSection(headers: [RequestHeader]) -> some View {
         if headers.isEmpty {
@@ -78,7 +76,6 @@ struct HeadersTabView: View {
 
     // MARK: - Header Row
 
-    @available(iOS 16.0, *)
     private func headerRow(_ header: RequestHeader) -> some View {
         HStack(alignment: .top, spacing: 12) {
             // Left accent line
@@ -209,7 +206,6 @@ struct HeadersTabView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct HeadersTabView_Previews: PreviewProvider {
     static var previews: some View {
         HeadersTabView(viewModel: .mock())

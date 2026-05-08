@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Overview Tab View
 
-@available(iOS 16.0, *)
 struct OverviewTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
     @State private var copiedLabel: String?
@@ -177,7 +176,6 @@ struct OverviewTabView: View {
 
 // MARK: - Flow Layout (for tags)
 
-@available(iOS 16.0, *)
 struct FlowLayout: Layout {
     var spacing: CGFloat = 8
 
@@ -219,7 +217,6 @@ struct FlowLayout: Layout {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct OverviewTabView_Previews: PreviewProvider {
     static var previews: some View {
         InspectlyNavigationStack {

@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Stub Detail View
 
-@available(iOS 16.0, *)
 struct StubDetailView: View {
     @StateObject var viewModel: StubDetailViewModel
     var onSave: ((RequestStub) async -> Void)?
@@ -167,7 +166,6 @@ struct StubDetailView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct StubDetailView_Previews: PreviewProvider {
     static var previews: some View {
         InspectlyNavigationStack {

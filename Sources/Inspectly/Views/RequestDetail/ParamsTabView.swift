@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Params Tab View
 
-@available(iOS 16.0, *)
 struct ParamsTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
     @State private var copiedParamId: UUID?
@@ -123,7 +122,6 @@ struct ParamsTabView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct ParamsTabView_Previews: PreviewProvider {
     static var previews: some View {
         ParamsTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .get, url: "https://api.example.com/users?id=1", host: "api.example.com", path: "/users")))

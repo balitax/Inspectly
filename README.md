@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/iOS-13.0%2B-blue" />
+  <img src="https://img.shields.io/badge/iOS-16.0%2B-blue" />
   <img src="https://img.shields.io/badge/Swift-5.9%2B-orange" />
   <img src="https://img.shields.io/badge/License-MIT-green" />
   <img src="https://img.shields.io/badge/SPM-Ready-purple" />
@@ -69,11 +69,9 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 
 ## Requirements
 
-- iOS 13.0+
+- iOS 16.0+
 - Swift 5.9+
 - Xcode 15+
-
-> Note: Core request interception and storage work on iOS 13+. The built-in inspector interface requires iOS 16+.
 
 ---
 

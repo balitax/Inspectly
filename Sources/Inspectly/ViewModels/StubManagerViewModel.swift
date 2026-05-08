@@ -31,7 +31,6 @@ enum StubFilterOption: String, CaseIterable, Identifiable {
 
 // MARK: - Stub Manager View Model
 
-@available(iOS 15.0, *)
 @MainActor
 final class StubManagerViewModel: ObservableObject {
     @Published var stubs: [RequestStub] = []

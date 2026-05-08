@@ -21,7 +21,6 @@ import SwiftUI
 
 // MARK: - Settings View Model
 
-@available(iOS 15.0, *)
 @MainActor
 final class SettingsViewModel: ObservableObject {
     @Published var settings: AppSettings

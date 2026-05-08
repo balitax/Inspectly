@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Response Editor View
 
-@available(iOS 15.0, *)
 struct ResponseEditorView: View {
     @ObservedObject var viewModel: StubDetailViewModel
     
@@ -158,7 +157,6 @@ struct ResponseEditorView: View {
 
 // MARK: - Preview
 
-@available(iOS 15.0, *)
 struct ResponseEditorView_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView {

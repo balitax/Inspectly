@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Empty State View
 
-@available(iOS 15.0, *)
 struct EmptyStateView: View {
     let icon: String
     let title: String
@@ -70,7 +69,6 @@ struct EmptyStateView: View {
 
 // MARK: - Preview
 
-@available(iOS 15.0, *)
 struct EmptyStateView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {

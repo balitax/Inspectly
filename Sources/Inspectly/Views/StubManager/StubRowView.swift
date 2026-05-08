@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Stub Row View
 
-@available(iOS 15.0, *)
 struct StubRowView: View {
     let stub: RequestStub
 
@@ -96,7 +95,6 @@ struct StubRowView: View {
 
 // MARK: - Preview
 
-@available(iOS 15.0, *)
 struct StubRowView_Previews: PreviewProvider {
     static var previews: some View {
         List {

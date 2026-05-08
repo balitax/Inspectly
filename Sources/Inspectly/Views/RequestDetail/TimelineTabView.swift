@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Timeline Tab View
 
-@available(iOS 16.0, *)
 struct TimelineTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
 
@@ -190,7 +189,6 @@ struct TimelineTabView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct TimelineTabView_Previews: PreviewProvider {
     static var previews: some View {
         TimelineTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .get, url: "https://api.example.com/users", host: "api.example.com", path: "/users")))

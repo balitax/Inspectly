@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Settings View
 
-@available(iOS 16.0, *)
 struct SettingsView: View {
     @StateObject var viewModel: SettingsViewModel
 
@@ -523,7 +522,6 @@ struct SettingsView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(viewModel: .mock())

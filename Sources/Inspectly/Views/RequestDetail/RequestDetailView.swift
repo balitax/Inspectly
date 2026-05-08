@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Request Detail View
 
-@available(iOS 16.0, *)
 struct RequestDetailView: View {
     @StateObject var viewModel: RequestDetailViewModel
     let stubRepository: StubRepositoryProtocol
@@ -204,7 +203,6 @@ struct RequestDetailView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct RequestDetailView_Previews: PreviewProvider {
     static var previews: some View {
         InspectlyNavigationStack {

@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Mini Chart View
 
-@available(iOS 15.0, *)
 struct MiniChartView: View {
     let data: [Double]
     var barColor: Color = .chartPrimary
@@ -70,7 +69,6 @@ struct MiniChartView: View {
 
 // MARK: - Preview
 
-@available(iOS 15.0, *)
 struct MiniChartView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 24) {

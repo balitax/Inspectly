@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Status Badge View
 
-@available(iOS 15.0, *)
 struct StatusBadgeView: View {
     let statusCode: Int?
 
@@ -41,7 +40,6 @@ struct StatusBadgeView: View {
 
 // MARK: - Preview
 
-@available(iOS 15.0, *)
 struct StatusBadgeView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 12) {
