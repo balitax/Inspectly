@@ -17,6 +17,7 @@
   <img src="https://img.shields.io/badge/Swift-5.9%2B-orange" />
   <img src="https://img.shields.io/badge/License-MIT-green" />
   <img src="https://img.shields.io/badge/SPM-Ready-purple" />
+  <img src="https://img.shields.io/badge/version-1.1.0-brightgreen" />
 </p>
 
 ---
@@ -29,17 +30,40 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 
 ## Features
 
+### Capture & Inspect
 - Automatic request interception with zero setup
 - Zero external dependencies
 - In-app inspector UI for Requests, Statistics, Stubs, and Settings
 - Request and response inspection including headers, bodies, timing, and metadata
-- **Rich HTML Rendering**: Interactive preview for HTML responses (ideal for debugging server errors)
-- **Smart Content Detection**: Automatic content-type sniffing when server headers are misleading
-- Create API stubs directly from captured requests
-- Enable, disable, duplicate, search, and manage stubs
-- Search, filter, sort, favorite, pin, and clear captured requests
-- Export logs and stubs directly from the app
-- Shake gesture shortcut to quickly open the inspector
+- **Rich HTML Rendering** — interactive preview for HTML responses
+- **Smart Content Detection** — automatic content-type sniffing when server headers are misleading
+- **Sensitive Header Masking** — `Authorization`, `Cookie`, `X-Api-Key` and other sensitive headers are hidden by default with a per-header reveal toggle
+- **Full-Text Search** — search across URL, method, host, status code, request body, response body, and error messages
+
+### Request Management
+- Search, filter, sort, favorite, pin, and tag captured requests
+- Paginated request list with auto-load-more
+- Export logs as JSON directly from the app
+
+### API Stubbing
+- Create stubs directly from any captured request in one tap
+- **Flexible URL Matching** — match stubs by `Exact`, `Contains`, `Prefix`, `Suffix`, or `Regex` URL pattern
+- All requests with matching URLs are automatically marked as stubbed
+- Enable, disable, duplicate, group, and manage stubs
+- Export stubs as JSON for sharing or version control
+
+### Performance & Debugging
+- **Slow Request Detection** — configurable threshold highlights slow requests with visual indicator
+- **Network Throttling** — simulate Edge, 3G, LTE, or custom bandwidth/delay conditions
+- Timeline view for DNS, connect, TLS, TTFB, and transfer phases
+- cURL export with correct shell escaping for all requests
+
+### Settings
+- Configure max stored requests (100–2500)
+- Ignore specific hosts from being captured
+- Shake gesture shortcut to open the inspector
+- Light / Dark / System theme override
+- Auto-prettify JSON responses
 
 ---
 
@@ -59,7 +83,7 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.0.4")
+    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.1.0")
 ]
 ```
 
@@ -135,15 +159,17 @@ Inspectly.enable(with: configuration)
 
 ### Available Configuration
 
-| Option | Description |
-| --- | --- |
-| `isLoggingEnabled` | Enable or disable request capture |
-| `isStubEnabled` | Enable or disable request stubbing globally |
-| `networkThrottlingPreset` | Simulate network conditions (Edge, 3G, Custom, etc.) |
-| `ignoredHosts` | Ignore selected hosts from being captured |
-| `isShakeGestureEnabled` | Open the inspector by shaking the device |
-| `ignoreLocalhost` | Ignore `localhost` and `127.0.0.1` |
-| `stubRepository` | Provide a custom stub repository |
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `isLoggingEnabled` | `Bool` | `true` | Enable or disable request capture |
+| `isStubEnabled` | `Bool` | `true` | Enable or disable request stubbing globally |
+| `networkThrottlingPreset` | `NetworkThrottlingPreset` | `.off` | Simulate network conditions (Edge, 3G, LTE, Custom) |
+| `slowRequestThreshold` | `TimeInterval` | `1.0` | Duration (seconds) above which requests are flagged as slow |
+| `maxStoredRequests` | `Int` | `500` | Maximum number of requests retained in storage |
+| `ignoredHosts` | `[String]` | `[]` | Hosts to exclude from capture |
+| `isShakeGestureEnabled` | `Bool` | `true` | Open the inspector by shaking the device |
+| `ignoreLocalhost` | `Bool` | `false` | Ignore `localhost` and `127.0.0.1` |
+| `stubRepository` | `StubRepositoryProtocol?` | `nil` | Provide a custom stub repository |
 
 ### Public APIs
 
@@ -189,6 +215,27 @@ No custom interceptor setup is required for common use cases.
 5. Create a stub from an existing request
 6. Adjust the mocked response in the Stubs tab
 7. Re-run the flow with stubs enabled
+
+---
+
+## Changelog
+
+### [1.1.0] — 2026-05-08
+- Flexible stub URL matching: Exact, Contains, Prefix, Suffix, Regex
+- Batch-mark all matching URL requests as stubbed when a stub is saved
+- Clearing all requests now also clears all stubs
+- Stub save validation with inline error banner
+- Configurable slow request detection threshold (Settings → Performance)
+- Search now covers response body, request body, and error messages
+- Storage error displayed as banner in request list
+- Sensitive header masking with per-header reveal toggle
+- Paginated request list with auto-load-more
+- Configurable max stored requests (100–2500)
+- cURL export with correct single-quote shell escaping
+- Full UI revamp: Request Detail, Request List, Statistics, Stubs, Settings
+
+### [1.0.0]
+- Initial release
 
 ---
 
