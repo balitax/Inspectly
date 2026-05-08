@@ -36,26 +36,8 @@ struct RequestBodyTabView: View {
                     )
                     .frame(maxHeight: .infinity)
                 } else {
-                    // MARK: - Content Info
-                    HStack {
-                        Label(viewModel.request.requestContentType.displayName, systemImage: viewModel.request.requestContentType.iconName)
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundStyle(.secondary)
-
-                        Spacer()
-
-                        if let size = viewModel.request.requestBody?.formattedSize {
-                            Text(size)
-                                .font(.system(size: 11, weight: .medium, design: .monospaced))
-                                .foregroundStyle(.tertiary)
-                        }
-
-                        Toggle("Raw", isOn: $showRaw)
-                            .toggleStyle(.button)
-                            .buttonStyle(.bordered)
-                            .controlSize(.mini)
-                            .font(.system(size: 10, weight: .medium))
-                    }
+                    // MARK: - Info Bar
+                    infoBar
 
                     // MARK: - Body Content
                     CodeBlockView(
@@ -68,6 +50,44 @@ struct RequestBodyTabView: View {
             }
             .padding(16)
         }
+    }
+
+    // MARK: - Info Bar
+
+    private var infoBar: some View {
+        HStack(spacing: 10) {
+            // Content type pill
+            Label(
+                viewModel.request.requestContentType.displayName,
+                systemImage: viewModel.request.requestContentType.iconName
+            )
+            .font(.system(size: 11, weight: .medium))
+            .foregroundStyle(.secondary)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 5)
+            .background(Color(.quaternarySystemFill))
+            .clipShape(Capsule())
+
+            Spacer()
+
+            // Size
+            if let size = viewModel.request.requestBody?.formattedSize {
+                Text(size)
+                    .font(.system(size: 11, weight: .medium, design: .monospaced))
+                    .foregroundStyle(.tertiary)
+            }
+
+            // Raw toggle
+            Toggle("Raw", isOn: $showRaw)
+                .toggleStyle(.button)
+                .buttonStyle(.bordered)
+                .controlSize(.mini)
+                .font(.system(size: 10, weight: .medium))
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
+        .background(Color(.tertiarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 }
 

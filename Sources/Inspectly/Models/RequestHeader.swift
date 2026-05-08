@@ -32,6 +32,76 @@ public struct RequestHeader: Identifiable, Codable, Hashable {
     }
 }
 
+// MARK: - Formatted Value
+
+extension RequestHeader {
+    /// Human-readable version of the header value.
+    ///
+    /// - Parses q-value notation (`br;q=1.0, gzip;q=0.9`) and sorts by priority.
+    /// - Decodes encoding abbreviations to full names (`br` → `Brotli`).
+    /// - Decodes language tags to locale names (`en-US` → `English (US) (en-US)`).
+    var formattedValue: String {
+        let hasQValues = value.contains(";q=") || value.contains("; q=")
+        let normalizedKey = key.lowercased()
+        let isEncodingHeader = normalizedKey == "accept-encoding" || normalizedKey == "content-encoding"
+        let isLanguageHeader = normalizedKey == "accept-language"
+
+        guard hasQValues || isEncodingHeader || isLanguageHeader else {
+            return value
+        }
+
+        let entries = value
+            .components(separatedBy: ",")
+            .compactMap { Self.parseQValueEntry($0) }
+            .sorted { $0.quality > $1.quality }
+
+        guard !entries.isEmpty else { return value }
+
+        return entries.map { entry in
+            if isEncodingHeader { return Self.decodedEncodingName(entry.name) }
+            if isLanguageHeader  { return Self.decodedLanguageName(entry.name) }
+            return entry.name
+        }.joined(separator: ", ")
+    }
+
+    private static func parseQValueEntry(_ raw: String) -> (name: String, quality: Double)? {
+        let parts = raw.trimmingCharacters(in: .whitespaces).components(separatedBy: ";")
+        let name = parts[0].trimmingCharacters(in: .whitespaces)
+        guard !name.isEmpty else { return nil }
+
+        var quality = 1.0
+        for param in parts.dropFirst() {
+            let p = param.trimmingCharacters(in: .whitespaces).lowercased()
+            if p.hasPrefix("q="), let q = Double(p.dropFirst(2)) {
+                quality = q
+                break
+            }
+        }
+        return (name, quality)
+    }
+
+    private static func decodedEncodingName(_ name: String) -> String {
+        switch name.lowercased() {
+        case "br":       return "Brotli"
+        case "gzip":     return "Gzip"
+        case "deflate":  return "Deflate"
+        case "compress": return "Compress"
+        case "zstd":     return "Zstandard"
+        case "identity": return "Identity"
+        case "*":        return "Any"
+        default:         return name
+        }
+    }
+
+    private static func decodedLanguageName(_ tag: String) -> String {
+        let identifier = tag.replacingOccurrences(of: "-", with: "_")
+        if let name = Locale.current.localizedString(forIdentifier: identifier), !name.isEmpty {
+            return "\(name) (\(tag))"
+        }
+        return tag
+    }
+}
+
 // MARK: - Common Headers
 
 extension RequestHeader {

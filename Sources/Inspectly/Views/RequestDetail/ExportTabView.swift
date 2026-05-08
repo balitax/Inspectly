@@ -27,87 +27,60 @@ struct ExportTabView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                // MARK: - Quick Copy Section
-                VStack(alignment: .leading, spacing: 12) {
-                    SectionHeaderView(title: "Quick Copy")
+                // MARK: - Quick Copy
+                actionGroup(title: "Quick Copy", subtitle: "Copy to clipboard") {
+                    exportButton(
+                        title: "Copy as cURL",
+                        subtitle: "Ready to paste in Terminal",
+                        icon: "terminal",
+                        color: .green
+                    ) { viewModel.copyCURL() }
 
-                    VStack(spacing: 8) {
-                        exportButton(
-                            title: "Copy as cURL",
-                            subtitle: "Ready to paste in Terminal",
-                            icon: "terminal",
-                            color: .green
-                        ) {
-                            viewModel.copyCURL()
-                        }
+                    exportButton(
+                        title: "Copy JSON Body",
+                        subtitle: "Response body as formatted JSON",
+                        icon: "curlybraces",
+                        color: .blue
+                    ) { viewModel.copyJSONBody() }
 
-                        exportButton(
-                            title: "Copy JSON Body",
-                            subtitle: "Response body as formatted JSON",
-                            icon: "curlybraces",
-                            color: .blue
-                        ) {
-                            viewModel.copyJSONBody()
-                        }
-
-                        exportButton(
-                            title: "Copy Full Request",
-                            subtitle: "Headers, body, and response",
-                            icon: "doc.on.doc",
-                            color: .accentColor
-                        ) {
-                            viewModel.copyFullRequest()
-                        }
-                    }
+                    exportButton(
+                        title: "Copy Full Request",
+                        subtitle: "Headers, body, and response",
+                        icon: "doc.on.doc",
+                        color: .accentColor
+                    ) { viewModel.copyFullRequest() }
                 }
 
-                Divider()
-
-                // MARK: - Share Section
-                VStack(alignment: .leading, spacing: 12) {
-                    SectionHeaderView(title: "Share")
-
+                // MARK: - Share
+                actionGroup(title: "Share", subtitle: "Send via system share sheet") {
                     exportButton(
                         title: "Share Request",
-                        subtitle: "Share via system share sheet (cURL)",
+                        subtitle: "cURL command via share sheet",
                         icon: "square.and.arrow.up",
                         color: .orange
-                    ) {
-                        viewModel.shareRequest()
-                    }
+                    ) { viewModel.shareRequest() }
 
                     exportButton(
-                        title: "Share as JSON file",
+                        title: "Share as JSON",
                         subtitle: "Export full request data as a file",
                         icon: "doc.text.fill",
                         color: .purple
-                    ) {
-                        viewModel.shareAsJSON()
-                    }
+                    ) { viewModel.shareAsJSON() }
                 }
 
-                Divider()
-
-                // MARK: - Mocking Section
-                VStack(alignment: .leading, spacing: 12) {
-                    SectionHeaderView(title: "Mocking & Stubs")
-
+                // MARK: - Mocking
+                actionGroup(title: "Mocking & Stubs", subtitle: "Create API mock from this request") {
                     exportButton(
                         title: "Create API Stub",
                         subtitle: "Convert this request into a mock",
                         icon: "hammer.fill",
                         color: .accentColor
-                    ) {
-                        viewModel.createStub()
-                    }
+                    ) { viewModel.createStub() }
                 }
-
-                Divider()
 
                 // MARK: - cURL Preview
                 VStack(alignment: .leading, spacing: 8) {
                     SectionHeaderView(title: "cURL Preview")
-
                     CodeBlockView(
                         title: nil,
                         content: viewModel.request.curlCommand,
@@ -119,21 +92,55 @@ struct ExportTabView: View {
         }
     }
 
+    // MARK: - Action Group
+
+    private func actionGroup<Content: View>(
+        title: String,
+        subtitle: String,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            // Group header inside the card
+            HStack(spacing: 6) {
+                Text(title.uppercased())
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(.secondary)
+                    .tracking(0.4)
+
+                Text("·")
+                    .foregroundStyle(.tertiary)
+
+                Text(subtitle)
+                    .font(.system(size: 10))
+                    .foregroundStyle(.tertiary)
+            }
+            .padding(.horizontal, 14)
+            .padding(.top, 12)
+            .padding(.bottom, 8)
+
+            Divider().padding(.horizontal, 14)
+
+            content()
+        }
+        .background(Color(.tertiarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+    }
+
     // MARK: - Export Button
 
     private func exportButton(title: String, subtitle: String, icon: String, color: Color, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             HStack(spacing: 12) {
                 Image(systemName: icon)
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.system(size: 15, weight: .semibold))
                     .foregroundStyle(color)
-                    .frame(width: 36, height: 36)
+                    .frame(width: 34, height: 34)
                     .background(color.opacity(0.12))
                     .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.system(size: 13, weight: .medium))
                         .foregroundStyle(.primary)
 
                     Text(subtitle)
@@ -144,12 +151,11 @@ struct ExportTabView: View {
                 Spacer()
 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 12))
+                    .font(.system(size: 11, weight: .medium))
                     .foregroundStyle(.quaternary)
             }
-            .padding(12)
-            .background(Color(.tertiarySystemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
         }
         .buttonStyle(.plain)
     }

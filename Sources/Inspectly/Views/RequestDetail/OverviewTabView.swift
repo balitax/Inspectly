@@ -23,6 +23,7 @@ import SwiftUI
 @available(iOS 16.0, *)
 struct OverviewTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
+    @State private var copiedLabel: String?
 
     var body: some View {
         ScrollView {
@@ -34,37 +35,22 @@ struct OverviewTabView: View {
                 VStack(spacing: 0) {
                     ForEach(Array(viewModel.overviewItems.enumerated()), id: \.offset) { index, item in
                         overviewRow(label: item.label, value: item.value, icon: item.icon)
-
                         if index < viewModel.overviewItems.count - 1 {
-                            Divider()
+                            Divider().padding(.leading, 54)
                         }
                     }
                 }
-                .sectionCardStyle()
+                .background(Color(.tertiarySystemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
 
                 // MARK: - Tags
                 if !viewModel.request.tags.isEmpty {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Tags")
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundStyle(.secondary)
-
-                        FlowLayout(spacing: 6) {
-                            ForEach(viewModel.request.tags) { tag in
-                                Text(tag.name)
-                                    .font(.system(size: 11, weight: .medium))
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 4)
-                                    .background(Color.accentColor.opacity(0.12))
-                                    .foregroundColor(.accentColor)
-                                    .clipShape(Capsule())
-                            }
-                        }
-                    }
-                    .sectionCardStyle()
+                    tagsSection
                 }
             }
-            // .padding(16)
+            .padding(.horizontal, 16)
+            .padding(.top, 16)
+            .padding(.bottom, 24)
         }
     }
 
@@ -89,43 +75,103 @@ struct OverviewTabView: View {
                 }
 
                 Text(viewModel.request.url)
-                    .font(.system(size: 13, design: .default))
+                    .font(.system(size: 13))
                     .foregroundStyle(.primary)
+                    .lineLimit(2)
             }
 
             Spacer()
         }
         .padding(14)
         .background(Color.forStatusCode(viewModel.request.statusCode).opacity(0.06))
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         .overlay(
-            RoundedRectangle(cornerRadius: 0, style: .continuous)
-                .strokeBorder(Color.forStatusCode(viewModel.request.statusCode).opacity(0.15), lineWidth: 1)
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .strokeBorder(Color.forStatusCode(viewModel.request.statusCode).opacity(0.18), lineWidth: 1)
         )
     }
 
     // MARK: - Overview Row
 
     private func overviewRow(label: String, value: String, icon: String) -> some View {
-        HStack(spacing: 10) {
+        let isCopyable = ["URL", "Path", "Host"].contains(label)
+
+        return HStack(spacing: 12) {
+            // Icon pill
             Image(systemName: icon)
-                .font(.system(size: 12))
+                .font(.system(size: 13, weight: .medium))
                 .foregroundStyle(.secondary)
-                .frame(width: 28)
+                .frame(width: 30, height: 30)
+                .background(Color(.quaternarySystemFill))
+                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
 
-            Text(label)
-                .font(.system(size: 13))
-                .foregroundStyle(.secondary)
-                .frame(width: 90, alignment: .leading)
+            // Label + value stack
+            VStack(alignment: .leading, spacing: 3) {
+                Text(label.uppercased())
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(.secondary)
+                    .tracking(0.4)
 
-            Text(value)
-                .font(.system(size: 13, design: label == "URL" || label == "Path" ? .monospaced : .default))
-                .foregroundStyle(.primary)
-                .lineLimit(2)
-                .textSelection(.enabled)
+                Text(value)
+                    .font(.system(size: 13, design: ["URL", "Path"].contains(label) ? .monospaced : .default))
+                    .foregroundStyle(.primary)
+                    .textSelection(.enabled)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
 
-            Spacer()
+            Spacer(minLength: 8)
+
+            // Copy button for URL / Path / Host
+            if isCopyable {
+                Button {
+                    UIPasteboard.general.string = value
+                    withAnimation(.easeInOut(duration: 0.15)) { copiedLabel = label }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        withAnimation(.easeInOut(duration: 0.15)) {
+                            if copiedLabel == label { copiedLabel = nil }
+                        }
+                    }
+                } label: {
+                    Image(systemName: copiedLabel == label ? "checkmark" : "doc.on.doc")
+                        .font(.system(size: 12))
+                        .foregroundStyle(copiedLabel == label ? .green : .secondary)
+                        .frame(width: 28, height: 28)
+                        .background(Color(.quaternarySystemFill))
+                        .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                }
+                .buttonStyle(.plain)
+            }
         }
-        .padding(.vertical, 8)
+        .padding(.vertical, 10)
+        .padding(.horizontal, 14)
+    }
+
+    // MARK: - Tags Section
+
+    private var tagsSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("TAGS")
+                .font(.system(size: 10, weight: .semibold))
+                .foregroundStyle(.secondary)
+                .tracking(0.4)
+                .padding(.horizontal, 14)
+
+            FlowLayout(spacing: 6) {
+                ForEach(viewModel.request.tags) { tag in
+                    Text(tag.name)
+                        .font(.system(size: 11, weight: .medium))
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 4)
+                        .background(Color.accentColor.opacity(0.12))
+                        .foregroundColor(.accentColor)
+                        .clipShape(Capsule())
+                }
+            }
+            .padding(.horizontal, 14)
+            .padding(.bottom, 10)
+        }
+        .background(Color(.tertiarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 }
 
@@ -136,8 +182,7 @@ struct FlowLayout: Layout {
     var spacing: CGFloat = 8
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        let result = arrange(proposal: proposal, subviews: subviews)
-        return result.size
+        arrange(proposal: proposal, subviews: subviews).size
     }
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
@@ -177,7 +222,7 @@ struct FlowLayout: Layout {
 @available(iOS 16.0, *)
 struct OverviewTabView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
+        InspectlyNavigationStack {
             OverviewTabView(viewModel: .mock())
         }
     }

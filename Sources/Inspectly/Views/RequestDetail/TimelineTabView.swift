@@ -35,23 +35,8 @@ struct TimelineTabView: View {
                     )
                     .frame(maxHeight: .infinity)
                 } else {
-                    // MARK: - Total Duration
-                    HStack {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Total Duration")
-                                .font(.system(size: 12))
-                                .foregroundStyle(.secondary)
-                            Text(viewModel.request.formattedDuration)
-                                .font(.system(size: 24, weight: .bold, design: .rounded))
-                                .foregroundStyle(.primary)
-                        }
-                        Spacer()
-
-                        Image(systemName: "clock.fill")
-                            .font(.system(size: 32))
-                            .foregroundColor(Color.accentColor.opacity(0.3))
-                    }
-                    .sectionCardStyle()
+                    // MARK: - Total Duration Card
+                    totalDurationCard
 
                     // MARK: - Timeline Events
                     VStack(spacing: 0) {
@@ -64,73 +49,132 @@ struct TimelineTabView: View {
                             )
                         }
                     }
-                    .sectionCardStyle()
+                    .background(Color(.tertiarySystemBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                 }
             }
             .padding(16)
         }
     }
 
+    // MARK: - Total Duration Card
+
+    private var totalDurationCard: some View {
+        HStack(spacing: 14) {
+            // Icon pill
+            Image(systemName: "clock.fill")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundStyle(.secondary)
+                .frame(width: 40, height: 40)
+                .background(Color(.quaternarySystemFill))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text("TOTAL DURATION")
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(.secondary)
+                    .tracking(0.4)
+
+                Text(viewModel.request.formattedDuration)
+                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                    .foregroundStyle(.primary)
+            }
+
+            Spacer()
+
+            // Event count pill
+            Text("\(viewModel.request.timelineEvents.count) events")
+                .font(.system(size: 11, weight: .medium))
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .background(Color(.quaternarySystemFill))
+                .clipShape(Capsule())
+        }
+        .padding(14)
+        .background(Color(.tertiarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+    }
+
     // MARK: - Timeline Row
 
     private func timelineRow(event: TimelineEvent, isFirst: Bool, isLast: Bool, totalDuration: TimeInterval) -> some View {
-        HStack(alignment: .top, spacing: 12) {
-            // Timeline indicator
+        HStack(alignment: .top, spacing: 14) {
+            // Dot + connecting line
             VStack(spacing: 0) {
                 if !isFirst {
                     Rectangle()
-                        .fill(Color.accentColor.opacity(0.3))
-                        .frame(width: 2, height: 12)
+                        .fill(Color.accentColor.opacity(0.25))
+                        .frame(width: 2, height: 10)
                 }
 
                 Circle()
                     .fill(Color.accentColor)
                     .frame(width: 10, height: 10)
+                    .overlay(
+                        Circle()
+                            .strokeBorder(Color.accentColor.opacity(0.3), lineWidth: 3)
+                    )
 
                 if !isLast {
                     Rectangle()
-                        .fill(Color.accentColor.opacity(0.3))
+                        .fill(Color.accentColor.opacity(0.25))
                         .frame(width: 2)
-                        .frame(minHeight: 30)
+                        .frame(minHeight: 36)
                 }
             }
             .frame(width: 10)
+            .padding(.top, 10)
 
             // Event info
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    Text(event.name)
-                        .font(.system(size: 13, weight: .medium))
-                        .foregroundColor(.primary)
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(alignment: .center) {
+                    Text(event.name.uppercased())
+                        .font(.system(size: 10, weight: .semibold))
+                        .foregroundStyle(.secondary)
+                        .tracking(0.4)
 
                     Spacer()
 
                     if let duration = event.duration {
                         Text(formatDuration(duration))
-                            .font(.system(size: 11, weight: .medium, design: .monospaced))
-                            .foregroundColor(.secondary)
+                            .font(.system(size: 12, weight: .semibold, design: .monospaced))
+                            .foregroundStyle(.primary)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 3)
+                            .background(Color(.quaternarySystemFill))
+                            .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
                     }
                 }
 
                 if let detail = event.detail {
                     Text(detail)
-                        .font(.system(size: 11, design: .monospaced))
-                        .foregroundColor(.secondary)
+                        .font(.system(size: 12, design: .monospaced))
+                        .foregroundStyle(.secondary)
                 }
 
                 // Duration bar
-                if let duration = event.duration {
+                if let duration = event.duration, totalDuration > 0 {
                     GeometryReader { geo in
                         let width = geo.size.width * CGFloat(duration / totalDuration)
-                        RoundedRectangle(cornerRadius: 2, style: .continuous)
-                            .fill(Color.accentColor.opacity(0.2))
-                            .frame(width: max(width, 4), height: 4)
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 3, style: .continuous)
+                                .fill(Color(.quaternarySystemFill))
+                                .frame(height: 5)
+                            RoundedRectangle(cornerRadius: 3, style: .continuous)
+                                .fill(Color.accentColor.opacity(0.5))
+                                .frame(width: max(width, 4), height: 5)
+                        }
                     }
-                    .frame(height: 4)
+                    .frame(height: 5)
                 }
             }
-            .padding(.vertical, 4)
+            .padding(.vertical, 10)
+            .padding(.trailing, 14)
         }
+        .padding(.leading, 14)
+
+        // No extra divider — the connecting lines serve as separators
     }
 
     private func formatDuration(_ duration: TimeInterval) -> String {

@@ -37,46 +37,8 @@ struct ResponseBodyTabView: View {
                     )
                     .frame(maxHeight: .infinity)
                 } else {
-                    // MARK: - Content Info
-                    HStack {
-                        Label(
-                            viewModel.request.responseContentType.displayName,
-                            systemImage: viewModel.request.responseContentType.iconName
-                        )
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(.secondary)
-
-                        Spacer()
-
-                        if let size = viewModel.request.responseBody?.formattedSize {
-                            Text(size)
-                                .font(.system(size: 11, weight: .medium, design: .monospaced))
-                                .foregroundStyle(.tertiary)
-                        }
-                        
-                        if viewModel.request.responseContentType == .html {
-                            Toggle("Preview", isOn: $showPreview)
-                                .toggleStyle(.button)
-                                .buttonStyle(.bordered)
-                                .controlSize(.mini)
-                                .font(.system(size: 10, weight: .medium))
-                        }
-
-                        Toggle("Raw", isOn: $showRaw)
-                            .toggleStyle(.button)
-                            .buttonStyle(.bordered)
-                            .controlSize(.mini)
-                            .font(.system(size: 10, weight: .medium))
-                    }
-
-                    // MARK: - Status Bar
-                    HStack(spacing: 8) {
-                        StatusBadgeView(statusCode: viewModel.request.statusCode)
-                        Text(viewModel.request.formattedDuration)
-                            .font(.system(size: 12, weight: .medium, design: .monospaced))
-                            .foregroundStyle(.secondary)
-                        Spacer()
-                    }
+                    // MARK: - Info Bar
+                    infoBar
 
                     // MARK: - Body Content
                     if viewModel.request.responseContentType == .html && showPreview && !showRaw {
@@ -93,6 +55,61 @@ struct ResponseBodyTabView: View {
             }
             .padding(16)
         }
+    }
+
+    // MARK: - Info Bar
+
+    private var infoBar: some View {
+        HStack(spacing: 10) {
+            // Status badge
+            StatusBadgeView(statusCode: viewModel.request.statusCode)
+
+            // Content type pill
+            Label(
+                viewModel.request.responseContentType.displayName,
+                systemImage: viewModel.request.responseContentType.iconName
+            )
+            .font(.system(size: 11, weight: .medium))
+            .foregroundStyle(.secondary)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 5)
+            .background(Color(.quaternarySystemFill))
+            .clipShape(Capsule())
+
+            Spacer()
+
+            // Size
+            if let size = viewModel.request.responseBody?.formattedSize {
+                Text(size)
+                    .font(.system(size: 11, weight: .medium, design: .monospaced))
+                    .foregroundStyle(.tertiary)
+            }
+
+            // Duration
+            Text(viewModel.request.formattedDuration)
+                .font(.system(size: 11, weight: .medium, design: .monospaced))
+                .foregroundStyle(.tertiary)
+
+            // Preview toggle (HTML only)
+            if viewModel.request.responseContentType == .html {
+                Toggle("Preview", isOn: $showPreview)
+                    .toggleStyle(.button)
+                    .buttonStyle(.bordered)
+                    .controlSize(.mini)
+                    .font(.system(size: 10, weight: .medium))
+            }
+
+            // Raw toggle
+            Toggle("Raw", isOn: $showRaw)
+                .toggleStyle(.button)
+                .buttonStyle(.bordered)
+                .controlSize(.mini)
+                .font(.system(size: 10, weight: .medium))
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
+        .background(Color(.tertiarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 }
 

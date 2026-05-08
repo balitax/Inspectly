@@ -23,6 +23,7 @@ import SwiftUI
 @available(iOS 16.0, *)
 struct ParamsTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
+    @State private var copiedParamId: UUID?
 
     var body: some View {
         ScrollView {
@@ -35,7 +36,7 @@ struct ParamsTabView: View {
                     )
                     .frame(maxHeight: .infinity)
                 } else {
-                    // MARK: - URL
+                    // MARK: - Full URL
                     VStack(alignment: .leading, spacing: 8) {
                         SectionHeaderView(title: "Full URL")
                         CodeBlockView(
@@ -45,61 +46,78 @@ struct ParamsTabView: View {
                         )
                     }
 
-                    // MARK: - Parameters Table
+                    // MARK: - Parameters
                     VStack(alignment: .leading, spacing: 8) {
                         SectionHeaderView(
                             title: "Parameters",
-                            subtitle: "\(viewModel.request.queryParameters.count) parameters"
+                            subtitle: "\(viewModel.request.queryParameters.count) found"
                         )
 
                         VStack(spacing: 0) {
-                            // Header row
-                            HStack {
-                                Text("Key")
-                                    .font(.system(size: 11, weight: .semibold))
-                                    .foregroundStyle(.secondary)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                                Text("Value")
-                                    .font(.system(size: 11, weight: .semibold))
-                                    .foregroundStyle(.secondary)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
-                            .background(Color(.quaternarySystemFill))
-
-                            // Data rows
                             ForEach(viewModel.request.queryParameters) { param in
-                                HStack(alignment: .top) {
-                                    Text(param.key)
-                                        .font(.system(size: 12, weight: .medium, design: .monospaced))
-                                        .foregroundStyle(.primary)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .textSelection(.enabled)
-
-                                    Text(param.value)
-                                        .font(.system(size: 12, design: .monospaced))
-                                        .foregroundStyle(.primary)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .textSelection(.enabled)
-                                }
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 8)
+                                paramRow(param)
 
                                 if param.id != viewModel.request.queryParameters.last?.id {
-                                    Divider()
-                                        .padding(.leading, 12)
+                                    Divider().padding(.leading, 14)
                                 }
                             }
                         }
                         .background(Color(.tertiarySystemBackground))
-                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                     }
                 }
             }
             .padding(16)
         }
+    }
+
+    // MARK: - Param Row
+
+    private func paramRow(_ param: QueryParameter) -> some View {
+        HStack(alignment: .top, spacing: 12) {
+            // Left accent line
+            RoundedRectangle(cornerRadius: 2, style: .continuous)
+                .fill(Color.accentColor.opacity(0.6))
+                .frame(width: 3)
+                .padding(.vertical, 2)
+
+            // Key + Value
+            VStack(alignment: .leading, spacing: 4) {
+                Text(param.key.uppercased())
+                    .font(.system(size: 10, weight: .semibold, design: .monospaced))
+                    .foregroundStyle(.secondary)
+                    .tracking(0.4)
+
+                Text(param.value.isEmpty ? "—" : param.value)
+                    .font(.system(size: 13, design: .monospaced))
+                    .foregroundStyle(param.value.isEmpty ? .tertiary : .primary)
+                    .textSelection(.enabled)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Spacer(minLength: 8)
+
+            // Copy button
+            Button {
+                UIPasteboard.general.string = param.value
+                withAnimation(.easeInOut(duration: 0.15)) { copiedParamId = param.id }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    withAnimation(.easeInOut(duration: 0.15)) {
+                        if copiedParamId == param.id { copiedParamId = nil }
+                    }
+                }
+            } label: {
+                Image(systemName: copiedParamId == param.id ? "checkmark" : "doc.on.doc")
+                    .font(.system(size: 12))
+                    .foregroundStyle(copiedParamId == param.id ? .green : .secondary)
+                    .frame(width: 28, height: 28)
+                    .background(Color(.quaternarySystemFill))
+                    .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(.vertical, 10)
+        .padding(.horizontal, 14)
     }
 }
 
