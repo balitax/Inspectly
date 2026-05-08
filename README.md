@@ -17,7 +17,7 @@
   <img src="https://img.shields.io/badge/Swift-5.9%2B-orange" />
   <img src="https://img.shields.io/badge/License-MIT-green" />
   <img src="https://img.shields.io/badge/SPM-Ready-purple" />
-  <img src="https://img.shields.io/badge/version-1.1.0-brightgreen" />
+  <img src="https://img.shields.io/badge/version-1.2.0-brightgreen" />
 </p>
 
 ---
@@ -81,7 +81,7 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.1.0")
+    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.2.0")
 ]
 ```
 
@@ -218,21 +218,28 @@ No custom interceptor setup is required for common use cases.
 
 ## Changelog
 
-### [1.1.0] — 2026-05-08
+### [1.2.0] — 2026-05-08
+- **iOS 16.0 minimum** — dropped iOS 13–15 support
+- Liquid glass-inspired floating tab bar for iOS 16–25
+- Inspector now presents fullscreen
+- Revamped DemoApp with card layout and response console
+- Fixed dark mode statistics cards visibility
+- Converted `StorageManager` to `actor` (eliminates Sendable warnings)
+- Removed all redundant `@available` annotations
+
+### [1.1.0] — 2026-05-01
 - Flexible stub URL matching: Exact, Contains, Prefix, Suffix, Regex
 - Batch-mark all matching URL requests as stubbed when a stub is saved
 - Clearing all requests now also clears all stubs
-- Stub save validation with inline error banner
 - Configurable slow request detection threshold (Settings → Performance)
-- Search now covers response body, request body, and error messages
-- Storage error displayed as banner in request list
+- Search covers response body, request body, and error messages
 - Sensitive header masking with per-header reveal toggle
 - Paginated request list with auto-load-more
 - Configurable max stored requests (100–2500)
-- cURL export with correct single-quote shell escaping
+- cURL export with correct shell escaping
 - Full UI revamp: Request Detail, Request List, Statistics, Stubs, Settings
 
-### [1.0.0]
+### [1.0.0] — 2026-04-19
 - Initial release
 
 ---
