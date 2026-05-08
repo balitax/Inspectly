@@ -246,7 +246,7 @@ private struct QuickAccessChip: View {
 
             Text("\(count)")
                 .font(.system(size: 11, weight: .bold, design: .monospaced))
-                .foregroundStyle(count > 0 ? color : .tertiary)
+                .foregroundStyle(count > 0 ? color : Color(.tertiaryLabel))
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
@@ -303,7 +303,7 @@ private struct RecentActivityRow: View {
 
 // MARK: - Preview
 
-@available(iOS 15.0, *)
+@available(iOS 16.0, *)
 struct StatisticsView_Previews: PreviewProvider {
     static var previews: some View {
         StatisticsView(viewModel: .mock())
