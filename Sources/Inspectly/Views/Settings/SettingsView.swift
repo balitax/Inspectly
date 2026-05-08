@@ -25,7 +25,7 @@ struct SettingsView: View {
     @StateObject var viewModel: SettingsViewModel
 
     var body: some View {
-        NavigationStack {
+        InspectlyNavigationStack {
             List {
                 // MARK: - Logging Section
                 loggingSection

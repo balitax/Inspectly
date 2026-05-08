@@ -44,7 +44,7 @@ struct StubDetailView: View {
         .navigationTitle(viewModel.stub.name)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
                     Task {
                         await viewModel.save()
@@ -130,7 +130,7 @@ struct StubDetailView: View {
 @available(iOS 16.0, *)
 struct StubDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
+        InspectlyNavigationStack {
             StubDetailView(viewModel: .mock())
         }
     }

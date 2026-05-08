@@ -20,7 +20,7 @@ import SwiftUI
 
 // MARK: - Filter Chip View
 
-@available(iOS 16.0, *)
+@available(iOS 15.0, *)
 struct FilterChipView: View {
     let label: String
     let isSelected: Bool
@@ -53,7 +53,7 @@ struct FilterChipView: View {
 
 // MARK: - Filter Chip Group
 
-@available(iOS 16.0, *)
+@available(iOS 15.0, *)
 struct FilterChipGroup<T: Identifiable & Hashable>: View {
     let items: [T]
     let selected: Set<T>
@@ -78,7 +78,7 @@ struct FilterChipGroup<T: Identifiable & Hashable>: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
+@available(iOS 15.0, *)
 struct FilterChipView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 16) {

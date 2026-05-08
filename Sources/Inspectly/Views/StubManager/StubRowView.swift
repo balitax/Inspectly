@@ -20,31 +20,32 @@ import SwiftUI
 
 // MARK: - Stub Row View
 
-@available(iOS 16.0, *)
+@available(iOS 15.0, *)
 struct StubRowView: View {
     let stub: RequestStub
 
     var body: some View {
         HStack(spacing: 10) {
-            // Enabled indicator
-            Circle()
-                .fill(stub.isEnabled ? Color.stubActive : Color.stubInactive)
-                .frame(width: 8, height: 8)
+            // Left accent line (green=active, gray=inactive)
+            RoundedRectangle(cornerRadius: 2, style: .continuous)
+                .fill(stub.isEnabled ? Color.stubActive : Color.stubInactive.opacity(0.4))
+                .frame(width: 3)
+                .padding(.vertical, 2)
 
             // Stub info
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 6) {
                     Text(stub.name)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.system(size: 13, weight: .semibold))
                         .foregroundStyle(.primary)
                         .lineLimit(1)
 
                     if let scenario = stub.activeScenario {
                         Text(scenario.name)
                             .font(.system(size: 9, weight: .semibold))
-                            .padding(.horizontal, 6)
+                            .padding(.horizontal, 5)
                             .padding(.vertical, 2)
-                            .background(Color.stubBadge.opacity(0.12))
+                            .background(Color.stubBadge.opacity(0.1))
                             .foregroundStyle(Color.stubBadge)
                             .clipShape(Capsule())
                     }
@@ -58,8 +59,8 @@ struct StubRowView: View {
                             .font(.system(size: 9, weight: .bold, design: .monospaced))
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
-                            .background(Color.gray.opacity(0.15))
-                            .foregroundStyle(.gray)
+                            .background(Color(.quaternarySystemFill))
+                            .foregroundStyle(.secondary)
                             .clipShape(RoundedRectangle(cornerRadius: 4))
                     }
 
@@ -70,7 +71,7 @@ struct StubRowView: View {
                 }
             }
 
-            Spacer()
+            Spacer(minLength: 6)
 
             // Right side info
             VStack(alignment: .trailing, spacing: 4) {
@@ -89,13 +90,13 @@ struct StubRowView: View {
                 }
             }
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 6)
     }
 }
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
+@available(iOS 15.0, *)
 struct StubRowView_Previews: PreviewProvider {
     static var previews: some View {
         List {

@@ -18,8 +18,9 @@
 
 import SwiftUI
 import Alamofire
+import Inspectly
 
-@available(iOS 16.0, *)
+@available(iOS 15.0, *)
 struct DemoAppView: View {
     
     // MARK: - Network Engine
@@ -40,7 +41,7 @@ struct DemoAppView: View {
     @AppStorage("isDarkMode") private var isDarkMode: Bool = false
     
     var body: some View {
-        NavigationStack {
+        InspectlyNavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
                     
@@ -406,7 +407,7 @@ struct DemoAppView: View {
     }
 }
 
-@available(iOS 16.0, *)
+@available(iOS 15.0, *)
 struct DemoAppView_Previews: PreviewProvider {
     static var previews: some View {
         DemoAppView()

@@ -70,7 +70,7 @@ struct RequestDetailView: View {
         .navigationTitle(viewModel.request.shortURL)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .navigationBarTrailing) {
                 shareButton
             }
         }
@@ -80,7 +80,7 @@ struct RequestDetailView: View {
             }
         }
         .sheet(item: $viewModel.createdStub) { stub in
-            NavigationStack {
+            InspectlyNavigationStack {
                 StubDetailView(
                     viewModel: StubDetailViewModel(
                         stub: stub,
@@ -207,7 +207,7 @@ struct RequestDetailView: View {
 @available(iOS 16.0, *)
 struct RequestDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
+        InspectlyNavigationStack {
             RequestDetailView(viewModel: .mock())
         }
     }

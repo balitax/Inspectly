@@ -72,7 +72,7 @@ extension Color {
     static let textSecondary = Color(.secondaryLabel)
     static let textTertiary = Color(.tertiaryLabel)
     
-    static let accentColor = Color(red: 0.890, green: 0.118, blue: 0.322)
+    static let accentColor = Color(.label)
     static let accentIndigo = Color(red: 0.345, green: 0.337, blue: 0.839)
     static let accentTeal = Color(red: 0.188, green: 0.690, blue: 0.780)
     static let accentMint = Color(red: 0.0, green: 0.780, blue: 0.745)
@@ -89,7 +89,7 @@ extension Color {
     static let tagDebug = Color.gray
 
     // MARK: - Chart Colors
-    static let chartPrimary = accentColor
+    static let chartPrimary = accentIndigo
     static let chartSecondary = Color(red: 0.188, green: 0.690, blue: 0.780)
     static let chartTertiary = Color(red: 0.0, green: 0.780, blue: 0.745)
     static let chartQuaternary = Color(red: 0.196, green: 0.678, blue: 0.902)
@@ -97,11 +97,6 @@ extension Color {
     // MARK: - Stub Colors
     static let stubActive = Color.green
     static let stubInactive = Color.gray
-    static let stubBadge = accentColor
+    static let stubBadge = accentIndigo
 }
 
-// MARK: - ShapeStyle Extension
-
-extension ShapeStyle where Self == Color {
-    static var accentColor: Color { Color(red: 0.890, green: 0.118, blue: 0.322) }
-}

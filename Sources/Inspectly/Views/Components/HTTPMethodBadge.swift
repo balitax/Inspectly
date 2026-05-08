@@ -20,7 +20,7 @@ import SwiftUI
 
 // MARK: - HTTP Method Badge
 
-@available(iOS 16.0, *)
+@available(iOS 15.0, *)
 struct HTTPMethodBadge: View {
     let method: HTTPMethodType
 
@@ -37,7 +37,7 @@ struct HTTPMethodBadge: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
+@available(iOS 15.0, *)
 struct HTTPMethodBadge_Previews: PreviewProvider {
     static var previews: some View {
         HStack(spacing: 8) {

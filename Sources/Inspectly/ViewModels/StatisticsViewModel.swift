@@ -21,7 +21,7 @@ import SwiftUI
 
 // MARK: - Statistics View Model
 
-@available(iOS 16.0, *)
+@available(iOS 15.0, *)
 @MainActor
 final class StatisticsViewModel: ObservableObject {
     @Published var summary: StatisticsSummary = StatisticsSummary()

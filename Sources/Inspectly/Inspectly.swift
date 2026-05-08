@@ -167,7 +167,7 @@ public final class Inspectly {
             setupThemeObserver()
             
             if let sheet = hostingController.sheetPresentationController {
-                sheet.detents = [.medium(), .large()]
+                sheet.detents = [.large()]
                 sheet.prefersGrabberVisible = true
                 sheet.prefersScrollingExpandsWhenScrolledToEdge = false
                 sheet.largestUndimmedDetentIdentifier = .medium

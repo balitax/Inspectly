@@ -21,7 +21,7 @@ import SwiftUI
 
 // MARK: - Request Detail Tab
 
-@available(iOS 16.0, *)
+@available(iOS 15.0, *)
 enum RequestDetailTab: String, CaseIterable, Identifiable {
     case overview = "Overview"
     case headers = "Headers"
@@ -46,7 +46,7 @@ enum RequestDetailTab: String, CaseIterable, Identifiable {
 
 // MARK: - Request Detail View Model
 
-@available(iOS 16.0, *)
+@available(iOS 15.0, *)
 @MainActor
 final class RequestDetailViewModel: ObservableObject {
     @Published var request: NetworkRequest
