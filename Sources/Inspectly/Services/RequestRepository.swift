@@ -25,6 +25,7 @@ actor RequestRepository: RequestRepositoryProtocol {
     private let storageManager: StorageManagerProtocol
     private let storageKey = "inspectly_requests"
     private var maxRequests: Int
+    private var lastErrorMessage: String?
 
     init(
         storageManager: StorageManagerProtocol,
@@ -119,14 +120,18 @@ actor RequestRepository: RequestRepositoryProtocol {
 
     // MARK: - Persistence
 
+    func getLastError() async -> String? { lastErrorMessage }
+
     func loadFromStorage() async {
         do {
             if let stored = try await storageManager.load([NetworkRequest].self, forKey: storageKey) {
                 self.requests = stored
+                self.lastErrorMessage = nil
                 await publishRequestsDidChange()
             }
         } catch {
-            print("[Inspectly] Failed to load requests: \(error)")
+            lastErrorMessage = "Failed to load requests: \(error.localizedDescription)"
+            print("[Inspectly] \(lastErrorMessage!)")
         }
     }
 
@@ -135,7 +140,8 @@ actor RequestRepository: RequestRepositoryProtocol {
             try await storageManager.save(requests, forKey: storageKey)
             await publishRequestsDidChange()
         } catch {
-            print("[Inspectly] Failed to persist requests: \(error)")
+            lastErrorMessage = "Failed to save requests: \(error.localizedDescription)"
+            print("[Inspectly] \(lastErrorMessage!)")
         }
     }
 
@@ -162,6 +168,7 @@ actor MockRequestRepository: RequestRepositoryProtocol {
     }
     func getRequest(by id: UUID) async -> NetworkRequest? { requests.first { $0.id == id } }
     func setMaxRequests(_ max: Int) async {}
+    func getLastError() async -> String? { nil }
     func addRequest(_ request: NetworkRequest) async {
         requests.insert(request, at: 0)
         await publishRequestsDidChange()

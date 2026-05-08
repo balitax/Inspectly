@@ -76,46 +76,120 @@ enum StubErrorType: String, Codable, CaseIterable, Identifiable {
     }
 }
 
+// MARK: - URL Match Mode
+
+public enum URLMatchMode: String, Codable, CaseIterable, Identifiable {
+    case exact    = "Exact"
+    case contains = "Contains"
+    case prefix   = "Prefix"
+    case suffix   = "Suffix"
+    case regex    = "Regex"
+
+    public var id: String { rawValue }
+
+    var iconName: String {
+        switch self {
+        case .exact:    return "equal.circle"
+        case .contains: return "text.magnifyingglass"
+        case .prefix:   return "arrow.right.to.line"
+        case .suffix:   return "arrow.left.to.line"
+        case .regex:    return "chevron.left.forwardslash.chevron.right"
+        }
+    }
+
+    var hint: String {
+        switch self {
+        case .exact:    return "https://api.example.com/v1/users"
+        case .contains: return "/v1/users"
+        case .prefix:   return "https://api.example.com"
+        case .suffix:   return "/users"
+        case .regex:    return "api\\.example\\.com/v\\d+/users"
+        }
+    }
+}
+
 // MARK: - Stub Match Rule
 
 public struct StubMatchRule: Codable, Identifiable {
     public let id: UUID
     var method: HTTPMethodType?
-    var urlPath: String?
-    var fullURL: String?
+    var urlPattern: String?
+    var urlMatchMode: URLMatchMode
     var queryParameters: [QueryParameter]
     var headers: [RequestHeader]
     var bodyContains: String?
+
+    // Legacy field — mapped from old `fullURL` / `urlPath` on decode
+    var urlPath: String? {
+        get { urlMatchMode == .exact ? nil : urlPattern }
+        set { urlPattern = newValue }
+    }
+    var fullURL: String? {
+        get { urlMatchMode == .exact ? urlPattern : nil }
+        set { urlPattern = newValue }
+    }
 
     init(
         id: UUID = UUID(),
         method: HTTPMethodType? = nil,
         urlPath: String? = nil,
         fullURL: String? = nil,
+        urlMatchMode: URLMatchMode = .exact,
         queryParameters: [QueryParameter] = [],
         headers: [RequestHeader] = [],
         bodyContains: String? = nil
     ) {
         self.id = id
         self.method = method
-        self.urlPath = urlPath
-        self.fullURL = fullURL
+        self.urlPattern = fullURL ?? urlPath
+        self.urlMatchMode = urlMatchMode
         self.queryParameters = queryParameters
         self.headers = headers
         self.bodyContains = bodyContains
     }
 
+    // MARK: - Codable with legacy support
+
+    private enum CodingKeys: String, CodingKey {
+        case id, method, urlPattern, urlMatchMode, queryParameters, headers, bodyContains
+        case legacyFullURL = "fullURL"
+        case legacyURLPath = "urlPath"
+    }
+
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id             = try c.decode(UUID.self, forKey: .id)
+        method         = try c.decodeIfPresent(HTTPMethodType.self, forKey: .method)
+        urlMatchMode   = try c.decodeIfPresent(URLMatchMode.self, forKey: .urlMatchMode) ?? .exact
+        queryParameters = try c.decodeIfPresent([QueryParameter].self, forKey: .queryParameters) ?? []
+        headers        = try c.decodeIfPresent([RequestHeader].self, forKey: .headers) ?? []
+        bodyContains   = try c.decodeIfPresent(String.self, forKey: .bodyContains)
+        // Prefer new field; fall back to legacy fullURL / urlPath
+        urlPattern     = try c.decodeIfPresent(String.self, forKey: .urlPattern)
+            ?? c.decodeIfPresent(String.self, forKey: .legacyFullURL)
+            ?? c.decodeIfPresent(String.self, forKey: .legacyURLPath)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var c = encoder.container(keyedBy: CodingKeys.self)
+        try c.encode(id,              forKey: .id)
+        try c.encodeIfPresent(method, forKey: .method)
+        try c.encode(urlPattern,      forKey: .urlPattern)
+        try c.encode(urlMatchMode,    forKey: .urlMatchMode)
+        try c.encode(queryParameters, forKey: .queryParameters)
+        try c.encode(headers,         forKey: .headers)
+        try c.encodeIfPresent(bodyContains, forKey: .bodyContains)
+    }
+
     /// Check if a request matches this rule
     func matches(_ request: NetworkRequest) -> Bool {
-        // Check full URL (Mandatory)
-        // Scheme and host are case-insensitive per RFC 3986; path is case-sensitive.
-        if let fullURL = fullURL, !fullURL.isEmpty {
-            if !urlsMatch(request.url, fullURL) {
+        // URL pattern match
+        if let pattern = urlPattern, !pattern.isEmpty {
+            if !urlMatches(request.url, pattern: pattern, mode: urlMatchMode) {
                 return false
             }
         } else {
-            // If fullURL is missing, we can't match strictly as requested
-            return false
+            return false  // no pattern = no match
         }
 
         // Check method
@@ -146,20 +220,33 @@ public struct StubMatchRule: Codable, Identifiable {
         return true
     }
 
-    /// Compare two URL strings with RFC 3986 normalization:
-    /// scheme and host are case-insensitive; path, query, and fragment are case-sensitive.
-    private func urlsMatch(_ lhs: String, _ rhs: String) -> Bool {
-        guard let lhsComponents = URLComponents(string: lhs),
-              let rhsComponents = URLComponents(string: rhs) else {
-            // Fallback to direct comparison if URLs can't be parsed
-            return lhs == rhs
+    /// Match a URL against a pattern using the specified mode.
+    private func urlMatches(_ url: String, pattern: String, mode: URLMatchMode) -> Bool {
+        switch mode {
+        case .exact:
+            return urlsExactMatch(url, pattern)
+        case .contains:
+            return url.contains(pattern)
+        case .prefix:
+            return url.hasPrefix(pattern)
+        case .suffix:
+            return url.hasSuffix(pattern)
+        case .regex:
+            guard let regex = try? NSRegularExpression(pattern: pattern) else { return false }
+            let range = NSRange(url.startIndex..., in: url)
+            return regex.firstMatch(in: url, range: range) != nil
         }
+    }
 
-        return lhsComponents.scheme?.lowercased() == rhsComponents.scheme?.lowercased()
-            && lhsComponents.host?.lowercased() == rhsComponents.host?.lowercased()
-            && lhsComponents.port == rhsComponents.port
-            && lhsComponents.path == rhsComponents.path
-            && lhsComponents.query == rhsComponents.query
+    /// RFC 3986 exact URL comparison: scheme+host case-insensitive, path+query case-sensitive.
+    private func urlsExactMatch(_ lhs: String, _ rhs: String) -> Bool {
+        guard let l = URLComponents(string: lhs),
+              let r = URLComponents(string: rhs) else { return lhs == rhs }
+        return l.scheme?.lowercased() == r.scheme?.lowercased()
+            && l.host?.lowercased()   == r.host?.lowercased()
+            && l.port                 == r.port
+            && l.path                 == r.path
+            && l.query                == r.query
     }
 }
 
@@ -284,6 +371,6 @@ public struct RequestStub: Identifiable, Codable {
     }
 
     var pathDisplay: String {
-        matchRule.urlPath ?? matchRule.fullURL ?? "—"
+        matchRule.urlPattern ?? "—"
     }
 }

@@ -126,6 +126,7 @@ final class RequestListViewModel: ObservableObject {
         totalCount = await requestRepository.getRequestCount()
         requests = await requestRepository.getRequests(offset: 0, limit: pageSize)
         hasMore = requests.count < totalCount
+        errorMessage = await requestRepository.getLastError()
         applyFiltersAndSort()
         isLoading = false
         hasLoadedOnce = true

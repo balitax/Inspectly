@@ -30,6 +30,7 @@ final class StubDetailViewModel: ObservableObject {
     @Published var showTestResult: Bool = false
     @Published var testResultMessage: String = ""
     @Published var selectedScenarioId: UUID?
+    @Published var validationErrors: [String] = []
 
     private let stubRepository: StubRepositoryProtocol
     
@@ -61,11 +62,15 @@ final class StubDetailViewModel: ObservableObject {
     }
 
     func updateURLPath(_ path: String) {
-        stub.matchRule.urlPath = path
+        stub.matchRule.urlPattern = path
     }
 
     func updateFullURL(_ url: String) {
-        stub.matchRule.fullURL = url
+        stub.matchRule.urlPattern = url
+    }
+
+    func updateURLMatchMode(_ mode: URLMatchMode) {
+        stub.matchRule.urlMatchMode = mode
     }
 
     func updateBodyContains(_ body: String) {
@@ -104,6 +109,30 @@ final class StubDetailViewModel: ObservableObject {
             jsonValidationError = "Invalid JSON syntax. Please check your response body."
         }
     }
+
+    // MARK: - Validation
+
+    @discardableResult
+    func validate() -> Bool {
+        var errors: [String] = []
+
+        if stub.name.trimmingCharacters(in: .whitespaces).isEmpty {
+            errors.append("Stub name is required.")
+        }
+
+        let pattern = stub.matchRule.urlPattern ?? ""
+        if pattern.trimmingCharacters(in: .whitespaces).isEmpty {
+            errors.append("URL pattern is required.")
+        } else if stub.matchRule.urlMatchMode == .regex,
+                  (try? NSRegularExpression(pattern: pattern)) == nil {
+            errors.append("URL pattern contains an invalid regex.")
+        }
+
+        validationErrors = errors
+        return errors.isEmpty
+    }
+
+    var isValid: Bool { validationErrors.isEmpty }
 
     // MARK: - Save
 

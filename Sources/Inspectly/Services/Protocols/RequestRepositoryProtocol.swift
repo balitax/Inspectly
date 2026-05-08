@@ -32,4 +32,5 @@ public protocol RequestRepositoryProtocol {
     func searchRequests(query: String) async -> [NetworkRequest]
     func getRequestCount() async -> Int
     func setMaxRequests(_ max: Int) async
+    func getLastError() async -> String?
 }

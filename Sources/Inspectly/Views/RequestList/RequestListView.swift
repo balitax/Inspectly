@@ -121,6 +121,11 @@ struct RequestListView: View {
 
     private var requestList: some View {
         List {
+            // Error Banner
+            if let error = viewModel.errorMessage {
+                errorBanner(message: error)
+            }
+
             // Throttling Banner
             if viewModel.activeThrottling != .off {
                 throttlingBanner
@@ -327,6 +332,40 @@ struct RequestListView: View {
         }
         .padding(.vertical, 4)
         .listRowBackground(Color.clear)
+        .listRowSeparator(.hidden)
+    }
+
+    // MARK: - Error Banner
+
+    private func errorBanner(message: String) -> some View {
+        HStack(spacing: 10) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(.red)
+                .frame(width: 32, height: 32)
+                .background(Color.red.opacity(0.12))
+                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Storage Error")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(.red)
+
+                Text(message)
+                    .font(.system(size: 11))
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+            }
+
+            Spacer()
+        }
+        .padding(.vertical, 6)
+        .listRowBackground(
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .fill(Color.red.opacity(0.07))
+                .padding(.horizontal, 4)
+                .padding(.vertical, 3)
+        )
         .listRowSeparator(.hidden)
     }
 

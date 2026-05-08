@@ -44,19 +44,62 @@ struct MatchRuleEditorView: View {
 
             Divider()
 
-            // MARK: - Full URL
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Full URL (exact match)")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(.secondary)
-                TextField("https://api.example.com/v1/users", text: Binding(
-                    get: { viewModel.stub.matchRule.fullURL ?? "" },
-                    set: { viewModel.updateFullURL($0) }
-                ))
+            // MARK: - URL Pattern
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(spacing: 8) {
+                    Text("URL Pattern")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(.secondary)
+
+                    Spacer()
+
+                    // Match mode selector
+                    Menu {
+                        ForEach(URLMatchMode.allCases) { mode in
+                            Button {
+                                viewModel.updateURLMatchMode(mode)
+                            } label: {
+                                Label(mode.rawValue, systemImage: mode.iconName)
+                            }
+                        }
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: viewModel.stub.matchRule.urlMatchMode.iconName)
+                                .font(.system(size: 10))
+                            Text(viewModel.stub.matchRule.urlMatchMode.rawValue)
+                                .font(.system(size: 11, weight: .semibold))
+                            Image(systemName: "chevron.up.chevron.down")
+                                .font(.system(size: 8))
+                        }
+                        .foregroundStyle(.accentColor)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.accentColor.opacity(0.1))
+                        .clipShape(Capsule())
+                    }
+                }
+
+                TextField(
+                    viewModel.stub.matchRule.urlMatchMode.hint,
+                    text: Binding(
+                        get: { viewModel.stub.matchRule.urlPattern ?? "" },
+                        set: { viewModel.updateFullURL($0) }
+                    )
+                )
                 .textFieldStyle(.roundedBorder)
                 .font(.system(size: 13, design: .monospaced))
                 .autocapitalization(.none)
                 .autocorrectionDisabled()
+
+                if viewModel.stub.matchRule.urlMatchMode == .regex {
+                    let pattern = viewModel.stub.matchRule.urlPattern ?? ""
+                    let isValidRegex = pattern.isEmpty || (try? NSRegularExpression(pattern: pattern)) != nil
+                    if !isValidRegex {
+                        Label("Invalid regex pattern", systemImage: "exclamationmark.triangle.fill")
+                            .font(.system(size: 11))
+                            .foregroundStyle(.red)
+                    }
+                }
             }
 
             Divider()

@@ -288,16 +288,21 @@ public struct NetworkRequest: Identifiable, Codable, Equatable, Hashable {
         components.append("-X \(method.rawValue)")
 
         for header in requestHeaders {
-            components.append("-H '\(header.key): \(header.maskedValue)'")
+            let key = shellEscaped(header.key)
+            let value = shellEscaped(header.maskedValue)
+            components.append("-H '\(key): \(value)'")
         }
 
         if let body = requestBody?.rawString, !body.isEmpty {
-            let escaped = body.replacingOccurrences(of: "'", with: "'\\''")
-            components.append("-d '\(escaped)'")
+            components.append("-d '\(shellEscaped(body))'")
         }
 
-        components.append("'\(url)'")
+        components.append("'\(shellEscaped(url))'")
         return components.joined(separator: " \\\n  ")
+    }
+
+    private func shellEscaped(_ string: String) -> String {
+        string.replacingOccurrences(of: "'", with: "'\\''")
     }
 
     // MARK: - Equatable & Hashable

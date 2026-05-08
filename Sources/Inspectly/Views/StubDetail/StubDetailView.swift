@@ -29,6 +29,11 @@ struct StubDetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
+                // MARK: - Validation Errors
+                if !viewModel.validationErrors.isEmpty {
+                    validationErrorBanner
+                }
+
                 // MARK: - General Info
                 generalInfoSection
 
@@ -46,6 +51,7 @@ struct StubDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
+                    guard viewModel.validate() else { return }
                     Task {
                         await viewModel.save()
                         await onSave?(viewModel.stub)
@@ -56,6 +62,40 @@ struct StubDetailView: View {
             }
         }
         .toolbar(.hidden, for: .tabBar)
+    }
+
+    // MARK: - Validation Error Banner
+
+    private var validationErrorBanner: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 6) {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(.red)
+                Text("Fix the following before saving:")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(.red)
+            }
+
+            ForEach(viewModel.validationErrors, id: \.self) { error in
+                HStack(spacing: 6) {
+                    Circle()
+                        .fill(.red.opacity(0.6))
+                        .frame(width: 4, height: 4)
+                    Text(error)
+                        .font(.system(size: 12))
+                        .foregroundStyle(.red.opacity(0.85))
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(12)
+        .background(Color.red.opacity(0.08))
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .strokeBorder(Color.red.opacity(0.2), lineWidth: 1)
+        )
     }
 
     // MARK: - General Info
