@@ -99,6 +99,7 @@ final class RequestListViewModel: ObservableObject {
     @Published var listRenderID: UUID = UUID()
     @Published var errorMessage: String?
     @Published var activeThrottling: NetworkThrottlingPreset = .off
+    @Published var slowRequestThreshold: TimeInterval = 1.0
 
     let requestRepository: RequestRepositoryProtocol
     let stubRepository: StubRepositoryProtocol
@@ -122,6 +123,7 @@ final class RequestListViewModel: ObservableObject {
     func loadThrottlingStatus() async {
         if let settings = try? await DependencyContainer.shared.storageManager.load(AppSettings.self, forKey: "inspectly_settings") {
             self.activeThrottling = settings.networkThrottlingPreset
+            self.slowRequestThreshold = settings.slowRequestThreshold
         }
     }
 
@@ -176,7 +178,10 @@ final class RequestListViewModel: ObservableObject {
                 $0.url.lowercased().contains(query) ||
                 $0.method.rawValue.lowercased().contains(query) ||
                 $0.host.lowercased().contains(query) ||
-                ($0.statusCode.map { String($0) } ?? "").contains(query)
+                ($0.statusCode.map { String($0) } ?? "").contains(query) ||
+                ($0.responseBody?.rawString?.lowercased().contains(query) ?? false) ||
+                ($0.requestBody?.rawString?.lowercased().contains(query) ?? false) ||
+                ($0.errorMessage?.lowercased().contains(query) ?? false)
             }
         }
 

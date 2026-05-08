@@ -106,6 +106,7 @@ struct RequestListView: View {
             .onReceive(NotificationCenter.default.publisher(for: .inspectlySettingsDidChange)) { notification in
                 if let settings = notification.object as? AppSettings {
                     viewModel.activeThrottling = settings.networkThrottlingPreset
+                    viewModel.slowRequestThreshold = settings.slowRequestThreshold
                 }
             }
             .onAppear {
@@ -143,7 +144,7 @@ struct RequestListView: View {
                         InspectlyNavigationLink(value: request) { request in
                             requestDetailDestination(for: request)
                         } label: {
-                            RequestRowView(request: request)
+                            RequestRowView(request: request, slowThreshold: viewModel.slowRequestThreshold)
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive) {

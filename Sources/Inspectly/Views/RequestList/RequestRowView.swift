@@ -23,6 +23,7 @@ import SwiftUI
 @available(iOS 16.0, *)
 struct RequestRowView: View {
     let request: NetworkRequest
+    var slowThreshold: TimeInterval = 1.0
 
     var body: some View {
         HStack(spacing: 10) {
@@ -92,9 +93,16 @@ struct RequestRowView: View {
             VStack(alignment: .trailing, spacing: 5) {
                 StatusBadgeView(statusCode: request.statusCode)
 
-                Text(request.formattedDuration)
-                    .font(.system(size: 10, weight: .medium, design: .monospaced))
-                    .foregroundStyle(durationColor)
+                HStack(spacing: 4) {
+                    if isSlow {
+                        Image(systemName: "tortoise.fill")
+                            .font(.system(size: 8))
+                            .foregroundStyle(.orange)
+                    }
+                    Text(request.formattedDuration)
+                        .font(.system(size: 10, weight: .medium, design: .monospaced))
+                        .foregroundStyle(durationColor)
+                }
             }
         }
         .padding(.vertical, 6)
@@ -110,10 +118,15 @@ struct RequestRowView: View {
         return Color.forStatusCode(code)
     }
 
+    private var isSlow: Bool {
+        guard let duration = request.duration else { return false }
+        return duration >= slowThreshold
+    }
+
     private var durationColor: Color {
         guard let duration = request.duration else { return .secondary }
-        if duration > 3.0 { return .red }
-        if duration > 1.0 { return .orange }
+        if duration >= slowThreshold * 3 { return .red }
+        if duration >= slowThreshold { return .orange }
         return .secondary
     }
 }

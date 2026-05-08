@@ -33,6 +33,7 @@ public struct AppSettings: Codable {
     var isAutoResponsePrettifying: Bool
     var isRequestBodyTruncation: Bool
     var truncationLimit: Int
+    var slowRequestThreshold: TimeInterval
 
     init(
         isLoggingEnabled: Bool = true,
@@ -46,7 +47,8 @@ public struct AppSettings: Codable {
         isDarkModeOverride: Bool? = nil,
         isAutoResponsePrettifying: Bool = true,
         isRequestBodyTruncation: Bool = false,
-        truncationLimit: Int = 10000
+        truncationLimit: Int = 10000,
+        slowRequestThreshold: TimeInterval = 1.0
     ) {
         self.isLoggingEnabled = isLoggingEnabled
         self.areStubsEnabled = areStubsEnabled
@@ -60,6 +62,7 @@ public struct AppSettings: Codable {
         self.isAutoResponsePrettifying = isAutoResponsePrettifying
         self.isRequestBodyTruncation = isRequestBodyTruncation
         self.truncationLimit = truncationLimit
+        self.slowRequestThreshold = slowRequestThreshold
     }
 
     static let `default` = AppSettings()
@@ -77,6 +80,7 @@ public struct AppSettings: Codable {
         case isAutoResponsePrettifying
         case isRequestBodyTruncation
         case truncationLimit
+        case slowRequestThreshold
     }
 
     public init(from decoder: Decoder) throws {
@@ -94,6 +98,7 @@ public struct AppSettings: Codable {
         isAutoResponsePrettifying = try container.decodeIfPresent(Bool.self, forKey: .isAutoResponsePrettifying) ?? true
         isRequestBodyTruncation = try container.decodeIfPresent(Bool.self, forKey: .isRequestBodyTruncation) ?? false
         truncationLimit = try container.decodeIfPresent(Int.self, forKey: .truncationLimit) ?? 10000
+        slowRequestThreshold = try container.decodeIfPresent(TimeInterval.self, forKey: .slowRequestThreshold) ?? 1.0
     }
 }
 
