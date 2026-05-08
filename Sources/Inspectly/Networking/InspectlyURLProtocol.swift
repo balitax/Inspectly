@@ -77,6 +77,17 @@ final class InspectlyURLProtocol: URLProtocol {
 
     private static let handledKey = "InspectlyURLProtocolHandled"
 
+    /// Shared internal session reused across all requests to avoid creating a new
+    /// URLSession (and its connection pool) per request. Requests sent through this
+    /// session already carry the `handledKey` marker, so InspectlyURLProtocol's
+    /// `canInit` returns false for them — preventing infinite interception loops.
+    private static let internalSession: URLSession = {
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 60
+        config.timeoutIntervalForResource = 300
+        return URLSession(configuration: config)
+    }()
+
     // MARK: - URLProtocol Override
 
     override class func canInit(with request: URLRequest) -> Bool {
@@ -255,12 +266,15 @@ final class InspectlyURLProtocol: URLProtocol {
         waitResponsive(for: throttle.requestDelay) { [weak self] in
             guard let self = self else { return }
 
-            let session = URLSession(configuration: .default)
-            self.dataTask = session.dataTask(with: request) { [weak self] data, response, error in
+            self.dataTask = Self.internalSession.dataTask(with: request) { [weak self] data, response, error in
                 guard let self = self, !self.isStopped else { return }
 
                 if let error = error {
-                    var updatedRequest = self.capturedRequest!
+                    guard let captured = self.capturedRequest else {
+                        self.client?.urlProtocol(self, didFailWithError: error)
+                        return
+                    }
+                    var updatedRequest = captured
                     updatedRequest.duration = Date().timeIntervalSince(startTime)
                     updatedRequest.status = self.status(for: error)
                     updatedRequest.errorMessage = error.localizedDescription
@@ -272,7 +286,11 @@ final class InspectlyURLProtocol: URLProtocol {
                 }
 
                 if let httpResponse = response as? HTTPURLResponse {
-                    var updatedRequest = self.capturedRequest!
+                    guard let captured = self.capturedRequest else {
+                        self.client?.urlProtocolDidFinishLoading(self)
+                        return
+                    }
+                    var updatedRequest = captured
                     updatedRequest.statusCode = httpResponse.statusCode
                     
                     var responseContentType = httpResponse.contentType

@@ -108,8 +108,9 @@ public struct StubMatchRule: Codable, Identifiable {
     /// Check if a request matches this rule
     func matches(_ request: NetworkRequest) -> Bool {
         // Check full URL (Mandatory)
+        // Scheme and host are case-insensitive per RFC 3986; path is case-sensitive.
         if let fullURL = fullURL, !fullURL.isEmpty {
-            if request.url != fullURL {
+            if !urlsMatch(request.url, fullURL) {
                 return false
             }
         } else {
@@ -128,9 +129,11 @@ public struct StubMatchRule: Codable, Identifiable {
             if !found { return false }
         }
 
-        // Check headers
+        // Check headers — header names are case-insensitive per RFC 7230
         for header in headers {
-            let found = request.requestHeaders.contains { $0.key == header.key && $0.value == header.value }
+            let found = request.requestHeaders.contains {
+                $0.key.lowercased() == header.key.lowercased() && $0.value == header.value
+            }
             if !found { return false }
         }
 
@@ -141,6 +144,22 @@ public struct StubMatchRule: Codable, Identifiable {
         }
 
         return true
+    }
+
+    /// Compare two URL strings with RFC 3986 normalization:
+    /// scheme and host are case-insensitive; path, query, and fragment are case-sensitive.
+    private func urlsMatch(_ lhs: String, _ rhs: String) -> Bool {
+        guard let lhsComponents = URLComponents(string: lhs),
+              let rhsComponents = URLComponents(string: rhs) else {
+            // Fallback to direct comparison if URLs can't be parsed
+            return lhs == rhs
+        }
+
+        return lhsComponents.scheme?.lowercased() == rhsComponents.scheme?.lowercased()
+            && lhsComponents.host?.lowercased() == rhsComponents.host?.lowercased()
+            && lhsComponents.port == rhsComponents.port
+            && lhsComponents.path == rhsComponents.path
+            && lhsComponents.query == rhsComponents.query
     }
 }
 

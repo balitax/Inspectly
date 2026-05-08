@@ -78,9 +78,11 @@ public final class Inspectly {
     }
     
     // MARK: - Properties
-    
+
+    private static let enableLock = NSLock()
     private static var _isEnabled: Bool = false
     private static var configuration: Configuration?
+    private static var themeObserverToken: NSObjectProtocol?
     
     // MARK: - Public API
     
@@ -89,6 +91,8 @@ public final class Inspectly {
     ///   - isEnabled: Enable or disable Inspectly. Use `true` for debug, `false` for production release builds.
     ///   - configuration: Custom configuration for Inspectly
     public static func enable(isEnabled: Bool = true, with configuration: Configuration = Configuration()) {
+        enableLock.lock()
+        defer { enableLock.unlock() }
         guard !_isEnabled else { return }
         
         self.configuration = configuration
@@ -163,8 +167,10 @@ public final class Inspectly {
             setupThemeObserver()
             
             if let sheet = hostingController.sheetPresentationController {
-                sheet.detents = [.large()]
+                sheet.detents = [.medium(), .large()]
                 sheet.prefersGrabberVisible = true
+                sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+                sheet.largestUndimmedDetentIdentifier = .medium
             }
             
             if let root = rootView {
@@ -226,7 +232,10 @@ public final class Inspectly {
     
     @available(iOS 16.0, *)
     private static func setupThemeObserver() {
-        NotificationCenter.default.addObserver(
+        // Guard against accumulating duplicate observers on every presentInspector() call
+        guard themeObserverToken == nil else { return }
+
+        themeObserverToken = NotificationCenter.default.addObserver(
             forName: .inspectlySettingsDidChange,
             object: nil,
             queue: .main
@@ -235,7 +244,7 @@ public final class Inspectly {
                   let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                   let window = windowScene.windows.first,
                   let hostingController = window.rootViewController?.presentedViewController as? UIHostingController<ContentView> else { return }
-            
+
             if let isDarkModeOverride = settings.isDarkModeOverride {
                 hostingController.overrideUserInterfaceStyle = isDarkModeOverride ? .dark : .light
             } else {

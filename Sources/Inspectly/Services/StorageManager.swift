@@ -25,7 +25,8 @@ final class StorageManager: StorageManagerProtocol {
     private let baseDirectory: URL
 
     init() {
-        let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fallback = URL(fileURLWithPath: NSTemporaryDirectory())
+        let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first ?? fallback
         baseDirectory = documentsPath.appendingPathComponent("Inspectly", isDirectory: true)
 
         // Create directory if needed
