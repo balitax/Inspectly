@@ -107,11 +107,20 @@ struct HeadersTabView: View {
                     ? header.maskedValue
                     : header.formattedValue
 
-                Text(displayValue)
-                    .font(.system(size: 13, design: .monospaced))
-                    .foregroundStyle(header.isSensitive && !isRevealed ? .secondary : .primary)
-                    .textSelection(isRevealed ? .enabled : .disabled)
-                    .fixedSize(horizontal: false, vertical: true)
+                // textSelection type differs (.enabled vs .disabled) so branch explicitly
+                if isRevealed || !header.isSensitive {
+                    Text(displayValue)
+                        .font(.system(size: 13, design: .monospaced))
+                        .foregroundStyle(Color.primary)
+                        .textSelection(.enabled)
+                        .fixedSize(horizontal: false, vertical: true)
+                } else {
+                    Text(displayValue)
+                        .font(.system(size: 13, design: .monospaced))
+                        .foregroundStyle(Color.secondary)
+                        .textSelection(.disabled)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
 
                 if !header.isSensitive && header.formattedValue != header.value {
                     Text(header.value)
