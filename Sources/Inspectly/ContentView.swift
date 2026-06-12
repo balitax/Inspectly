@@ -18,11 +18,27 @@
 
 import SwiftUI
 
+// MARK: - Hide Floating Tab Bar Preference Key
+
+struct HideFloatingTabBarKey: PreferenceKey {
+    static var defaultValue = false
+    static func reduce(value: inout Bool, nextValue: () -> Bool) {
+        value = value || nextValue()
+    }
+}
+
+extension View {
+    func hideFloatingTabBar(_ hidden: Bool = true) -> some View {
+        preference(key: HideFloatingTabBarKey.self, value: hidden)
+    }
+}
+
 // MARK: - Content View
 
 struct ContentView: View {
     @State private var selectedTab: AppTab = .requests
     @State private var appSettings: AppSettings = .default
+    @State private var isFloatingTabBarHidden = false
     let onDismiss: (() -> Void)?
     let container: DependencyContainer
 
@@ -73,10 +89,18 @@ struct ContentView: View {
         }
         .tint(.accentColor)
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            FloatingTabBar(selectedTab: $selectedTab, onDismiss: onDismiss)
-                .padding(.horizontal, 16)
-                .padding(.bottom, 8)
-                .padding(.top, 4)
+            if !isFloatingTabBarHidden {
+                FloatingTabBar(selectedTab: $selectedTab, onDismiss: onDismiss)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 8)
+                    .padding(.top, 4)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
+        .onPreferenceChange(HideFloatingTabBarKey.self) { hidden in
+            withAnimation(.easeInOut(duration: 0.2)) {
+                isFloatingTabBarHidden = hidden
+            }
         }
         .ignoresSafeArea(.keyboard)
     }

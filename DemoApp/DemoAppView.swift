@@ -287,7 +287,7 @@ struct DemoAppView: View {
     // MARK: - Network Actions
 
     private func loadCommentList() {
-        fire("Comments", url: "https://jsonplaceholder.typicode.com/comments?postId=1")
+        fire("Comments", url: "https://api.bareksa.dev/internal/v1/sbn-homepage/seri?year=2026")
     }
 
     private func loadPostDetail() {

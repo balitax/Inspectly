@@ -44,26 +44,22 @@ struct RequestDetailView: View {
             tabSelector
 
             // MARK: - Tab Content
-            TabView(selection: $viewModel.selectedTab) {
-                OverviewTabView(viewModel: viewModel)
-                    .tag(RequestDetailTab.overview)
-
-                HeadersTabView(viewModel: viewModel)
-                    .tag(RequestDetailTab.headers)
-
-                ParamsTabView(viewModel: viewModel)
-                    .tag(RequestDetailTab.params)
-
-                RequestBodyTabView(viewModel: viewModel)
-                    .tag(RequestDetailTab.requestBody)
-
-                ResponseBodyTabView(viewModel: viewModel)
-                    .tag(RequestDetailTab.responseBody)
-
-                ExportTabView(viewModel: viewModel)
-                    .tag(RequestDetailTab.export)
+            Group {
+                switch viewModel.selectedTab {
+                case .overview:
+                    OverviewTabView(viewModel: viewModel)
+                case .headers:
+                    HeadersTabView(viewModel: viewModel)
+                case .params:
+                    ParamsTabView(viewModel: viewModel)
+                case .requestBody:
+                    RequestBodyTabView(viewModel: viewModel)
+                case .responseBody:
+                    ResponseBodyTabView(viewModel: viewModel)
+                case .export:
+                    ExportTabView(viewModel: viewModel)
+                }
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
         }
         .background(Color.surfacePrimary)
         .navigationTitle(viewModel.request.shortURL)
@@ -103,6 +99,7 @@ struct RequestDetailView: View {
             onDismissed?()
         }
         .toolbar(.hidden, for: .tabBar)
+        .hideFloatingTabBar()
     }
 
     // MARK: - Tab Selector

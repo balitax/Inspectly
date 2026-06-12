@@ -63,13 +63,10 @@ struct ResponseBodyTabView: View {
     var body: some View {
         VStack(spacing: 0) {
             if !(viewModel.request.responseBody?.isEmpty ?? true) {
-                VStack(spacing: 8) {
-                    infoBar
-                    searchBar
-                }
-                .padding(.horizontal, 16)
-                .padding(.top, 16)
-                .padding(.bottom, 8)
+                searchBar
+                    .padding(.horizontal, 16)
+                    .padding(.top, 16)
+                    .padding(.bottom, 8)
             }
 
             if viewModel.request.responseBody?.isEmpty ?? true {
@@ -86,6 +83,8 @@ struct ResponseBodyTabView: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack(spacing: 16) {
+                            infoBar
+
                             if viewModel.request.responseContentType == .html && showPreview && !showRaw {
                                 HTMLPreviewView(htmlContent: viewModel.request.responseBody?.rawString ?? "")
                             } else {
