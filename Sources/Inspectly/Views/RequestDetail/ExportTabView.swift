@@ -88,6 +88,7 @@ struct ExportTabView: View {
                 }
             }
             .padding(16)
+            .padding(.bottom, 100)
         }
     }
 
