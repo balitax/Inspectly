@@ -66,6 +66,10 @@ struct ContentView: View {
             settingsTab
                 .tag(AppTab.settings)
                 .toolbar(.hidden, for: .tabBar)
+
+            dismissTab
+                .tag(AppTab.dismiss)
+                .toolbar(.hidden, for: .tabBar)
         }
         .tint(.accentColor)
         .safeAreaInset(edge: .bottom, spacing: 0) {
@@ -115,6 +119,31 @@ struct ContentView: View {
         )
     }
 
+    private var dismissTab: some View {
+        VStack {
+            Spacer()
+            Button(action: {
+                onDismiss?()
+            }) {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.system(size: 48, weight: .bold))
+                    .foregroundStyle(.secondary)
+                    .padding(40)
+                    .background {
+                        Circle()
+                            .fill(.ultraThinMaterial)
+                            .overlay {
+                                Circle()
+                                    .strokeBorder(Color.primary.opacity(0.1), lineWidth: 1)
+                            }
+                            .shadow(color: .black.opacity(0.15), radius: 20, x: 0, y: 8)
+                    }
+            }
+            .buttonStyle(.plain)
+            Spacer()
+        }
+    }
+
     // MARK: - Settings
 
     private func loadSettings() async {
@@ -131,6 +160,7 @@ enum AppTab: String, Hashable, CaseIterable, Identifiable {
     case statistics
     case stubs
     case settings
+    case dismiss
 
     var id: String { rawValue }
 
@@ -140,6 +170,7 @@ enum AppTab: String, Hashable, CaseIterable, Identifiable {
         case .statistics: return "Stats"
         case .stubs:      return "Stubs"
         case .settings:   return "Settings"
+        case .dismiss:    return "Dismiss"
         }
     }
 
@@ -149,6 +180,7 @@ enum AppTab: String, Hashable, CaseIterable, Identifiable {
         case .statistics: return "chart.bar"
         case .stubs:      return "hammer"
         case .settings:   return "gearshape"
+        case .dismiss:    return "xmark.circle"
         }
     }
 
@@ -158,6 +190,7 @@ enum AppTab: String, Hashable, CaseIterable, Identifiable {
         case .statistics: return "chart.bar.fill"
         case .stubs:      return "hammer.fill"
         case .settings:   return "gearshape.fill"
+        case .dismiss:    return "xmark.circle.fill"
         }
     }
 }
@@ -189,49 +222,56 @@ private struct FloatingTabBar: View {
                     .shadow(color: .black.opacity(0.18), radius: 32, x: 0, y: 10)
             }
 
-            // Close button — frosted glass circle
-            if let onDismiss {
-                Button(action: onDismiss) {
-                    Image(systemName: "xmark")
-                        .font(.system(size: 16, weight: .bold))
-                        .foregroundStyle(.accentColor)
-                        .frame(width: 60, height: 60)
-                        .background {
-                            Circle()
-                                .fill(.red)
-                                .overlay {
-                                    Circle()
-                                        .strokeBorder(.white.opacity(0.2), lineWidth: 0.5)
-                                }
-                                .shadow(color: .black.opacity(0.15), radius: 20, x: 0, y: 8)
-                        }
-                }
-                .buttonStyle(.plain)
-            }
+            // // Close button — frosted glass circle
+            // if let onDismiss {
+            //     Button(action: onDismiss) {
+            //         Image(systemName: "xmark")
+            //             .font(.system(size: 16, weight: .bold))
+            //             .foregroundStyle(.accentColor)
+            //             .frame(width: 60, height: 60)
+            //             .background {
+            //                 Circle()
+            //                     .fill(.red)
+            //                     .overlay {
+            //                         Circle()
+            //                             .strokeBorder(.white.opacity(0.2), lineWidth: 0.5)
+            //                     }
+            //                     .shadow(color: .black.opacity(0.15), radius: 20, x: 0, y: 8)
+            //             }
+            //     }
+            //     .buttonStyle(.plain)
+            // }
         }
     }
 
     private func tabButton(_ tab: AppTab) -> some View {
-        Button {
-            withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                selectedTab = tab
+        let isDismiss = tab == .dismiss
+        let isSelected = selectedTab == tab && !isDismiss
+
+        return Button {
+            if isDismiss {
+                onDismiss?()
+            } else {
+                withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                    selectedTab = tab
+                }
             }
         } label: {
             VStack(spacing: 3) {
-                Image(systemName: selectedTab == tab ? tab.selectedIcon : tab.icon)
-                    .font(.system(size: 20, weight: selectedTab == tab ? .semibold : .regular))
+                Image(systemName: isSelected ? tab.selectedIcon : tab.icon)
+                    .font(.system(size: 20, weight: isSelected ? .semibold : .regular))
                     .frame(width: 26, height: 26)
-                    .scaleEffect(selectedTab == tab ? 1.1 : 1.0)
+                    .scaleEffect(isSelected ? 1.1 : 1.0)
 
                 Text(tab.title)
                     .font(.system(size: 10, weight: .medium))
             }
-            .foregroundStyle(selectedTab == tab ? Color.accentColor : Color.secondary)
+            .foregroundStyle(isDismiss ? .red : (isSelected ? Color.accentColor : Color.secondary))
             .frame(maxWidth: .infinity)
             .padding(.vertical, 8)
             .padding(.horizontal, 10)
             .background {
-                if selectedTab == tab {
+                if isSelected {
                     Capsule()
                         .fill(Color(.systemBackground).opacity(0.7))
                         .overlay {
