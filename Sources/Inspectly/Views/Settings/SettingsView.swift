@@ -67,9 +67,6 @@ struct SettingsView: View {
             .onChange(of: viewModel.settings.networkThrottlingPreset) { _ in
                 Task { await viewModel.saveSettings() }
             }
-            .onChange(of: viewModel.settings.isShakeGestureEnabled) { _ in
-                Task { await viewModel.saveSettings() }
-            }
             .onChange(of: viewModel.settings.isAutoResponsePrettifying) { _ in
                 Task { await viewModel.saveSettings() }
             }
@@ -365,15 +362,6 @@ struct SettingsView: View {
                 }
             }
 
-            Toggle(isOn: $viewModel.settings.isShakeGestureEnabled) {
-                settingRow(
-                    icon: "iphone.radiowaves.left.and.right",
-                    color: .pink,
-                    title: "Shake to Open"
-                )
-            }
-            .tint(.pink)
-
             Toggle(isOn: $viewModel.settings.isAutoResponsePrettifying) {
                 settingRow(
                     icon: "text.alignleft",
@@ -483,7 +471,7 @@ struct SettingsView: View {
                 Text("Developer")
                     .font(.system(size: 15))
                 Spacer()
-                Text("Inspectly Team")
+                Text("Agus Cahyono")
                     .font(.system(size: 13))
                     .foregroundStyle(.secondary)
             }
