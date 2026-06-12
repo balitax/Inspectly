@@ -30,6 +30,9 @@ struct StatisticsView: View {
                     summaryCardsSection
                     activityChartSection
                     methodDistributionSection
+                    performanceHeatmapSection
+                    duplicateDetectorSection
+                    largeResponsesSection
                     quickAccessSection
                     recentActivitySection
                 }
@@ -143,6 +146,159 @@ struct StatisticsView: View {
                                 }
                             }
                             .frame(height: 22)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Performance Heatmap
+
+    private var performanceHeatmapSection: some View {
+        statsCard(title: "Performance Heatmap", subtitle: "Slowest endpoints") {
+            if viewModel.endpointPerformance.isEmpty {
+                Text("No timing data yet")
+                    .font(.system(size: 13))
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            } else {
+                VStack(spacing: 8) {
+                    ForEach(viewModel.endpointPerformance, id: \.path) { item in
+                        HStack(spacing: 10) {
+                            Text(item.path)
+                                .font(.system(size: 11, design: .monospaced))
+                                .foregroundStyle(.primary)
+                                .lineLimit(1)
+                                .frame(maxWidth: 130, alignment: .leading)
+
+                            GeometryReader { geo in
+                                let maxTime = viewModel.endpointPerformance.first?.avgTime ?? 1
+                                let fillWidth = geo.size.width * CGFloat(item.avgTime / max(maxTime, 0.001))
+
+                                ZStack(alignment: .leading) {
+                                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                                        .fill(Color(.quaternarySystemFill))
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+                                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                                        .fill(perfTimeColor(item.avgTime).opacity(0.35))
+                                        .frame(width: max(fillWidth, 4))
+                                }
+                                .overlay(alignment: .trailing) {
+                                    Text(formattedDuration(item.avgTime))
+                                        .font(.system(size: 10, weight: .semibold, design: .monospaced))
+                                        .foregroundStyle(perfTimeColor(item.avgTime))
+                                        .padding(.trailing, 6)
+                                }
+                            }
+                            .frame(height: 22)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private func perfTimeColor(_ time: TimeInterval) -> Color {
+        if time >= 2.0 { return .red }
+        if time >= 0.5 { return .orange }
+        return .green
+    }
+
+    private func formattedDuration(_ time: TimeInterval) -> String {
+        if time < 1 { return String(format: "%.0fms", time * 1000) }
+        return String(format: "%.2fs", time)
+    }
+
+    // MARK: - Duplicate Detector
+
+    private var duplicateDetectorSection: some View {
+        statsCard(title: "Duplicate Requests", subtitle: "Same endpoint hit multiple times") {
+            if viewModel.duplicateGroups.isEmpty {
+                HStack(spacing: 8) {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 13))
+                        .foregroundStyle(.green)
+                    Text("No duplicate requests detected")
+                        .font(.system(size: 13))
+                        .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            } else {
+                VStack(spacing: 0) {
+                    ForEach(Array(viewModel.duplicateGroups.enumerated()), id: \.offset) { idx, group in
+                        HStack(spacing: 10) {
+                            HTTPMethodBadge(method: group.method)
+
+                            Text(group.path)
+                                .font(.system(size: 12, design: .monospaced))
+                                .foregroundStyle(.primary)
+                                .lineLimit(1)
+
+                            Spacer(minLength: 6)
+
+                            Text("×\(group.count)")
+                                .font(.system(size: 12, weight: .bold, design: .monospaced))
+                                .foregroundStyle(.orange)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 3)
+                                .background(Color.orange.opacity(0.12))
+                                .clipShape(Capsule())
+                        }
+                        .padding(.vertical, 8)
+
+                        if idx < viewModel.duplicateGroups.count - 1 {
+                            Divider().padding(.leading, 46)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Large Responses
+
+    private var largeResponsesSection: some View {
+        statsCard(title: "Large Responses", subtitle: "Responses over 1 MB") {
+            if viewModel.largeResponses.isEmpty {
+                HStack(spacing: 8) {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 13))
+                        .foregroundStyle(.green)
+                    Text("No oversized responses detected")
+                        .font(.system(size: 13))
+                        .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            } else {
+                VStack(spacing: 0) {
+                    ForEach(Array(viewModel.largeResponses.enumerated()), id: \.offset) { idx, request in
+                        HStack(spacing: 10) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .font(.system(size: 13))
+                                .foregroundStyle(.orange)
+                                .frame(width: 22, height: 22)
+
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(request.shortURL)
+                                    .font(.system(size: 12, weight: .semibold))
+                                    .foregroundStyle(.primary)
+                                    .lineLimit(1)
+
+                                Text(request.responseBody?.formattedSize ?? "—")
+                                    .font(.system(size: 11, design: .monospaced))
+                                    .foregroundStyle(.orange)
+                            }
+
+                            Spacer(minLength: 6)
+
+                            StatusBadgeView(statusCode: request.statusCode)
+                        }
+                        .padding(.vertical, 8)
+
+                        if idx < viewModel.largeResponses.count - 1 {
+                            Divider().padding(.leading, 40)
                         }
                     }
                 }

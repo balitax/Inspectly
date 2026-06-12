@@ -83,6 +83,12 @@ struct RequestRowView: View {
                             .font(.system(size: 8))
                             .foregroundStyle(.pink)
                     }
+
+                    if isLargeResponse {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.system(size: 8))
+                            .foregroundStyle(.orange)
+                    }
                 }
             }
 
@@ -120,6 +126,10 @@ struct RequestRowView: View {
     private var isSlow: Bool {
         guard let duration = request.duration else { return false }
         return duration >= slowThreshold
+    }
+
+    private var isLargeResponse: Bool {
+        (request.responseBody?.size ?? 0) >= 1_048_576
     }
 
     private var durationColor: Color {
