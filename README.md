@@ -17,7 +17,7 @@
   <img src="https://img.shields.io/badge/Swift-5.9%2B-orange" />
   <img src="https://img.shields.io/badge/License-MIT-green" />
   <img src="https://img.shields.io/badge/SPM-Ready-purple" />
-  <img src="https://img.shields.io/badge/version-1.2.0-brightgreen" />
+  <img src="https://img.shields.io/badge/version-1.3.0-brightgreen" />
 </p>
 
 ---
@@ -38,8 +38,6 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 - **Rich HTML Rendering** — interactive preview for HTML responses
 - **Smart Content Detection** — automatic content-type sniffing when server headers are misleading
 - **Sensitive Header Masking** — `Authorization`, `Cookie`, `X-Api-Key` and other sensitive headers are hidden by default with a per-header reveal toggle
-- **Full-Text Search** — search across URL, method, host, status code, request body, response body, and error messages
-
 ### Request Management
 - Search, filter, sort, favorite, pin, and tag captured requests
 - Paginated request list with auto-load-more
@@ -55,13 +53,19 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 ### Performance & Debugging
 - **Slow Request Detection** — configurable threshold highlights slow requests with visual indicator
 - **Network Throttling** — simulate Edge, 3G, LTE, or custom bandwidth/delay conditions
+- **Performance Heatmap** — top 5 slowest endpoints with color-coded average response time bars
+- **Duplicate Detector** — surfaces endpoints called multiple times with a repeat count badge
+- **Large Response Warning** — flags responses over 1 MB in Statistics and the request list
 - Timeline view for DNS, connect, TLS, TTFB, and transfer phases
 - cURL export with correct shell escaping for all requests
+
+### Search
+- **Response Body Search** — full-text search inside JSON/plain-text responses with next/prev highlight navigation
+- **Full-Text Search** — search across URL, method, host, status code, request body, response body, and error messages
 
 ### Settings
 - Configure max stored requests (100–2500)
 - Ignore specific hosts from being captured
-- Shake gesture shortcut to open the inspector
 - Light / Dark / System theme override
 - Auto-prettify JSON responses
 
@@ -81,7 +85,7 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.2.0")
+    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.3.0")
 ]
 ```
 
@@ -208,7 +212,7 @@ No custom interceptor setup is required for common use cases.
 
 1. Enable Inspectly in your app
 2. Trigger real API calls
-3. Open the inspector using shake gesture or `Inspectly.presentInspector()`
+3. Open the inspector using `Inspectly.presentInspector()` or shake gesture (if enabled via configuration)
 4. Browse captured requests
 5. Create a stub from an existing request
 6. Adjust the mocked response in the Stubs tab
@@ -217,6 +221,16 @@ No custom interceptor setup is required for common use cases.
 ---
 
 ## Changelog
+
+### [1.3.0] — 2026-06-12
+- **Performance Heatmap** — top 5 slowest endpoints visualized as color-coded bars (green < 500ms, orange < 2s, red ≥ 2s)
+- **Duplicate Detector** — groups requests by method + URL and surfaces repeated calls with a count badge
+- **Large Response Warning** — responses over 1 MB are flagged in the Statistics view and marked with a warning indicator in the request list
+- **Response Body Search** — full-text search inside JSON and plain-text responses with next/prev highlight navigation and a fixed search bar
+- Floating tab bar now hides automatically when entering Request Detail
+- Dismiss tab added to the floating tab bar for quick close
+- Fixed next/prev highlight scroll in response body search
+- Settings: removed Shake to Open toggle from UI (still configurable via `Inspectly.Configuration`)
 
 ### [1.2.0] — 2026-05-08
 - **iOS 16.0 minimum** — dropped iOS 13–15 support
