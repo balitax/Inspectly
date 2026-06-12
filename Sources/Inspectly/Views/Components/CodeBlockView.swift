@@ -25,8 +25,69 @@ struct CodeBlockView: View {
     let content: String
     var showCopyButton: Bool = true
     var maxLines: Int? = nil
+    var searchQuery: String = ""
+    var currentMatchIndex: Int = 0
+    var totalMatches: Int = 0
 
     @State private var copied = false
+
+    // MARK: - Computed
+
+    private var displayContent: String {
+        if let maxLines = maxLines {
+            let lines = content.components(separatedBy: "\n")
+            if lines.count > maxLines {
+                return lines.prefix(maxLines).joined(separator: "\n") + "\n..."
+            }
+        }
+        return content
+    }
+
+    private var lines: [String] {
+        displayContent.components(separatedBy: "\n")
+    }
+
+    private var matchLineMap: [Int: Int] {
+        guard !searchQuery.isEmpty else { return [:] }
+        var map: [Int: Int] = [:]
+        var globalIdx = 0
+        let lowerQuery = searchQuery.lowercased()
+        for (lineIdx, line) in lines.enumerated() {
+            let lowerLine = line.lowercased()
+            var pos = lowerLine.startIndex
+            while let range = lowerLine.range(of: lowerQuery, range: pos..<lowerLine.endIndex) {
+                map[globalIdx] = lineIdx
+                globalIdx += 1
+                pos = range.upperBound
+            }
+        }
+        return map
+    }
+
+    private var highlightedLines: [AttributedString] {
+        guard !searchQuery.isEmpty else { return lines.map { AttributedString($0) } }
+        let lowerQuery = searchQuery.lowercased()
+        var globalIdx = 0
+        return lines.enumerated().map { lineIdx, line in
+            var attr = AttributedString(line)
+            let lowerLine = line.lowercased()
+            var pos = lowerLine.startIndex
+            while let range = lowerLine.range(of: lowerQuery, range: pos..<lowerLine.endIndex) {
+                if let attrRange = Range(range, in: attr) {
+                    let isCurrent = globalIdx == currentMatchIndex
+                    attr[attrRange].backgroundColor = isCurrent
+                        ? Color.orange.opacity(0.6)
+                        : Color.yellow.opacity(0.35)
+                    attr[attrRange].foregroundColor = .primary
+                }
+                globalIdx += 1
+                pos = range.upperBound
+            }
+            return attr
+        }
+    }
+
+    // MARK: - Body
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -61,28 +122,42 @@ struct CodeBlockView: View {
                 }
             }
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                Text(displayContent)
-                    .font(.system(size: 12, design: .monospaced))
-                    .foregroundStyle(.primary)
-                    .textSelection(.enabled)
-                    .lineLimit(maxLines)
+            if searchQuery.isEmpty {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    Text(displayContent)
+                        .font(.system(size: 12, design: .monospaced))
+                        .foregroundStyle(.primary)
+                        .textSelection(.enabled)
+                        .lineLimit(maxLines)
+                }
+            } else {
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 0) {
+                            ForEach(highlightedLines.indices, id: \.self) { lineIdx in
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    Text(highlightedLines[lineIdx])
+                                        .font(.system(size: 12, design: .monospaced))
+                                        .foregroundStyle(.primary)
+                                        .textSelection(.enabled)
+                                }
+                                .id(lineIdx)
+                            }
+                        }
+                    }
+                    .onChange(of: currentMatchIndex) { _ in
+                        guard let targetLine = matchLineMap[currentMatchIndex] else { return }
+                        withAnimation {
+                            proxy.scrollTo(targetLine, anchor: .center)
+                        }
+                    }
+                }
             }
         }
         .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(.tertiarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-    }
-
-    private var displayContent: String {
-        if let maxLines = maxLines {
-            let lines = content.components(separatedBy: "\n")
-            if lines.count > maxLines {
-                return lines.prefix(maxLines).joined(separator: "\n") + "\n..."
-            }
-        }
-        return content
     }
 }
 

@@ -24,6 +24,21 @@ struct ResponseBodyTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
     @State private var showRaw = false
     @State private var showPreview = true
+    @State private var searchQuery = ""
+    @State private var currentMatch = 0
+    @FocusState private var searchFieldFocused: Bool
+
+    private var matchCount: Int {
+        guard !searchQuery.isEmpty,
+              let body = currentBody else { return 0 }
+        return body.lowercased().components(separatedBy: searchQuery.lowercased()).count - 1
+    }
+
+    private var currentBody: String? {
+        showRaw
+            ? (viewModel.request.responseBody?.rawString ?? "")
+            : viewModel.prettyResponseBody
+    }
 
     var body: some View {
         ScrollView {
@@ -36,10 +51,10 @@ struct ResponseBodyTabView: View {
                     )
                     .frame(maxHeight: .infinity)
                 } else {
-                    // MARK: - Info Bar
                     infoBar
 
-                    // MARK: - Body Content
+                    searchBar
+
                     if viewModel.request.responseContentType == .html && showPreview && !showRaw {
                         HTMLPreviewView(htmlContent: viewModel.request.responseBody?.rawString ?? "")
                     } else {
@@ -47,12 +62,16 @@ struct ResponseBodyTabView: View {
                             title: "Response Body",
                             content: showRaw
                                 ? (viewModel.request.responseBody?.rawString ?? "")
-                                : viewModel.prettyResponseBody
+                                : viewModel.prettyResponseBody,
+                            searchQuery: searchQuery,
+                            currentMatchIndex: searchQuery.isEmpty ? 0 : currentMatch,
+                            totalMatches: matchCount
                         )
                     }
                 }
             }
             .padding(16)
+            .padding(.bottom, 100)
         }
     }
 
@@ -91,15 +110,6 @@ struct ResponseBodyTabView: View {
                 .font(.system(size: 11, weight: .medium, design: .monospaced))
                 .foregroundStyle(.tertiary)
 
-            // Preview toggle (HTML only)
-            if viewModel.request.responseContentType == .html {
-                Toggle("Preview", isOn: $showPreview)
-                    .toggleStyle(.button)
-                    .buttonStyle(.bordered)
-                    .controlSize(.mini)
-                    .font(.system(size: 10, weight: .medium))
-            }
-
             // Raw toggle
             Toggle("Raw", isOn: $showRaw)
                 .toggleStyle(.button)
@@ -109,6 +119,67 @@ struct ResponseBodyTabView: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
+        .background(Color(.tertiarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+    }
+
+    // MARK: - Search Bar
+
+    private var searchBar: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "magnifyingglass")
+                .font(.system(size: 12, weight: .medium))
+                .foregroundStyle(.secondary)
+
+            TextField("Search JSON...", text: $searchQuery)
+                .font(.system(size: 12, design: .monospaced))
+                .textFieldStyle(.plain)
+                .focused($searchFieldFocused)
+                .onChange(of: searchQuery) { _ in
+                    currentMatch = 0
+                }
+
+            if !searchQuery.isEmpty {
+                HStack(spacing: 2) {
+                    Button {
+                        if currentMatch > 0 { currentMatch -= 1 }
+                    } label: {
+                        Image(systemName: "chevron.up")
+                            .font(.system(size: 12, weight: .semibold))
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(matchCount == 0)
+                    .opacity(matchCount == 0 ? 0.3 : 1)
+
+                    Text("\(currentMatch + 1)/\(matchCount)")
+                        .font(.system(size: 11, weight: .semibold, design: .monospaced))
+                        .foregroundStyle(matchCount > 0 ? Color.primary : Color.red)
+                        .lineLimit(1)
+                        .fixedSize()
+
+                    Button {
+                        if currentMatch < matchCount - 1 { currentMatch += 1 }
+                    } label: {
+                        Image(systemName: "chevron.down")
+                            .font(.system(size: 12, weight: .semibold))
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(matchCount == 0)
+                    .opacity(matchCount == 0 ? 0.3 : 1)
+                }
+
+                Button {
+                    searchQuery = ""
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.system(size: 13))
+                        .foregroundStyle(.secondary)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
         .background(Color(.tertiarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
