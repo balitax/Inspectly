@@ -28,6 +28,8 @@ struct ResponseBodyTabView: View {
     @State private var currentMatch = 0
     @FocusState private var searchFieldFocused: Bool
 
+    private let lineIdPrefix = "responseLine"
+
     private var matchCount: Int {
         guard !searchQuery.isEmpty,
               let body = currentBody else { return 0 }
@@ -40,38 +42,83 @@ struct ResponseBodyTabView: View {
             : viewModel.prettyResponseBody
     }
 
+    private var matchLineMap: [Int: Int] {
+        guard !searchQuery.isEmpty, let body = currentBody else { return [:] }
+        let lines = body.components(separatedBy: "\n")
+        var map: [Int: Int] = [:]
+        var globalIdx = 0
+        let lowerQuery = searchQuery.lowercased()
+        for (lineIdx, line) in lines.enumerated() {
+            let lowerLine = line.lowercased()
+            var pos = lowerLine.startIndex
+            while let range = lowerLine.range(of: lowerQuery, range: pos..<lowerLine.endIndex) {
+                map[globalIdx] = lineIdx
+                globalIdx += 1
+                pos = range.upperBound
+            }
+        }
+        return map
+    }
+
     var body: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                if viewModel.request.responseBody?.isEmpty ?? true {
+        VStack(spacing: 0) {
+            if !(viewModel.request.responseBody?.isEmpty ?? true) {
+                VStack(spacing: 8) {
+                    infoBar
+                    searchBar
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 16)
+                .padding(.bottom, 8)
+            }
+
+            if viewModel.request.responseBody?.isEmpty ?? true {
+                ScrollView {
                     EmptyStateView(
                         icon: "arrow.down.doc",
                         title: "No Response Body",
                         subtitle: "This request doesn't have a response body."
                     )
                     .frame(maxHeight: .infinity)
-                } else {
-                    infoBar
-
-                    searchBar
-
-                    if viewModel.request.responseContentType == .html && showPreview && !showRaw {
-                        HTMLPreviewView(htmlContent: viewModel.request.responseBody?.rawString ?? "")
-                    } else {
-                        CodeBlockView(
-                            title: "Response Body",
-                            content: showRaw
-                                ? (viewModel.request.responseBody?.rawString ?? "")
-                                : viewModel.prettyResponseBody,
-                            searchQuery: searchQuery,
-                            currentMatchIndex: searchQuery.isEmpty ? 0 : currentMatch,
-                            totalMatches: matchCount
-                        )
+                    .padding(16)
+                }
+            } else {
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        VStack(spacing: 16) {
+                            if viewModel.request.responseContentType == .html && showPreview && !showRaw {
+                                HTMLPreviewView(htmlContent: viewModel.request.responseBody?.rawString ?? "")
+                            } else {
+                                CodeBlockView(
+                                    title: "Response Body",
+                                    content: showRaw
+                                        ? (viewModel.request.responseBody?.rawString ?? "")
+                                        : viewModel.prettyResponseBody,
+                                    searchQuery: searchQuery,
+                                    currentMatchIndex: searchQuery.isEmpty ? 0 : currentMatch,
+                                    totalMatches: matchCount,
+                                    lineIdPrefix: lineIdPrefix
+                                )
+                            }
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .padding(.bottom, 100)
+                    }
+                    .onChange(of: currentMatch) { newMatch in
+                        guard let targetLine = matchLineMap[newMatch] else { return }
+                        withAnimation {
+                            proxy.scrollTo("\(lineIdPrefix)_\(targetLine)", anchor: .center)
+                        }
+                    }
+                    .onChange(of: searchQuery) { _ in
+                        guard let targetLine = matchLineMap[0] else { return }
+                        withAnimation {
+                            proxy.scrollTo("\(lineIdPrefix)_\(targetLine)", anchor: .center)
+                        }
                     }
                 }
             }
-            .padding(16)
-            .padding(.bottom, 100)
         }
     }
 
@@ -126,21 +173,40 @@ struct ResponseBodyTabView: View {
     // MARK: - Search Bar
 
     private var searchBar: some View {
-        HStack(spacing: 6) {
-            Image(systemName: "magnifyingglass")
-                .font(.system(size: 12, weight: .medium))
-                .foregroundStyle(.secondary)
+        HStack(spacing: 8) {
+            // Search field
+            HStack(spacing: 6) {
+                Image(systemName: "magnifyingglass")
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundStyle(.secondary)
 
-            TextField("Search JSON...", text: $searchQuery)
-                .font(.system(size: 12, design: .monospaced))
-                .textFieldStyle(.plain)
-                .focused($searchFieldFocused)
-                .onChange(of: searchQuery) { _ in
-                    currentMatch = 0
+                TextField("Search JSON...", text: $searchQuery)
+                    .font(.system(size: 12, design: .monospaced))
+                    .textFieldStyle(.plain)
+                    .focused($searchFieldFocused)
+                    .onChange(of: searchQuery) { _ in
+                        currentMatch = 0
+                    }
+
+                if !searchQuery.isEmpty {
+                    Button {
+                        searchQuery = ""
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 13))
+                            .foregroundStyle(.secondary)
+                    }
+                    .buttonStyle(.plain)
                 }
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .background(Color(.tertiarySystemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
 
+            // Nav buttons — separate pill, always fully visible
             if !searchQuery.isEmpty {
-                HStack(spacing: 2) {
+                HStack(spacing: 6) {
                     Button {
                         if currentMatch > 0 { currentMatch -= 1 }
                     } label: {
@@ -148,10 +214,10 @@ struct ResponseBodyTabView: View {
                             .font(.system(size: 12, weight: .semibold))
                     }
                     .buttonStyle(.plain)
-                    .disabled(matchCount == 0)
-                    .opacity(matchCount == 0 ? 0.3 : 1)
+                    .disabled(currentMatch == 0 || matchCount == 0)
+                    .opacity(currentMatch == 0 || matchCount == 0 ? 0.3 : 1)
 
-                    Text("\(currentMatch + 1)/\(matchCount)")
+                    Text("\(matchCount > 0 ? currentMatch + 1 : 0)/\(matchCount)")
                         .font(.system(size: 11, weight: .semibold, design: .monospaced))
                         .foregroundStyle(matchCount > 0 ? Color.primary : Color.red)
                         .lineLimit(1)
@@ -164,24 +230,15 @@ struct ResponseBodyTabView: View {
                             .font(.system(size: 12, weight: .semibold))
                     }
                     .buttonStyle(.plain)
-                    .disabled(matchCount == 0)
-                    .opacity(matchCount == 0 ? 0.3 : 1)
+                    .disabled(currentMatch >= matchCount - 1 || matchCount == 0)
+                    .opacity(currentMatch >= matchCount - 1 || matchCount == 0 ? 0.3 : 1)
                 }
-
-                Button {
-                    searchQuery = ""
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 13))
-                        .foregroundStyle(.secondary)
-                }
-                .buttonStyle(.plain)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 8)
+                .background(Color(.tertiarySystemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 8)
-        .background(Color(.tertiarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 }
 

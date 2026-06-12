@@ -28,6 +28,7 @@ struct CodeBlockView: View {
     var searchQuery: String = ""
     var currentMatchIndex: Int = 0
     var totalMatches: Int = 0
+    var lineIdPrefix: String = "codeline"
 
     @State private var copied = false
 
@@ -131,25 +132,15 @@ struct CodeBlockView: View {
                         .lineLimit(maxLines)
                 }
             } else {
-                ScrollViewReader { proxy in
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 0) {
-                            ForEach(highlightedLines.indices, id: \.self) { lineIdx in
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    Text(highlightedLines[lineIdx])
-                                        .font(.system(size: 12, design: .monospaced))
-                                        .foregroundStyle(.primary)
-                                        .textSelection(.enabled)
-                                }
-                                .id(lineIdx)
-                            }
+                VStack(alignment: .leading, spacing: 0) {
+                    ForEach(highlightedLines.indices, id: \.self) { lineIdx in
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            Text(highlightedLines[lineIdx])
+                                .font(.system(size: 12, design: .monospaced))
+                                .foregroundStyle(.primary)
+                                .textSelection(.enabled)
                         }
-                    }
-                    .onChange(of: currentMatchIndex) { _ in
-                        guard let targetLine = matchLineMap[currentMatchIndex] else { return }
-                        withAnimation {
-                            proxy.scrollTo(targetLine, anchor: .center)
-                        }
+                        .id("\(lineIdPrefix)_\(lineIdx)")
                     }
                 }
             }
