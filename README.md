@@ -17,7 +17,7 @@
   <img src="https://img.shields.io/badge/Swift-5.9%2B-orange" />
   <img src="https://img.shields.io/badge/License-MIT-green" />
   <img src="https://img.shields.io/badge/SPM-Ready-purple" />
-  <img src="https://img.shields.io/badge/version-1.3.0-brightgreen" />
+  <img src="https://img.shields.io/badge/version-1.3.1-brightgreen" />
 </p>
 
 ---
@@ -88,7 +88,7 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.3.0")
+    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.3.1")
 ]
 ```
 
