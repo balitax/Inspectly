@@ -32,6 +32,17 @@ actor StorageManager: StorageManagerProtocol {
         if !FileManager.default.fileExists(atPath: baseDirectory.path) {
             try? FileManager.default.createDirectory(at: baseDirectory, withIntermediateDirectories: true)
         }
+
+        // Captured traffic can contain auth tokens/cookies/PII — keep it out of
+        // iCloud/iTunes backups and encrypted at rest while the device is locked.
+        var excludedFromBackup = baseDirectory
+        var resourceValues = URLResourceValues()
+        resourceValues.isExcludedFromBackup = true
+        try? excludedFromBackup.setResourceValues(resourceValues)
+        try? FileManager.default.setAttributes(
+            [.protectionKey: FileProtectionType.completeUntilFirstUserAuthentication],
+            ofItemAtPath: baseDirectory.path
+        )
     }
 
     func save<T: Encodable>(_ data: T, forKey key: String) async throws {
@@ -41,6 +52,10 @@ actor StorageManager: StorageManagerProtocol {
         let encoded = try encoder.encode(data)
         let fileURL = baseDirectory.appendingPathComponent("\(key).json")
         try encoded.write(to: fileURL, options: .atomic)
+        try? FileManager.default.setAttributes(
+            [.protectionKey: FileProtectionType.completeUntilFirstUserAuthentication],
+            ofItemAtPath: fileURL.path
+        )
     }
 
     func load<T: Decodable & Sendable>(_ type: T.Type, forKey key: String) async throws -> T? {

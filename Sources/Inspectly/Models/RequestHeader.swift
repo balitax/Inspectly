@@ -141,6 +141,12 @@ extension RequestHeader {
         let prefix = String(value.prefix(4))
         return prefix + String(repeating: "•", count: 8)
     }
+
+    /// Copy of this header with a sensitive value replaced by `maskedValue`.
+    /// Use before serializing headers for export/share so secrets aren't written unmasked.
+    var maskedHeader: RequestHeader {
+        RequestHeader(id: id, key: key, value: maskedValue)
+    }
 }
 
 // MARK: - Common Headers

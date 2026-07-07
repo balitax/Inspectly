@@ -39,7 +39,7 @@ final class ExportManager: ExportManagerProtocol {
             exportedAt: Date(),
             type: "requests",
             count: requests.count,
-            data: requests
+            data: requests.map { $0.maskedForExport() }
         )
         return try encoder.encode(exportData)
     }
@@ -50,13 +50,13 @@ final class ExportManager: ExportManagerProtocol {
             exportedAt: Date(),
             type: "stubs",
             count: stubs.count,
-            data: stubs
+            data: stubs.map { $0.maskedForExport() }
         )
         return try encoder.encode(exportData)
     }
 
     func exportAsJSON(_ requests: [NetworkRequest]) async throws -> String {
-        let data = try encoder.encode(requests)
+        let data = try encoder.encode(requests.map { $0.maskedForExport() })
         return String(data: data, encoding: .utf8) ?? ""
     }
 

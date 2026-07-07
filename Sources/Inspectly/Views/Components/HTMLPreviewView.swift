@@ -38,13 +38,17 @@ struct HTMLWebView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> WKWebView {
         let configuration = WKWebViewConfiguration()
+        // The rendered content is an untrusted HTTP response body (possibly from a
+        // malicious/MITM'd server) — block it from navigating the webview away
+        // (link taps, redirects, window.open) via the coordinator's decidePolicyFor.
+        configuration.preferences.javaScriptCanOpenWindowsAutomatically = false
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.navigationDelegate = context.coordinator
         webView.scrollView.isScrollEnabled = false
-        
+
         webView.backgroundColor = .white
         webView.isOpaque = true
-        
+
         return webView
     }
     
@@ -118,6 +122,17 @@ struct HTMLWebView: UIViewRepresentable {
                     }
                 }
             }
+        }
+
+        /// Only allow the programmatic `loadHTMLString` load itself (navigationType
+        /// `.other`). Reject link taps, redirects, and form submissions so a
+        /// malicious/MITM'd response body can't navigate the user out of the preview.
+        func webView(
+            _ webView: WKWebView,
+            decidePolicyFor navigationAction: WKNavigationAction,
+            decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+        ) {
+            decisionHandler(navigationAction.navigationType == .other ? .allow : .cancel)
         }
     }
 }

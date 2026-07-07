@@ -250,26 +250,6 @@ private struct FloatingTabBar: View {
                     }
                     .shadow(color: .black.opacity(0.18), radius: 32, x: 0, y: 10)
             }
-
-            // // Close button — frosted glass circle
-            // if let onDismiss {
-            //     Button(action: onDismiss) {
-            //         Image(systemName: "xmark")
-            //             .font(.system(size: 16, weight: .bold))
-            //             .foregroundStyle(.accentColor)
-            //             .frame(width: 60, height: 60)
-            //             .background {
-            //                 Circle()
-            //                     .fill(.red)
-            //                     .overlay {
-            //                         Circle()
-            //                             .strokeBorder(.white.opacity(0.2), lineWidth: 0.5)
-            //                     }
-            //                     .shadow(color: .black.opacity(0.15), radius: 20, x: 0, y: 8)
-            //             }
-            //     }
-            //     .buttonStyle(.plain)
-            // }
         }
     }
 

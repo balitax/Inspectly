@@ -34,7 +34,6 @@ public final class DependencyContainer: @unchecked Sendable {
     public let requestRepository: RequestRepositoryProtocol
     public let stubRepository: StubRepositoryProtocol
     public let exportManager: ExportManagerProtocol
-    public let networkObserver: NetworkObserverProtocol
 
     // MARK: - Initialization
 
@@ -42,15 +41,13 @@ public final class DependencyContainer: @unchecked Sendable {
         storageManager: StorageManagerProtocol? = nil,
         requestRepository: RequestRepositoryProtocol? = nil,
         stubRepository: StubRepositoryProtocol? = nil,
-        exportManager: ExportManagerProtocol? = nil,
-        networkObserver: NetworkObserverProtocol? = nil
+        exportManager: ExportManagerProtocol? = nil
     ) {
         let storage = storageManager ?? StorageManager()
         self.storageManager = storage
         self.requestRepository = requestRepository ?? RequestRepository(storageManager: storage)
         self.stubRepository = stubRepository ?? StubRepository(storageManager: storage)
         self.exportManager = exportManager ?? ExportManager()
-        self.networkObserver = networkObserver ?? NetworkObserverService()
     }
 
     // MARK: - Mock Container
@@ -61,8 +58,7 @@ public final class DependencyContainer: @unchecked Sendable {
             storageManager: storage,
             requestRepository: MockRequestRepository(),
             stubRepository: MockStubRepository(),
-            exportManager: MockExportManager(),
-            networkObserver: MockNetworkObserverService()
+            exportManager: MockExportManager()
         )
     }
 }

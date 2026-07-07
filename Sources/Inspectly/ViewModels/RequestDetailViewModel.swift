@@ -170,7 +170,7 @@ final class RequestDetailViewModel: ObservableObject {
             let encoder = JSONEncoder()
             encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
             encoder.dateEncodingStrategy = .iso8601
-            let data = try encoder.encode(request)
+            let data = try encoder.encode(request.maskedForExport())
             
             let tempDir = FileManager.default.temporaryDirectory
             let fileName = "inspectly_request_\(request.method.rawValue)_\(Int(Date().timeIntervalSince1970)).json"

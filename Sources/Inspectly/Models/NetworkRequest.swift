@@ -283,6 +283,17 @@ public struct NetworkRequest: Identifiable, Codable, Equatable, Hashable {
         return "\(code)"
     }
 
+    /// Copy with sensitive request/response header values masked — use before serializing
+    /// this request for export/share (JSON export, share sheet) so tokens/cookies aren't
+    /// written out in plaintext, matching the masking already applied to `curlCommand`
+    /// and the Headers tab UI.
+    func maskedForExport() -> NetworkRequest {
+        var copy = self
+        copy.requestHeaders = requestHeaders.map(\.maskedHeader)
+        copy.responseHeaders = responseHeaders.map(\.maskedHeader)
+        return copy
+    }
+
     var curlCommand: String {
         var components: [String] = ["curl"]
         components.append("-X \(method.rawValue)")

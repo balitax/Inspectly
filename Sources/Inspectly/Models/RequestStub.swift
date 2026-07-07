@@ -373,4 +373,18 @@ public struct RequestStub: Identifiable, Codable {
     var pathDisplay: String {
         matchRule.urlPattern ?? "—"
     }
+
+    /// Copy with sensitive header values (in the match rule and every scenario's mocked
+    /// response) masked — use before serializing this stub for export/share, since stubs
+    /// created "from a captured request" can carry a real Authorization/Cookie value.
+    func maskedForExport() -> RequestStub {
+        var copy = self
+        copy.matchRule.headers = matchRule.headers.map(\.maskedHeader)
+        copy.scenarios = scenarios.map { scenario in
+            var scenario = scenario
+            scenario.response.headers = scenario.response.headers.map(\.maskedHeader)
+            return scenario
+        }
+        return copy
+    }
 }
