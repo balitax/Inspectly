@@ -17,7 +17,7 @@
   <img src="https://img.shields.io/badge/Swift-5.9%2B-orange" />
   <img src="https://img.shields.io/badge/License-MIT-green" />
   <img src="https://img.shields.io/badge/SPM-Ready-purple" />
-  <img src="https://img.shields.io/badge/version-1.3.1-brightgreen" />
+  <img src="https://img.shields.io/badge/version-1.3.2-brightgreen" />
 </p>
 
 ---
@@ -88,7 +88,7 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.3.1")
+    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.3.2")
 ]
 ```
 
@@ -224,6 +224,11 @@ No custom interceptor setup is required for common use cases.
 ---
 
 ## Changelog
+
+### [1.3.2] — 2026-07-07
+- **Security** — masked sensitive headers in JSON export/share (previously only `curlCommand` and the UI masked them), excluded stored request data from device backups and added file protection, and hardened `HTMLPreviewView`'s WKWebView against navigating away from a malicious/MITM'd response body.
+- **Cleanup** — removed the dead `NetworkObserverService` subsystem, a stale commented-out UI block, and an unused property.
+- **Refactor** — split `SettingsView`, `StatisticsView`, `RequestListView`, and `InspectlyURLProtocol` into smaller per-section/per-responsibility files with no behavior change.
 
 ### [1.3.1] — 2026-07-07
 - **Restored iOS 13.0 minimum deployment target** — `Package.swift` is SPM-installable again from iOS 13. The inspector UI still requires iOS 16.0+ (all Views/ViewModels are `@available(iOS 16.0, *)`); on iOS 13–15, `presentInspector()` shows an alert instead of crashing or silently no-op'ing, while request capture and stubbing keep running via `enable()`.

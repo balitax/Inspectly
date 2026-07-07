@@ -4,6 +4,38 @@ All notable changes to Inspectly are documented here.
 
 ---
 
+## [1.3.2] – 2026-07-07
+
+### Security
+- **Masked export/share.** `shareAsJSON()`, `exportLogs()`, `exportStubs()`, and
+  `ExportManagerProtocol.exportAsJSON(_:)` now mask sensitive header values (via new
+  `NetworkRequest.maskedForExport()` / `RequestStub.maskedForExport()`), matching the
+  masking already applied to `curlCommand` and the Headers tab UI. Previously these
+  export paths serialized raw header values, so sharing exported logs could leak a live
+  `Authorization`/`Cookie` value in plaintext.
+- **Hardened on-disk storage.** `StorageManager` now excludes its data directory from
+  iCloud/iTunes backups and applies `.completeUntilFirstUserAuthentication` file
+  protection, since captured traffic can contain tokens, cookies, and PII.
+- **Hardened `HTMLPreviewView`.** The WKWebView used to preview HTML response bodies now
+  rejects any navigation other than the initial programmatic load (blocking link taps,
+  redirects, and `window.open` from a malicious/MITM'd response) and disables
+  `javaScriptCanOpenWindowsAutomatically`.
+
+### Removed
+- Deleted the dead `NetworkObserverService` / `NetworkObserverProtocol` subsystem —
+  instantiated by `DependencyContainer` but never actually consulted (request capture
+  goes through `InspectlyURLProtocol.onRequestCaptured` directly). `DependencyContainer.init`
+  no longer takes a `networkObserver` parameter.
+- Removed a stale commented-out close button block in `ContentView.swift` and an unused
+  `responseData` property on `InspectlyURLProtocol`.
+
+### Refactored
+- Split oversized view files into per-section/per-responsibility files with no behavior
+  change: `SettingsView.swift` (519→92 lines), `StatisticsView.swift` (468→68 lines),
+  `RequestListView.swift` (415→129 lines), and `InspectlyURLProtocol.swift`
+  (520→155 lines, now spread across `+RequestBuilding`/`+StubDelivery`/
+  `+RealRequestDelivery`/`+Timing` extensions).
+
 ## [1.3.1] – 2026-07-07
 
 ### Changed
