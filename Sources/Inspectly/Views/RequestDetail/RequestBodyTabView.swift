@@ -20,6 +20,7 @@ import SwiftUI
 
 // MARK: - Request Body Tab View
 
+@available(iOS 16.0, *)
 struct RequestBodyTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
     @State private var showRaw = false
@@ -94,6 +95,7 @@ struct RequestBodyTabView: View {
 
 // MARK: - Preview
 
+@available(iOS 16.0, *)
 struct RequestBodyTabView_Previews: PreviewProvider {
     static var previews: some View {
         RequestBodyTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .post, url: "https://api.example.com/login", host: "api.example.com", path: "/login")))

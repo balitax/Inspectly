@@ -20,6 +20,7 @@ import SwiftUI
 
 // MARK: - Filter Sheet View
 
+@available(iOS 16.0, *)
 struct FilterSheetView: View {
     @Binding var filter: RequestFilter
     let onApply: () -> Void
@@ -178,6 +179,7 @@ struct FilterSheetView: View {
 
 // MARK: - Preview
 
+@available(iOS 16.0, *)
 struct FilterSheetView_Previews: PreviewProvider {
     static var previews: some View {
         FilterSheetView(filter: .constant(RequestFilter())) {}

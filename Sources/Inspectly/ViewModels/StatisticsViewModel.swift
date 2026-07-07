@@ -22,6 +22,7 @@ import SwiftUI
 // MARK: - Statistics View Model
 
 @MainActor
+@available(iOS 16.0, *)
 final class StatisticsViewModel: ObservableObject {
     @Published var summary: StatisticsSummary = StatisticsSummary()
     @Published var recentRequests: [NetworkRequest] = []

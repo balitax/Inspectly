@@ -4,6 +4,19 @@ All notable changes to Inspectly are documented here.
 
 ---
 
+## [1.3.1] – 2026-07-07
+
+### Changed
+- **Minimum iOS lowered back to 13.0.** `Package.swift` now declares `.iOS(.v13)`, so apps
+  with an iOS 13 deployment target can adopt Inspectly via SPM again.
+- The inspector UI still requires iOS 16.0+ (all Views/ViewModels carry
+  `@available(iOS 16.0, *)`, matching the pre-1.2.0 pattern). `Inspectly.presentInspector()`
+  now checks `#available(iOS 16.0, *)` and shows a `UIAlertController` notice on iOS 13–15
+  instead of just logging to the console.
+- `enable()`, request capture, and stubbing are unaffected by OS version — they only
+  depend on Foundation and continue to work on iOS 13+ regardless of whether the visual
+  inspector can be shown.
+
 ## [1.2.0] – 2026-05-08
 
 ### Breaking Changes

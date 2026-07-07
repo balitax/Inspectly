@@ -22,6 +22,7 @@ import SwiftUI
 // MARK: - Settings View Model
 
 @MainActor
+@available(iOS 16.0, *)
 final class SettingsViewModel: ObservableObject {
     @Published var settings: AppSettings
     @Published var showClearConfirmation: Bool = false

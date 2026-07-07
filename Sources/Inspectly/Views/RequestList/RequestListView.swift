@@ -20,6 +20,7 @@ import SwiftUI
 
 // MARK: - Request List View
 
+@available(iOS 16.0, *)
 struct RequestListView: View {
     @StateObject var viewModel: RequestListViewModel
     let stubRepository: StubRepositoryProtocol
@@ -406,6 +407,7 @@ struct RequestListView: View {
 
 // MARK: - Preview
 
+@available(iOS 16.0, *)
 struct RequestListView_Previews: PreviewProvider {
     static var previews: some View {
         RequestListView(viewModel: .mock())

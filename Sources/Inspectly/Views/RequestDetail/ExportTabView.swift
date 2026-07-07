@@ -20,6 +20,7 @@ import SwiftUI
 
 // MARK: - Export Tab View
 
+@available(iOS 16.0, *)
 struct ExportTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
 
@@ -163,6 +164,7 @@ struct ExportTabView: View {
 
 // MARK: - Preview
 
+@available(iOS 16.0, *)
 struct ExportTabView_Previews: PreviewProvider {
     static var previews: some View {
         ExportTabView(viewModel: .mock())

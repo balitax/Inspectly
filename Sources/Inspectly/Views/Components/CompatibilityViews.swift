@@ -7,6 +7,7 @@ import SwiftUI
 
 // MARK: - Navigation Stack
 
+@available(iOS 16.0, *)
 public struct InspectlyNavigationStack<Content: View>: View {
     let content: () -> Content
 
@@ -21,6 +22,7 @@ public struct InspectlyNavigationStack<Content: View>: View {
 
 // MARK: - Navigation Link
 
+@available(iOS 16.0, *)
 public struct InspectlyNavigationLink<Value: Hashable, Destination: View, Content: View>: View {
     let value: Value
     let destination: (Value) -> Destination
@@ -39,6 +41,7 @@ public struct InspectlyNavigationLink<Value: Hashable, Destination: View, Conten
 
 // MARK: - View Extensions
 
+@available(iOS 16.0, *)
 extension View {
     func inspectlyNavigationDestination<D: View, V: Hashable>(for data: V.Type, @ViewBuilder destination: @escaping (V) -> D) -> some View {
         self.navigationDestination(for: data, destination: destination)
@@ -57,6 +60,7 @@ extension View {
 
 // MARK: - Detent Type
 
+@available(iOS 16.0, *)
 enum InspectlyDetent: Hashable {
     case medium
     case large

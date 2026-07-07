@@ -132,6 +132,15 @@ public final class Inspectly {
     
     /// Present the Inspectly UI manually.
     public static func presentInspector(rootView: UIViewController? = nil) {
+        if #available(iOS 16.0, *) {
+            presentInspectorInternal(rootView: rootView)
+        } else {
+            presentUnavailableAlert(rootView: rootView)
+        }
+    }
+
+    @available(iOS 16.0, *)
+    private static func presentInspectorInternal(rootView: UIViewController? = nil) {
         guard let config = configuration else {
             print("[Inspectly] Not enabled. Call Inspectly.enable() first.")
             return
@@ -162,6 +171,27 @@ public final class Inspectly {
             } else {
                 presentingVC?.present(hostingController, animated: true)
             }
+        }
+    }
+
+    /// Shown on iOS versions below 16 where the inspector UI is unavailable.
+    /// Request capture and stubbing (`enable()`) keep working regardless — only
+    /// the visual inspector requires iOS 16+.
+    private static func presentUnavailableAlert(rootView: UIViewController? = nil) {
+        print("[Inspectly] Warning: Inspectly UI requires iOS 16.0 or newer. Request capture is still active.")
+
+        DispatchQueue.main.async {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            let presentingVC = rootView ?? window.rootViewController
+
+            let alert = UIAlertController(
+                title: "Inspectly",
+                message: "The Inspectly inspector requires iOS 16 or later on this device. Network request capture and stubbing remain active in the background.",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            presentingVC?.present(alert, animated: true)
         }
     }
     
@@ -202,6 +232,7 @@ public final class Inspectly {
         InspectlySwizzler.shared.activate()
     }
     
+    @available(iOS 16.0, *)
     private static func applyTheme(to hostingController: UIHostingController<ContentView>) {
         Task {
             if let settings = try? await DependencyContainer.shared.storageManager.load(AppSettings.self, forKey: "inspectly_settings"),
@@ -213,6 +244,7 @@ public final class Inspectly {
         }
     }
     
+    @available(iOS 16.0, *)
     private static func setupThemeObserver() {
         // Guard against accumulating duplicate observers on every presentInspector() call
         guard themeObserverToken == nil else { return }

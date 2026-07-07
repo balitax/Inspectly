@@ -20,6 +20,7 @@ import SwiftUI
 
 // MARK: - JSON Preview View
 
+@available(iOS 16.0, *)
 struct JSONPreviewView: View {
     let json: String
     @State private var isValid: Bool = true
@@ -85,6 +86,7 @@ struct JSONPreviewView: View {
 
 // MARK: - Preview
 
+@available(iOS 16.0, *)
 struct JSONPreviewView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20) {

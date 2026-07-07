@@ -20,6 +20,7 @@ import SwiftUI
 
 // MARK: - Headers Tab View
 
+@available(iOS 16.0, *)
 struct HeadersTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
     @State private var showingRequest = true
@@ -207,6 +208,7 @@ struct HeadersTabView: View {
 
 // MARK: - Preview
 
+@available(iOS 16.0, *)
 struct HeadersTabView_Previews: PreviewProvider {
     static var previews: some View {
         HeadersTabView(viewModel: .mock())

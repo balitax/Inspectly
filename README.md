@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/iOS-16.0%2B-blue" />
+  <img src="https://img.shields.io/badge/iOS-13.0%2B-blue" />
   <img src="https://img.shields.io/badge/Swift-5.9%2B-orange" />
   <img src="https://img.shields.io/badge/License-MIT-green" />
   <img src="https://img.shields.io/badge/SPM-Ready-purple" />
@@ -73,7 +73,10 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 
 ## Requirements
 
-- iOS 16.0+
+- iOS 13.0+ (Swift Package Manager minimum deployment target)
+- The inspector UI requires **iOS 16.0+**. On iOS 13–15, `Inspectly.enable()` and
+  request capture/stubbing still run in the background, but `presentInspector()`
+  shows an alert instead of the inspector.
 - Swift 5.9+
 - Xcode 15+
 
@@ -221,6 +224,9 @@ No custom interceptor setup is required for common use cases.
 ---
 
 ## Changelog
+
+### [1.3.1] — 2026-07-07
+- **Restored iOS 13.0 minimum deployment target** — `Package.swift` is SPM-installable again from iOS 13. The inspector UI still requires iOS 16.0+ (all Views/ViewModels are `@available(iOS 16.0, *)`); on iOS 13–15, `presentInspector()` shows an alert instead of crashing or silently no-op'ing, while request capture and stubbing keep running via `enable()`.
 
 ### [1.3.0] — 2026-06-12
 - **Performance Heatmap** — top 5 slowest endpoints visualized as color-coded bars (green < 500ms, orange < 2s, red ≥ 2s)

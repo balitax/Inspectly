@@ -20,6 +20,7 @@ import SwiftUI
 
 // MARK: - Code Block View
 
+@available(iOS 16.0, *)
 struct CodeBlockView: View {
     let title: String?
     let content: String
@@ -154,6 +155,7 @@ struct CodeBlockView: View {
 
 // MARK: - Preview
 
+@available(iOS 16.0, *)
 struct CodeBlockView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20) {

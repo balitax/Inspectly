@@ -20,6 +20,7 @@ import SwiftUI
 
 // MARK: - Statistics View
 
+@available(iOS 16.0, *)
 struct StatisticsView: View {
     @StateObject var viewModel: StatisticsViewModel
 
@@ -383,6 +384,7 @@ struct StatisticsView: View {
 
 // MARK: - Quick Access Chip
 
+@available(iOS 16.0, *)
 private struct QuickAccessChip: View {
     let icon: String
     let label: String
@@ -416,6 +418,7 @@ private struct QuickAccessChip: View {
 
 // MARK: - Recent Activity Row
 
+@available(iOS 16.0, *)
 private struct RecentActivityRow: View {
     let request: NetworkRequest
 
@@ -457,6 +460,7 @@ private struct RecentActivityRow: View {
 
 // MARK: - Preview
 
+@available(iOS 16.0, *)
 struct StatisticsView_Previews: PreviewProvider {
     static var previews: some View {
         StatisticsView(viewModel: .mock())

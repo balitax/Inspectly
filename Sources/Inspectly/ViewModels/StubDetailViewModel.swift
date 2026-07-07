@@ -22,6 +22,7 @@ import SwiftUI
 // MARK: - Stub Detail View Model
 
 @MainActor
+@available(iOS 16.0, *)
 final class StubDetailViewModel: ObservableObject {
     @Published var stub: RequestStub
     @Published var isEditing: Bool

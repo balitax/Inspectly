@@ -20,6 +20,7 @@ import SwiftUI
 
 // MARK: - Match Rule Editor View
 
+@available(iOS 16.0, *)
 struct MatchRuleEditorView: View {
     @ObservedObject var viewModel: StubDetailViewModel
 
@@ -217,6 +218,7 @@ struct MatchRuleEditorView: View {
 
 // MARK: - Preview
 
+@available(iOS 16.0, *)
 struct MatchRuleEditorView_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView {

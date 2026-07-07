@@ -20,6 +20,7 @@ import SwiftUI
 
 // MARK: - Hide Floating Tab Bar Preference Key
 
+@available(iOS 16.0, *)
 struct HideFloatingTabBarKey: PreferenceKey {
     static var defaultValue = false
     static func reduce(value: inout Bool, nextValue: () -> Bool) {
@@ -27,6 +28,7 @@ struct HideFloatingTabBarKey: PreferenceKey {
     }
 }
 
+@available(iOS 16.0, *)
 extension View {
     func hideFloatingTabBar(_ hidden: Bool = true) -> some View {
         preference(key: HideFloatingTabBarKey.self, value: hidden)
@@ -35,6 +37,7 @@ extension View {
 
 // MARK: - Content View
 
+@available(iOS 16.0, *)
 struct ContentView: View {
     @State private var selectedTab: AppTab = .requests
     @State private var appSettings: AppSettings = .default
@@ -179,6 +182,7 @@ struct ContentView: View {
 
 // MARK: - App Tab
 
+@available(iOS 16.0, *)
 enum AppTab: String, Hashable, CaseIterable, Identifiable {
     case requests
     case statistics
@@ -221,6 +225,7 @@ enum AppTab: String, Hashable, CaseIterable, Identifiable {
 
 // MARK: - Floating Tab Bar (iOS 16–25, Liquid Glass-inspired)
 
+@available(iOS 16.0, *)
 private struct FloatingTabBar: View {
     @Binding var selectedTab: AppTab
     let onDismiss: (() -> Void)?
@@ -313,6 +318,7 @@ private struct FloatingTabBar: View {
 
 // MARK: - Preview
 
+@available(iOS 16.0, *)
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(container: .mock())

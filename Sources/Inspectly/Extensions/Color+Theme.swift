@@ -20,6 +20,7 @@ import SwiftUI
 
 // MARK: - Theme Colors
 
+@available(iOS 16.0, *)
 extension Color {
     // MARK: - Status Code Colors
     static let statusSuccess = Color.green
@@ -102,6 +103,7 @@ extension Color {
 
 // MARK: - ShapeStyle Extension
 
+@available(iOS 16.0, *)
 extension ShapeStyle where Self == Color {
     static var accentColor: Color { Color(.label) }
 }

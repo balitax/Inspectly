@@ -20,6 +20,7 @@ import SwiftUI
 
 // MARK: - Summary Card View
 
+@available(iOS 16.0, *)
 struct SummaryCardView: View {
     let title: String
     let value: String
@@ -65,6 +66,7 @@ struct SummaryCardView: View {
 
 // MARK: - Preview
 
+@available(iOS 16.0, *)
 struct SummaryCardView_Previews: PreviewProvider {
     static var previews: some View {
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {

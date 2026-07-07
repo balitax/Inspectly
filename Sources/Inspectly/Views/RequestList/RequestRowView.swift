@@ -20,6 +20,7 @@ import SwiftUI
 
 // MARK: - Request Row View
 
+@available(iOS 16.0, *)
 struct RequestRowView: View {
     let request: NetworkRequest
     var slowThreshold: TimeInterval = 1.0
@@ -142,6 +143,7 @@ struct RequestRowView: View {
 
 // MARK: - Preview
 
+@available(iOS 16.0, *)
 struct RequestRowView_Previews: PreviewProvider {
     static var previews: some View {
         List {

@@ -20,6 +20,7 @@ import SwiftUI
 
 // MARK: - Card Style Modifier
 
+@available(iOS 16.0, *)
 struct CardStyleModifier: ViewModifier {
     var padding: CGFloat = 16
     var cornerRadius: CGFloat = 16
@@ -35,6 +36,7 @@ struct CardStyleModifier: ViewModifier {
 
 // MARK: - Code Block Style Modifier
 
+@available(iOS 16.0, *)
 struct CodeBlockStyleModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -48,6 +50,7 @@ struct CodeBlockStyleModifier: ViewModifier {
 
 // MARK: - Section Card Style
 
+@available(iOS 16.0, *)
 struct SectionCardModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -59,6 +62,7 @@ struct SectionCardModifier: ViewModifier {
 
 // MARK: - Badge Style
 
+@available(iOS 16.0, *)
 struct BadgeStyleModifier: ViewModifier {
     var color: Color
     var isSmall: Bool
@@ -76,6 +80,7 @@ struct BadgeStyleModifier: ViewModifier {
 
 // MARK: - View Extensions
 
+@available(iOS 16.0, *)
 extension View {
     func cardStyle(padding: CGFloat = 16, cornerRadius: CGFloat = 16) -> some View {
         modifier(CardStyleModifier(padding: padding, cornerRadius: cornerRadius))
@@ -96,6 +101,7 @@ extension View {
 
 // MARK: - Activity View (Share Sheet)
 
+@available(iOS 16.0, *)
 struct ActivityView: UIViewControllerRepresentable {
     let activityItems: [Any]
     let applicationActivities: [UIActivity]? = nil
@@ -107,6 +113,7 @@ struct ActivityView: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
 
+@available(iOS 16.0, *)
 struct IdentifiableURL: Identifiable {
     let id = UUID()
     let url: URL

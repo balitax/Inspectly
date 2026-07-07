@@ -21,6 +21,7 @@ import SwiftUI
 
 // MARK: - Stub Filter Option
 
+@available(iOS 16.0, *)
 enum StubFilterOption: String, CaseIterable, Identifiable {
     case all = "All"
     case active = "Active"
@@ -32,6 +33,7 @@ enum StubFilterOption: String, CaseIterable, Identifiable {
 // MARK: - Stub Manager View Model
 
 @MainActor
+@available(iOS 16.0, *)
 final class StubManagerViewModel: ObservableObject {
     @Published var stubs: [RequestStub] = []
     @Published var searchText: String = ""
