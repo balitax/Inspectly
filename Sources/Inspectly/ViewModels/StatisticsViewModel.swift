@@ -27,7 +27,7 @@ final class StatisticsViewModel: ObservableObject {
     @Published var recentRequests: [NetworkRequest] = []
     @Published var isLoading: Bool = false
 
-    private let requestRepository: RequestRepositoryProtocol
+    let requestRepository: RequestRepositoryProtocol
 
     init(requestRepository: RequestRepositoryProtocol) {
         self.requestRepository = requestRepository

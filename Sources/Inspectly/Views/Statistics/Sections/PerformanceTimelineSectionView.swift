@@ -27,7 +27,14 @@ struct PerformanceTimelineSectionView: View {
     var body: some View {
         StatsCardView(title: "Performance Timeline", subtitle: "Waterfall view") {
             InspectlyNavigationLink(destination: {
-                PerformanceTimelineView(requests: viewModel.requests)
+                PerformanceTimelineView(requests: viewModel.requests) { request in
+                    RequestDetailView(
+                        viewModel: RequestDetailViewModel(
+                            request: request,
+                            requestRepository: viewModel.requestRepository
+                        )
+                    )
+                }
             }, label: {
                 HStack(spacing: 12) {
                     SettingsRow.icon("chart.bar.horizontal", color: .blue)
