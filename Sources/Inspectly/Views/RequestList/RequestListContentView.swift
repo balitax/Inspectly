@@ -27,6 +27,7 @@ import SwiftUI
 struct RequestListContentView: View {
     @ObservedObject var viewModel: RequestListViewModel
     let stubRepository: StubRepositoryProtocol
+    @State private var copiedToClipboard: Bool = false
 
     var body: some View {
         List {
@@ -54,6 +55,13 @@ struct RequestListContentView: View {
                             RequestRowView(request: request, slowThreshold: viewModel.slowRequestThreshold)
                         })
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button {
+                                copyCURL(from: request)
+                            } label: {
+                                Label("Copy cURL", systemImage: "doc.on.clipboard")
+                            }
+                            .tint(.blue)
+
                             Button(role: .destructive) {
                                 Task { await viewModel.deleteRequest(request) }
                             } label: {
@@ -111,9 +119,37 @@ struct RequestListContentView: View {
         .id(viewModel.listRenderID)
         .listStyle(.insetGrouped)
         .overlay(
-            Color.clear.frame(height: 90),
+            Group {
+                if copiedToClipboard {
+                    copiedBanner
+                } else {
+                    Color.clear.frame(height: 90)
+                }
+            },
             alignment: .bottom
         )
+    }
+
+    // MARK: - Copy cURL
+
+    private func copyCURL(from request: NetworkRequest) {
+        UIPasteboard.general.string = request.curlCommand
+        copiedToClipboard = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            copiedToClipboard = false
+        }
+    }
+
+    private var copiedBanner: some View {
+        Text("cURL copied to clipboard")
+            .font(.system(size: 13, weight: .medium))
+            .foregroundColor(.white)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 10)
+            .background(Color.black.opacity(0.8))
+            .cornerRadius(16)
+            .transition(.move(edge: .bottom).combined(with: .opacity))
+            .padding(.bottom, 20)
     }
 
     // MARK: - Section Header
