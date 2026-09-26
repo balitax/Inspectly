@@ -63,6 +63,10 @@ final class StatisticsViewModel: ObservableObject {
         }
     }
 
+    var requests: [NetworkRequest] {
+        allRequests
+    }
+
     // MARK: - Feature #4: Performance Heatmap
 
     var endpointPerformance: [(path: String, avgTime: TimeInterval, count: Int)] {

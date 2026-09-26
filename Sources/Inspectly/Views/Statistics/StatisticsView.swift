@@ -31,6 +31,7 @@ struct StatisticsView: View {
                     ActivityChartSectionView(viewModel: viewModel)
                     MethodDistributionSectionView(viewModel: viewModel)
                     PerformanceHeatmapSectionView(viewModel: viewModel)
+                    PerformanceTimelineSectionView(viewModel: viewModel)
                     DuplicateDetectorSectionView(viewModel: viewModel)
                     LargeResponsesSectionView(viewModel: viewModel)
                     QuickAccessSectionView(viewModel: viewModel)
