@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Request Body Tab View
 
-@available(iOS 16.0, *)
 struct RequestBodyTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
     @State private var showRaw = false
@@ -62,13 +61,13 @@ struct RequestBodyTabView: View {
                 systemImage: viewModel.request.requestContentType.iconName
             )
             .font(.system(size: 11, weight: .medium))
-            .foregroundStyle(.secondary)
+            .foregroundColor(.secondary)
             .lineLimit(1)
             .fixedSize(horizontal: true, vertical: false)
             .padding(.horizontal, 10)
             .padding(.vertical, 5)
             .background(Color(.quaternarySystemFill))
-            .clipShape(Capsule())
+            .cornerRadius(8)
 
             Spacer()
 
@@ -76,26 +75,25 @@ struct RequestBodyTabView: View {
             if let size = viewModel.request.requestBody?.formattedSize {
                 Text(size)
                     .font(.system(size: 11, weight: .medium, design: .monospaced))
-                    .foregroundStyle(.tertiary)
+                    .foregroundColor(.tertiaryLabel)
             }
 
             // Raw toggle
             Toggle("Raw", isOn: $showRaw)
                 .toggleStyle(.button)
                 .buttonStyle(.bordered)
-                .controlSize(.mini)
+                .controlSizeCompat(.mini)
                 .font(.system(size: 10, weight: .medium))
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
         .background(Color(.tertiarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .cornerRadius(10)
     }
 }
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct RequestBodyTabView_Previews: PreviewProvider {
     static var previews: some View {
         RequestBodyTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .post, url: "https://api.example.com/login", host: "api.example.com", path: "/login")))

@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - HTTP Method Badge
 
-@available(iOS 16.0, *)
 struct HTTPMethodBadge: View {
     let method: HTTPMethodType
 
@@ -31,13 +30,12 @@ struct HTTPMethodBadge: View {
             .padding(.vertical, 3)
             .background(Color.forMethod(method).opacity(0.15))
             .foregroundColor(Color.forMethod(method))
-            .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+            .cornerRadius(5)
     }
 }
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct HTTPMethodBadge_Previews: PreviewProvider {
     static var previews: some View {
         HStack(spacing: 8) {

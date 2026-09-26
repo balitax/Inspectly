@@ -20,8 +20,11 @@ import SwiftUI
 
 // MARK: - Theme Colors
 
-@available(iOS 16.0, *)
 extension Color {
+    // MARK: - UIKit Label Aliases
+    static let tertiaryLabel = Color(UIColor.tertiaryLabel)
+    static let quaternaryLabel = Color(UIColor.quaternaryLabel)
+
     // MARK: - Status Code Colors
     static let statusSuccess = Color.green
     static let statusRedirect = Color.blue
@@ -72,7 +75,7 @@ extension Color {
     static let textPrimary = Color(.label)
     static let textSecondary = Color(.secondaryLabel)
     static let textTertiary = Color(.tertiaryLabel)
-    
+
     static let accentColor = Color(.label)
     static let accentIndigo = Color(red: 0.345, green: 0.337, blue: 0.839)
     static let accentTeal = Color(red: 0.188, green: 0.690, blue: 0.780)
@@ -99,11 +102,4 @@ extension Color {
     static let stubActive = Color.green
     static let stubInactive = Color.gray
     static let stubBadge = accentIndigo
-}
-
-// MARK: - ShapeStyle Extension
-
-@available(iOS 16.0, *)
-extension ShapeStyle where Self == Color {
-    static var accentColor: Color { Color(.label) }
 }

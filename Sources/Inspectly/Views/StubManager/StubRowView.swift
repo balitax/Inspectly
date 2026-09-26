@@ -20,14 +20,13 @@ import SwiftUI
 
 // MARK: - Stub Row View
 
-@available(iOS 16.0, *)
 struct StubRowView: View {
     let stub: RequestStub
 
     var body: some View {
         HStack(spacing: 10) {
             // Left accent line (green=active, gray=inactive)
-            RoundedRectangle(cornerRadius: 2, style: .continuous)
+            RoundedRectangle(cornerRadius: 2)
                 .fill(stub.isEnabled ? Color.stubActive : Color.stubInactive.opacity(0.4))
                 .frame(width: 3)
                 .padding(.vertical, 2)
@@ -37,7 +36,7 @@ struct StubRowView: View {
                 HStack(spacing: 6) {
                     Text(stub.name)
                         .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.primary)
+                        .foregroundColor(.primary)
                         .lineLimit(1)
 
                     if let scenario = stub.activeScenario {
@@ -46,8 +45,8 @@ struct StubRowView: View {
                             .padding(.horizontal, 5)
                             .padding(.vertical, 2)
                             .background(Color.stubBadge.opacity(0.1))
-                            .foregroundStyle(Color.stubBadge)
-                            .clipShape(Capsule())
+                            .foregroundColor(Color.stubBadge)
+                            .cornerRadius(8)
                     }
                 }
 
@@ -60,13 +59,13 @@ struct StubRowView: View {
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
                             .background(Color(.quaternarySystemFill))
-                            .foregroundStyle(.secondary)
-                            .clipShape(RoundedRectangle(cornerRadius: 4))
+                            .foregroundColor(.secondary)
+                            .cornerRadius(4)
                     }
 
                     Text(stub.pathDisplay)
                         .font(.system(size: 11, design: .monospaced))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                         .lineLimit(1)
                 }
             }
@@ -81,12 +80,12 @@ struct StubRowView: View {
                     Text("\(stub.usageCount)")
                         .font(.system(size: 10, weight: .medium, design: .monospaced))
                 }
-                .foregroundStyle(.tertiary)
+                .foregroundColor(.tertiaryLabel)
 
                 if let lastTriggered = stub.lastTriggered {
                     Text(lastTriggered.relativeTimeString)
                         .font(.system(size: 10))
-                        .foregroundStyle(.quaternary)
+                        .foregroundColor(.quaternaryLabel)
                 }
             }
         }
@@ -96,7 +95,6 @@ struct StubRowView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct StubRowView_Previews: PreviewProvider {
     static var previews: some View {
         List {

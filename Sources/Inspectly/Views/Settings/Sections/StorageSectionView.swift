@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Storage Section
 
-@available(iOS 16.0, *)
 struct StorageSectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 

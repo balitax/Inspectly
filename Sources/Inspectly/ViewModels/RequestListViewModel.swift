@@ -21,7 +21,6 @@ import SwiftUI
 
 // MARK: - Sort Option
 
-@available(iOS 16.0, *)
 enum RequestSortOption: String, CaseIterable, Identifiable {
     case latest = "Latest"
     case oldest = "Oldest"
@@ -44,7 +43,6 @@ enum RequestSortOption: String, CaseIterable, Identifiable {
 
 // MARK: - Filter Option
 
-@available(iOS 16.0, *)
 struct RequestFilter {
     var methods: Set<HTTPMethodType> = []
     var statusCodeRange: ClosedRange<Int>?
@@ -85,7 +83,6 @@ struct RequestFilter {
 // MARK: - Request List View Model
 
 @MainActor
-@available(iOS 16.0, *)
 final class RequestListViewModel: ObservableObject {
     @Published var requests: [NetworkRequest] = []
     @Published var groupedRequests: [RequestGroup] = []

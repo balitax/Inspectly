@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Params Tab View
 
-@available(iOS 16.0, *)
 struct ParamsTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
     @State private var copiedParamId: UUID?
@@ -63,7 +62,7 @@ struct ParamsTabView: View {
                             }
                         }
                         .background(Color(.tertiarySystemBackground))
-                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                        .cornerRadius(12)
                     }
                 }
             }
@@ -76,7 +75,7 @@ struct ParamsTabView: View {
     private func paramRow(_ param: QueryParameter) -> some View {
         HStack(alignment: .top, spacing: 12) {
             // Left accent line
-            RoundedRectangle(cornerRadius: 2, style: .continuous)
+            RoundedRectangle(cornerRadius: 2)
                 .fill(Color.accentColor.opacity(0.6))
                 .frame(width: 3)
                 .padding(.vertical, 2)
@@ -85,13 +84,12 @@ struct ParamsTabView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(param.key.uppercased())
                     .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
                     .tracking(0.4)
 
                 Text(param.value.isEmpty ? "—" : param.value)
                     .font(.system(size: 13, design: .monospaced))
-                    .foregroundStyle(param.value.isEmpty ? .tertiary : .primary)
-                    .textSelection(.enabled)
+                    .foregroundColor(param.value.isEmpty ? Color(.tertiaryLabel) : .primary)
                     .fixedSize(horizontal: false, vertical: true)
             }
 
@@ -109,10 +107,10 @@ struct ParamsTabView: View {
             } label: {
                 Image(systemName: copiedParamId == param.id ? "checkmark" : "doc.on.doc")
                     .font(.system(size: 12))
-                    .foregroundStyle(copiedParamId == param.id ? .green : .secondary)
+                    .foregroundColor(copiedParamId == param.id ? .green : .secondary)
                     .frame(width: 28, height: 28)
                     .background(Color(.quaternarySystemFill))
-                    .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                    .cornerRadius(6)
             }
             .buttonStyle(.plain)
         }
@@ -123,7 +121,6 @@ struct ParamsTabView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct ParamsTabView_Previews: PreviewProvider {
     static var previews: some View {
         ParamsTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .get, url: "https://api.example.com/users?id=1", host: "api.example.com", path: "/users")))

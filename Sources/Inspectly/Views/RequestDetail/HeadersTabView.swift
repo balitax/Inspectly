@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Headers Tab View
 
-@available(iOS 16.0, *)
 struct HeadersTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
     @State private var showingRequest = true
@@ -72,7 +71,7 @@ struct HeadersTabView: View {
                 }
             }
             .background(Color(.tertiarySystemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .cornerRadius(12)
         }
     }
 
@@ -81,7 +80,7 @@ struct HeadersTabView: View {
     private func headerRow(_ header: RequestHeader) -> some View {
         HStack(alignment: .top, spacing: 12) {
             // Left accent line
-            RoundedRectangle(cornerRadius: 2, style: .continuous)
+            RoundedRectangle(cornerRadius: 2)
                 .fill(accentColor(for: header.key))
                 .frame(width: 3)
                 .padding(.vertical, 2)
@@ -91,13 +90,13 @@ struct HeadersTabView: View {
                 HStack(spacing: 6) {
                     Text(header.key.uppercased())
                         .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                         .tracking(0.4)
 
                     if header.isSensitive {
                         Image(systemName: "lock.fill")
                             .font(.system(size: 8))
-                            .foregroundStyle(.orange)
+                            .foregroundColor(.orange)
                     }
                 }
 
@@ -106,26 +105,15 @@ struct HeadersTabView: View {
                     ? header.maskedValue
                     : header.formattedValue
 
-                // textSelection type differs (.enabled vs .disabled) so branch explicitly
-                if isRevealed || !header.isSensitive {
-                    Text(displayValue)
-                        .font(.system(size: 13, design: .monospaced))
-                        .foregroundStyle(Color.primary)
-                        .textSelection(.enabled)
-                        .fixedSize(horizontal: false, vertical: true)
-                } else {
-                    Text(displayValue)
-                        .font(.system(size: 13, design: .monospaced))
-                        .foregroundStyle(Color.secondary)
-                        .textSelection(.disabled)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
+                Text(displayValue)
+                    .font(.system(size: 13, design: .monospaced))
+                    .foregroundColor(isRevealed || !header.isSensitive ? Color.primary : Color.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 if !header.isSensitive && header.formattedValue != header.value {
                     Text(header.value)
                         .font(.system(size: 10, design: .monospaced))
-                        .foregroundStyle(.tertiary)
-                        .textSelection(.enabled)
+                        .foregroundColor(.tertiaryLabel)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
@@ -148,10 +136,10 @@ struct HeadersTabView: View {
                     } label: {
                         Image(systemName: isRevealed ? "eye.slash" : "eye")
                             .font(.system(size: 12))
-                            .foregroundStyle(.orange)
+                            .foregroundColor(.orange)
                             .frame(width: 28, height: 28)
                             .background(Color.orange.opacity(0.1))
-                            .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                            .cornerRadius(6)
                     }
                     .buttonStyle(.plain)
                 }
@@ -170,10 +158,10 @@ struct HeadersTabView: View {
                 } label: {
                     Image(systemName: copiedHeaderId == header.id ? "checkmark" : "doc.on.doc")
                         .font(.system(size: 12))
-                        .foregroundStyle(copiedHeaderId == header.id ? .green : .secondary)
+                        .foregroundColor(copiedHeaderId == header.id ? .green : .secondary)
                         .frame(width: 28, height: 28)
                         .background(Color(.quaternarySystemFill))
-                        .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                        .cornerRadius(6)
                 }
                 .buttonStyle(.plain)
             }
@@ -208,7 +196,6 @@ struct HeadersTabView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct HeadersTabView_Previews: PreviewProvider {
     static var previews: some View {
         HeadersTabView(viewModel: .mock())

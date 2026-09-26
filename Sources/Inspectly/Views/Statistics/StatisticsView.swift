@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Statistics View
 
-@available(iOS 16.0, *)
 struct StatisticsView: View {
     @StateObject var viewModel: StatisticsViewModel
 
@@ -42,7 +41,10 @@ struct StatisticsView: View {
                 .padding(.bottom, 24)
             }
             .background(Color.surfacePrimary)
-            .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 90) }
+            .overlay(
+                Color.clear.frame(height: 90),
+                alignment: .bottom
+            )
             .navigationTitle("Statistics")
             .refreshable {
                 await viewModel.loadData()
@@ -59,7 +61,6 @@ struct StatisticsView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct StatisticsView_Previews: PreviewProvider {
     static var previews: some View {
         StatisticsView(viewModel: .mock())

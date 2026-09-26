@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Ignored Hosts Section
 
-@available(iOS 16.0, *)
 struct IgnoredHostsSectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 
@@ -33,7 +32,7 @@ struct IgnoredHostsSectionView: View {
                 )) {
                     Text(host.host)
                         .font(.system(size: 13, design: .monospaced))
-                        .foregroundStyle(host.isEnabled ? .primary : .secondary)
+                        .foregroundColor(host.isEnabled ? .primary : .secondary)
                 }
                 .tint(.orange)
                 .swipeActions {
@@ -48,12 +47,12 @@ struct IgnoredHostsSectionView: View {
             HStack(spacing: 10) {
                 Image(systemName: "plus.circle.fill")
                     .font(.system(size: 18))
-                    .foregroundStyle(viewModel.newIgnoredHost.isEmpty ? Color(.tertiaryLabel) : .green)
+                    .foregroundColor(viewModel.newIgnoredHost.isEmpty ? Color(.tertiaryLabel) : .green)
 
                 TextField("Add host to ignore...", text: $viewModel.newIgnoredHost)
                     .font(.system(size: 13, design: .monospaced))
                     .autocapitalization(.none)
-                    .autocorrectionDisabled()
+                    .disableAutocorrection(true)
                     .onSubmit { viewModel.addIgnoredHost() }
 
                 if !viewModel.newIgnoredHost.isEmpty {
@@ -62,7 +61,7 @@ struct IgnoredHostsSectionView: View {
                     } label: {
                         Text("Add")
                             .font(.system(size: 13, weight: .semibold))
-                            .foregroundStyle(.green)
+                            .foregroundColor(.green)
                     }
                 }
             }

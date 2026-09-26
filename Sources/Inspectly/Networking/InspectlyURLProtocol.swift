@@ -59,9 +59,6 @@ final class InspectlyURLProtocol: URLProtocol {
     /// Whether stubbing is globally enabled.
     static var isStubEnabled: Bool = false
 
-    /// Whether logging is enabled.
-    static var isLoggingEnabled: Bool = true
-
     /// Active network throttling configuration for real requests.
     static var networkThrottlingConfig: NetworkThrottlingConfiguration = NetworkThrottlingConfiguration()
 
@@ -102,7 +99,8 @@ final class InspectlyURLProtocol: URLProtocol {
             return false
         }
 
-        return isLoggingEnabled || isStubEnabled
+        // Logging is always enabled once Inspectly is integrated.
+        return true
     }
 
     override class func canonicalRequest(for request: URLRequest) -> URLRequest {

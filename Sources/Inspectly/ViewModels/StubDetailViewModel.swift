@@ -22,7 +22,6 @@ import SwiftUI
 // MARK: - Stub Detail View Model
 
 @MainActor
-@available(iOS 16.0, *)
 final class StubDetailViewModel: ObservableObject {
     @Published var stub: RequestStub
     @Published var isEditing: Bool
@@ -33,7 +32,7 @@ final class StubDetailViewModel: ObservableObject {
     @Published var validationErrors: [String] = []
 
     private let stubRepository: StubRepositoryProtocol
-    
+
     var response: StubResponse {
         get {
             if stub.scenarios.isEmpty {
@@ -138,7 +137,7 @@ final class StubDetailViewModel: ObservableObject {
 
     func save() async {
         stub.updatedAt = Date()
-        
+
         let existing = await stubRepository.getStub(by: stub.id)
         if existing != nil {
             await stubRepository.updateStub(stub)

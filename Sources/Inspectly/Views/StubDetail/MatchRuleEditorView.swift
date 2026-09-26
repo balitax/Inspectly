@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Match Rule Editor View
 
-@available(iOS 16.0, *)
 struct MatchRuleEditorView: View {
     @ObservedObject var viewModel: StubDetailViewModel
 
@@ -30,7 +29,7 @@ struct MatchRuleEditorView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("HTTP Method")
                     .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 6) {
@@ -49,7 +48,7 @@ struct MatchRuleEditorView: View {
                 HStack(spacing: 8) {
                     Text("URL Pattern")
                         .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
 
                     Spacer()
 
@@ -71,11 +70,11 @@ struct MatchRuleEditorView: View {
                             Image(systemName: "chevron.up.chevron.down")
                                 .font(.system(size: 8))
                         }
-                        .foregroundStyle(.accentColor)
+                        .foregroundColor(.accentColor)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
                         .background(Color.accentColor.opacity(0.1))
-                        .clipShape(Capsule())
+                        .cornerRadius(8)
                     }
                 }
 
@@ -89,7 +88,7 @@ struct MatchRuleEditorView: View {
                 .textFieldStyle(.roundedBorder)
                 .font(.system(size: 13, design: .monospaced))
                 .autocapitalization(.none)
-                .autocorrectionDisabled()
+                .disableAutocorrection(true)
 
                 if viewModel.stub.matchRule.urlMatchMode == .regex {
                     let pattern = viewModel.stub.matchRule.urlPattern ?? ""
@@ -97,7 +96,7 @@ struct MatchRuleEditorView: View {
                     if !isValidRegex {
                         Label("Invalid regex pattern", systemImage: "exclamationmark.triangle.fill")
                             .font(.system(size: 11))
-                            .foregroundStyle(.red)
+                            .foregroundColor(.red)
                     }
                 }
             }
@@ -109,7 +108,7 @@ struct MatchRuleEditorView: View {
                 HStack {
                     Text("Query Parameters")
                         .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                     Spacer()
                     Button {
                         viewModel.addMatchQueryParam()
@@ -133,7 +132,7 @@ struct MatchRuleEditorView: View {
                             viewModel.removeMatchQueryParam(at: index)
                         } label: {
                             Image(systemName: "minus.circle.fill")
-                                .foregroundStyle(.red)
+                                .foregroundColor(.red)
                                 .font(.system(size: 16))
                         }
                         .buttonStyle(.plain)
@@ -148,7 +147,7 @@ struct MatchRuleEditorView: View {
                 HStack {
                     Text("Headers")
                         .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                     Spacer()
                     Button {
                         viewModel.addMatchHeader()
@@ -172,7 +171,7 @@ struct MatchRuleEditorView: View {
                             viewModel.removeMatchHeader(at: index)
                         } label: {
                             Image(systemName: "minus.circle.fill")
-                                .foregroundStyle(.red)
+                                .foregroundColor(.red)
                                 .font(.system(size: 16))
                         }
                         .buttonStyle(.plain)
@@ -186,7 +185,7 @@ struct MatchRuleEditorView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Body Contains")
                     .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
                 TextField("Search string in body", text: Binding(
                     get: { viewModel.stub.matchRule.bodyContains ?? "" },
                     set: { viewModel.updateBodyContains($0) }
@@ -210,7 +209,7 @@ struct MatchRuleEditorView: View {
                 .padding(.vertical, 5)
                 .background(isSelected ? Color.accentColor.opacity(0.15) : Color(.tertiarySystemFill))
                 .foregroundColor(isSelected ? .accentColor : .secondary)
-                .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                .cornerRadius(6)
         }
         .buttonStyle(.plain)
     }
@@ -218,7 +217,6 @@ struct MatchRuleEditorView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct MatchRuleEditorView_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView {

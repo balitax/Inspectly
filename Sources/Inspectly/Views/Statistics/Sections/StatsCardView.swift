@@ -22,7 +22,6 @@ import SwiftUI
 
 /// Shared card chrome (title/subtitle header + divider + content) used by every
 /// Statistics section.
-@available(iOS 16.0, *)
 struct StatsCardView<Content: View>: View {
     let title: String
     var subtitle: String? = nil
@@ -33,15 +32,15 @@ struct StatsCardView<Content: View>: View {
             HStack(spacing: 6) {
                 Text(title.uppercased())
                     .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
                     .tracking(0.4)
 
                 if let subtitle = subtitle {
                     Text("·")
-                        .foregroundStyle(.quaternary)
+                        .foregroundColor(.quaternaryLabel)
                     Text(subtitle)
                         .font(.system(size: 10))
-                        .foregroundStyle(.tertiary)
+                        .foregroundColor(.tertiaryLabel)
                 }
             }
             .padding(.horizontal, 14)
@@ -55,6 +54,6 @@ struct StatsCardView<Content: View>: View {
                 .padding(.vertical, 12)
         }
         .background(Color(.tertiarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .cornerRadius(12)
     }
 }

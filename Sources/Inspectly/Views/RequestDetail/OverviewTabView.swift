@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Overview Tab View
 
-@available(iOS 16.0, *)
 struct OverviewTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
     @State private var copiedLabel: String?
@@ -41,7 +40,7 @@ struct OverviewTabView: View {
                     }
                 }
                 .background(Color(.tertiarySystemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .cornerRadius(12)
 
                 // MARK: - Tags
                 if !viewModel.request.tags.isEmpty {
@@ -60,8 +59,7 @@ struct OverviewTabView: View {
         HStack(spacing: 14) {
             Image(systemName: viewModel.request.status.iconName)
                 .font(.system(size: 28))
-                .foregroundStyle(Color.forStatusCode(viewModel.request.statusCode))
-                .symbolRenderingMode(.hierarchical)
+                .foregroundColor(Color.forStatusCode(viewModel.request.statusCode))
 
             VStack(alignment: .leading, spacing: 3) {
                 HStack(spacing: 8) {
@@ -76,7 +74,7 @@ struct OverviewTabView: View {
 
                 Text(viewModel.request.url)
                     .font(.system(size: 13))
-                    .foregroundStyle(.primary)
+                    .foregroundColor(.primary)
                     .lineLimit(2)
             }
 
@@ -84,10 +82,10 @@ struct OverviewTabView: View {
         }
         .padding(14)
         .background(Color.forStatusCode(viewModel.request.statusCode).opacity(0.06))
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .cornerRadius(12)
         .overlay(
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .strokeBorder(Color.forStatusCode(viewModel.request.statusCode).opacity(0.18), lineWidth: 1)
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.forStatusCode(viewModel.request.statusCode).opacity(0.18), lineWidth: 1)
         )
     }
 
@@ -100,22 +98,21 @@ struct OverviewTabView: View {
             // Icon pill
             Image(systemName: icon)
                 .font(.system(size: 13, weight: .medium))
-                .foregroundStyle(.secondary)
+                .foregroundColor(.secondary)
                 .frame(width: 30, height: 30)
                 .background(Color(.quaternarySystemFill))
-                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .cornerRadius(8)
 
             // Label + value stack
             VStack(alignment: .leading, spacing: 3) {
                 Text(label.uppercased())
                     .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
                     .tracking(0.4)
 
                 Text(value)
                     .font(.system(size: 13, design: ["URL", "Path"].contains(label) ? .monospaced : .default))
-                    .foregroundStyle(.primary)
-                    .textSelection(.enabled)
+                    .foregroundColor(.primary)
                     .fixedSize(horizontal: false, vertical: true)
             }
 
@@ -134,10 +131,10 @@ struct OverviewTabView: View {
                 } label: {
                     Image(systemName: copiedLabel == label ? "checkmark" : "doc.on.doc")
                         .font(.system(size: 12))
-                        .foregroundStyle(copiedLabel == label ? .green : .secondary)
+                        .foregroundColor(copiedLabel == label ? .green : .secondary)
                         .frame(width: 28, height: 28)
                         .background(Color(.quaternarySystemFill))
-                        .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                        .cornerRadius(6)
                 }
                 .buttonStyle(.plain)
             }
@@ -152,7 +149,7 @@ struct OverviewTabView: View {
         VStack(alignment: .leading, spacing: 10) {
             Text("TAGS")
                 .font(.system(size: 10, weight: .semibold))
-                .foregroundStyle(.secondary)
+                .foregroundColor(.secondary)
                 .tracking(0.4)
                 .padding(.horizontal, 14)
 
@@ -164,62 +161,84 @@ struct OverviewTabView: View {
                         .padding(.vertical, 4)
                         .background(Color.accentColor.opacity(0.12))
                         .foregroundColor(.accentColor)
-                        .clipShape(Capsule())
+                        .cornerRadius(8)
                 }
             }
             .padding(.horizontal, 14)
             .padding(.bottom, 10)
         }
         .background(Color(.tertiarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .cornerRadius(12)
     }
 }
 
-// MARK: - Flow Layout (for tags)
+// MARK: - Flow Layout (iOS 15 compatible)
 
-@available(iOS 16.0, *)
-struct FlowLayout: Layout {
+struct FlowLayout: View {
     var spacing: CGFloat = 8
+    var children: [AnyView]
 
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        arrange(proposal: proposal, subviews: subviews).size
+    init<Content: View>(spacing: CGFloat = 8, @ViewBuilder content: () -> Content) {
+        self.spacing = spacing
+        self.children = ViewExtractor.extract(from: content())
     }
 
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
-        let result = arrange(proposal: proposal, subviews: subviews)
-        for (index, position) in result.positions.enumerated() {
-            subviews[index].place(at: CGPoint(x: bounds.minX + position.x, y: bounds.minY + position.y), proposal: .unspecified)
+    var body: some View {
+        GeometryReader { geometry in
+            self.generateContent(in: geometry)
         }
     }
 
-    private func arrange(proposal: ProposedViewSize, subviews: Subviews) -> (positions: [CGPoint], size: CGSize) {
-        let maxWidth = proposal.width ?? .infinity
-        var positions: [CGPoint] = []
-        var x: CGFloat = 0
-        var y: CGFloat = 0
-        var maxHeight: CGFloat = 0
-        var rowHeight: CGFloat = 0
+    private func generateContent(in geometry: GeometryProxy) -> some View {
+        var width = CGFloat.zero
+        var height = CGFloat.zero
 
-        for subview in subviews {
-            let size = subview.sizeThatFits(.unspecified)
-            if x + size.width > maxWidth && x > 0 {
-                x = 0
-                y += rowHeight + spacing
-                rowHeight = 0
+        return ZStack(alignment: .topLeading) {
+            ForEach(children.indices, id: \.self) { index in
+                children[index]
+                    .alignmentGuide(.leading, computeValue: { dimension in
+                        if abs(width - dimension.width) > geometry.size.width {
+                            width = 0
+                            height -= dimension.height + spacing
+                        }
+                        let result = width
+                        if index == children.count - 1 {
+                            width = 0
+                        } else {
+                            width -= dimension.width + spacing
+                        }
+                        return result
+                    })
+                    .alignmentGuide(.top, computeValue: { _ in
+                        let result = height
+                        if index == children.count - 1 {
+                            height = 0
+                        }
+                        return result
+                    })
             }
-            positions.append(CGPoint(x: x, y: y))
-            rowHeight = max(rowHeight, size.height)
-            x += size.width + spacing
-            maxHeight = max(maxHeight, y + rowHeight)
         }
+    }
+}
 
-        return (positions, CGSize(width: maxWidth, height: maxHeight))
+// MARK: - View Extractor Helper
+
+private enum ViewExtractor {
+    static func extract<Content: View>(from view: Content) -> [AnyView] {
+        var views: [AnyView] = []
+        Mirror(reflecting: view).children.forEach { child in
+            if let view = child.value as? AnyView {
+                views.append(view)
+            } else if let view = child.value as? (any View) {
+                views.append(AnyView(view))
+            }
+        }
+        return views.isEmpty ? [AnyView(view)] : views
     }
 }
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct OverviewTabView_Previews: PreviewProvider {
     static var previews: some View {
         InspectlyNavigationStack {

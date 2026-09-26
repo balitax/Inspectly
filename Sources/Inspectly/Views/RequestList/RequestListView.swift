@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Request List View
 
-@available(iOS 16.0, *)
 struct RequestListView: View {
     @StateObject var viewModel: RequestListViewModel
     let stubRepository: StubRepositoryProtocol
@@ -63,8 +62,8 @@ struct RequestListView: View {
             }
             .background(Color.surfacePrimary)
             .navigationTitle("Requests")
-            .searchable(text: $viewModel.searchText, prompt: "Search URL, method, status...")
-            .onChange(of: viewModel.searchText) { _ in
+            .searchable(text: $viewModel.searchText, prompt: "Search requests...")
+            .onChange(of: viewModel.searchText) { newValue in
                 viewModel.applyFiltersAndSort()
             }
             .toolbar {
@@ -80,22 +79,20 @@ struct RequestListView: View {
                     RequestFilterButton(viewModel: viewModel)
                 }
             }
-            .refreshable {
-                await viewModel.refresh()
-            }
             .sheet(isPresented: $viewModel.showFilterSheet) {
                 FilterSheetView(filter: $viewModel.filter) {
                     viewModel.applyFiltersAndSort()
                 }
-                .inspectlyPresentationDetents([.medium, .large])
             }
-            .alert("Clear All Requests?", isPresented: $viewModel.showClearConfirmation) {
-                Button("Cancel", role: .cancel) {}
-                Button("Clear", role: .destructive) {
-                    Task { await viewModel.clearRequests() }
-                }
-            } message: {
-                Text("This will permanently delete all captured requests and stubs. This action cannot be undone.")
+            .alert(isPresented: $viewModel.showClearConfirmation) {
+                Alert(
+                    title: Text("Clear All Requests?"),
+                    message: Text("This will permanently delete all captured requests and stubs. This action cannot be undone."),
+                    primaryButton: .cancel(Text("Cancel")),
+                    secondaryButton: .destructive(Text("Clear")) {
+                        Task { await viewModel.clearRequests() }
+                    }
+                )
             }
             .task {
                 await viewModel.loadRequestsIfNeeded()
@@ -121,7 +118,6 @@ struct RequestListView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct RequestListView_Previews: PreviewProvider {
     static var previews: some View {
         RequestListView(viewModel: .mock())

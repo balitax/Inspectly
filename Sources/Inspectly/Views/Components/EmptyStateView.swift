@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Empty State View
 
-@available(iOS 16.0, *)
 struct EmptyStateView: View {
     let icon: String
     let title: String
@@ -34,17 +33,16 @@ struct EmptyStateView: View {
 
             Image(systemName: icon)
                 .font(.system(size: 56))
-                .foregroundStyle(.quaternary)
-                .symbolRenderingMode(.hierarchical)
+                .foregroundColor(Color(.quaternaryLabel))
 
             VStack(spacing: 6) {
                 Text(title)
                     .font(.system(size: 18, weight: .semibold))
-                    .foregroundStyle(.primary)
+                    .foregroundColor(.primary)
 
                 Text(subtitle)
                     .font(.system(size: 14))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
             }
@@ -53,11 +51,11 @@ struct EmptyStateView: View {
                 Button(action: action) {
                     Text(actionTitle)
                         .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(.white)
+                        .foregroundColor(.white)
                         .padding(.horizontal, 24)
                         .padding(.vertical, 10)
                         .background(Color.accentColor)
-                        .clipShape(Capsule())
+                        .cornerRadius(8)
                 }
                 .padding(.top, 8)
             }
@@ -70,7 +68,6 @@ struct EmptyStateView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct EmptyStateView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {

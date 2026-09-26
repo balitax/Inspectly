@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - About Section
 
-@available(iOS 16.0, *)
 struct AboutSectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 
@@ -29,17 +28,17 @@ struct AboutSectionView: View {
             HStack(spacing: 14) {
                 Image(systemName: "network")
                     .font(.system(size: 20, weight: .medium))
-                    .foregroundStyle(Color.accentIndigo)
+                    .foregroundColor(Color.accentIndigo)
                     .frame(width: 44, height: 44)
                     .background(Color.accentIndigo.opacity(0.1))
-                    .clipShape(RoundedRectangle(cornerRadius: 11, style: .continuous))
+                    .cornerRadius(11)
 
                 VStack(alignment: .leading, spacing: 3) {
                     Text("Inspectly")
                         .font(.system(size: 15, weight: .bold))
                     Text("Network debugger for iOS developers")
                         .font(.system(size: 12))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                 }
             }
             .padding(.vertical, 4)
@@ -51,7 +50,7 @@ struct AboutSectionView: View {
                 Spacer()
                 Text("\(viewModel.appVersion) (\(viewModel.buildNumber))")
                     .font(.system(size: 13, design: .monospaced))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
             }
 
             HStack(spacing: 12) {
@@ -61,7 +60,7 @@ struct AboutSectionView: View {
                 Spacer()
                 Text("Agus Cahyono")
                     .font(.system(size: 13))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
             }
         } header: {
             SettingsRow.sectionHeader("About")

@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Stub Manager View
 
-@available(iOS 16.0, *)
 struct StubManagerView: View {
     @StateObject var viewModel: StubManagerViewModel
 
@@ -66,13 +65,15 @@ struct StubManagerView: View {
                     }
                 }
             }
-            .alert("Clear All Stubs?", isPresented: $viewModel.showClearConfirmation) {
-                Button("Cancel", role: .cancel) {}
-                Button("Clear", role: .destructive) {
-                    Task { await viewModel.clearStubs() }
-                }
-            } message: {
-                Text("This will permanently delete all saved stubs. Requests linked to those stubs will be unmarked. This action cannot be undone.")
+            .alert(isPresented: $viewModel.showClearConfirmation) {
+                Alert(
+                    title: Text("Clear All Stubs?"),
+                    message: Text("This will permanently delete all saved stubs. Requests linked to those stubs will be unmarked. This action cannot be undone."),
+                    primaryButton: .cancel(Text("Cancel")),
+                    secondaryButton: .destructive(Text("Clear")) {
+                        Task { await viewModel.clearStubs() }
+                    }
+                )
             }
             .sheet(isPresented: $viewModel.showingNewStub) {
                 InspectlyNavigationStack {
@@ -80,7 +81,7 @@ struct StubManagerView: View {
                         viewModel: StubDetailViewModel(
                             stub: viewModel.createNewStub(),
                             isEditing: true,
-                            stubRepository: MockStubRepository()
+                            stubRepository: viewModel.stubRepository
                         ),
                         onSave: { stub in
                             Task {
@@ -103,11 +104,11 @@ struct StubManagerView: View {
             ForEach(viewModel.groupedStubs, id: \.group) { group in
                 Section {
                     ForEach(group.stubs) { stub in
-                        InspectlyNavigationLink(value: stub.id) { stubId in
-                            stubDetailDestination(for: stubId)
-                        } label: {
+                        InspectlyNavigationLink(destination: {
+                            stubDetailDestination(for: stub)
+                        }, label: {
                             StubRowView(stub: stub)
-                        }
+                        })
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive) {
                                 Task { await viewModel.deleteStub(stub) }
@@ -138,43 +139,41 @@ struct StubManagerView: View {
                     HStack(spacing: 6) {
                         Text(group.group.uppercased())
                             .font(.system(size: 11, weight: .semibold))
-                            .foregroundStyle(.secondary)
+                            .foregroundColor(.secondary)
                             .tracking(0.3)
 
                         Text("\(group.stubs.count)")
                             .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                            .foregroundStyle(.tertiary)
+                            .foregroundColor(.tertiaryLabel)
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
                             .background(Color(.quaternarySystemFill))
-                            .clipShape(Capsule())
+                            .cornerRadius(8)
                     }
                 }
             }
         }
         .listStyle(.insetGrouped)
-        .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 90) }
-        .inspectlyNavigationDestination(for: UUID.self) { stubId in
-            stubDetailDestination(for: stubId)
-        }
+        .overlay(
+            Color.clear.frame(height: 90),
+            alignment: .bottom
+        )
     }
 
     @ViewBuilder
-    private func stubDetailDestination(for stubId: UUID) -> some View {
-        if let stub = viewModel.stubs.first(where: { $0.id == stubId }) {
-            StubDetailView(
-                viewModel: StubDetailViewModel(
-                    stub: stub,
-                    isEditing: false,
-                    stubRepository: MockStubRepository()
-                ),
-                onSave: { updatedStub in
-                    Task {
-                        await viewModel.saveStub(updatedStub)
-                    }
+    private func stubDetailDestination(for stub: RequestStub) -> some View {
+        StubDetailView(
+            viewModel: StubDetailViewModel(
+                stub: stub,
+                isEditing: false,
+                stubRepository: viewModel.stubRepository
+            ),
+            onSave: { updatedStub in
+                Task {
+                    await viewModel.saveStub(updatedStub)
                 }
-            )
-        }
+            }
+        )
     }
 
     // MARK: - Filter Menu
@@ -244,7 +243,6 @@ struct StubManagerView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct StubManagerView_Previews: PreviewProvider {
     static var previews: some View {
         StubManagerView(viewModel: .mock())

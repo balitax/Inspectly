@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Display Section
 
-@available(iOS 16.0, *)
 struct DisplaySectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 

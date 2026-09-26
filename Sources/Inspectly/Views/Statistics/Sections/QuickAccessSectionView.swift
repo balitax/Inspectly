@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Quick Access Section
 
-@available(iOS 16.0, *)
 struct QuickAccessSectionView: View {
     @ObservedObject var viewModel: StatisticsViewModel
 
@@ -40,7 +39,6 @@ struct QuickAccessSectionView: View {
 
 // MARK: - Quick Access Chip
 
-@available(iOS 16.0, *)
 private struct QuickAccessChip: View {
     let icon: String
     let label: String
@@ -51,23 +49,23 @@ private struct QuickAccessChip: View {
         HStack(spacing: 6) {
             Image(systemName: icon)
                 .font(.system(size: 11))
-                .foregroundStyle(count > 0 ? color : .secondary)
+                .foregroundColor(count > 0 ? color : .secondary)
 
             Text(label)
                 .font(.system(size: 12, weight: .medium))
-                .foregroundStyle(count > 0 ? .primary : .secondary)
+                .foregroundColor(count > 0 ? .primary : .secondary)
 
             Text("\(count)")
                 .font(.system(size: 11, weight: .bold, design: .monospaced))
-                .foregroundStyle(count > 0 ? color : Color(.tertiaryLabel))
+                .foregroundColor(count > 0 ? color : Color(.tertiaryLabel))
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
         .background(count > 0 ? color.opacity(0.1) : Color(.quaternarySystemFill))
-        .clipShape(Capsule())
+        .cornerRadius(8)
         .overlay(
             Capsule()
-                .strokeBorder(count > 0 ? color.opacity(0.3) : Color.clear, lineWidth: 1)
+                .stroke(count > 0 ? color.opacity(0.3) : Color.clear, lineWidth: 1)
         )
     }
 }

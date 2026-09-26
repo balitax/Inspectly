@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Code Block View
 
-@available(iOS 16.0, *)
 struct CodeBlockView: View {
     let title: String?
     let content: String
@@ -97,7 +96,7 @@ struct CodeBlockView: View {
                 HStack {
                     Text(title)
                         .font(.system(size: 12, weight: .semibold))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
 
                     Spacer()
 
@@ -117,7 +116,7 @@ struct CodeBlockView: View {
                                 Text(copied ? "Copied" : "Copy")
                                     .font(.system(size: 10, weight: .medium))
                             }
-                            .foregroundStyle(copied ? .green : .secondary)
+                            .foregroundColor(copied ? .green : .secondary)
                         }
                         .buttonStyle(.plain)
                     }
@@ -128,8 +127,7 @@ struct CodeBlockView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     Text(displayContent)
                         .font(.system(size: 12, design: .monospaced))
-                        .foregroundStyle(.primary)
-                        .textSelection(.enabled)
+                        .foregroundColor(.primary)
                         .lineLimit(maxLines)
                 }
             } else {
@@ -138,8 +136,7 @@ struct CodeBlockView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             Text(highlightedLines[lineIdx])
                                 .font(.system(size: 12, design: .monospaced))
-                                .foregroundStyle(.primary)
-                                .textSelection(.enabled)
+                                .foregroundColor(.primary)
                         }
                         .id("\(lineIdPrefix)_\(lineIdx)")
                     }
@@ -149,13 +146,12 @@ struct CodeBlockView: View {
         .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(.tertiarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .cornerRadius(10)
     }
 }
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct CodeBlockView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20) {
@@ -163,7 +159,7 @@ struct CodeBlockView_Previews: PreviewProvider {
                 title: "Response Headers",
                 content: "Content-Type: application/json\nCache-Control: no-cache\nServer: nginx"
             )
-            
+
             CodeBlockView(
                 title: "JSON Body",
                 content: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"id\": 123,\n    \"name\": \"Inspectly\"\n  }\n}"

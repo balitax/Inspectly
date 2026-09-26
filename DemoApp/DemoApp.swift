@@ -19,7 +19,7 @@
 import SwiftUI
 import Inspectly
 
-@available(iOS 14.0, *)
+@available(iOS 15.0, *)
 @main
 struct DemoApp: App {
     
@@ -29,17 +29,7 @@ struct DemoApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if #available(iOS 16.0, *) {
-                DemoAppView()
-            } else {
-                VStack {
-                    Text("Inspectly")
-                        .font(.title)
-                        .bold()
-                    Text("Dashboard UI requires iOS 16.0+")
-                        .foregroundColor(.secondary)
-                }
-            }
+            DemoAppView()
         }
     }
 }

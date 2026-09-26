@@ -20,11 +20,10 @@ import SwiftUI
 
 // MARK: - Filter Sheet View
 
-@available(iOS 16.0, *)
 struct FilterSheetView: View {
     @Binding var filter: RequestFilter
     let onApply: () -> Void
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         InspectlyNavigationStack {
@@ -77,19 +76,18 @@ struct FilterSheetView: View {
             }
             .background(Color.surfacePrimary)
             .navigationTitle("Filters")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Reset") {
                         filter.reset()
                         onApply()
                     }
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Apply") {
                         onApply()
-                        dismiss()
+                        presentationMode.wrappedValue.dismiss()
                     }
                     .fontWeight(.semibold)
                 }
@@ -108,15 +106,15 @@ struct FilterSheetView: View {
             HStack(spacing: 6) {
                 Text(title.uppercased())
                     .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
                     .tracking(0.4)
 
                 Text("·")
-                    .foregroundStyle(.quaternary)
+                    .foregroundColor(.quaternaryLabel)
 
                 Text(subtitle)
                     .font(.system(size: 10))
-                    .foregroundStyle(.tertiary)
+                    .foregroundColor(Color(.tertiaryLabel))
             }
             .padding(.horizontal, 14)
             .padding(.top, 12)
@@ -129,7 +127,7 @@ struct FilterSheetView: View {
                 .padding(.vertical, 12)
         }
         .background(Color(.tertiarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .cornerRadius(12)
     }
 
     // MARK: - Status Range Chip
@@ -141,16 +139,16 @@ struct FilterSheetView: View {
         } label: {
             Text(label)
                 .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                .foregroundStyle(isSelected ? color : .secondary)
+                .foregroundColor(isSelected ? color : .secondary)
                 .lineLimit(1)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 7)
                 .frame(maxWidth: .infinity)
                 .background(isSelected ? color.opacity(0.12) : Color(.quaternarySystemFill))
-                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .cornerRadius(8)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .strokeBorder(isSelected ? color.opacity(0.4) : Color.clear, lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(isSelected ? color.opacity(0.4) : Color.clear, lineWidth: 1)
                 )
         }
         .buttonStyle(.plain)
@@ -163,12 +161,12 @@ struct FilterSheetView: View {
             HStack(spacing: 10) {
                 Image(systemName: icon)
                     .font(.system(size: 13))
-                    .foregroundStyle(color)
+                    .foregroundColor(color)
                     .frame(width: 22)
 
                 Text(label)
                     .font(.system(size: 14))
-                    .foregroundStyle(.primary)
+                    .foregroundColor(.primary)
             }
         }
         .toggleStyle(.switch)
@@ -179,7 +177,6 @@ struct FilterSheetView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct FilterSheetView_Previews: PreviewProvider {
     static var previews: some View {
         FilterSheetView(filter: .constant(RequestFilter())) {}

@@ -20,29 +20,28 @@ import SwiftUI
 
 // MARK: - Response Editor View
 
-@available(iOS 16.0, *)
 struct ResponseEditorView: View {
     @ObservedObject var viewModel: StubDetailViewModel
-    
+
     var body: some View {
         VStack(spacing: 14) {
             // MARK: - Status Code
             VStack(alignment: .leading, spacing: 4) {
                 Text("Status Code")
                     .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(.secondary)
-                
+                    .foregroundColor(.secondary)
+
                 HStack(spacing: 8) {
-                    TextField("200", value: $viewModel.response.statusCode, format: .number)
+                    TextField("200", value: $viewModel.response.statusCode, formatter: NumberFormatter())
                         .textFieldStyle(.roundedBorder)
                         .font(.system(size: 14, design: .monospaced))
                         .frame(width: 80)
                         .keyboardType(.numberPad)
-                    
+
                     StatusBadgeView(statusCode: viewModel.response.statusCode)
-                    
+
                     Spacer()
-                    
+
                     // Quick status buttons
                     ForEach([200, 201, 400, 404, 500], id: \.self) { code in
                         Button {
@@ -54,39 +53,39 @@ struct ResponseEditorView: View {
                                 .padding(.vertical, 3)
                                 .background(viewModel.response.statusCode == code ? Color.accentColor.opacity(0.15) : Color(.tertiarySystemFill))
                                 .foregroundColor(viewModel.response.statusCode == code ? .accentColor : .secondary)
-                                .clipShape(RoundedRectangle(cornerRadius: 4))
+                                .cornerRadius(4)
                         }
                         .buttonStyle(.plain)
                     }
                 }
             }
-            
+
             Divider()
-            
+
             // MARK: - Response Delay
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     Text("Response Delay")
                         .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                     Spacer()
                     Text(String(format: "%.1fs", viewModel.response.responseDelay))
                         .font(.system(size: 12, weight: .medium, design: .monospaced))
                         .foregroundColor(.accentColor)
                 }
-                
+
                 Slider(value: $viewModel.response.responseDelay, in: 0...30, step: 0.5)
                     .tint(.accentColor)
             }
-            
+
             Divider()
-            
+
             // MARK: - Error Simulation
             VStack(alignment: .leading, spacing: 8) {
                 Text("Error Simulation")
                     .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(.secondary)
-                
+                    .foregroundColor(.secondary)
+
                 LazyVGrid(columns: [
                     GridItem(.flexible()),
                     GridItem(.flexible())
@@ -110,35 +109,35 @@ struct ResponseEditorView: View {
                             .padding(.horizontal, 6)
                             .background(viewModel.response.errorType == errorType ? Color.accentColor.opacity(0.15) : Color(.tertiarySystemFill))
                             .foregroundColor(viewModel.response.errorType == errorType ? .accentColor : .secondary)
-                            .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                            .cornerRadius(6)
                         }
                         .buttonStyle(.plain)
                     }
                 }
             }
-            
+
             Divider()
-            
+
             // MARK: - JSON Body Editor
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     Text("JSON Response Body")
                         .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(.secondary)
-                    
+                        .foregroundColor(.secondary)
+
                     Spacer()
-                    
+
                     if let error = viewModel.jsonValidationError {
                         Label(error, systemImage: "exclamationmark.triangle.fill")
                             .font(.system(size: 10))
-                            .foregroundStyle(.red)
+                            .foregroundColor(.red)
                     } else if viewModel.response.jsonBody?.isEmpty == false {
                         Label("Valid", systemImage: "checkmark.circle.fill")
                             .font(.system(size: 10))
-                            .foregroundStyle(.green)
+                            .foregroundColor(.green)
                     }
                 }
-                
+
                 TextEditor(text: Binding(
                     get: { viewModel.response.jsonBody ?? "" },
                     set: { viewModel.response.jsonBody = $0.isEmpty ? nil : $0 }
@@ -147,7 +146,7 @@ struct ResponseEditorView: View {
                 .frame(minHeight: 150)
                 .padding(4)
                 .background(Color(.tertiarySystemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .cornerRadius(8)
                 .onChange(of: viewModel.response.jsonBody) { _ in
                     viewModel.validateJSON()
                 }
@@ -158,7 +157,6 @@ struct ResponseEditorView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct ResponseEditorView_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView {

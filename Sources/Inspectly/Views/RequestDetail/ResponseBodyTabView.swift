@@ -20,14 +20,12 @@ import SwiftUI
 
 // MARK: - Response Body Tab View
 
-@available(iOS 16.0, *)
 struct ResponseBodyTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
     @State private var showRaw = false
     @State private var showPreview = true
     @State private var searchQuery = ""
     @State private var currentMatch = 0
-    @FocusState private var searchFieldFocused: Bool
 
     private let lineIdPrefix = "responseLine"
 
@@ -135,13 +133,13 @@ struct ResponseBodyTabView: View {
                 systemImage: viewModel.request.responseContentType.iconName
             )
             .font(.system(size: 11, weight: .medium))
-            .foregroundStyle(.secondary)
+            .foregroundColor(.secondary)
             .lineLimit(1)
             .fixedSize(horizontal: true, vertical: false)
             .padding(.horizontal, 10)
             .padding(.vertical, 5)
             .background(Color(.quaternarySystemFill))
-            .clipShape(Capsule())
+            .cornerRadius(8)
 
             Spacer()
 
@@ -149,25 +147,25 @@ struct ResponseBodyTabView: View {
             if let size = viewModel.request.responseBody?.formattedSize {
                 Text(size)
                     .font(.system(size: 11, weight: .medium, design: .monospaced))
-                    .foregroundStyle(.tertiary)
+                    .foregroundColor(.tertiaryLabel)
             }
 
             // Duration
             Text(viewModel.request.formattedDuration)
                 .font(.system(size: 11, weight: .medium, design: .monospaced))
-                .foregroundStyle(.tertiary)
+                .foregroundColor(.tertiaryLabel)
 
             // Raw toggle
             Toggle("Raw", isOn: $showRaw)
                 .toggleStyle(.button)
                 .buttonStyle(.bordered)
-                .controlSize(.mini)
+                .controlSizeCompat(.mini)
                 .font(.system(size: 10, weight: .medium))
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
         .background(Color(.tertiarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .cornerRadius(10)
     }
 
     // MARK: - Search Bar
@@ -178,12 +176,11 @@ struct ResponseBodyTabView: View {
             HStack(spacing: 6) {
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
 
                 TextField("Search JSON...", text: $searchQuery)
                     .font(.system(size: 12, design: .monospaced))
                     .textFieldStyle(.plain)
-                    .focused($searchFieldFocused)
                     .onChange(of: searchQuery) { _ in
                         currentMatch = 0
                     }
@@ -194,7 +191,7 @@ struct ResponseBodyTabView: View {
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                             .font(.system(size: 13))
-                            .foregroundStyle(.secondary)
+                            .foregroundColor(.secondary)
                     }
                     .buttonStyle(.plain)
                 }
@@ -202,7 +199,7 @@ struct ResponseBodyTabView: View {
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
             .background(Color(.tertiarySystemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .cornerRadius(10)
 
             // Nav buttons — separate pill, always fully visible
             if !searchQuery.isEmpty {
@@ -219,7 +216,7 @@ struct ResponseBodyTabView: View {
 
                     Text("\(matchCount > 0 ? currentMatch + 1 : 0)/\(matchCount)")
                         .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                        .foregroundStyle(matchCount > 0 ? Color.primary : Color.red)
+                        .foregroundColor(matchCount > 0 ? Color.primary : Color.red)
                         .lineLimit(1)
                         .fixedSize()
 
@@ -236,7 +233,7 @@ struct ResponseBodyTabView: View {
                 .padding(.horizontal, 10)
                 .padding(.vertical, 8)
                 .background(Color(.tertiarySystemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .cornerRadius(10)
             }
         }
     }
@@ -244,7 +241,6 @@ struct ResponseBodyTabView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct ResponseBodyTabView_Previews: PreviewProvider {
     static var previews: some View {
         ResponseBodyTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .get, url: "https://api.example.com/users", host: "api.example.com", path: "/users")))

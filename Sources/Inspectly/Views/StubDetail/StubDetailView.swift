@@ -20,11 +20,10 @@ import SwiftUI
 
 // MARK: - Stub Detail View
 
-@available(iOS 16.0, *)
 struct StubDetailView: View {
     @StateObject var viewModel: StubDetailViewModel
     var onSave: ((RequestStub) async -> Void)?
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         ScrollView {
@@ -47,7 +46,6 @@ struct StubDetailView: View {
         }
         .background(Color.surfacePrimary)
         .navigationTitle(viewModel.stub.name)
-        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
@@ -55,13 +53,12 @@ struct StubDetailView: View {
                     Task {
                         await viewModel.save()
                         await onSave?(viewModel.stub)
-                        dismiss()
+                        presentationMode.wrappedValue.dismiss()
                     }
                 }
                 .fontWeight(.semibold)
             }
         }
-        .toolbar(.hidden, for: .tabBar)
     }
 
     // MARK: - Validation Error Banner
@@ -71,30 +68,30 @@ struct StubDetailView: View {
             HStack(spacing: 6) {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(.red)
+                    .foregroundColor(.red)
                 Text("Fix the following before saving:")
                     .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(.red)
+                    .foregroundColor(.red)
             }
 
             ForEach(viewModel.validationErrors, id: \.self) { error in
                 HStack(spacing: 6) {
                     Circle()
-                        .fill(.red.opacity(0.6))
+                        .fill(Color.red.opacity(0.6))
                         .frame(width: 4, height: 4)
                     Text(error)
                         .font(.system(size: 12))
-                        .foregroundStyle(.red.opacity(0.85))
+                        .foregroundColor(Color.red.opacity(0.85))
                 }
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(12)
         .background(Color.red.opacity(0.08))
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .cornerRadius(10)
         .overlay(
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .strokeBorder(Color.red.opacity(0.2), lineWidth: 1)
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.red.opacity(0.2), lineWidth: 1)
         )
     }
 
@@ -108,7 +105,7 @@ struct StubDetailView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Name")
                         .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                     TextField("Stub name", text: $viewModel.stub.name)
                         .textFieldStyle(.roundedBorder)
                         .font(.system(size: 14))
@@ -117,7 +114,7 @@ struct StubDetailView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Description")
                         .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                     TextField("Description", text: $viewModel.stub.description)
                         .textFieldStyle(.roundedBorder)
                         .font(.system(size: 14))
@@ -126,7 +123,7 @@ struct StubDetailView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Group")
                         .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                     TextField("Group name", text: Binding(
                         get: { viewModel.stub.groupName ?? "" },
                         set: { viewModel.stub.groupName = $0.isEmpty ? nil : $0 }
@@ -167,7 +164,6 @@ struct StubDetailView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct StubDetailView_Previews: PreviewProvider {
     static var previews: some View {
         InspectlyNavigationStack {

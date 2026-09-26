@@ -20,14 +20,12 @@ import SwiftUI
 
 // MARK: - Settings View
 
-@available(iOS 16.0, *)
 struct SettingsView: View {
     @StateObject var viewModel: SettingsViewModel
 
     var body: some View {
         InspectlyNavigationStack {
             List {
-                LoggingSectionView(viewModel: viewModel)
                 StubsSectionView(viewModel: viewModel)
                 NetworkThrottlingSectionView(viewModel: viewModel)
                 SlowRequestSectionView(viewModel: viewModel)
@@ -38,29 +36,33 @@ struct SettingsView: View {
                 AboutSectionView(viewModel: viewModel)
             }
             .listStyle(.insetGrouped)
-            .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 90) }
+            .overlay(
+                Color.clear.frame(height: 90),
+                alignment: .bottom
+            )
             .navigationTitle("Settings")
-            .alert("Clear All Logs?", isPresented: $viewModel.showClearConfirmation) {
-                Button("Cancel", role: .cancel) {}
-                Button("Clear", role: .destructive) {
-                    Task { await viewModel.clearLogs() }
-                }
-            } message: {
-                Text("This will permanently delete all captured requests. This action cannot be undone.")
+            .alert(isPresented: $viewModel.showClearConfirmation) {
+                Alert(
+                    title: Text("Clear All Logs?"),
+                    message: Text("This will permanently delete all captured requests. This action cannot be undone."),
+                    primaryButton: .cancel(Text("Cancel")),
+                    secondaryButton: .destructive(Text("Clear")) {
+                        Task { await viewModel.clearLogs() }
+                    }
+                )
             }
-            .alert("Export Error", isPresented: $viewModel.showExportError) {
-                Button("OK") {}
-            } message: {
-                Text(viewModel.exportMessage)
+            .alert(isPresented: $viewModel.showExportError) {
+                Alert(
+                    title: Text("Export Error"),
+                    message: Text(viewModel.exportMessage),
+                    dismissButton: .default(Text("OK"))
+                )
             }
             .sheet(item: $viewModel.shareURL) { identifiable in
                 ActivityView(activityItems: [identifiable.url])
             }
             .task {
                 await viewModel.loadSettings()
-            }
-            .onChange(of: viewModel.settings.isLoggingEnabled) { _ in
-                Task { await viewModel.saveSettings() }
             }
             .onChange(of: viewModel.settings.areStubsEnabled) { _ in
                 Task { await viewModel.saveSettings() }
@@ -83,7 +85,6 @@ struct SettingsView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(viewModel: .mock())

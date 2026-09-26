@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Performance Heatmap Section
 
-@available(iOS 16.0, *)
 struct PerformanceHeatmapSectionView: View {
     @ObservedObject var viewModel: StatisticsViewModel
 
@@ -29,7 +28,7 @@ struct PerformanceHeatmapSectionView: View {
             if viewModel.endpointPerformance.isEmpty {
                 Text("No timing data yet")
                     .font(.system(size: 13))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
             } else {
                 VStack(spacing: 8) {
@@ -37,7 +36,7 @@ struct PerformanceHeatmapSectionView: View {
                         HStack(spacing: 10) {
                             Text(item.path)
                                 .font(.system(size: 11, design: .monospaced))
-                                .foregroundStyle(.primary)
+                                .foregroundColor(.primary)
                                 .lineLimit(1)
                                 .frame(maxWidth: 130, alignment: .leading)
 
@@ -46,20 +45,24 @@ struct PerformanceHeatmapSectionView: View {
                                 let fillWidth = geo.size.width * CGFloat(item.avgTime / max(maxTime, 0.001))
 
                                 ZStack(alignment: .leading) {
-                                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                                    RoundedRectangle(cornerRadius: 4)
                                         .fill(Color(.quaternarySystemFill))
                                         .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                                    RoundedRectangle(cornerRadius: 4)
                                         .fill(perfTimeColor(item.avgTime).opacity(0.35))
                                         .frame(width: max(fillWidth, 4))
                                 }
-                                .overlay(alignment: .trailing) {
-                                    Text(formattedDuration(item.avgTime))
-                                        .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                                        .foregroundStyle(perfTimeColor(item.avgTime))
-                                        .padding(.trailing, 6)
-                                }
+                                .overlay(
+                                    HStack {
+                                        Spacer()
+                                        Text(formattedDuration(item.avgTime))
+                                            .font(.system(size: 10, weight: .semibold, design: .monospaced))
+                                            .foregroundColor(perfTimeColor(item.avgTime))
+                                            .padding(.trailing, 6)
+                                    },
+                                    alignment: .trailing
+                                )
                             }
                             .frame(height: 22)
                         }

@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Summary Card View
 
-@available(iOS 16.0, *)
 struct SummaryCardView: View {
     let title: String
     let value: String
@@ -33,40 +32,39 @@ struct SummaryCardView: View {
             HStack {
                 Image(systemName: icon)
                     .font(.system(size: 14, weight: .semibold))
-                    .foregroundStyle(color)
+                    .foregroundColor(color)
                     .frame(width: 32, height: 32)
                     .background(color.opacity(0.12))
-                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    .cornerRadius(8)
 
                 Spacer()
 
                 if let trend = trend {
                     Text(trend)
                         .font(.system(size: 10, weight: .medium))
-                        .foregroundStyle(trend.hasPrefix("+") ? .green : .red)
+                        .foregroundColor(trend.hasPrefix("+") ? .green : .red)
                 }
             }
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(value)
                     .font(.system(size: 22, weight: .bold, design: .rounded))
-                    .foregroundStyle(.primary)
+                    .foregroundColor(.primary)
 
                 Text(title)
                     .font(.system(size: 12))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
             }
         }
         .padding(14)
         .background(Color.surfaceElevated)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .cornerRadius(14)
         .shadow(color: .black.opacity(0.08), radius: 6, x: 0, y: 2)
     }
 }
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct SummaryCardView_Previews: PreviewProvider {
     static var previews: some View {
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {

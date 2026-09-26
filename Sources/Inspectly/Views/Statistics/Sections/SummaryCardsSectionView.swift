@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Summary Cards Section
 
-@available(iOS 16.0, *)
 struct SummaryCardsSectionView: View {
     @ObservedObject var viewModel: StatisticsViewModel
 

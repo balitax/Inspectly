@@ -3,7 +3,7 @@ name: InspectlyDemo
 options:
   bundleIdPrefix: com.inspectly
   deploymentTarget:
-    iOS: "13.0"
+    iOS: "15.0"
 
 packages:
   Inspectly:
@@ -17,7 +17,7 @@ targets:
   DemoApp:
     type: application
     platform: iOS
-    deploymentTarget: "13.0"
+    deploymentTarget: "15.0"
     sources:
       - DemoApp
     dependencies:

@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Export Tab View
 
-@available(iOS 16.0, *)
 struct ExportTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
 
@@ -105,15 +104,15 @@ struct ExportTabView: View {
             HStack(spacing: 6) {
                 Text(title.uppercased())
                     .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
                     .tracking(0.4)
 
                 Text("·")
-                    .foregroundStyle(.tertiary)
+                    .foregroundColor(.tertiaryLabel)
 
                 Text(subtitle)
                     .font(.system(size: 10))
-                    .foregroundStyle(.tertiary)
+                    .foregroundColor(.tertiaryLabel)
             }
             .padding(.horizontal, 14)
             .padding(.top, 12)
@@ -124,7 +123,7 @@ struct ExportTabView: View {
             content()
         }
         .background(Color(.tertiarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .cornerRadius(12)
     }
 
     // MARK: - Export Button
@@ -134,26 +133,26 @@ struct ExportTabView: View {
             HStack(spacing: 12) {
                 Image(systemName: icon)
                     .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(color)
+                    .foregroundColor(color)
                     .frame(width: 34, height: 34)
                     .background(color.opacity(0.12))
-                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    .cornerRadius(8)
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
                         .font(.system(size: 13, weight: .medium))
-                        .foregroundStyle(.primary)
+                        .foregroundColor(.primary)
 
                     Text(subtitle)
                         .font(.system(size: 11))
-                        .foregroundStyle(.tertiary)
+                        .foregroundColor(.tertiaryLabel)
                 }
 
                 Spacer()
 
                 Image(systemName: "chevron.right")
                     .font(.system(size: 11, weight: .medium))
-                    .foregroundStyle(.quaternary)
+                    .foregroundColor(.quaternaryLabel)
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
@@ -164,7 +163,6 @@ struct ExportTabView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct ExportTabView_Previews: PreviewProvider {
     static var previews: some View {
         ExportTabView(viewModel: .mock())

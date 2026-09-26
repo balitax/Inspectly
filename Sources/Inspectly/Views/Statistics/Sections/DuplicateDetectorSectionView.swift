@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Duplicate Detector Section
 
-@available(iOS 16.0, *)
 struct DuplicateDetectorSectionView: View {
     @ObservedObject var viewModel: StatisticsViewModel
 
@@ -30,10 +29,10 @@ struct DuplicateDetectorSectionView: View {
                 HStack(spacing: 8) {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.system(size: 13))
-                        .foregroundStyle(.green)
+                        .foregroundColor(.green)
                     Text("No duplicate requests detected")
                         .font(.system(size: 13))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             } else {
@@ -44,18 +43,18 @@ struct DuplicateDetectorSectionView: View {
 
                             Text(group.path)
                                 .font(.system(size: 12, design: .monospaced))
-                                .foregroundStyle(.primary)
+                                .foregroundColor(.primary)
                                 .lineLimit(1)
 
                             Spacer(minLength: 6)
 
                             Text("×\(group.count)")
                                 .font(.system(size: 12, weight: .bold, design: .monospaced))
-                                .foregroundStyle(.orange)
+                                .foregroundColor(.orange)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 3)
                                 .background(Color.orange.opacity(0.12))
-                                .clipShape(Capsule())
+                                .cornerRadius(8)
                         }
                         .padding(.vertical, 8)
 

@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Method Distribution Section
 
-@available(iOS 16.0, *)
 struct MethodDistributionSectionView: View {
     @ObservedObject var viewModel: StatisticsViewModel
 
@@ -29,7 +28,7 @@ struct MethodDistributionSectionView: View {
             if viewModel.topMethods.isEmpty {
                 Text("No data yet")
                     .font(.system(size: 13))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
             } else {
                 VStack(spacing: 8) {
@@ -42,20 +41,24 @@ struct MethodDistributionSectionView: View {
                                 let width = geo.size.width * CGFloat(item.count) / CGFloat(total)
 
                                 ZStack(alignment: .leading) {
-                                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                                    RoundedRectangle(cornerRadius: 4)
                                         .fill(Color(.quaternarySystemFill))
                                         .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                                    RoundedRectangle(cornerRadius: 4)
                                         .fill(Color.forMethod(item.method).opacity(0.35))
                                         .frame(width: max(width, 4))
                                 }
-                                .overlay(alignment: .trailing) {
-                                    Text("\(item.count)")
-                                        .font(.system(size: 10, weight: .medium, design: .monospaced))
-                                        .foregroundStyle(.secondary)
-                                        .padding(.trailing, 6)
-                                }
+                                .overlay(
+                                    HStack {
+                                        Spacer()
+                                        Text("\(item.count)")
+                                            .font(.system(size: 10, weight: .medium, design: .monospaced))
+                                            .foregroundColor(.secondary)
+                                            .padding(.trailing, 6)
+                                    },
+                                    alignment: .trailing
+                                )
                             }
                             .frame(height: 22)
                         }

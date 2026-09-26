@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Request Detail View
 
-@available(iOS 16.0, *)
 struct RequestDetailView: View {
     @StateObject var viewModel: RequestDetailViewModel
     let stubRepository: StubRepositoryProtocol
@@ -64,17 +63,19 @@ struct RequestDetailView: View {
         }
         .background(Color.surfacePrimary)
         .navigationTitle(viewModel.request.shortURL)
-        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 shareButton
             }
         }
-        .overlay(alignment: .bottom) {
-            if viewModel.copiedToClipboard {
-                copiedBanner
-            }
-        }
+        .overlay(
+            Group {
+                if viewModel.copiedToClipboard {
+                    copiedBanner
+                }
+            },
+            alignment: .bottom
+        )
         .sheet(item: $viewModel.createdStub) { stub in
             InspectlyNavigationStack {
                 StubDetailView(
@@ -99,8 +100,6 @@ struct RequestDetailView: View {
         .onDisappear {
             onDismissed?()
         }
-        .toolbar(.hidden, for: .tabBar)
-        .hideFloatingTabBar()
     }
 
     // MARK: - Tab Selector
@@ -136,9 +135,10 @@ struct RequestDetailView: View {
             .padding(.horizontal, 12)
         }
         .background(Color.cardBackground)
-        .overlay(alignment: .bottom) {
-            Divider()
-        }
+        .overlay(
+            Divider(),
+            alignment: .bottom
+        )
     }
 
     // MARK: - Share Button
@@ -189,11 +189,11 @@ struct RequestDetailView: View {
     private var copiedBanner: some View {
         Text("Copied to clipboard")
             .font(.system(size: 13, weight: .medium))
-            .foregroundStyle(.white)
+            .foregroundColor(.white)
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
             .background(Color.black.opacity(0.8))
-            .clipShape(Capsule())
+            .cornerRadius(16)
             .transition(.move(edge: .bottom).combined(with: .opacity))
             .padding(.bottom, 20)
     }
@@ -201,7 +201,6 @@ struct RequestDetailView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct RequestDetailView_Previews: PreviewProvider {
     static var previews: some View {
         InspectlyNavigationStack {

@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Slow Request Detection Section
 
-@available(iOS 16.0, *)
 struct SlowRequestSectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 
@@ -34,7 +33,7 @@ struct SlowRequestSectionView: View {
                     Spacer()
                     Text(String(format: "%.1fs", viewModel.settings.slowRequestThreshold))
                         .font(.system(size: 13, weight: .bold, design: .monospaced))
-                        .foregroundStyle(.orange)
+                        .foregroundColor(.orange)
                 }
 
                 Slider(

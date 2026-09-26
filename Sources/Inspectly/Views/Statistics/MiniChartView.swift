@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Mini Chart View
 
-@available(iOS 16.0, *)
 struct MiniChartView: View {
     let data: [Double]
     var barColor: Color = .chartPrimary
@@ -34,10 +33,10 @@ struct MiniChartView: View {
             HStack(alignment: .bottom, spacing: 2) {
                 ForEach(Array(data.enumerated()), id: \.offset) { index, value in
                     VStack(spacing: 2) {
-                        RoundedRectangle(cornerRadius: 2, style: .continuous)
+                        RoundedRectangle(cornerRadius: 2)
                             .fill(
                                 LinearGradient(
-                                    colors: [barColor.opacity(0.8), barColor.opacity(0.4)],
+                                    gradient: Gradient(colors: [barColor.opacity(0.8), barColor.opacity(0.4)]),
                                     startPoint: .top,
                                     endPoint: .bottom
                                 )
@@ -54,7 +53,7 @@ struct MiniChartView: View {
                             if index % 6 == 0 {
                                 Text("\(index)")
                                     .font(.system(size: 7))
-                                    .foregroundStyle(.quaternary)
+                                    .foregroundColor(.quaternaryLabel)
                             } else {
                                 Text("")
                                     .font(.system(size: 7))
@@ -70,7 +69,6 @@ struct MiniChartView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct MiniChartView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 24) {
@@ -80,8 +78,8 @@ struct MiniChartView_Previews: PreviewProvider {
             .frame(height: 80)
             .padding()
             .background(Color(.secondarySystemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-    
+            .cornerRadius(12)
+
             MiniChartView(
                 data: [4, 8, 6, 12, 9, 15, 7],
                 barColor: .teal,

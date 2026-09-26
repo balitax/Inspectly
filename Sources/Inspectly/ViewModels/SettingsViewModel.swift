@@ -22,7 +22,6 @@ import SwiftUI
 // MARK: - Settings View Model
 
 @MainActor
-@available(iOS 16.0, *)
 final class SettingsViewModel: ObservableObject {
     @Published var settings: AppSettings
     @Published var showClearConfirmation: Bool = false
@@ -110,11 +109,11 @@ final class SettingsViewModel: ObservableObject {
         do {
             let requests = await requestRepository.getAllRequests()
             let data = try await exportManager.exportRequests(requests)
-            
+
             let tempDir = FileManager.default.temporaryDirectory
             let fileURL = tempDir.appendingPathComponent("inspectly_logs_\(Int(Date().timeIntervalSince1970)).json")
             try data.write(to: fileURL)
-            
+
             shareURL = IdentifiableURL(url: fileURL)
         } catch {
             exportMessage = "Export failed: \(error.localizedDescription)"
@@ -126,11 +125,11 @@ final class SettingsViewModel: ObservableObject {
         do {
             let stubs = await stubRepository.getAllStubs()
             let data = try await exportManager.exportStubs(stubs)
-            
+
             let tempDir = FileManager.default.temporaryDirectory
             let fileURL = tempDir.appendingPathComponent("inspectly_stubs_\(Int(Date().timeIntervalSince1970)).json")
             try data.write(to: fileURL)
-            
+
             shareURL = IdentifiableURL(url: fileURL)
         } catch {
             exportMessage = "Export failed: \(error.localizedDescription)"

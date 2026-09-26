@@ -21,7 +21,6 @@ import Foundation
 // MARK: - App Settings
 
 public struct AppSettings: Codable {
-    var isLoggingEnabled: Bool
     var areStubsEnabled: Bool
     var networkThrottlingPreset: NetworkThrottlingPreset
     var customNetworkDelay: TimeInterval
@@ -36,7 +35,6 @@ public struct AppSettings: Codable {
     var slowRequestThreshold: TimeInterval
 
     init(
-        isLoggingEnabled: Bool = true,
         areStubsEnabled: Bool = true,
         networkThrottlingPreset: NetworkThrottlingPreset = .off,
         customNetworkDelay: TimeInterval = 0,
@@ -50,7 +48,6 @@ public struct AppSettings: Codable {
         truncationLimit: Int = 10000,
         slowRequestThreshold: TimeInterval = 1.0
     ) {
-        self.isLoggingEnabled = isLoggingEnabled
         self.areStubsEnabled = areStubsEnabled
         self.networkThrottlingPreset = networkThrottlingPreset
         self.customNetworkDelay = customNetworkDelay
@@ -68,7 +65,6 @@ public struct AppSettings: Codable {
     static let `default` = AppSettings()
 
     enum CodingKeys: String, CodingKey {
-        case isLoggingEnabled
         case areStubsEnabled
         case networkThrottlingPreset
         case customNetworkDelay
@@ -86,7 +82,6 @@ public struct AppSettings: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        isLoggingEnabled = try container.decodeIfPresent(Bool.self, forKey: .isLoggingEnabled) ?? true
         areStubsEnabled = try container.decodeIfPresent(Bool.self, forKey: .areStubsEnabled) ?? true
         networkThrottlingPreset = try container.decodeIfPresent(NetworkThrottlingPreset.self, forKey: .networkThrottlingPreset) ?? .off
         customNetworkDelay = try container.decodeIfPresent(TimeInterval.self, forKey: .customNetworkDelay) ?? 0

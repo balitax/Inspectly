@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Sort Menu
 
-@available(iOS 16.0, *)
 struct RequestSortMenu: View {
     @ObservedObject var viewModel: RequestListViewModel
 
@@ -49,7 +48,6 @@ struct RequestSortMenu: View {
 
 // MARK: - Clear Requests Button
 
-@available(iOS 16.0, *)
 struct ClearRequestsButton: View {
     @ObservedObject var viewModel: RequestListViewModel
 
@@ -65,7 +63,6 @@ struct ClearRequestsButton: View {
 
 // MARK: - Filter Button
 
-@available(iOS 16.0, *)
 struct RequestFilterButton: View {
     @ObservedObject var viewModel: RequestListViewModel
 
@@ -79,7 +76,7 @@ struct RequestFilterButton: View {
 
                 if viewModel.filter.isActive {
                     Circle()
-                        .fill(.red)
+                        .fill(Color.red)
                         .frame(width: 8, height: 8)
                         .offset(x: 4, y: -4)
                 }

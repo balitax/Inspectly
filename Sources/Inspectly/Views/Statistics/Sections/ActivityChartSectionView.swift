@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Activity Chart Section
 
-@available(iOS 16.0, *)
 struct ActivityChartSectionView: View {
     @ObservedObject var viewModel: StatisticsViewModel
 

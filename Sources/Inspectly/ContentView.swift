@@ -18,30 +18,12 @@
 
 import SwiftUI
 
-// MARK: - Hide Floating Tab Bar Preference Key
-
-@available(iOS 16.0, *)
-struct HideFloatingTabBarKey: PreferenceKey {
-    static var defaultValue = false
-    static func reduce(value: inout Bool, nextValue: () -> Bool) {
-        value = value || nextValue()
-    }
-}
-
-@available(iOS 16.0, *)
-extension View {
-    func hideFloatingTabBar(_ hidden: Bool = true) -> some View {
-        preference(key: HideFloatingTabBarKey.self, value: hidden)
-    }
-}
-
 // MARK: - Content View
 
-@available(iOS 16.0, *)
 struct ContentView: View {
     @State private var selectedTab: AppTab = .requests
+    @State private var previousTab: AppTab = .requests
     @State private var appSettings: AppSettings = .default
-    @State private var isFloatingTabBarHidden = false
     let onDismiss: (() -> Void)?
     let container: DependencyContainer
 
@@ -56,9 +38,9 @@ struct ContentView: View {
     }
 
     var body: some View {
-        floatingTabContent
+        tabContent
             .preferredColorScheme(colorScheme)
-            .task { await loadSettings() }
+            .onAppear { loadSettings() }
             .onReceive(NotificationCenter.default.publisher(for: .inspectlySettingsDidChange)) { notification in
                 if let settings = notification.object as? AppSettings {
                     appSettings = settings
@@ -66,49 +48,53 @@ struct ContentView: View {
             }
     }
 
-    // MARK: - iOS 16–25 (Custom floating tab bar)
+    // MARK: - Tab Content
 
-    private var floatingTabContent: some View {
+    private var tabContent: some View {
         TabView(selection: $selectedTab) {
             requestsTab
+                .tabItem {
+                    Label(AppTab.requests.title, systemImage: AppTab.requests.icon)
+                }
                 .tag(AppTab.requests)
-                .toolbar(.hidden, for: .tabBar)
 
             statisticsTab
+                .tabItem {
+                    Label(AppTab.statistics.title, systemImage: AppTab.statistics.icon)
+                }
                 .tag(AppTab.statistics)
-                .toolbar(.hidden, for: .tabBar)
 
             stubsTab
+                .tabItem {
+                    Label(AppTab.stubs.title, systemImage: AppTab.stubs.icon)
+                }
                 .tag(AppTab.stubs)
-                .toolbar(.hidden, for: .tabBar)
 
             settingsTab
+                .tabItem {
+                    Label(AppTab.settings.title, systemImage: AppTab.settings.icon)
+                }
                 .tag(AppTab.settings)
-                .toolbar(.hidden, for: .tabBar)
 
+            // Dismiss tab: does not keep selection, just closes the inspector
             dismissTab
+                .tabItem {
+                    Label(AppTab.dismiss.title, systemImage: AppTab.dismiss.icon)
+                }
                 .tag(AppTab.dismiss)
-                .toolbar(.hidden, for: .tabBar)
         }
-        .tint(.accentColor)
-        .safeAreaInset(edge: .bottom, spacing: 0) {
-            if !isFloatingTabBarHidden {
-                FloatingTabBar(selectedTab: $selectedTab, onDismiss: onDismiss)
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 8)
-                    .padding(.top, 4)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
+        .accentColor(.accentColor)
+        .onChange(of: selectedTab) { newTab in
+            if newTab == .dismiss {
+                selectedTab = previousTab
+                onDismiss?()
+            } else {
+                previousTab = newTab
             }
         }
-        .onPreferenceChange(HideFloatingTabBarKey.self) { hidden in
-            withAnimation(.easeInOut(duration: 0.2)) {
-                isFloatingTabBarHidden = hidden
-            }
-        }
-        .ignoresSafeArea(.keyboard)
     }
 
-    // MARK: - Tab Content
+    // MARK: - Tab Content Views
 
     private var requestsTab: some View {
         RequestListView(
@@ -147,42 +133,31 @@ struct ContentView: View {
     }
 
     private var dismissTab: some View {
-        VStack {
-            Spacer()
-            Button(action: {
+        Color.clear
+            .onAppear {
+                // Tab selection is restored via onChange; this guards against any missed state.
+                if selectedTab == .dismiss {
+                    selectedTab = previousTab
+                }
                 onDismiss?()
-            }) {
-                Image(systemName: "xmark.circle.fill")
-                    .font(.system(size: 48, weight: .bold))
-                    .foregroundStyle(.secondary)
-                    .padding(40)
-                    .background {
-                        Circle()
-                            .fill(.ultraThinMaterial)
-                            .overlay {
-                                Circle()
-                                    .strokeBorder(Color.primary.opacity(0.1), lineWidth: 1)
-                            }
-                            .shadow(color: .black.opacity(0.15), radius: 20, x: 0, y: 8)
-                    }
             }
-            .buttonStyle(.plain)
-            Spacer()
-        }
     }
 
     // MARK: - Settings
 
-    private func loadSettings() async {
-        if let loaded = try? await container.storageManager.load(AppSettings.self, forKey: "inspectly_settings") {
-            appSettings = loaded
+    private func loadSettings() {
+        Task {
+            if let loaded = try? await container.storageManager.load(AppSettings.self, forKey: "inspectly_settings") {
+                await MainActor.run {
+                    appSettings = loaded
+                }
+            }
         }
     }
 }
 
 // MARK: - App Tab
 
-@available(iOS 16.0, *)
 enum AppTab: String, Hashable, CaseIterable, Identifiable {
     case requests
     case statistics
@@ -211,94 +186,10 @@ enum AppTab: String, Hashable, CaseIterable, Identifiable {
         case .dismiss:    return "xmark.circle"
         }
     }
-
-    var selectedIcon: String {
-        switch self {
-        case .requests:   return "arrow.up.arrow.down.circle.fill"
-        case .statistics: return "chart.bar.fill"
-        case .stubs:      return "hammer.fill"
-        case .settings:   return "gearshape.fill"
-        case .dismiss:    return "xmark.circle.fill"
-        }
-    }
-}
-
-// MARK: - Floating Tab Bar (iOS 16–25, Liquid Glass-inspired)
-
-@available(iOS 16.0, *)
-private struct FloatingTabBar: View {
-    @Binding var selectedTab: AppTab
-    let onDismiss: (() -> Void)?
-    @Namespace private var tabNamespace
-
-    var body: some View {
-        HStack(spacing: 10) {
-            // Main frosted glass pill
-            HStack(spacing: 0) {
-                ForEach(AppTab.allCases) { tab in
-                    tabButton(tab)
-                }
-            }
-            .padding(.horizontal, 6)
-            .padding(.vertical, 8)
-            .background {
-                Capsule()
-                    .fill(.ultraThinMaterial)
-                    .overlay {
-                        Capsule()
-                            .strokeBorder(Color.primary.opacity(0.12), lineWidth: 1)
-                    }
-                    .shadow(color: .black.opacity(0.18), radius: 32, x: 0, y: 10)
-            }
-        }
-    }
-
-    private func tabButton(_ tab: AppTab) -> some View {
-        let isDismiss = tab == .dismiss
-        let isSelected = selectedTab == tab && !isDismiss
-
-        return Button {
-            if isDismiss {
-                onDismiss?()
-            } else {
-                withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                    selectedTab = tab
-                }
-            }
-        } label: {
-            VStack(spacing: 3) {
-                Image(systemName: isSelected ? tab.selectedIcon : tab.icon)
-                    .font(.system(size: 20, weight: isSelected ? .semibold : .regular))
-                    .frame(width: 26, height: 26)
-                    .scaleEffect(isSelected ? 1.1 : 1.0)
-
-                Text(tab.title)
-                    .font(.system(size: 10, weight: .medium))
-            }
-            .foregroundStyle(isDismiss ? .red : (isSelected ? Color.accentColor : Color.secondary))
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 8)
-            .padding(.horizontal, 10)
-            .background {
-                if isSelected {
-                    Capsule()
-                        .fill(Color(.systemBackground).opacity(0.7))
-                        .overlay {
-                            Capsule()
-                                .strokeBorder(Color.accentColor.opacity(0.15), lineWidth: 0.5)
-                        }
-                        .matchedGeometryEffect(id: "tabHighlight", in: tabNamespace)
-                }
-            }
-        }
-        .buttonStyle(.plain)
-        .animation(.spring(response: 0.35, dampingFraction: 0.7), value: selectedTab)
-    }
 }
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(container: .mock())

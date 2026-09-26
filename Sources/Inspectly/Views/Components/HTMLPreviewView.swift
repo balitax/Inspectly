@@ -8,34 +8,32 @@
 import SwiftUI
 import WebKit
 
-@available(iOS 16.0, *)
 struct HTMLPreviewView: View {
     let htmlContent: String
     @State private var webViewHeight: CGFloat = 300
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("HTML Preview")
                 .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(.secondary)
-            
+                .foregroundColor(.secondary)
+
             HTMLWebView(html: htmlContent, dynamicHeight: $webViewHeight)
                 .frame(height: webViewHeight)
                 .background(Color(.tertiarySystemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .cornerRadius(10)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    RoundedRectangle(cornerRadius: 10)
                         .stroke(Color(.separator), lineWidth: 0.5)
                 )
         }
     }
 }
 
-@available(iOS 16.0, *)
 struct HTMLWebView: UIViewRepresentable {
     let html: String
     @Binding var dynamicHeight: CGFloat
-    
+
     func makeUIView(context: Context) -> WKWebView {
         let configuration = WKWebViewConfiguration()
         // The rendered content is an untrusted HTTP response body (possibly from a
@@ -46,19 +44,19 @@ struct HTMLWebView: UIViewRepresentable {
         webView.navigationDelegate = context.coordinator
         webView.scrollView.isScrollEnabled = false
 
-        webView.backgroundColor = .white
+        webView.backgroundColor = UIColor.systemBackground
         webView.isOpaque = true
 
         return webView
     }
-    
+
     func updateUIView(_ uiView: WKWebView, context: Context) {
         // Prevent infinite reload loop: Only load if content actually changed
         guard context.coordinator.lastLoadedHTML != html else { return }
         context.coordinator.lastLoadedHTML = html
-        
+
         let wrappedHtml: String
-        
+
         if html.lowercased().contains("<html") {
             if html.lowercased().contains("<head>") {
                 wrappedHtml = html.replacingOccurrences(
@@ -81,7 +79,7 @@ struct HTMLWebView: UIViewRepresentable {
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
                 <style>
-                    body { 
+                    body {
                         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                         padding: 16px;
                         margin: 0;
@@ -95,22 +93,22 @@ struct HTMLWebView: UIViewRepresentable {
             </html>
             """
         }
-        
+
         uiView.loadHTMLString(wrappedHtml, baseURL: nil)
     }
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-    
+
     class Coordinator: NSObject, WKNavigationDelegate {
         var parent: HTMLWebView
         var lastLoadedHTML: String?
-        
+
         init(_ parent: HTMLWebView) {
             self.parent = parent
         }
-        
+
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             // Measure height after load
             webView.evaluateJavaScript("document.documentElement.scrollHeight") { (height, error) in

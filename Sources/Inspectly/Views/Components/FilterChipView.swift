@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Filter Chip View
 
-@available(iOS 16.0, *)
 struct FilterChipView: View {
     let label: String
     let isSelected: Bool
@@ -41,10 +40,10 @@ struct FilterChipView: View {
             .padding(.vertical, 7)
             .background(isSelected ? Color.accentColor.opacity(0.15) : Color(.tertiarySystemFill))
             .foregroundColor(isSelected ? Color.accentColor : .secondary)
-            .clipShape(Capsule())
+            .cornerRadius(8)
             .overlay(
                 Capsule()
-                    .strokeBorder(isSelected ? Color.accentColor.opacity(0.3) : .clear, lineWidth: 1)
+                    .stroke(isSelected ? Color.accentColor.opacity(0.3) : Color.clear, lineWidth: 1)
             )
         }
         .buttonStyle(.plain)
@@ -53,7 +52,6 @@ struct FilterChipView: View {
 
 // MARK: - Filter Chip Group
 
-@available(iOS 16.0, *)
 struct FilterChipGroup<T: Identifiable & Hashable>: View {
     let items: [T]
     let selected: Set<T>
@@ -78,7 +76,6 @@ struct FilterChipGroup<T: Identifiable & Hashable>: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct FilterChipView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 16) {

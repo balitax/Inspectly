@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Timeline Tab View
 
-@available(iOS 16.0, *)
 struct TimelineTabView: View {
     @ObservedObject var viewModel: RequestDetailViewModel
 
@@ -50,7 +49,7 @@ struct TimelineTabView: View {
                         }
                     }
                     .background(Color(.tertiarySystemBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    .cornerRadius(12)
                 }
             }
             .padding(16)
@@ -65,20 +64,20 @@ struct TimelineTabView: View {
             // Icon pill
             Image(systemName: "clock.fill")
                 .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(.secondary)
+                .foregroundColor(.secondary)
                 .frame(width: 40, height: 40)
                 .background(Color(.quaternarySystemFill))
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .cornerRadius(10)
 
             VStack(alignment: .leading, spacing: 3) {
                 Text("TOTAL DURATION")
                     .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
                     .tracking(0.4)
 
                 Text(viewModel.request.formattedDuration)
                     .font(.system(size: 22, weight: .bold, design: .rounded))
-                    .foregroundStyle(.primary)
+                    .foregroundColor(.primary)
             }
 
             Spacer()
@@ -86,15 +85,15 @@ struct TimelineTabView: View {
             // Event count pill
             Text("\(viewModel.request.timelineEvents.count) events")
                 .font(.system(size: 11, weight: .medium))
-                .foregroundStyle(.secondary)
+                .foregroundColor(.secondary)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
                 .background(Color(.quaternarySystemFill))
-                .clipShape(Capsule())
+                .cornerRadius(8)
         }
         .padding(14)
         .background(Color(.tertiarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .cornerRadius(12)
     }
 
     // MARK: - Timeline Row
@@ -114,7 +113,7 @@ struct TimelineTabView: View {
                     .frame(width: 10, height: 10)
                     .overlay(
                         Circle()
-                            .strokeBorder(Color.accentColor.opacity(0.3), lineWidth: 3)
+                            .stroke(Color.accentColor.opacity(0.3), lineWidth: 3)
                     )
 
                 if !isLast {
@@ -132,7 +131,7 @@ struct TimelineTabView: View {
                 HStack(alignment: .center) {
                     Text(event.name.uppercased())
                         .font(.system(size: 10, weight: .semibold))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                         .tracking(0.4)
 
                     Spacer()
@@ -140,18 +139,18 @@ struct TimelineTabView: View {
                     if let duration = event.duration {
                         Text(formatDuration(duration))
                             .font(.system(size: 12, weight: .semibold, design: .monospaced))
-                            .foregroundStyle(.primary)
+                            .foregroundColor(.primary)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 3)
                             .background(Color(.quaternarySystemFill))
-                            .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                            .cornerRadius(6)
                     }
                 }
 
                 if let detail = event.detail {
                     Text(detail)
                         .font(.system(size: 12, design: .monospaced))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                 }
 
                 // Duration bar
@@ -159,10 +158,10 @@ struct TimelineTabView: View {
                     GeometryReader { geo in
                         let width = geo.size.width * CGFloat(duration / totalDuration)
                         ZStack(alignment: .leading) {
-                            RoundedRectangle(cornerRadius: 3, style: .continuous)
+                            RoundedRectangle(cornerRadius: 3)
                                 .fill(Color(.quaternarySystemFill))
                                 .frame(height: 5)
-                            RoundedRectangle(cornerRadius: 3, style: .continuous)
+                            RoundedRectangle(cornerRadius: 3)
                                 .fill(Color.accentColor.opacity(0.5))
                                 .frame(width: max(width, 4), height: 5)
                         }
@@ -191,7 +190,6 @@ struct TimelineTabView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct TimelineTabView_Previews: PreviewProvider {
     static var previews: some View {
         TimelineTabView(viewModel: RequestDetailViewModel(request: NetworkRequest(method: .get, url: "https://api.example.com/users", host: "api.example.com", path: "/users")))

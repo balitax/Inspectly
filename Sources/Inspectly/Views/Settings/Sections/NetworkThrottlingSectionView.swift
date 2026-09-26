@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Network Throttling Section
 
-@available(iOS 16.0, *)
 struct NetworkThrottlingSectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 
@@ -45,10 +44,10 @@ struct NetworkThrottlingSectionView: View {
                     VStack(alignment: .leading, spacing: 3) {
                         Text(viewModel.settings.networkThrottlingPreset.displayName)
                             .font(.system(size: 13, weight: .semibold))
-                            .foregroundStyle(.orange)
+                            .foregroundColor(.orange)
                         Text(viewModel.settings.networkThrottlingPreset.description)
                             .font(.system(size: 12))
-                            .foregroundStyle(.secondary)
+                            .foregroundColor(.secondary)
                     }
                 }
                 .padding(.vertical, 2)
@@ -67,7 +66,6 @@ struct NetworkThrottlingSectionView: View {
 
 // MARK: - Custom Throttling Controls
 
-@available(iOS 16.0, *)
 private struct CustomThrottlingControls: View {
     @ObservedObject var viewModel: SettingsViewModel
 
@@ -80,7 +78,7 @@ private struct CustomThrottlingControls: View {
                     Spacer()
                     Text(String(format: "%.1fs", viewModel.settings.customNetworkDelay))
                         .font(.system(size: 12, weight: .bold, design: .monospaced))
-                        .foregroundStyle(.orange)
+                        .foregroundColor(.orange)
                 }
                 Slider(value: $viewModel.settings.customNetworkDelay, in: 0...30, step: 0.5) { _ in
                     Task { await viewModel.saveSettings() }
@@ -106,11 +104,11 @@ private struct CustomThrottlingControls: View {
                         HStack {
                             Text("Speed Limit")
                                 .font(.system(size: 12))
-                                .foregroundStyle(.secondary)
+                                .foregroundColor(.secondary)
                             Spacer()
                             Text("\(Int(bandwidth / 1024)) KB/s")
                                 .font(.system(size: 12, weight: .bold, design: .monospaced))
-                                .foregroundStyle(.orange)
+                                .foregroundColor(.orange)
                         }
                         Slider(
                             value: Binding(

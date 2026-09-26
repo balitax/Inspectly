@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - JSON Preview View
 
-@available(iOS 16.0, *)
 struct JSONPreviewView: View {
     let json: String
     @State private var isValid: Bool = true
@@ -31,7 +30,7 @@ struct JSONPreviewView: View {
             HStack {
                 Text("JSON Preview")
                     .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(.primary)
+                    .foregroundColor(.primary)
 
                 Spacer()
 
@@ -41,33 +40,32 @@ struct JSONPreviewView: View {
                     Text(isValid ? "Valid JSON" : "Invalid JSON")
                         .font(.system(size: 11, weight: .medium))
                 }
-                .foregroundStyle(isValid ? .green : .red)
+                .foregroundColor(isValid ? .green : .red)
             }
 
             if isValid {
                 ScrollView {
                     Text(prettyJSON)
                         .font(.system(size: 12, design: .monospaced))
-                        .foregroundStyle(.primary)
-                        .textSelection(.enabled)
+                        .foregroundColor(.primary)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .frame(maxHeight: 300)
                 .padding(12)
                 .background(Color(.tertiarySystemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .cornerRadius(10)
             } else {
                 HStack(spacing: 8) {
                     Image(systemName: "exclamationmark.triangle.fill")
-                        .foregroundStyle(.orange)
+                        .foregroundColor(.orange)
 
                     Text("The JSON body contains syntax errors. Please fix them before saving.")
                         .font(.system(size: 12))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                 }
                 .padding(12)
                 .background(Color.orange.opacity(0.08))
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .cornerRadius(10)
             }
         }
         .onAppear {
@@ -86,14 +84,13 @@ struct JSONPreviewView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct JSONPreviewView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20) {
             JSONPreviewView(json: """
             {"id": 1, "name": "John Doe", "email": "john@example.com"}
             """)
-    
+
             JSONPreviewView(json: """
             {"invalid": json missing quote}
             """)

@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Large Responses Section
 
-@available(iOS 16.0, *)
 struct LargeResponsesSectionView: View {
     @ObservedObject var viewModel: StatisticsViewModel
 
@@ -30,10 +29,10 @@ struct LargeResponsesSectionView: View {
                 HStack(spacing: 8) {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.system(size: 13))
-                        .foregroundStyle(.green)
+                        .foregroundColor(.green)
                     Text("No oversized responses detected")
                         .font(.system(size: 13))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             } else {
@@ -42,18 +41,18 @@ struct LargeResponsesSectionView: View {
                         HStack(spacing: 10) {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .font(.system(size: 13))
-                                .foregroundStyle(.orange)
+                                .foregroundColor(.orange)
                                 .frame(width: 22, height: 22)
 
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(request.shortURL)
                                     .font(.system(size: 12, weight: .semibold))
-                                    .foregroundStyle(.primary)
+                                    .foregroundColor(.primary)
                                     .lineLimit(1)
 
                                 Text(request.responseBody?.formattedSize ?? "—")
                                     .font(.system(size: 11, design: .monospaced))
-                                    .foregroundStyle(.orange)
+                                    .foregroundColor(.orange)
                             }
 
                             Spacer(minLength: 6)

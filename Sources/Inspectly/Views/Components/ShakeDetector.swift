@@ -42,9 +42,9 @@ extension UIDevice {
 final class ShakeManager {
     static let shared = ShakeManager()
     var onShake: (() -> Void)?
-    
+
     private init() {}
-    
+
     func trigger() {
         DispatchQueue.main.async {
             self.onShake?()
@@ -65,10 +65,9 @@ extension UIWindow {
 
 // MARK: - Shake View Modifier
 
-@available(iOS 16.0, *)
 struct ShakeDetector: ViewModifier {
     let action: () -> Void
-    
+
     func body(content: Content) -> some View {
         content
             .onReceive(NotificationCenter.default.publisher(for: UIDevice.deviceDidShake)) { _ in
@@ -79,7 +78,6 @@ struct ShakeDetector: ViewModifier {
 
 // MARK: - View Extension
 
-@available(iOS 16.0, *)
 extension View {
     func onShake(perform action: @escaping () -> Void) -> some View {
         modifier(ShakeDetector(action: action))

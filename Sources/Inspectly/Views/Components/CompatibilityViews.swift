@@ -5,9 +5,8 @@
 
 import SwiftUI
 
-// MARK: - Navigation Stack
+// MARK: - Navigation Stack (iOS 15 compatible)
 
-@available(iOS 16.0, *)
 public struct InspectlyNavigationStack<Content: View>: View {
     let content: () -> Content
 
@@ -16,52 +15,30 @@ public struct InspectlyNavigationStack<Content: View>: View {
     }
 
     public var body: some View {
-        NavigationStack(root: content)
+        NavigationView {
+            content()
+        }
+        .navigationViewStyle(.stack)
     }
 }
 
-// MARK: - Navigation Link
+// MARK: - Navigation Link (iOS 15 compatible)
 
-@available(iOS 16.0, *)
-public struct InspectlyNavigationLink<Value: Hashable, Destination: View, Content: View>: View {
-    let value: Value
-    let destination: (Value) -> Destination
+public struct InspectlyNavigationLink<Destination: View, Content: View>: View {
+    let destination: Destination
     let content: () -> Content
 
-    public init(value: Value, @ViewBuilder destination: @escaping (Value) -> Destination, @ViewBuilder label: @escaping () -> Content) {
-        self.value = value
-        self.destination = destination
+    public init(
+        @ViewBuilder destination: @escaping () -> Destination,
+        @ViewBuilder label: @escaping () -> Content
+    ) {
+        self.destination = destination()
         self.content = label
     }
 
     public var body: some View {
-        NavigationLink(value: value, label: content)
+        NavigationLink(destination: destination) {
+            content()
+        }
     }
-}
-
-// MARK: - View Extensions
-
-@available(iOS 16.0, *)
-extension View {
-    func inspectlyNavigationDestination<D: View, V: Hashable>(for data: V.Type, @ViewBuilder destination: @escaping (V) -> D) -> some View {
-        self.navigationDestination(for: data, destination: destination)
-    }
-
-    func inspectlyPresentationDetents(_ detents: Set<InspectlyDetent>) -> some View {
-        let swiftUIDetents: Set<PresentationDetent> = Set(detents.map { d in
-            switch d {
-            case .medium: return .medium
-            case .large:  return .large
-            }
-        })
-        return self.presentationDetents(swiftUIDetents)
-    }
-}
-
-// MARK: - Detent Type
-
-@available(iOS 16.0, *)
-enum InspectlyDetent: Hashable {
-    case medium
-    case large
 }

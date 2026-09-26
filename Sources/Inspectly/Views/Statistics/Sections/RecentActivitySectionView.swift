@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Recent Activity Section
 
-@available(iOS 16.0, *)
 struct RecentActivitySectionView: View {
     @ObservedObject var viewModel: StatisticsViewModel
 
@@ -29,7 +28,7 @@ struct RecentActivitySectionView: View {
             if viewModel.recentRequests.isEmpty {
                 Text("No recent activity")
                     .font(.system(size: 13))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.vertical, 12)
             } else {
@@ -48,7 +47,6 @@ struct RecentActivitySectionView: View {
 
 // MARK: - Recent Activity Row
 
-@available(iOS 16.0, *)
 private struct RecentActivityRow: View {
     let request: NetworkRequest
 
@@ -62,7 +60,7 @@ private struct RecentActivityRow: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            RoundedRectangle(cornerRadius: 2, style: .continuous)
+            RoundedRectangle(cornerRadius: 2)
                 .fill(statusAccentColor)
                 .frame(width: 3)
                 .padding(.vertical, 4)
@@ -72,12 +70,12 @@ private struct RecentActivityRow: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text(request.shortURL)
                     .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(.primary)
+                    .foregroundColor(.primary)
                     .lineLimit(1)
 
                 Text(request.timestamp.relativeTimeString)
                     .font(.system(size: 11))
-                    .foregroundStyle(.tertiary)
+                    .foregroundColor(.secondary)
             }
 
             Spacer(minLength: 6)

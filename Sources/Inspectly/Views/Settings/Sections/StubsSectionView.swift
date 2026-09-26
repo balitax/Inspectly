@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Stubs Section
 
-@available(iOS 16.0, *)
 struct StubsSectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 

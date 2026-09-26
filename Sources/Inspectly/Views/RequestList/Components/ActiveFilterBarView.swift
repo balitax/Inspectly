@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Active Filter Bar
 
-@available(iOS 16.0, *)
 struct ActiveFilterBarView: View {
     @ObservedObject var viewModel: RequestListViewModel
 
@@ -28,15 +27,15 @@ struct ActiveFilterBarView: View {
         HStack(spacing: 8) {
             Image(systemName: "line.3.horizontal.decrease")
                 .font(.system(size: 11))
-                .foregroundStyle(.accentColor)
+                .foregroundColor(.accentColor)
 
             Text("\(viewModel.totalFilteredCount) results")
                 .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(.primary)
+                .foregroundColor(.primary)
 
             Text("filtered")
                 .font(.system(size: 11))
-                .foregroundStyle(.tertiary)
+                .foregroundColor(.tertiaryLabel)
 
             Spacer()
 
@@ -46,16 +45,15 @@ struct ActiveFilterBarView: View {
             } label: {
                 Text("Clear")
                     .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(.accentColor)
+                    .foregroundColor(.accentColor)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 4)
                     .background(Color.accentColor.opacity(0.1))
-                    .clipShape(Capsule())
+                    .cornerRadius(8)
             }
             .buttonStyle(.plain)
         }
         .padding(.vertical, 4)
         .listRowBackground(Color.clear)
-        .listRowSeparator(.hidden)
     }
 }

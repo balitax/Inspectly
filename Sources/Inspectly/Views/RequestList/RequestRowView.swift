@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Request Row View
 
-@available(iOS 16.0, *)
 struct RequestRowView: View {
     let request: NetworkRequest
     var slowThreshold: TimeInterval = 1.0
@@ -28,7 +27,7 @@ struct RequestRowView: View {
     var body: some View {
         HStack(spacing: 10) {
             // Left status accent line
-            RoundedRectangle(cornerRadius: 2, style: .continuous)
+            RoundedRectangle(cornerRadius: 2)
                 .fill(statusAccentColor)
                 .frame(width: 3)
                 .padding(.vertical, 2)
@@ -42,17 +41,17 @@ struct RequestRowView: View {
                 HStack(spacing: 6) {
                     Text(request.shortURL)
                         .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.primary)
+                        .foregroundColor(.primary)
                         .lineLimit(1)
 
                     if request.isStubbed {
                         Image(systemName: "hammer.fill")
                             .font(.system(size: 9))
-                            .foregroundStyle(.accentColor)
+                            .foregroundColor(.accentColor)
                             .padding(.horizontal, 4)
                             .padding(.vertical, 2)
                             .background(Color.accentColor.opacity(0.1))
-                            .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+                            .cornerRadius(4)
                     }
                 }
 
@@ -61,34 +60,34 @@ struct RequestRowView: View {
                     if !request.host.isEmpty {
                         Text(request.host)
                             .font(.system(size: 11))
-                            .foregroundStyle(.tertiary)
+                            .foregroundColor(Color(.tertiaryLabel))
                             .lineLimit(1)
 
                         Text("·")
                             .font(.system(size: 11))
-                            .foregroundStyle(.quaternary)
+                            .foregroundColor(.quaternaryLabel)
                     }
 
                     Text(request.timestamp.relativeTimeString)
                         .font(.system(size: 11))
-                        .foregroundStyle(.tertiary)
+                        .foregroundColor(Color(.tertiaryLabel))
 
                     if request.isPinned {
                         Image(systemName: "pin.fill")
                             .font(.system(size: 8))
-                            .foregroundStyle(.orange)
+                            .foregroundColor(.orange)
                     }
 
                     if request.isFavorite {
                         Image(systemName: "heart.fill")
                             .font(.system(size: 8))
-                            .foregroundStyle(.pink)
+                            .foregroundColor(.pink)
                     }
 
                     if isLargeResponse {
                         Image(systemName: "exclamationmark.triangle.fill")
                             .font(.system(size: 8))
-                            .foregroundStyle(.orange)
+                            .foregroundColor(.orange)
                     }
                 }
             }
@@ -103,11 +102,11 @@ struct RequestRowView: View {
                     if isSlow {
                         Image(systemName: "tortoise.fill")
                             .font(.system(size: 8))
-                            .foregroundStyle(.orange)
+                            .foregroundColor(.orange)
                     }
                     Text(request.formattedDuration)
                         .font(.system(size: 10, weight: .medium, design: .monospaced))
-                        .foregroundStyle(durationColor)
+                        .foregroundColor(durationColor)
                 }
             }
         }
@@ -143,7 +142,6 @@ struct RequestRowView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct RequestRowView_Previews: PreviewProvider {
     static var previews: some View {
         List {

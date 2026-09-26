@@ -32,34 +32,31 @@ import UIKit
 ///     init() {
 ///         Inspectly.enable()
 ///     }
-///     
+///
 ///     var body: some Scene {
 ///         WindowGroup { ContentView() }
 ///     }
 /// }
 /// ```
 public final class Inspectly {
-    
+
     // MARK: - Configuration
-    
+
     public struct Configuration {
-        public var isLoggingEnabled: Bool = true
-        
         public var isStubEnabled: Bool = true
 
         public var networkThrottlingPreset: NetworkThrottlingPreset = .off
-        
+
         public var ignoredHosts: Set<String> = []
-        
+
         /// Enable shake gesture to open inspector
         public var isShakeGestureEnabled: Bool = true
-        
+
         public var ignoreLocalhost: Bool = true
-        
+
         public var stubRepository: (any StubRepositoryProtocol)?
-        
+
         public init(
-            isLoggingEnabled: Bool = true,
             isStubEnabled: Bool = true,
             networkThrottlingPreset: NetworkThrottlingPreset = .off,
             ignoredHosts: Set<String> = [],
@@ -67,7 +64,6 @@ public final class Inspectly {
             ignoreLocalhost: Bool = true,
             stubRepository: (any StubRepositoryProtocol)? = nil
         ) {
-            self.isLoggingEnabled = isLoggingEnabled
             self.isStubEnabled = isStubEnabled
             self.networkThrottlingPreset = networkThrottlingPreset
             self.ignoredHosts = ignoredHosts
@@ -76,16 +72,16 @@ public final class Inspectly {
             self.stubRepository = stubRepository
         }
     }
-    
+
     // MARK: - Properties
 
     private static let enableLock = NSLock()
     private static var _isEnabled: Bool = false
     private static var configuration: Configuration?
     private static var themeObserverToken: NSObjectProtocol?
-    
+
     // MARK: - Public API
-    
+
     /// Enable Inspectly with optional configuration.
     /// - Parameters:
     ///   - isEnabled: Enable or disable Inspectly. Use `true` for debug, `false` for production release builds.
@@ -94,24 +90,24 @@ public final class Inspectly {
         enableLock.lock()
         defer { enableLock.unlock() }
         guard !_isEnabled else { return }
-        
+
         self.configuration = configuration
-        
+
         guard isEnabled else {
             print("[Inspectly] Disabled via parameter")
             _isEnabled = false
             return
         }
-        
+
         configureURLProtocol(with: configuration)
         applyShakeGesture(isEnabled: configuration.isShakeGestureEnabled)
         loadPersistedSettingsIfNeeded()
-        
+
         _isEnabled = true
-        
+
         print("[Inspectly] Enabled - shake device or press ⌘+Ctrl+Z to open inspector")
     }
-    
+
     /// Disable Inspectly and unregister interceptors.
     public static func disable() {
         URLProtocol.unregisterClass(InspectlyURLProtocol.self)
@@ -119,27 +115,22 @@ public final class Inspectly {
         _isEnabled = false
         print("[Inspectly] Disabled")
     }
-    
+
     /// Check if Inspectly is currently enabled.
     public static var isEnabled: Bool {
         return _isEnabled
     }
-    
+
     /// Check if Inspectly is currently enabled.
     public static var isActive: Bool {
         return _isEnabled
     }
-    
+
     /// Present the Inspectly UI manually.
     public static func presentInspector(rootView: UIViewController? = nil) {
-        if #available(iOS 16.0, *) {
-            presentInspectorInternal(rootView: rootView)
-        } else {
-            presentUnavailableAlert(rootView: rootView)
-        }
+        presentInspectorInternal(rootView: rootView)
     }
 
-    @available(iOS 16.0, *)
     private static func presentInspectorInternal(rootView: UIViewController? = nil) {
         guard let config = configuration else {
             print("[Inspectly] Not enabled. Call Inspectly.enable() first.")
@@ -174,65 +165,42 @@ public final class Inspectly {
         }
     }
 
-    /// Shown on iOS versions below 16 where the inspector UI is unavailable.
-    /// Request capture and stubbing (`enable()`) keep working regardless — only
-    /// the visual inspector requires iOS 16+.
-    private static func presentUnavailableAlert(rootView: UIViewController? = nil) {
-        print("[Inspectly] Warning: Inspectly UI requires iOS 16.0 or newer. Request capture is still active.")
-
-        DispatchQueue.main.async {
-            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                  let window = windowScene.windows.first else { return }
-            let presentingVC = rootView ?? window.rootViewController
-
-            let alert = UIAlertController(
-                title: "Inspectly",
-                message: "The Inspectly inspector requires iOS 16 or later on this device. Network request capture and stubbing remain active in the background.",
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            presentingVC?.present(alert, animated: true)
-        }
-    }
-    
     /// Get the shared container for custom access.
     public static var container: DependencyContainer {
         return DependencyContainer.shared
     }
-    
+
     // MARK: - Private Methods
-    
+
     private static func configureURLProtocol(with configuration: Configuration) {
-        InspectlyURLProtocol.isLoggingEnabled = configuration.isLoggingEnabled
         InspectlyURLProtocol.isStubEnabled = configuration.isStubEnabled
         InspectlyURLProtocol.networkThrottlingConfig = configuration.networkThrottlingPreset.configuration()
-        
+
         if let stubRepo = configuration.stubRepository {
             InspectlyURLProtocol.stubRepository = stubRepo
         } else {
             InspectlyURLProtocol.stubRepository = DependencyContainer.shared.stubRepository
         }
-        
+
         var ignoredHosts = configuration.ignoredHosts
         if configuration.ignoreLocalhost {
             ignoredHosts.insert("localhost")
             ignoredHosts.insert("127.0.0.1")
         }
         InspectlyURLProtocol.ignoredHosts = ignoredHosts
-        
+
         InspectlyURLProtocol.onRequestCaptured = { request in
             Task { @MainActor in
                 await DependencyContainer.shared.requestRepository.addRequest(request)
             }
         }
-        
+
         URLProtocol.registerClass(InspectlyURLProtocol.self)
-        
+
         // Activate swizzling for seamless integration (Alamofire, AFNetworking, etc.)
         InspectlySwizzler.shared.activate()
     }
-    
-    @available(iOS 16.0, *)
+
     private static func applyTheme(to hostingController: UIHostingController<ContentView>) {
         Task {
             if let settings = try? await DependencyContainer.shared.storageManager.load(AppSettings.self, forKey: "inspectly_settings"),
@@ -243,8 +211,7 @@ public final class Inspectly {
             }
         }
     }
-    
-    @available(iOS 16.0, *)
+
     private static func setupThemeObserver() {
         // Guard against accumulating duplicate observers on every presentInspector() call
         guard themeObserverToken == nil else { return }
@@ -278,9 +245,8 @@ public final class Inspectly {
     static func applyRuntimeSettings(_ settings: AppSettings) {
         guard let configuration else { return }
 
-        InspectlyURLProtocol.isLoggingEnabled = settings.isLoggingEnabled
         InspectlyURLProtocol.isStubEnabled = settings.areStubsEnabled
-        
+
         InspectlyURLProtocol.networkThrottlingConfig = settings.networkThrottlingPreset.configuration(
             customDelay: settings.customNetworkDelay,
             customBytesPerSecond: settings.customNetworkBandwidth

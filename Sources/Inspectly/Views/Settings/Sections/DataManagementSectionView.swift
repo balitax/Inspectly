@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Data Management Section
 
-@available(iOS 16.0, *)
 struct DataManagementSectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 
@@ -33,11 +32,11 @@ struct DataManagementSectionView: View {
                     SettingsRow.icon("arrow.up.doc.fill", color: .blue)
                     Text("Export Logs")
                         .font(.system(size: 15))
-                        .foregroundStyle(.primary)
+                        .foregroundColor(.primary)
                     Spacer()
                     Image(systemName: "chevron.right")
                         .font(.system(size: 12, weight: .semibold))
-                        .foregroundStyle(Color(.tertiaryLabel))
+                        .foregroundColor(Color(.tertiaryLabel))
                 }
             }
 
@@ -48,11 +47,11 @@ struct DataManagementSectionView: View {
                     SettingsRow.icon("hammer.circle.fill", color: .accentIndigo)
                     Text("Export Stubs")
                         .font(.system(size: 15))
-                        .foregroundStyle(.primary)
+                        .foregroundColor(.primary)
                     Spacer()
                     Image(systemName: "chevron.right")
                         .font(.system(size: 12, weight: .semibold))
-                        .foregroundStyle(Color(.tertiaryLabel))
+                        .foregroundColor(Color(.tertiaryLabel))
                 }
             }
 
@@ -63,7 +62,7 @@ struct DataManagementSectionView: View {
                     SettingsRow.icon("trash.fill", color: .red)
                     Text("Clear All Logs")
                         .font(.system(size: 15))
-                        .foregroundStyle(.red)
+                        .foregroundColor(.red)
                     Spacer()
                 }
             }

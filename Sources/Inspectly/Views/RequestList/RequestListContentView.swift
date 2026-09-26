@@ -24,7 +24,6 @@ import SwiftUI
 /// load-more footer. Split out since it needs both the view model and the stub
 /// repository (for building the navigation destination), unlike the toolbar/banner
 /// pieces which only need the view model.
-@available(iOS 16.0, *)
 struct RequestListContentView: View {
     @ObservedObject var viewModel: RequestListViewModel
     let stubRepository: StubRepositoryProtocol
@@ -49,12 +48,11 @@ struct RequestListContentView: View {
             ForEach(viewModel.groupedRequests) { group in
                 Section {
                     ForEach(group.requests) { request in
-
-                        InspectlyNavigationLink(value: request) { request in
+                        InspectlyNavigationLink(destination: {
                             requestDetailDestination(for: request)
-                        } label: {
+                        }, label: {
                             RequestRowView(request: request, slowThreshold: viewModel.slowRequestThreshold)
-                        }
+                        })
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive) {
                                 Task { await viewModel.deleteRequest(request) }
@@ -96,10 +94,10 @@ struct RequestListContentView: View {
                         Spacer()
                         if viewModel.isLoadingMore {
                             ProgressView()
-                                .controlSize(.small)
+                                .controlSizeCompat(.small)
                         } else {
                             ProgressView()
-                                .controlSize(.small)
+                                .controlSizeCompat(.small)
                                 .onAppear {
                                     Task { await viewModel.loadMore() }
                                 }
@@ -107,16 +105,15 @@ struct RequestListContentView: View {
                         Spacer()
                     }
                     .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
                 }
             }
         }
         .id(viewModel.listRenderID)
         .listStyle(.insetGrouped)
-        .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 90) }
-        .inspectlyNavigationDestination(for: NetworkRequest.self) { request in
-            requestDetailDestination(for: request)
-        }
+        .overlay(
+            Color.clear.frame(height: 90),
+            alignment: .bottom
+        )
     }
 
     // MARK: - Section Header
@@ -125,16 +122,16 @@ struct RequestListContentView: View {
         HStack(spacing: 6) {
             Text(group.title.uppercased())
                 .font(.system(size: 11, weight: .semibold))
-                .foregroundStyle(.secondary)
+                .foregroundColor(.secondary)
                 .tracking(0.3)
 
             Text("\(group.requests.count)")
                 .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                .foregroundStyle(.tertiary)
+                .foregroundColor(Color(.tertiaryLabel))
                 .padding(.horizontal, 6)
                 .padding(.vertical, 2)
                 .background(Color(.quaternarySystemFill))
-                .clipShape(Capsule())
+                .cornerRadius(8)
         }
     }
 

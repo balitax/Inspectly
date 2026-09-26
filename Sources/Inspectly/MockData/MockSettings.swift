@@ -22,7 +22,6 @@ import Foundation
 
 struct MockSettings {
     static let `default` = AppSettings(
-        isLoggingEnabled: true,
         areStubsEnabled: true,
         networkThrottlingPreset: .off,
         ignoredHosts: [
@@ -39,7 +38,6 @@ struct MockSettings {
     )
 
     static let allStubsEnabled = AppSettings(
-        isLoggingEnabled: true,
         areStubsEnabled: true,
         networkThrottlingPreset: .threeG,
         ignoredHosts: [],

@@ -21,7 +21,6 @@ import SwiftUI
 // MARK: - Settings Row Helpers
 
 /// Shared row/icon/header styling used by every Settings section view.
-@available(iOS 16.0, *)
 enum SettingsRow {
     @ViewBuilder
     static func labeled(icon iconName: String, color: Color, title: String) -> some View {
@@ -35,16 +34,16 @@ enum SettingsRow {
     static func icon(_ name: String, color: Color) -> some View {
         Image(systemName: name)
             .font(.system(size: 13, weight: .medium))
-            .foregroundStyle(.white)
+            .foregroundColor(.white)
             .frame(width: 28, height: 28)
             .background(color)
-            .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+            .cornerRadius(7)
     }
 
     static func sectionHeader(_ title: String) -> some View {
         Text(title.uppercased())
             .font(.system(size: 10, weight: .semibold))
-            .foregroundStyle(.secondary)
+            .foregroundColor(.secondary)
             .tracking(0.4)
     }
 }

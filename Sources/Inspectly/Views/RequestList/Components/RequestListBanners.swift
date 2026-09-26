@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Error Banner
 
-@available(iOS 16.0, *)
 struct ErrorBannerView: View {
     let message: String
 
@@ -28,19 +27,19 @@ struct ErrorBannerView: View {
         HStack(spacing: 10) {
             Image(systemName: "exclamationmark.triangle.fill")
                 .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(.red)
+                .foregroundColor(.red)
                 .frame(width: 32, height: 32)
                 .background(Color.red.opacity(0.12))
-                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .cornerRadius(8)
 
             VStack(alignment: .leading, spacing: 2) {
                 Text("Storage Error")
                     .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(.red)
+                    .foregroundColor(.red)
 
                 Text(message)
                     .font(.system(size: 11))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
                     .lineLimit(2)
             }
 
@@ -48,18 +47,16 @@ struct ErrorBannerView: View {
         }
         .padding(.vertical, 6)
         .listRowBackground(
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
+            RoundedRectangle(cornerRadius: 10)
                 .fill(Color.red.opacity(0.07))
                 .padding(.horizontal, 4)
                 .padding(.vertical, 3)
         )
-        .listRowSeparator(.hidden)
     }
 }
 
 // MARK: - Throttling Banner
 
-@available(iOS 16.0, *)
 struct ThrottlingBannerView: View {
     let throttling: NetworkThrottlingPreset
 
@@ -67,19 +64,19 @@ struct ThrottlingBannerView: View {
         HStack(spacing: 10) {
             Image(systemName: throttling.iconName)
                 .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(.orange)
+                .foregroundColor(.orange)
                 .frame(width: 32, height: 32)
                 .background(Color.orange.opacity(0.12))
-                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .cornerRadius(8)
 
             VStack(alignment: .leading, spacing: 2) {
                 Text("Throttling: \(throttling.displayName)")
                     .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(.orange)
+                    .foregroundColor(.orange)
 
                 Text(throttling.description)
                     .font(.system(size: 11))
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
                     .lineLimit(1)
             }
 
@@ -87,11 +84,10 @@ struct ThrottlingBannerView: View {
         }
         .padding(.vertical, 6)
         .listRowBackground(
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
+            RoundedRectangle(cornerRadius: 10)
                 .fill(Color.orange.opacity(0.07))
                 .padding(.horizontal, 4)
                 .padding(.vertical, 3)
         )
-        .listRowSeparator(.hidden)
     }
 }

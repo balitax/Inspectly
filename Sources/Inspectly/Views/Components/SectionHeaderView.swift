@@ -20,7 +20,6 @@ import SwiftUI
 
 // MARK: - Section Header View
 
-@available(iOS 16.0, *)
 struct SectionHeaderView: View {
     let title: String
     var subtitle: String? = nil
@@ -32,12 +31,12 @@ struct SectionHeaderView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.system(size: 14, weight: .semibold))
-                    .foregroundStyle(.primary)
+                    .foregroundColor(.primary)
 
                 if let subtitle = subtitle {
                     Text(subtitle)
                         .font(.system(size: 12))
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(.secondary)
                 }
             }
 
@@ -57,7 +56,6 @@ struct SectionHeaderView: View {
 
 // MARK: - Preview
 
-@available(iOS 16.0, *)
 struct SectionHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20) {

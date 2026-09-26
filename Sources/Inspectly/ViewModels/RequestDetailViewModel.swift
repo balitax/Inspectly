@@ -21,7 +21,6 @@ import SwiftUI
 
 // MARK: - Request Detail Tab
 
-@available(iOS 16.0, *)
 enum RequestDetailTab: String, CaseIterable, Identifiable {
     case overview = "Overview"
     case headers = "Headers"
@@ -29,9 +28,9 @@ enum RequestDetailTab: String, CaseIterable, Identifiable {
     case requestBody = "Request"
     case responseBody = "Response"
     case export = "Export"
-    
+
     var id: String { rawValue }
-    
+
     var iconName: String {
         switch self {
         case .overview: return "info.circle"
@@ -47,7 +46,6 @@ enum RequestDetailTab: String, CaseIterable, Identifiable {
 // MARK: - Request Detail View Model
 
 @MainActor
-@available(iOS 16.0, *)
 final class RequestDetailViewModel: ObservableObject {
     @Published var request: NetworkRequest
     @Published var selectedTab: RequestDetailTab = .overview
@@ -171,12 +169,12 @@ final class RequestDetailViewModel: ObservableObject {
             encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
             encoder.dateEncodingStrategy = .iso8601
             let data = try encoder.encode(request.maskedForExport())
-            
+
             let tempDir = FileManager.default.temporaryDirectory
             let fileName = "inspectly_request_\(request.method.rawValue)_\(Int(Date().timeIntervalSince1970)).json"
             let fileURL = tempDir.appendingPathComponent(fileName)
             try data.write(to: fileURL)
-            
+
             shareURL = IdentifiableURL(url: fileURL)
         } catch {
             print("[Inspectly] Failed to share as JSON: \(error)")
