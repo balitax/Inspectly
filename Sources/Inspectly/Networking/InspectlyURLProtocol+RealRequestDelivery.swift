@@ -49,6 +49,9 @@ extension InspectlyURLProtocol {
                     updatedRequest.errorMessage = error.localizedDescription
                     updatedRequest.completedAt = Date()
                     Self.onRequestCaptured?(updatedRequest)
+                    Task { @MainActor in
+                        NotificationManager.shared.evaluate(updatedRequest)
+                    }
 
                     self.client?.urlProtocol(self, didFailWithError: error)
                     return
@@ -143,6 +146,9 @@ extension InspectlyURLProtocol {
         completedRequest.completedAt = Date()
 
         Self.onRequestCaptured?(completedRequest)
+        Task { @MainActor in
+            NotificationManager.shared.evaluate(completedRequest)
+        }
         client?.urlProtocolDidFinishLoading(self)
     }
 
@@ -202,6 +208,9 @@ extension InspectlyURLProtocol {
         updatedRequest.completedAt = Date()
 
         Self.onRequestCaptured?(updatedRequest)
+        Task { @MainActor in
+            NotificationManager.shared.evaluate(updatedRequest)
+        }
         client?.urlProtocol(self, didFailWithError: error)
     }
 

@@ -47,6 +47,14 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    NotificationsSectionView(viewModel: viewModel)
+                } header: {
+                    SettingsRow.sectionHeader("Notifications")
+                } footer: {
+                    Text("Get alerted for slow requests, errors, or requests to specific hosts.")
+                }
+
+                Section {
                     DataManagementSectionView(viewModel: viewModel)
                 } header: {
                     SettingsRow.sectionHeader("Data Management")
@@ -100,6 +108,12 @@ struct SettingsView: View {
                 Task { await viewModel.saveSettings() }
             }
             .onChange(of: viewModel.settings.slowRequestThreshold) { _ in
+                Task { await viewModel.saveSettings() }
+            }
+            .onChange(of: viewModel.settings.alertSlowRequests) { _ in
+                Task { await viewModel.saveSettings() }
+            }
+            .onChange(of: viewModel.settings.alertErrorRequests) { _ in
                 Task { await viewModel.saveSettings() }
             }
         }

@@ -262,6 +262,23 @@ public final class Inspectly {
 
         InspectlyURLProtocol.ignoredHosts = ignoredHosts
         applyShakeGesture(isEnabled: settings.isShakeGestureEnabled)
+        applyNotificationSettings(settings)
+    }
+
+    private static func applyNotificationSettings(_ settings: AppSettings) {
+        Task { @MainActor in
+            let isEnabled = settings.alertSlowRequests || settings.alertErrorRequests || !settings.alertHosts.isEmpty
+
+            NotificationManager.shared.isEnabled = isEnabled
+            NotificationManager.shared.alertSlowRequests = settings.alertSlowRequests
+            NotificationManager.shared.alertErrorRequests = settings.alertErrorRequests
+            NotificationManager.shared.alertHosts = settings.alertHosts
+            NotificationManager.shared.slowRequestThreshold = settings.slowRequestThreshold
+
+            if isEnabled {
+                NotificationManager.shared.requestAuthorizationIfNeeded()
+            }
+        }
     }
 
     private static func loadPersistedSettingsIfNeeded() {

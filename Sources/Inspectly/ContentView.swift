@@ -24,6 +24,7 @@ struct ContentView: View {
     @State private var selectedTab: AppTab = .requests
     @State private var previousTab: AppTab = .requests
     @State private var appSettings: AppSettings = .default
+    @State private var notificationRequest: NetworkRequest?
     let onDismiss: (() -> Void)?
     let container: DependencyContainer
 
@@ -44,6 +45,28 @@ struct ContentView: View {
             .onReceive(NotificationCenter.default.publisher(for: .inspectlySettingsDidChange)) { notification in
                 if let settings = notification.object as? AppSettings {
                     appSettings = settings
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .inspectlyNotificationTapped)) { notification in
+                if let requestID = notification.object as? UUID {
+                    Task {
+                        if let request = await container.requestRepository.getRequest(by: requestID) {
+                            await MainActor.run {
+                                selectedTab = .requests
+                                notificationRequest = request
+                            }
+                        }
+                    }
+                }
+            }
+            .sheet(item: $notificationRequest) { request in
+                InspectlyNavigationStack {
+                    RequestDetailView(
+                        viewModel: RequestDetailViewModel(
+                            request: request,
+                            requestRepository: container.requestRepository
+                        )
+                    )
                 }
             }
     }

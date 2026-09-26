@@ -33,6 +33,9 @@ public struct AppSettings: Codable {
     var isRequestBodyTruncation: Bool
     var truncationLimit: Int
     var slowRequestThreshold: TimeInterval
+    var alertSlowRequests: Bool
+    var alertErrorRequests: Bool
+    var alertHosts: [String]
 
     init(
         areStubsEnabled: Bool = true,
@@ -46,7 +49,10 @@ public struct AppSettings: Codable {
         isAutoResponsePrettifying: Bool = true,
         isRequestBodyTruncation: Bool = false,
         truncationLimit: Int = 10000,
-        slowRequestThreshold: TimeInterval = 1.0
+        slowRequestThreshold: TimeInterval = 1.0,
+        alertSlowRequests: Bool = false,
+        alertErrorRequests: Bool = false,
+        alertHosts: [String] = []
     ) {
         self.areStubsEnabled = areStubsEnabled
         self.networkThrottlingPreset = networkThrottlingPreset
@@ -60,6 +66,9 @@ public struct AppSettings: Codable {
         self.isRequestBodyTruncation = isRequestBodyTruncation
         self.truncationLimit = truncationLimit
         self.slowRequestThreshold = slowRequestThreshold
+        self.alertSlowRequests = alertSlowRequests
+        self.alertErrorRequests = alertErrorRequests
+        self.alertHosts = alertHosts
     }
 
     static let `default` = AppSettings()
@@ -77,6 +86,9 @@ public struct AppSettings: Codable {
         case isRequestBodyTruncation
         case truncationLimit
         case slowRequestThreshold
+        case alertSlowRequests
+        case alertErrorRequests
+        case alertHosts
     }
 
     public init(from decoder: Decoder) throws {
@@ -94,6 +106,9 @@ public struct AppSettings: Codable {
         isRequestBodyTruncation = try container.decodeIfPresent(Bool.self, forKey: .isRequestBodyTruncation) ?? false
         truncationLimit = try container.decodeIfPresent(Int.self, forKey: .truncationLimit) ?? 10000
         slowRequestThreshold = try container.decodeIfPresent(TimeInterval.self, forKey: .slowRequestThreshold) ?? 1.0
+        alertSlowRequests = try container.decodeIfPresent(Bool.self, forKey: .alertSlowRequests) ?? false
+        alertErrorRequests = try container.decodeIfPresent(Bool.self, forKey: .alertErrorRequests) ?? false
+        alertHosts = try container.decodeIfPresent([String].self, forKey: .alertHosts) ?? []
     }
 }
 

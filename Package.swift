@@ -19,6 +19,9 @@ let package = Package(
             path: "Sources/Inspectly",
             resources: [
                 .process("Assets.xcassets")
+            ],
+            linkerSettings: [
+                .linkedFramework("UserNotifications")
             ]
         ),
     ]

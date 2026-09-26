@@ -11,5 +11,6 @@ import Foundation
 extension Notification.Name {
     static let inspectlyRequestsDidChange = Notification.Name("inspectly.requests.didChange")
     static let inspectlySettingsDidChange = Notification.Name("inspectly.settings.didChange")
+    static let inspectlyNotificationTapped = Notification.Name("inspectly.notification.tapped")
     static let inspectlyStubsDidChange = Notification.Name("inspectly.stubs.didChange")
 }
