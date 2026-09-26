@@ -24,32 +24,26 @@ struct SlowRequestSectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 
     var body: some View {
-        Section {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack(spacing: 12) {
-                    SettingsRow.icon("tortoise.fill", color: .orange)
-                    Text("Slow Request Threshold")
-                        .font(.system(size: 15))
-                    Spacer()
-                    Text(String(format: "%.1fs", viewModel.settings.slowRequestThreshold))
-                        .font(.system(size: 13, weight: .bold, design: .monospaced))
-                        .foregroundColor(.orange)
-                }
-
-                Slider(
-                    value: $viewModel.settings.slowRequestThreshold,
-                    in: 0.5...10.0,
-                    step: 0.5
-                ) { _ in
-                    Task { await viewModel.saveSettings() }
-                }
-                .tint(.orange)
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 12) {
+                SettingsRow.icon("tortoise.fill", color: .orange)
+                Text("Slow Request Threshold")
+                    .font(.system(size: 15))
+                Spacer()
+                Text(String(format: "%.1fs", viewModel.settings.slowRequestThreshold))
+                    .font(.system(size: 13, weight: .bold, design: .monospaced))
+                    .foregroundColor(.orange)
             }
-            .padding(.vertical, 4)
-        } header: {
-            SettingsRow.sectionHeader("Performance")
-        } footer: {
-            Text("Requests exceeding this duration will be highlighted with a slow indicator in the request list.")
+
+            Slider(
+                value: $viewModel.settings.slowRequestThreshold,
+                in: 0.5...10.0,
+                step: 0.5
+            ) { _ in
+                Task { await viewModel.saveSettings() }
+            }
+            .tint(.orange)
         }
+        .padding(.vertical, 4)
     }
 }

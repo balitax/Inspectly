@@ -24,7 +24,7 @@ struct NetworkThrottlingSectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 
     var body: some View {
-        Section {
+        Group {
             HStack(spacing: 12) {
                 SettingsRow.icon(viewModel.settings.networkThrottlingPreset.iconName, color: .orange)
                 Text("Preset")
@@ -56,10 +56,6 @@ struct NetworkThrottlingSectionView: View {
             if viewModel.settings.networkThrottlingPreset == .custom {
                 CustomThrottlingControls(viewModel: viewModel)
             }
-        } header: {
-            SettingsRow.sectionHeader("Network Throttling")
-        } footer: {
-            Text("Simulate slower connections or DNS failures for all real requests intercepted by Inspectly.")
         }
     }
 }

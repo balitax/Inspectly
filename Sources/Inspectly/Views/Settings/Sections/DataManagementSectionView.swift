@@ -24,7 +24,7 @@ struct DataManagementSectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 
     var body: some View {
-        Section {
+        Group {
             Button {
                 Task { await viewModel.exportLogs() }
             } label: {
@@ -66,8 +66,6 @@ struct DataManagementSectionView: View {
                     Spacer()
                 }
             }
-        } header: {
-            SettingsRow.sectionHeader("Data Management")
         }
     }
 }

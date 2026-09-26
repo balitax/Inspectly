@@ -24,25 +24,19 @@ struct StorageSectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 
     var body: some View {
-        Section {
-            HStack(spacing: 12) {
-                SettingsRow.icon("internaldrive.fill", color: .blue)
-                Text("Max Stored Requests")
-                    .font(.system(size: 15))
-                Spacer()
-                Picker("", selection: $viewModel.settings.maxStoredRequests) {
-                    Text("100").tag(100)
-                    Text("250").tag(250)
-                    Text("500").tag(500)
-                    Text("1000").tag(1000)
-                    Text("2500").tag(2500)
-                }
-                .pickerStyle(.menu)
+        HStack(spacing: 12) {
+            SettingsRow.icon("internaldrive.fill", color: .blue)
+            Text("Max Stored Requests")
+                .font(.system(size: 15))
+            Spacer()
+            Picker("", selection: $viewModel.settings.maxStoredRequests) {
+                Text("100").tag(100)
+                Text("250").tag(250)
+                Text("500").tag(500)
+                Text("1000").tag(1000)
+                Text("2500").tag(2500)
             }
-        } header: {
-            SettingsRow.sectionHeader("Storage")
-        } footer: {
-            Text("Older requests are automatically removed when this limit is reached.")
+            .pickerStyle(.menu)
         }
     }
 }

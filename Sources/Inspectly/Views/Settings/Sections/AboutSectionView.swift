@@ -24,7 +24,7 @@ struct AboutSectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 
     var body: some View {
-        Section {
+        Group {
             HStack(spacing: 14) {
                 Image(systemName: "network")
                     .font(.system(size: 20, weight: .medium))
@@ -62,8 +62,6 @@ struct AboutSectionView: View {
                     .font(.system(size: 13))
                     .foregroundColor(.secondary)
             }
-        } header: {
-            SettingsRow.sectionHeader("About")
         }
     }
 }

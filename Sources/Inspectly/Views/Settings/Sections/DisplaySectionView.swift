@@ -24,7 +24,7 @@ struct DisplaySectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 
     var body: some View {
-        Section {
+        Group {
             HStack(spacing: 12) {
                 SettingsRow.icon("circle.lefthalf.filled", color: .purple)
                 Text("Theme")
@@ -66,8 +66,6 @@ struct DisplaySectionView: View {
                 SettingsRow.labeled(icon: "scissors", color: Color(.systemGray), title: "Truncate Large Bodies")
             }
             .tint(Color(.systemGray))
-        } header: {
-            SettingsRow.sectionHeader("Display")
         }
     }
 }

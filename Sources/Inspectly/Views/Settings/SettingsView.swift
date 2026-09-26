@@ -26,14 +26,37 @@ struct SettingsView: View {
     var body: some View {
         InspectlyNavigationStack {
             List {
-                StubsSectionView(viewModel: viewModel)
-                NetworkThrottlingSectionView(viewModel: viewModel)
-                SlowRequestSectionView(viewModel: viewModel)
-                IgnoredHostsSectionView(viewModel: viewModel)
-                StorageSectionView(viewModel: viewModel)
-                DisplaySectionView(viewModel: viewModel)
-                DataManagementSectionView(viewModel: viewModel)
-                AboutSectionView(viewModel: viewModel)
+                Section {
+                    StubsSectionView(viewModel: viewModel)
+                    NetworkThrottlingSectionView(viewModel: viewModel)
+                    SlowRequestSectionView(viewModel: viewModel)
+                    IgnoredHostsSectionView(viewModel: viewModel)
+                } header: {
+                    SettingsRow.sectionHeader("Network & Capture")
+                } footer: {
+                    Text("Control how requests are intercepted, stubbed, throttled, slowed, or ignored.")
+                }
+
+                Section {
+                    StorageSectionView(viewModel: viewModel)
+                    DisplaySectionView(viewModel: viewModel)
+                } header: {
+                    SettingsRow.sectionHeader("Preferences")
+                } footer: {
+                    Text("Storage limits and display options for the inspector.")
+                }
+
+                Section {
+                    DataManagementSectionView(viewModel: viewModel)
+                } header: {
+                    SettingsRow.sectionHeader("Data Management")
+                }
+
+                Section {
+                    AboutSectionView(viewModel: viewModel)
+                } header: {
+                    SettingsRow.sectionHeader("About")
+                }
             }
             .listStyle(.insetGrouped)
             .overlay(

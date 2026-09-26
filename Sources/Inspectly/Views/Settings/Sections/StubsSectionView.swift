@@ -24,15 +24,9 @@ struct StubsSectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 
     var body: some View {
-        Section {
-            Toggle(isOn: $viewModel.settings.areStubsEnabled) {
-                SettingsRow.labeled(icon: "hammer.fill", color: .accentIndigo, title: "Enable Stubs Globally")
-            }
-            .tint(.accentIndigo)
-        } header: {
-            SettingsRow.sectionHeader("Stubs")
-        } footer: {
-            Text("When enabled, matching network requests will return stubbed responses.")
+        Toggle(isOn: $viewModel.settings.areStubsEnabled) {
+            SettingsRow.labeled(icon: "hammer.fill", color: .accentIndigo, title: "Enable Stubs Globally")
         }
+        .tint(.accentIndigo)
     }
 }

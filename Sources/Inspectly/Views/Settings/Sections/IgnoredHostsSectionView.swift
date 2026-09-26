@@ -24,7 +24,7 @@ struct IgnoredHostsSectionView: View {
     @ObservedObject var viewModel: SettingsViewModel
 
     var body: some View {
-        Section {
+        Group {
             ForEach(viewModel.settings.ignoredHosts) { host in
                 Toggle(isOn: Binding(
                     get: { host.isEnabled },
@@ -65,10 +65,6 @@ struct IgnoredHostsSectionView: View {
                     }
                 }
             }
-        } header: {
-            SettingsRow.sectionHeader("Ignored Hosts")
-        } footer: {
-            Text("Requests to these hosts will not be captured.")
         }
     }
 }
