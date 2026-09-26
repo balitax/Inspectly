@@ -54,6 +54,7 @@ final class RequestDetailViewModel: ObservableObject {
     @Published var shareContent: String = ""
     @Published var createdStub: RequestStub?
     @Published var shareURL: IdentifiableURL? = nil
+    @Published var showReplaySheet: Bool = false
 
     private let exportManager: ExportManagerProtocol
     private let requestRepository: RequestRepositoryProtocol

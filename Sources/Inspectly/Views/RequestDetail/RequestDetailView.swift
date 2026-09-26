@@ -97,6 +97,11 @@ struct RequestDetailView: View {
         .sheet(item: $viewModel.shareURL) { identifiable in
             ActivityView(activityItems: [identifiable.url])
         }
+        .sheet(isPresented: $viewModel.showReplaySheet) {
+            RequestReplayView(
+                viewModel: RequestReplayViewModel(request: viewModel.request)
+            )
+        }
         .onDisappear {
             onDismissed?()
         }
@@ -169,6 +174,12 @@ struct RequestDetailView: View {
                 viewModel.shareRequest()
             } label: {
                 Label("Share...", systemImage: "square.and.arrow.up")
+            }
+
+            Button {
+                viewModel.showReplaySheet = true
+            } label: {
+                Label("Replay Request", systemImage: "play.fill")
             }
 
             Divider()
