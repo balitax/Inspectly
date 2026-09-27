@@ -540,7 +540,7 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-badge">
-    <span>🎉</span> v1.2.0 is out — iOS 16 minimum, liquid glass floating tab bar
+    <span>🎉</span> v1.4.0 is out — iOS 15 minimum, system tab bar &amp; dark mode
   </div>
   <h1>The HTTP Inspector<br/>your iOS app deserves <em>.</em></h1>
   <p>Capture, inspect, debug, and mock network requests with zero configuration and zero dependencies.</p>
@@ -555,7 +555,7 @@
     </a>
   </div>
   <div class="hero-badges">
-    <span class="badge">📱 iOS 16.0+</span>
+    <span class="badge">📱 iOS 15.0+</span>
     <span class="badge">⚡️ Swift 5.9+</span>
     <span class="badge">📦 SPM Ready</span>
     <span class="badge">🔗 Zero Dependencies</span>
@@ -585,8 +585,8 @@
       </div>
       <div class="feature-card">
         <div class="feature-icon" style="background:#F0FDF4">🔨</div>
-        <h3>Flexible API Stubbing</h3>
-        <p>Create stubs from real captures with one tap. Match by Exact URL, Contains, Prefix, Suffix, or Regex. All matching requests across history are marked instantly.</p>
+        <h3>Method-Only Stubbing</h3>
+        <p>Create stubs from real captures with one tap. Stubs match by HTTP method and expose the original endpoint URL for reference. Define responses with status code + body only.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon" style="background:#FFF7ED">🐢</div>
@@ -601,7 +601,7 @@
       <div class="feature-card">
         <div class="feature-icon" style="background:#FFF1F2">📊</div>
         <h3>Statistics Dashboard</h3>
-        <p>At-a-glance breakdown of success vs error rates, slowest endpoints, most active hosts, and request volume over time.</p>
+        <p>At-a-glance breakdown of success vs error rates, slowest endpoints, performance timeline, security issues, and request volume over time.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon" style="background:#EFF6FF">🌐</div>
@@ -621,7 +621,32 @@
       <div class="feature-card">
         <div class="feature-icon" style="background:#EBF4FF">📤</div>
         <h3>cURL Export</h3>
-        <p>Copy any request as a properly shell-escaped cURL command. Paste it straight into Terminal or share with teammates.</p>
+        <p>Copy or share any request as a properly shell-escaped cURL command. A quick swipe action is also available in the request list.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#E0F2FE">▶️</div>
+        <h3>Request Replay</h3>
+        <p>Re-run a captured request with optional edits to method, URL, headers, or body. Inspect the real response status, duration, and body.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#F3E8FF">📈</div>
+        <h3>Performance Timeline</h3>
+        <p>Interactive waterfall with zoom, time ruler, and blocking detection. Tap any phase to dive into timing details.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#FFEDD5">🛡️</div>
+        <h3>Security Scanner</h3>
+        <p>Auto-detect HTTP traffic, missing security headers, exposed secrets, and sensitive query parameters.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#ECFDF5">🧱</div>
+        <h3>Generate Swift Model</h3>
+        <p>Turn any JSON response into a Codable Swift model with CodingKeys, ready to copy or share.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#FEF2F2">🔔</div>
+        <h3>Local Notifications</h3>
+        <p>Get alerted for slow requests, error responses, or traffic to specific hosts. Tap the banner to jump straight to the request detail.</p>
       </div>
     </div>
   </div>
@@ -648,7 +673,7 @@
 <span class="kw">dependencies</span>: [
   .package(
     url: <span class="str">"https://github.com/balitax/Inspectly.git"</span>,
-    from: <span class="str">"1.2.0"</span>
+    from: <span class="str">"1.4.0"</span>
   )
 ]
           </div>
@@ -705,8 +730,15 @@
         <div class="install-step">
           <div class="step-num">4</div>
           <div>
+            <h4>Logging is always on</h4>
+            <p>Once Inspectly is enabled, request capture starts automatically. There is no logging toggle to forget.</p>
+          </div>
+        </div>
+        <div class="install-step">
+          <div class="step-num">5</div>
+          <div>
             <h4>Create your first stub</h4>
-            <p>Tap any captured request → <strong>Create Stub</strong>. Edit the response, enable the stub, and re-run your flow.</p>
+            <p>Tap any captured request → <strong>Create Stub</strong>. The stub matches by HTTP method and keeps the endpoint URL for reference. Edit the response and re-run your flow.</p>
           </div>
         </div>
       </div>
