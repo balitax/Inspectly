@@ -192,6 +192,9 @@ public final class Inspectly {
         InspectlyURLProtocol.onRequestCaptured = { request in
             Task { @MainActor in
                 await DependencyContainer.shared.requestRepository.addRequest(request)
+                let issues = SecurityScanner.scan(request)
+                SecurityIssueManager.shared.add(issues)
+                NotificationCenter.default.post(name: .inspectlySecurityIssuesDidChange, object: nil)
             }
         }
 
