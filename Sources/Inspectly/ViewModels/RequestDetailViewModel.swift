@@ -55,6 +55,8 @@ final class RequestDetailViewModel: ObservableObject {
     @Published var createdStub: RequestStub?
     @Published var shareURL: IdentifiableURL? = nil
     @Published var showReplaySheet: Bool = false
+    @Published var generatedModelCode: String = ""
+    @Published var showGeneratedModelSheet: Bool = false
 
     private let exportManager: ExportManagerProtocol
     private let requestRepository: RequestRepositoryProtocol
@@ -73,6 +75,22 @@ final class RequestDetailViewModel: ObservableObject {
 
     func createStub() {
         createdStub = request.toStub()
+    }
+
+    func generateSwiftModel() {
+        let jsonString = request.responseBody?.rawString ?? request.requestBody?.rawString ?? ""
+        generatedModelCode = SwiftCodeGenerator.generateModel(from: jsonString, rootName: rootModelName) ?? "// Could not generate model from body"
+        showGeneratedModelSheet = true
+    }
+
+    private var rootModelName: String {
+        let name = request.shortURL
+            .replacingOccurrences(of: "/", with: "")
+            .replacingOccurrences(of: "{", with: "")
+            .replacingOccurrences(of: "}", with: "")
+            .components(separatedBy: CharacterSet.alphanumerics.inverted)
+            .joined()
+        return name.isEmpty ? "GeneratedModel" : name.capitalizedFirstLetter()
     }
 
     func markRequestAsStubbed(using stub: RequestStub) async {
@@ -203,5 +221,12 @@ final class RequestDetailViewModel: ObservableObject {
 
     static func mock() -> RequestDetailViewModel {
         RequestDetailViewModel(request: NetworkRequest(method: .get, url: "https://api.example.com", host: "api.example.com", path: "/"))
+    }
+}
+
+private extension String {
+    func capitalizedFirstLetter() -> String {
+        guard let first = first else { return self }
+        return String(first).uppercased() + dropFirst()
     }
 }

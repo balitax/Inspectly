@@ -102,6 +102,9 @@ struct RequestDetailView: View {
                 viewModel: RequestReplayViewModel(request: viewModel.request)
             )
         }
+        .sheet(isPresented: $viewModel.showGeneratedModelSheet) {
+            GeneratedModelView(code: viewModel.generatedModelCode)
+        }
         .onDisappear {
             onDismissed?()
         }
@@ -180,6 +183,12 @@ struct RequestDetailView: View {
                 viewModel.showReplaySheet = true
             } label: {
                 Label("Replay Request", systemImage: "play.fill")
+            }
+
+            Button {
+                viewModel.generateSwiftModel()
+            } label: {
+                Label("Generate Swift Model", systemImage: "doc.text")
             }
 
             Divider()
