@@ -25,131 +25,106 @@ struct ResponseEditorView: View {
 
     var body: some View {
         VStack(spacing: 14) {
-            // MARK: - Status Code
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Status Code")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(.secondary)
+            statusCodeSection
+            Divider()
+            responseDelaySection
+            Divider()
+            jsonBodySection
+        }
+    }
 
-                HStack(spacing: 8) {
-                    TextField("200", value: $viewModel.response.statusCode, formatter: NumberFormatter())
-                        .textFieldStyle(.roundedBorder)
-                        .font(.system(size: 14, design: .monospaced))
-                        .frame(width: 80)
-                        .keyboardType(.numberPad)
+    private let quickStatusCodes = [200, 201, 204, 400, 401, 403, 404, 422, 500, 502, 503]
 
-                    StatusBadgeView(statusCode: viewModel.response.statusCode)
+    private var statusCodeSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Status Code")
+                .font(.system(size: 12, weight: .medium))
+                .foregroundColor(.secondary)
 
-                    Spacer()
+            HStack(spacing: 12) {
+                TextField("200", value: $viewModel.response.statusCode, formatter: NumberFormatter())
+                    .textFieldStyle(.roundedBorder)
+                    .font(.system(size: 14, design: .monospaced))
+                    .frame(width: 80)
+                    .keyboardType(.numberPad)
 
-                    // Quick status buttons
-                    ForEach([200, 201, 400, 404, 500], id: \.self) { code in
-                        Button {
-                            viewModel.response.statusCode = code
-                        } label: {
-                            Text("\(code)")
-                                .font(.system(size: 10, weight: .bold, design: .monospaced))
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 3)
-                                .background(viewModel.response.statusCode == code ? Color.accentColor.opacity(0.15) : Color(.tertiarySystemFill))
-                                .foregroundColor(viewModel.response.statusCode == code ? .accentColor : .secondary)
-                                .cornerRadius(4)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
+                StatusBadgeView(statusCode: viewModel.response.statusCode)
+
+                Spacer()
             }
 
-            Divider()
-
-            // MARK: - Response Delay
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    Text("Response Delay")
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(.secondary)
-                    Spacer()
-                    Text(String(format: "%.1fs", viewModel.response.responseDelay))
-                        .font(.system(size: 12, weight: .medium, design: .monospaced))
-                        .foregroundColor(.accentColor)
-                }
-
-                Slider(value: $viewModel.response.responseDelay, in: 0...30, step: 0.5)
-                    .tint(.accentColor)
-            }
-
-            Divider()
-
-            // MARK: - Error Simulation
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Error Simulation")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(.secondary)
-
-                LazyVGrid(columns: [
-                    GridItem(.flexible()),
-                    GridItem(.flexible())
-                ], spacing: 6) {
-                    ForEach(StubErrorType.allCases) { errorType in
-                        Button {
-                            viewModel.response.errorType = errorType
-                            if let code = errorType.statusCode {
-                                viewModel.response.statusCode = code
-                            }
-                        } label: {
-                            HStack(spacing: 4) {
-                                Image(systemName: errorType.iconName)
-                                    .font(.system(size: 9))
-                                Text(errorType.displayName)
-                                    .font(.system(size: 10, weight: .medium))
-                                    .lineLimit(1)
-                            }
+            LazyVGrid(columns: [
+                GridItem(.flexible()),
+                GridItem(.flexible()),
+                GridItem(.flexible()),
+                GridItem(.flexible())
+            ], spacing: 8) {
+                ForEach(quickStatusCodes, id: \.self) { code in
+                    Button {
+                        viewModel.response.statusCode = code
+                    } label: {
+                        Text("\(code)")
+                            .font(.system(size: 12, weight: .semibold, design: .monospaced))
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 7)
-                            .padding(.horizontal, 6)
-                            .background(viewModel.response.errorType == errorType ? Color.accentColor.opacity(0.15) : Color(.tertiarySystemFill))
-                            .foregroundColor(viewModel.response.errorType == errorType ? .accentColor : .secondary)
-                            .cornerRadius(6)
-                        }
-                        .buttonStyle(.plain)
+                            .padding(.vertical, 8)
+                            .background(viewModel.response.statusCode == code ? Color.accentColor.opacity(0.15) : Color(.tertiarySystemFill))
+                            .foregroundColor(viewModel.response.statusCode == code ? .accentColor : .secondary)
+                            .cornerRadius(8)
                     }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
+    }
+
+    private var responseDelaySection: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Text("Response Delay")
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.secondary)
+                Spacer()
+                Text(String(format: "%.1fs", viewModel.response.responseDelay))
+                    .font(.system(size: 12, weight: .medium, design: .monospaced))
+                    .foregroundColor(.accentColor)
+            }
+
+            Slider(value: $viewModel.response.responseDelay, in: 0...30, step: 0.5)
+                .tint(.accentColor)
+        }
+    }
+
+    private var jsonBodySection: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Text("JSON Response Body")
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.secondary)
+
+                Spacer()
+
+                if let error = viewModel.jsonValidationError {
+                    Label(error, systemImage: "exclamationmark.triangle.fill")
+                        .font(.system(size: 10))
+                        .foregroundColor(.red)
+                } else if viewModel.response.jsonBody?.isEmpty == false {
+                    Label("Valid", systemImage: "checkmark.circle.fill")
+                        .font(.system(size: 10))
+                        .foregroundColor(.green)
                 }
             }
 
-            Divider()
-
-            // MARK: - JSON Body Editor
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    Text("JSON Response Body")
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(.secondary)
-
-                    Spacer()
-
-                    if let error = viewModel.jsonValidationError {
-                        Label(error, systemImage: "exclamationmark.triangle.fill")
-                            .font(.system(size: 10))
-                            .foregroundColor(.red)
-                    } else if viewModel.response.jsonBody?.isEmpty == false {
-                        Label("Valid", systemImage: "checkmark.circle.fill")
-                            .font(.system(size: 10))
-                            .foregroundColor(.green)
-                    }
-                }
-
-                TextEditor(text: Binding(
-                    get: { viewModel.response.jsonBody ?? "" },
-                    set: { viewModel.response.jsonBody = $0.isEmpty ? nil : $0 }
-                ))
-                .font(.system(size: 12, design: .monospaced))
-                .frame(minHeight: 150)
-                .padding(4)
-                .background(Color(.tertiarySystemBackground))
-                .cornerRadius(8)
-                .onChange(of: viewModel.response.jsonBody) { _ in
-                    viewModel.validateJSON()
-                }
+            TextEditor(text: Binding(
+                get: { viewModel.response.jsonBody ?? "" },
+                set: { viewModel.response.jsonBody = $0.isEmpty ? nil : $0 }
+            ))
+            .font(.system(size: 12, design: .monospaced))
+            .frame(minHeight: 150)
+            .padding(4)
+            .background(Color(.tertiarySystemBackground))
+            .cornerRadius(8)
+            .onChange(of: viewModel.response.jsonBody) { _ in
+                viewModel.validateJSON()
             }
         }
     }

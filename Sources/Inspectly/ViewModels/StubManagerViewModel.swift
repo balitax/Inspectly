@@ -65,7 +65,7 @@ final class StubManagerViewModel: ObservableObject {
             let query = searchText.lowercased()
             filtered = filtered.filter {
                 $0.name.lowercased().contains(query) ||
-                $0.pathDisplay.lowercased().contains(query) ||
+                $0.methodDisplay.lowercased().contains(query) ||
                 ($0.groupName?.lowercased().contains(query) ?? false)
             }
         }
@@ -79,7 +79,7 @@ final class StubManagerViewModel: ObservableObject {
 
         // Method filter
         if let method = methodFilter {
-            filtered = filtered.filter { $0.matchRule.method == method }
+            filtered = filtered.filter { $0.method == method }
         }
 
         return filtered
@@ -127,7 +127,7 @@ final class StubManagerViewModel: ObservableObject {
     func createNewStub() -> RequestStub {
         RequestStub(
             name: "New Stub",
-            matchRule: StubMatchRule(method: .get, urlPath: "/api/"),
+            method: .get,
             scenarios: [
                 StubScenario(
                     name: "Default",

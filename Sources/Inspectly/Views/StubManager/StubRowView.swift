@@ -51,19 +51,9 @@ struct StubRowView: View {
                 }
 
                 HStack(spacing: 6) {
-                    if let method = stub.matchRule.method {
-                        HTTPMethodBadge(method: method)
-                    } else {
-                        Text("ANY")
-                            .font(.system(size: 9, weight: .bold, design: .monospaced))
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(Color(.quaternarySystemFill))
-                            .foregroundColor(.secondary)
-                            .cornerRadius(4)
-                    }
+                    HTTPMethodBadge(method: stub.method)
 
-                    Text(stub.pathDisplay)
+                    Text(stub.url.isEmpty ? stub.methodDisplay : stub.url)
                         .font(.system(size: 11, design: .monospaced))
                         .foregroundColor(.secondary)
                         .lineLimit(1)
@@ -98,8 +88,8 @@ struct StubRowView: View {
 struct StubRowView_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            StubRowView(stub: RequestStub(name: "Login Mock", matchRule: StubMatchRule(fullURL: "https://api.example.com/login")))
-            StubRowView(stub: RequestStub(name: "User List", matchRule: StubMatchRule(fullURL: "https://api.example.com/users")))
+            StubRowView(stub: RequestStub(name: "Login Mock", method: .post, url: "https://api.example.com/login"))
+            StubRowView(stub: RequestStub(name: "User List", method: .get, url: "https://api.example.com/users"))
         }
         .listStyle(.insetGrouped)
     }

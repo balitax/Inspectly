@@ -242,7 +242,7 @@ final class RequestListViewModel: ObservableObject {
     func markRequestsAsStubbed(using stub: RequestStub) async {
         await requestRepository.markRequestsAsStubbed(for: stub)
         // Sync in-memory array
-        for i in requests.indices where stub.matchRule.matches(requests[i]) {
+        for i in requests.indices where stub.matches(requests[i]) {
             requests[i].isStubbed = true
             requests[i].stubId = stub.id
         }

@@ -28,21 +28,6 @@ extension InspectlyURLProtocol {
         waitResponsive(for: delay) { [weak self] in
             guard let self = self else { return }
 
-            // Handle error types
-            if stubResponse.errorType != .none {
-                let error = self.errorForType(stubResponse.errorType)
-                var updatedRequest = networkRequest
-                updatedRequest.status = stubResponse.errorType == .timeout ? .timeout : .serverError
-                updatedRequest.isStubbed = true
-                updatedRequest.stubId = stubId
-                updatedRequest.source = .stubbed
-                updatedRequest.duration = delay
-                updatedRequest.errorMessage = error.localizedDescription
-                Self.onRequestCaptured?(updatedRequest)
-                self.client?.urlProtocol(self, didFailWithError: error)
-                return
-            }
-
             // Build response
             let statusCode = stubResponse.statusCode
             let bodyString = stubResponse.bodyContent
@@ -78,23 +63,6 @@ extension InspectlyURLProtocol {
                 self.client?.urlProtocol(self, didLoad: bodyData)
                 self.client?.urlProtocolDidFinishLoading(self)
             }
-        }
-    }
-
-    func errorForType(_ errorType: StubErrorType) -> NSError {
-        switch errorType {
-        case .timeout:
-            return NSError(domain: NSURLErrorDomain, code: NSURLErrorTimedOut, userInfo: [
-                NSLocalizedDescriptionKey: "The request timed out."
-            ])
-        case .noInternet:
-            return NSError(domain: NSURLErrorDomain, code: NSURLErrorNotConnectedToInternet, userInfo: [
-                NSLocalizedDescriptionKey: "The Internet connection appears to be offline."
-            ])
-        default:
-            return NSError(domain: "InspectlyStub", code: errorType.statusCode ?? -1, userInfo: [
-                NSLocalizedDescriptionKey: errorType.displayName
-            ])
         }
     }
 }

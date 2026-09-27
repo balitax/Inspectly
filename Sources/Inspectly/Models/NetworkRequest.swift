@@ -20,7 +20,7 @@ import Foundation
 
 // MARK: - HTTP Method
 
-enum HTTPMethodType: String, Codable, CaseIterable, Identifiable {
+public enum HTTPMethodType: String, Codable, CaseIterable, Identifiable {
     case get = "GET"
     case post = "POST"
     case put = "PUT"
@@ -29,7 +29,7 @@ enum HTTPMethodType: String, Codable, CaseIterable, Identifiable {
     case head = "HEAD"
     case options = "OPTIONS"
 
-    var id: String { rawValue }
+    public var id: String { rawValue }
 
     var displayColor: String {
         switch self {
@@ -330,14 +330,6 @@ public struct NetworkRequest: Identifiable, Codable, Equatable, Hashable {
 
     /// Converts this request into a RequestStub for mocking
     func toStub() -> RequestStub {
-        let matchRule = StubMatchRule(
-            method: method,
-            urlPath: nil,
-            fullURL: url, // Set full URL for exact matching
-            queryParameters: queryParameters,
-            headers: requestHeaders
-        )
-
         let scenario = StubScenario(
             name: "Original Capture",
             description: "Default scenario imported from real request capture",
@@ -353,7 +345,8 @@ public struct NetworkRequest: Identifiable, Codable, Equatable, Hashable {
         return RequestStub(
             name: "Stub for \(path)",
             description: "Imported from \(method.rawValue) capture",
-            matchRule: matchRule,
+            method: method,
+            url: url,
             scenarios: [scenario]
         )
     }

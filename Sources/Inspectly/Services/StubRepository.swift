@@ -65,7 +65,7 @@ actor StubRepository: StubRepositoryProtocol {
 
     func findMatchingStub(for request: NetworkRequest) async -> RequestStub? {
         return stubs.first { stub in
-            stub.isEnabled && stub.matchRule.matches(request)
+            stub.isEnabled && stub.matches(request)
         }
     }
 
@@ -85,7 +85,8 @@ actor StubRepository: StubRepositoryProtocol {
         let duplicate = RequestStub(
             name: "\(original.name) (Copy)",
             description: original.description,
-            matchRule: original.matchRule,
+            method: original.method,
+            url: original.url,
             scenarios: original.scenarios.map { scenario in
                 StubScenario(
                     name: scenario.name,
@@ -149,7 +150,7 @@ actor MockStubRepository: StubRepositoryProtocol {
     func deleteStub(_ id: UUID) async { stubs.removeAll { $0.id == id } }
     func deleteAllStubs() async { stubs.removeAll() }
     func findMatchingStub(for request: NetworkRequest) async -> RequestStub? {
-        stubs.first { $0.isEnabled && $0.matchRule.matches(request) }
+        stubs.first { $0.isEnabled && $0.matches(request) }
     }
     func toggleStub(_ id: UUID, enabled: Bool) async {
         if let idx = stubs.firstIndex(where: { $0.id == id }) { stubs[idx].isEnabled = enabled }

@@ -36,8 +36,8 @@ struct StubDetailView: View {
                 // MARK: - General Info
                 generalInfoSection
 
-                // MARK: - Match Rules
-                matchRuleSection
+                // MARK: - Endpoint
+                endpointSection
 
                 // MARK: - Response Data
                 responseDataSection
@@ -141,11 +141,26 @@ struct StubDetailView: View {
 
     // MARK: - Match Rule
 
-    private var matchRuleSection: some View {
+    private var endpointSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            SectionHeaderView(title: "Match Rules")
+            SectionHeaderView(title: "Endpoint")
 
-            MatchRuleEditorView(viewModel: viewModel)
+            VStack(alignment: .leading, spacing: 10) {
+                HStack(spacing: 10) {
+                    HTTPMethodBadge(method: viewModel.stub.method)
+
+                    Text(viewModel.stub.url.isEmpty ? "No endpoint URL" : viewModel.stub.url)
+                        .font(.system(size: 13, design: .monospaced))
+                        .foregroundColor(viewModel.stub.url.isEmpty ? .secondary : .primary)
+                        .lineLimit(2)
+
+                    Spacer()
+                }
+
+                Text("This stub matches \(viewModel.stub.method.rawValue) requests. The endpoint is shown for reference only.")
+                    .font(.system(size: 12))
+                    .foregroundColor(.secondary)
+            }
         }
         .sectionCardStyle()
     }

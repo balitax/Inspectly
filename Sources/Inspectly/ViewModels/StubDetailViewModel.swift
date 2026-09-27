@@ -54,44 +54,10 @@ final class StubDetailViewModel: ObservableObject {
         self.stubRepository = stubRepository
     }
 
-    // MARK: - Match Rule Editing
+    // MARK: - Method Editing
 
-    func updateMethod(_ method: HTTPMethodType?) {
-        stub.matchRule.method = method
-    }
-
-    func updateURLPath(_ path: String) {
-        stub.matchRule.urlPattern = path
-    }
-
-    func updateFullURL(_ url: String) {
-        stub.matchRule.urlPattern = url
-    }
-
-    func updateURLMatchMode(_ mode: URLMatchMode) {
-        stub.matchRule.urlMatchMode = mode
-    }
-
-    func updateBodyContains(_ body: String) {
-        stub.matchRule.bodyContains = body
-    }
-
-    func addMatchHeader() {
-        stub.matchRule.headers.append(RequestHeader(key: "", value: ""))
-    }
-
-    func removeMatchHeader(at index: Int) {
-        guard index < stub.matchRule.headers.count else { return }
-        stub.matchRule.headers.remove(at: index)
-    }
-
-    func addMatchQueryParam() {
-        stub.matchRule.queryParameters.append(QueryParameter(key: "", value: ""))
-    }
-
-    func removeMatchQueryParam(at index: Int) {
-        guard index < stub.matchRule.queryParameters.count else { return }
-        stub.matchRule.queryParameters.remove(at: index)
+    func updateMethod(_ method: HTTPMethodType) {
+        stub.method = method
     }
 
     // MARK: - JSON Validation
@@ -119,14 +85,6 @@ final class StubDetailViewModel: ObservableObject {
             errors.append("Stub name is required.")
         }
 
-        let pattern = stub.matchRule.urlPattern ?? ""
-        if pattern.trimmingCharacters(in: .whitespaces).isEmpty {
-            errors.append("URL pattern is required.")
-        } else if stub.matchRule.urlMatchMode == .regex,
-                  (try? NSRegularExpression(pattern: pattern)) == nil {
-            errors.append("URL pattern contains an invalid regex.")
-        }
-
         validationErrors = errors
         return errors.isEmpty
     }
@@ -152,7 +110,7 @@ final class StubDetailViewModel: ObservableObject {
         StubDetailViewModel(
             stub: RequestStub(
                 name: "Mock Stub",
-                matchRule: StubMatchRule(fullURL: "https://api.example.com/v1/users")
+                method: .get
             ),
             isEditing: true,
             stubRepository: MockStubRepository()
