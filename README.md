@@ -13,18 +13,18 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/iOS-13.0%2B-blue" />
+  <img src="https://img.shields.io/badge/iOS-15.0%2B-blue" />
   <img src="https://img.shields.io/badge/Swift-5.9%2B-orange" />
   <img src="https://img.shields.io/badge/License-MIT-green" />
   <img src="https://img.shields.io/badge/SPM-Ready-purple" />
-  <img src="https://img.shields.io/badge/version-1.3.2-brightgreen" />
+  <img src="https://img.shields.io/badge/version-1.4.0-brightgreen" />
 </p>
 
 ---
 
 Inspectly is a lightweight HTTP inspector and API stubbing toolkit for iOS.
 
-It automatically captures network traffic, provides a beautiful in-app inspector, and allows you to create and manage mocked API responses directly from live requests.
+It automatically captures network traffic, provides an in-app inspector, and allows you to create and manage mocked API responses directly from live requests.
 
 Built on top of the Foundation networking stack, Inspectly works seamlessly with `URLSession`, Alamofire, AFNetworking, and any networking layer powered by Foundation.
 
@@ -33,20 +33,26 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 ### Capture & Inspect
 - Automatic request interception with zero setup
 - Zero external dependencies
-- In-app inspector UI for Requests, Statistics, Stubs, and Settings
+- In-app inspector UI with **Requests**, **Statistics**, **Stubs**, **Settings**, and **Dismiss** tabs
+- Uses the standard system `TabView` and supports **Dark Mode**
 - Request and response inspection including headers, bodies, timing, and metadata
 - **Rich HTML Rendering** — interactive preview for HTML responses
 - **Smart Content Detection** — automatic content-type sniffing when server headers are misleading
 - **Sensitive Header Masking** — `Authorization`, `Cookie`, `X-Api-Key` and other sensitive headers are hidden by default with a per-header reveal toggle
+
 ### Request Management
 - Search, filter, sort, favorite, pin, and tag captured requests
 - Paginated request list with auto-load-more
+- **Copy as cURL** — swipe action on any request to copy a shell-escaped cURL command
+- **Request Replay** — re-run a captured request with optional edits and see real status/duration/body
+- **Generate Swift Model** — convert a JSON response into a Codable Swift model, ready to copy or share
 - Export logs as JSON directly from the app
 
 ### API Stubbing
 - Create stubs directly from any captured request in one tap
-- **Flexible URL Matching** — match stubs by `Exact`, `Contains`, `Prefix`, `Suffix`, or `Regex` URL pattern
-- All requests with matching URLs are automatically marked as stubbed
+- **Method-Only Matching** — stubs match by HTTP method; no complex URL rules needed
+- Response defined by **status code + body** only
+- Endpoint URL is shown on each stub for reference
 - Enable, disable, duplicate, group, and manage stubs
 - Export stubs as JSON for sharing or version control
 
@@ -54,10 +60,16 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 - **Slow Request Detection** — configurable threshold highlights slow requests with visual indicator
 - **Network Throttling** — simulate Edge, 3G, LTE, or custom bandwidth/delay conditions
 - **Performance Heatmap** — top 5 slowest endpoints with color-coded average response time bars
+- **Performance Timeline** — interactive waterfall with zoom, time ruler, blocking detection, and tap-to-detail
+- **Security Scanner** — auto-detects HTTP traffic, missing security headers, exposed secrets, and sensitive query parameters
 - **Duplicate Detector** — surfaces endpoints called multiple times with a repeat count badge
 - **Large Response Warning** — flags responses over 1 MB in Statistics and the request list
 - Timeline view for DNS, connect, TLS, TTFB, and transfer phases
 - cURL export with correct shell escaping for all requests
+
+### Notifications
+- **Local alerts** for slow requests, error responses, and traffic to specific hosts
+- Foreground banner support with tap-to-open request detail
 
 ### Search
 - **Response Body Search** — full-text search inside JSON/plain-text responses with next/prev highlight navigation
@@ -68,17 +80,18 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 - Ignore specific hosts from being captured
 - Light / Dark / System theme override
 - Auto-prettify JSON responses
+- Notification controls for slow/error/host alerts
+- Data management: export logs/stubs, clear all logs
 
 ---
 
 ## Requirements
 
-- iOS 13.0+ (Swift Package Manager minimum deployment target)
-- The inspector UI requires **iOS 16.0+**. On iOS 13–15, `Inspectly.enable()` and
-  request capture/stubbing still run in the background, but `presentInspector()`
-  shows an alert instead of the inspector.
+- iOS 15.0+
 - Swift 5.9+
 - Xcode 15+
+
+The inspector UI, request capture, and stubbing all run on iOS 15.0 and later.
 
 ---
 
@@ -88,7 +101,7 @@ Built on top of the Foundation networking stack, Inspectly works seamlessly with
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.3.2")
+    .package(url: "https://github.com/balitax/Inspectly.git", from: "1.4.0")
 ]
 ```
 
@@ -152,7 +165,6 @@ struct MyApp: App {
 import Inspectly
 
 let configuration = Inspectly.Configuration(
-    isLoggingEnabled: true,
     isStubEnabled: true,
     ignoredHosts: ["example.com"],
     isShakeGestureEnabled: true,
@@ -162,18 +174,17 @@ let configuration = Inspectly.Configuration(
 Inspectly.enable(with: configuration)
 ```
 
+**Note:** Request logging is always enabled once Inspectly is integrated. There is no logging toggle.
+
 ### Available Configuration
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
-| `isLoggingEnabled` | `Bool` | `true` | Enable or disable request capture |
 | `isStubEnabled` | `Bool` | `true` | Enable or disable request stubbing globally |
 | `networkThrottlingPreset` | `NetworkThrottlingPreset` | `.off` | Simulate network conditions (Edge, 3G, LTE, Custom) |
-| `slowRequestThreshold` | `TimeInterval` | `1.0` | Duration (seconds) above which requests are flagged as slow |
-| `maxStoredRequests` | `Int` | `500` | Maximum number of requests retained in storage |
 | `ignoredHosts` | `[String]` | `[]` | Hosts to exclude from capture |
 | `isShakeGestureEnabled` | `Bool` | `true` | Open the inspector by shaking the device |
-| `ignoreLocalhost` | `Bool` | `false` | Ignore `localhost` and `127.0.0.1` |
+| `ignoreLocalhost` | `Bool` | `true` | Ignore `localhost` and `127.0.0.1` |
 | `stubRepository` | `StubRepositoryProtocol?` | `nil` | Provide a custom stub repository |
 
 ### Public APIs
@@ -199,6 +210,20 @@ No custom interceptor setup is required for common use cases.
 
 ---
 
+## Demo App
+
+A standalone Demo app is included under `Demo/`. It is **not** part of the Swift Package, so users who install Inspectly do not get the demo app.
+
+To run it:
+
+```bash
+cd Demo
+xcodegen generate
+xcodebuild -project InspectlyDemo.xcodeproj -scheme DemoApp -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.5' build
+```
+
+---
+
 ## Screenshots
 
 | Demo App | Requests | Request Detail |
@@ -217,13 +242,28 @@ No custom interceptor setup is required for common use cases.
 2. Trigger real API calls
 3. Open the inspector using `Inspectly.presentInspector()` or shake gesture (if enabled via configuration)
 4. Browse captured requests
-5. Create a stub from an existing request
-6. Adjust the mocked response in the Stubs tab
-7. Re-run the flow with stubs enabled
+5. Copy any request as cURL, replay it, or generate a Swift model from its response
+6. Create a stub from an existing request
+7. Adjust the mocked response in the Stubs tab
+8. Re-run the flow with stubs enabled
 
 ---
 
 ## Changelog
+
+### [1.4.0] — Unreleased
+- **iOS 15 minimum deployment target** — raised from iOS 13 to support a single consistent codebase for capture, stubbing, and the inspector UI
+- **Inspector UI refresh** — standard system `TabView` with Requests, Statistics, Stubs, Settings, and Dismiss tabs; full dark mode support
+- **Logging always on** — removed the `isLoggingEnabled` toggle; capture starts as soon as Inspectly is enabled
+- **Simplified stubbing** — stubs now match by HTTP method only; removed URL/header/body match rules and connection-error simulation
+- **Stub endpoint reference** — each stub displays the URL endpoint it was created from
+- **Copy as cURL** — swipe action on any request in the list
+- **Request Replay** — re-run requests with optional edits and inspect real responses
+- **Performance Timeline** — interactive waterfall with zoom, time ruler, and blocking detection
+- **Security Scanner** — automatic detection of HTTP traffic, missing headers, exposed secrets, and sensitive query parameters
+- **Generate Swift Model** — turn JSON responses into Codable Swift models with Copy + Share
+- **Local Notifications** — alerts for slow requests, error responses, and specific hosts, with tap-to-detail
+- **Demo app moved** — `DemoApp/` relocated to `Demo/` so the package itself no longer includes the example app
 
 ### [1.3.2] — 2026-07-07
 - **Security** — masked sensitive headers in JSON export/share (previously only `curlCommand` and the UI masked them), excluded stored request data from device backups and added file protection, and hardened `HTMLPreviewView`'s WKWebView against navigating away from a malicious/MITM'd response body.
@@ -239,7 +279,7 @@ No custom interceptor setup is required for common use cases.
 - **Large Response Warning** — responses over 1 MB are flagged in the Statistics view and marked with a warning indicator in the request list
 - **Response Body Search** — full-text search inside JSON and plain-text responses with next/prev highlight navigation and a fixed search bar
 - Floating tab bar now hides automatically when entering Request Detail
-- Dismiss tab added to the floating tab bar for quick close
+- Dismiss tab added for quick close
 - Fixed next/prev highlight scroll in response body search
 - Settings: removed Shake to Open toggle from UI (still configurable via `Inspectly.Configuration`)
 

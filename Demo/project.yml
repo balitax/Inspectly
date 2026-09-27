@@ -7,7 +7,7 @@ options:
 
 packages:
   Inspectly:
-    path: ../Inspectly
+    path: ..
     
   Alamofire:
     url: https://github.com/Alamofire/Alamofire.git
